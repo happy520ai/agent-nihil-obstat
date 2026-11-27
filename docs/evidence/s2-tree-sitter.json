@@ -1,0 +1,1400 @@
+{
+  "spike": "S2",
+  "status": "measured",
+  "startedAt": "2026-11-18T12:43:42.965Z",
+  "finishedAt": "2026-11-18T12:44:09.193Z",
+  "environment": {
+    "node": "v24.14.0",
+    "nodeExecPath": "C:\\Program Files\\nodejs\\node.exe",
+    "v8": "13.6.233.17-node.41",
+    "icu": "78.2",
+    "unicode": "17.0",
+    "platform": "win32",
+    "arch": "x64",
+    "osRelease": "10.0.19041",
+    "osVersion": "Windows 10 Pro",
+    "cpuModel": "12th Gen Intel(R) Core(TM) i7-12700KF",
+    "cpuCount": 20,
+    "totalMemMB": 32604,
+    "exposeGc": true,
+    "cwd": "F:\\Agent Nihil Obstat",
+    "note": "Only Node 24.14.0 on Windows was measured. Results do NOT represent Node 22, Linux, or macOS."
+  },
+  "dependencies": {
+    "web-tree-sitter": "0.25.10",
+    "tree-sitter-wasms": "0.1.13",
+    "typescript": "5.9.3",
+    "wasm": {
+      "ts": {
+        "name": "typescript",
+        "wasmPath": "F:\\Agent Nihil Obstat\\scripts\\node_modules\\tree-sitter-wasms\\out\\tree-sitter-typescript.wasm",
+        "wasmBytes": 2342690,
+        "abiVersion": 14,
+        "nodeTypeCount": 385,
+        "loadMs": 12
+      },
+      "tsx": {
+        "name": "tsx",
+        "wasmPath": "F:\\Agent Nihil Obstat\\scripts\\node_modules\\tree-sitter-wasms\\out\\tree-sitter-tsx.wasm",
+        "wasmBytes": 2411272,
+        "abiVersion": 14,
+        "nodeTypeCount": 405,
+        "loadMs": 6
+      },
+      "js": {
+        "name": "javascript",
+        "wasmPath": "F:\\Agent Nihil Obstat\\scripts\\node_modules\\tree-sitter-wasms\\out\\tree-sitter-javascript.wasm",
+        "wasmBytes": 647334,
+        "abiVersion": 14,
+        "nodeTypeCount": 271,
+        "loadMs": 2.6
+      }
+    }
+  },
+  "fixtures": {
+    "dir": "F:\\Agent Nihil Obstat\\scripts\\fixtures\\generated\\s2",
+    "totalFiles": 5220,
+    "totalBytes": 50059905,
+    "tiers": {
+      "small": 2000,
+      "medium": 2000,
+      "large": 1200
+    },
+    "extraCjkFiles": 20,
+    "extensions": {
+      ".ts": 870,
+      ".tsx": 870,
+      ".js": 870,
+      ".jsx": 870,
+      ".mjs": 870,
+      ".cjs": 870
+    }
+  },
+  "measurement": {
+    "sampleEveryFiles": 100,
+    "gcBeforeSample": true,
+    "initTiming": {
+      "baseline": {
+        "rssMB": 59.02,
+        "heapUsedMB": 9.41,
+        "heapTotalMB": 16.22,
+        "externalMB": 1.77,
+        "arrayBuffersMB": 0.01,
+        "at": "2026-11-18T12:43:42.995Z"
+      },
+      "steps": [
+        {
+          "step": "Parser.init",
+          "ms": 8.9,
+          "mem": {
+            "rssMB": 60.24,
+            "heapUsedMB": 10.06,
+            "heapTotalMB": 17.47,
+            "externalMB": 34.16,
+            "arrayBuffersMB": 0.4,
+            "at": "2026-11-18T12:43:43.004Z"
+          }
+        },
+        {
+          "step": "Language.load(typescript)",
+          "ms": 12,
+          "mem": {
+            "rssMB": 67.09,
+            "heapUsedMB": 5.96,
+            "heapTotalMB": 16.72,
+            "externalMB": 36,
+            "arrayBuffersMB": 2.25,
+            "at": "2026-11-18T12:43:43.017Z"
+          }
+        },
+        {
+          "step": "Language.load(tsx)",
+          "ms": 6,
+          "mem": {
+            "rssMB": 73.91,
+            "heapUsedMB": 6.14,
+            "heapTotalMB": 16.72,
+            "externalMB": 38.3,
+            "arrayBuffersMB": 4.55,
+            "at": "2026-11-18T12:43:43.024Z"
+          }
+        },
+        {
+          "step": "Language.load(javascript)",
+          "ms": 2.6,
+          "mem": {
+            "rssMB": 75.81,
+            "heapUsedMB": 6.3,
+            "heapTotalMB": 16.72,
+            "externalMB": 38.92,
+            "arrayBuffersMB": 5.17,
+            "at": "2026-11-18T12:43:43.026Z"
+          }
+        }
+      ]
+    },
+    "samples": [
+      {
+        "label": "start",
+        "index": 0,
+        "beforeGc": {
+          "rssMB": 75.82,
+          "heapUsedMB": 6.31,
+          "heapTotalMB": 16.72,
+          "externalMB": 38.92,
+          "arrayBuffersMB": 5.17,
+          "at": "2026-11-18T12:43:43.026Z"
+        },
+        "afterGc": {
+          "rssMB": 70.64,
+          "heapUsedMB": 5.69,
+          "heapTotalMB": 14.47,
+          "externalMB": 33.77,
+          "arrayBuffersMB": 0.01,
+          "at": "2026-11-18T12:43:43.033Z"
+        }
+      },
+      {
+        "label": "progress",
+        "index": 100,
+        "beforeGc": {
+          "rssMB": 106.77,
+          "heapUsedMB": 21.92,
+          "heapTotalMB": 47.22,
+          "externalMB": 33.77,
+          "arrayBuffersMB": 0.01,
+          "at": "2026-11-18T12:43:45.376Z"
+        },
+        "afterGc": {
+          "rssMB": 106.76,
+          "heapUsedMB": 5.91,
+          "heapTotalMB": 39.22,
+          "externalMB": 33.77,
+          "arrayBuffersMB": 0.01,
+          "at": "2026-11-18T12:43:45.381Z"
+        }
+      },
+      {
+        "label": "progress",
+        "index": 200,
+        "beforeGc": {
+          "rssMB": 139.15,
+          "heapUsedMB": 38.55,
+          "heapTotalMB": 78.72,
+          "externalMB": 33.77,
+          "arrayBuffersMB": 0.01,
+          "at": "2026-11-18T12:43:47.436Z"
+        },
+        "afterGc": {
+          "rssMB": 139.16,
+          "heapUsedMB": 5.92,
+          "heapTotalMB": 71.22,
+          "externalMB": 33.77,
+          "arrayBuffersMB": 0.01,
+          "at": "2026-11-18T12:43:47.440Z"
+        }
+      },
+      {
+        "label": "progress",
+        "index": 300,
+        "beforeGc": {
+          "rssMB": 139.34,
+          "heapUsedMB": 22.14,
+          "heapTotalMB": 78.97,
+          "externalMB": 33.77,
+          "arrayBuffersMB": 0.01,
+          "at": "2026-11-18T12:43:49.436Z"
+        },
+        "afterGc": {
+          "rssMB": 139.36,
+          "heapUsedMB": 5.93,
+          "heapTotalMB": 71.22,
+          "externalMB": 33.77,
+          "arrayBuffersMB": 0.01,
+          "at": "2026-11-18T12:43:49.440Z"
+        }
+      },
+      {
+        "label": "progress",
+        "index": 400,
+        "beforeGc": {
+          "rssMB": 204.17,
+          "heapUsedMB": 21.1,
+          "heapTotalMB": 142.22,
+          "externalMB": 33.77,
+          "arrayBuffersMB": 0.01,
+          "at": "2026-11-18T12:43:51.396Z"
+        },
+        "afterGc": {
+          "rssMB": 204.18,
+          "heapUsedMB": 5.94,
+          "heapTotalMB": 134.97,
+          "externalMB": 33.77,
+          "arrayBuffersMB": 0.01,
+          "at": "2026-11-18T12:43:51.400Z"
+        }
+      },
+      {
+        "label": "progress",
+        "index": 500,
+        "beforeGc": {
+          "rssMB": 204.59,
+          "heapUsedMB": 52.04,
+          "heapTotalMB": 141.97,
+          "externalMB": 33.77,
+          "arrayBuffersMB": 0.01,
+          "at": "2026-11-18T12:43:53.397Z"
+        },
+        "afterGc": {
+          "rssMB": 204.62,
+          "heapUsedMB": 5.94,
+          "heapTotalMB": 134.97,
+          "externalMB": 33.77,
+          "arrayBuffersMB": 0.01,
+          "at": "2026-11-18T12:43:53.403Z"
+        }
+      },
+      {
+        "label": "progress",
+        "index": 600,
+        "beforeGc": {
+          "rssMB": 204.55,
+          "heapUsedMB": 51.82,
+          "heapTotalMB": 141.97,
+          "externalMB": 33.77,
+          "arrayBuffersMB": 0.01,
+          "at": "2026-11-18T12:43:55.822Z"
+        },
+        "afterGc": {
+          "rssMB": 204.56,
+          "heapUsedMB": 5.96,
+          "heapTotalMB": 134.97,
+          "externalMB": 33.77,
+          "arrayBuffersMB": 0.01,
+          "at": "2026-11-18T12:43:55.827Z"
+        }
+      },
+      {
+        "label": "progress",
+        "index": 700,
+        "beforeGc": {
+          "rssMB": 204.79,
+          "heapUsedMB": 51.66,
+          "heapTotalMB": 141.97,
+          "externalMB": 33.77,
+          "arrayBuffersMB": 0.01,
+          "at": "2026-11-18T12:43:58.221Z"
+        },
+        "afterGc": {
+          "rssMB": 204.81,
+          "heapUsedMB": 5.97,
+          "heapTotalMB": 134.97,
+          "externalMB": 33.77,
+          "arrayBuffersMB": 0.01,
+          "at": "2026-11-18T12:43:58.226Z"
+        }
+      },
+      {
+        "label": "progress",
+        "index": 800,
+        "beforeGc": {
+          "rssMB": 204.44,
+          "heapUsedMB": 51.88,
+          "heapTotalMB": 141.97,
+          "externalMB": 33.77,
+          "arrayBuffersMB": 0.01,
+          "at": "2026-11-18T12:44:00.482Z"
+        },
+        "afterGc": {
+          "rssMB": 204.47,
+          "heapUsedMB": 5.97,
+          "heapTotalMB": 134.97,
+          "externalMB": 33.77,
+          "arrayBuffersMB": 0.01,
+          "at": "2026-11-18T12:44:00.488Z"
+        }
+      },
+      {
+        "label": "progress",
+        "index": 900,
+        "beforeGc": {
+          "rssMB": 204.93,
+          "heapUsedMB": 53.15,
+          "heapTotalMB": 141.97,
+          "externalMB": 33.77,
+          "arrayBuffersMB": 0.01,
+          "at": "2026-11-18T12:44:02.571Z"
+        },
+        "afterGc": {
+          "rssMB": 204.95,
+          "heapUsedMB": 5.98,
+          "heapTotalMB": 134.97,
+          "externalMB": 33.77,
+          "arrayBuffersMB": 0.01,
+          "at": "2026-11-18T12:44:02.575Z"
+        }
+      },
+      {
+        "label": "progress",
+        "index": 1000,
+        "beforeGc": {
+          "rssMB": 204.62,
+          "heapUsedMB": 51.61,
+          "heapTotalMB": 141.97,
+          "externalMB": 33.77,
+          "arrayBuffersMB": 0.01,
+          "at": "2026-11-18T12:44:04.528Z"
+        },
+        "afterGc": {
+          "rssMB": 204.64,
+          "heapUsedMB": 5.98,
+          "heapTotalMB": 134.97,
+          "externalMB": 33.77,
+          "arrayBuffersMB": 0.01,
+          "at": "2026-11-18T12:44:04.532Z"
+        }
+      },
+      {
+        "label": "progress",
+        "index": 1100,
+        "beforeGc": {
+          "rssMB": 204.59,
+          "heapUsedMB": 52.01,
+          "heapTotalMB": 141.97,
+          "externalMB": 33.87,
+          "arrayBuffersMB": 0.01,
+          "at": "2026-11-18T12:44:06.206Z"
+        },
+        "afterGc": {
+          "rssMB": 204.63,
+          "heapUsedMB": 6.13,
+          "heapTotalMB": 134.97,
+          "externalMB": 33.87,
+          "arrayBuffersMB": 0.01,
+          "at": "2026-11-18T12:44:06.209Z"
+        }
+      },
+      {
+        "label": "progress",
+        "index": 1200,
+        "beforeGc": {
+          "rssMB": 204.54,
+          "heapUsedMB": 52.33,
+          "heapTotalMB": 141.97,
+          "externalMB": 33.87,
+          "arrayBuffersMB": 0.01,
+          "at": "2026-11-18T12:44:07.865Z"
+        },
+        "afterGc": {
+          "rssMB": 204.55,
+          "heapUsedMB": 6.13,
+          "heapTotalMB": 134.97,
+          "externalMB": 33.87,
+          "arrayBuffersMB": 0.01,
+          "at": "2026-11-18T12:44:07.868Z"
+        }
+      },
+      {
+        "label": "progress",
+        "index": 1300,
+        "beforeGc": {
+          "rssMB": 204.83,
+          "heapUsedMB": 14.3,
+          "heapTotalMB": 134.97,
+          "externalMB": 33.87,
+          "arrayBuffersMB": 0.01,
+          "at": "2026-11-18T12:44:07.900Z"
+        },
+        "afterGc": {
+          "rssMB": 204.9,
+          "heapUsedMB": 6.07,
+          "heapTotalMB": 134.97,
+          "externalMB": 33.87,
+          "arrayBuffersMB": 0.01,
+          "at": "2026-11-18T12:44:07.904Z"
+        }
+      },
+      {
+        "label": "progress",
+        "index": 1400,
+        "beforeGc": {
+          "rssMB": 204.88,
+          "heapUsedMB": 14.19,
+          "heapTotalMB": 135.22,
+          "externalMB": 33.87,
+          "arrayBuffersMB": 0.01,
+          "at": "2026-11-18T12:44:07.936Z"
+        },
+        "afterGc": {
+          "rssMB": 204.93,
+          "heapUsedMB": 6.07,
+          "heapTotalMB": 135.22,
+          "externalMB": 33.87,
+          "arrayBuffersMB": 0.01,
+          "at": "2026-11-18T12:44:07.940Z"
+        }
+      },
+      {
+        "label": "progress",
+        "index": 1500,
+        "beforeGc": {
+          "rssMB": 205.09,
+          "heapUsedMB": 14.67,
+          "heapTotalMB": 135.47,
+          "externalMB": 33.87,
+          "arrayBuffersMB": 0.01,
+          "at": "2026-11-18T12:44:07.973Z"
+        },
+        "afterGc": {
+          "rssMB": 205.24,
+          "heapUsedMB": 6.08,
+          "heapTotalMB": 135.22,
+          "externalMB": 33.87,
+          "arrayBuffersMB": 0.01,
+          "at": "2026-11-18T12:44:07.976Z"
+        }
+      },
+      {
+        "label": "progress",
+        "index": 1600,
+        "beforeGc": {
+          "rssMB": 204.33,
+          "heapUsedMB": 14.65,
+          "heapTotalMB": 135.47,
+          "externalMB": 33.87,
+          "arrayBuffersMB": 0.01,
+          "at": "2026-11-18T12:44:08.010Z"
+        },
+        "afterGc": {
+          "rssMB": 204.51,
+          "heapUsedMB": 6.07,
+          "heapTotalMB": 135.22,
+          "externalMB": 33.87,
+          "arrayBuffersMB": 0.01,
+          "at": "2026-11-18T12:44:08.014Z"
+        }
+      },
+      {
+        "label": "progress",
+        "index": 1700,
+        "beforeGc": {
+          "rssMB": 205.15,
+          "heapUsedMB": 14.7,
+          "heapTotalMB": 135.47,
+          "externalMB": 33.87,
+          "arrayBuffersMB": 0.01,
+          "at": "2026-11-18T12:44:08.048Z"
+        },
+        "afterGc": {
+          "rssMB": 205.23,
+          "heapUsedMB": 6.08,
+          "heapTotalMB": 135.22,
+          "externalMB": 33.87,
+          "arrayBuffersMB": 0.01,
+          "at": "2026-11-18T12:44:08.052Z"
+        }
+      },
+      {
+        "label": "progress",
+        "index": 1800,
+        "beforeGc": {
+          "rssMB": 204.7,
+          "heapUsedMB": 14.66,
+          "heapTotalMB": 135.47,
+          "externalMB": 33.87,
+          "arrayBuffersMB": 0.01,
+          "at": "2026-11-18T12:44:08.083Z"
+        },
+        "afterGc": {
+          "rssMB": 204.84,
+          "heapUsedMB": 6.08,
+          "heapTotalMB": 135.22,
+          "externalMB": 33.87,
+          "arrayBuffersMB": 0.01,
+          "at": "2026-11-18T12:44:08.086Z"
+        }
+      },
+      {
+        "label": "progress",
+        "index": 1900,
+        "beforeGc": {
+          "rssMB": 205.29,
+          "heapUsedMB": 14.6,
+          "heapTotalMB": 135.47,
+          "externalMB": 33.87,
+          "arrayBuffersMB": 0.01,
+          "at": "2026-11-18T12:44:08.121Z"
+        },
+        "afterGc": {
+          "rssMB": 205.37,
+          "heapUsedMB": 6.08,
+          "heapTotalMB": 135.22,
+          "externalMB": 33.87,
+          "arrayBuffersMB": 0.01,
+          "at": "2026-11-18T12:44:08.124Z"
+        }
+      },
+      {
+        "label": "progress",
+        "index": 2000,
+        "beforeGc": {
+          "rssMB": 204.66,
+          "heapUsedMB": 14.77,
+          "heapTotalMB": 135.47,
+          "externalMB": 33.87,
+          "arrayBuffersMB": 0.01,
+          "at": "2026-11-18T12:44:08.157Z"
+        },
+        "afterGc": {
+          "rssMB": 204.68,
+          "heapUsedMB": 6.1,
+          "heapTotalMB": 134.97,
+          "externalMB": 33.87,
+          "arrayBuffersMB": 0.01,
+          "at": "2026-11-18T12:44:08.161Z"
+        }
+      },
+      {
+        "label": "progress",
+        "index": 2100,
+        "beforeGc": {
+          "rssMB": 204.41,
+          "heapUsedMB": 14.68,
+          "heapTotalMB": 134.97,
+          "externalMB": 33.87,
+          "arrayBuffersMB": 0.01,
+          "at": "2026-11-18T12:44:08.192Z"
+        },
+        "afterGc": {
+          "rssMB": 204.49,
+          "heapUsedMB": 6.1,
+          "heapTotalMB": 135.22,
+          "externalMB": 33.87,
+          "arrayBuffersMB": 0.01,
+          "at": "2026-11-18T12:44:08.195Z"
+        }
+      },
+      {
+        "label": "progress",
+        "index": 2200,
+        "beforeGc": {
+          "rssMB": 204.41,
+          "heapUsedMB": 14.61,
+          "heapTotalMB": 135.47,
+          "externalMB": 33.87,
+          "arrayBuffersMB": 0.01,
+          "at": "2026-11-18T12:44:08.227Z"
+        },
+        "afterGc": {
+          "rssMB": 204.6,
+          "heapUsedMB": 6.1,
+          "heapTotalMB": 135.22,
+          "externalMB": 33.87,
+          "arrayBuffersMB": 0.01,
+          "at": "2026-11-18T12:44:08.231Z"
+        }
+      },
+      {
+        "label": "progress",
+        "index": 2300,
+        "beforeGc": {
+          "rssMB": 205.09,
+          "heapUsedMB": 14.74,
+          "heapTotalMB": 135.47,
+          "externalMB": 33.87,
+          "arrayBuffersMB": 0.01,
+          "at": "2026-11-18T12:44:08.262Z"
+        },
+        "afterGc": {
+          "rssMB": 205.19,
+          "heapUsedMB": 6.1,
+          "heapTotalMB": 135.22,
+          "externalMB": 33.87,
+          "arrayBuffersMB": 0.01,
+          "at": "2026-11-18T12:44:08.266Z"
+        }
+      },
+      {
+        "label": "progress",
+        "index": 2400,
+        "beforeGc": {
+          "rssMB": 204.7,
+          "heapUsedMB": 14.67,
+          "heapTotalMB": 135.22,
+          "externalMB": 33.87,
+          "arrayBuffersMB": 0.01,
+          "at": "2026-11-18T12:44:08.300Z"
+        },
+        "afterGc": {
+          "rssMB": 204.77,
+          "heapUsedMB": 6.1,
+          "heapTotalMB": 135.22,
+          "externalMB": 33.87,
+          "arrayBuffersMB": 0.01,
+          "at": "2026-11-18T12:44:08.303Z"
+        }
+      },
+      {
+        "label": "progress",
+        "index": 2500,
+        "beforeGc": {
+          "rssMB": 205.14,
+          "heapUsedMB": 14.65,
+          "heapTotalMB": 135.47,
+          "externalMB": 33.87,
+          "arrayBuffersMB": 0.01,
+          "at": "2026-11-18T12:44:08.337Z"
+        },
+        "afterGc": {
+          "rssMB": 205.16,
+          "heapUsedMB": 6.1,
+          "heapTotalMB": 135.22,
+          "externalMB": 33.87,
+          "arrayBuffersMB": 0.01,
+          "at": "2026-11-18T12:44:08.340Z"
+        }
+      },
+      {
+        "label": "progress",
+        "index": 2600,
+        "beforeGc": {
+          "rssMB": 204.48,
+          "heapUsedMB": 14.74,
+          "heapTotalMB": 135.47,
+          "externalMB": 33.87,
+          "arrayBuffersMB": 0.01,
+          "at": "2026-11-18T12:44:08.373Z"
+        },
+        "afterGc": {
+          "rssMB": 204.53,
+          "heapUsedMB": 6.1,
+          "heapTotalMB": 135.22,
+          "externalMB": 33.87,
+          "arrayBuffersMB": 0.01,
+          "at": "2026-11-18T12:44:08.376Z"
+        }
+      },
+      {
+        "label": "progress",
+        "index": 2700,
+        "beforeGc": {
+          "rssMB": 204.46,
+          "heapUsedMB": 14.68,
+          "heapTotalMB": 135.47,
+          "externalMB": 33.87,
+          "arrayBuffersMB": 0.01,
+          "at": "2026-11-18T12:44:08.410Z"
+        },
+        "afterGc": {
+          "rssMB": 204.57,
+          "heapUsedMB": 6.1,
+          "heapTotalMB": 135.22,
+          "externalMB": 33.87,
+          "arrayBuffersMB": 0.01,
+          "at": "2026-11-18T12:44:08.414Z"
+        }
+      },
+      {
+        "label": "progress",
+        "index": 2800,
+        "beforeGc": {
+          "rssMB": 205.06,
+          "heapUsedMB": 14.63,
+          "heapTotalMB": 135.22,
+          "externalMB": 33.87,
+          "arrayBuffersMB": 0.01,
+          "at": "2026-11-18T12:44:08.446Z"
+        },
+        "afterGc": {
+          "rssMB": 205.14,
+          "heapUsedMB": 6.1,
+          "heapTotalMB": 135.22,
+          "externalMB": 33.87,
+          "arrayBuffersMB": 0.01,
+          "at": "2026-11-18T12:44:08.450Z"
+        }
+      },
+      {
+        "label": "progress",
+        "index": 2900,
+        "beforeGc": {
+          "rssMB": 205.18,
+          "heapUsedMB": 14.72,
+          "heapTotalMB": 135.22,
+          "externalMB": 33.87,
+          "arrayBuffersMB": 0.01,
+          "at": "2026-11-18T12:44:08.486Z"
+        },
+        "afterGc": {
+          "rssMB": 205.25,
+          "heapUsedMB": 6.1,
+          "heapTotalMB": 135.22,
+          "externalMB": 33.87,
+          "arrayBuffersMB": 0.01,
+          "at": "2026-11-18T12:44:08.490Z"
+        }
+      },
+      {
+        "label": "progress",
+        "index": 3000,
+        "beforeGc": {
+          "rssMB": 205.07,
+          "heapUsedMB": 14.75,
+          "heapTotalMB": 135.22,
+          "externalMB": 33.87,
+          "arrayBuffersMB": 0.01,
+          "at": "2026-11-18T12:44:08.525Z"
+        },
+        "afterGc": {
+          "rssMB": 205.13,
+          "heapUsedMB": 6.13,
+          "heapTotalMB": 134.97,
+          "externalMB": 33.87,
+          "arrayBuffersMB": 0.01,
+          "at": "2026-11-18T12:44:08.528Z"
+        }
+      },
+      {
+        "label": "progress",
+        "index": 3100,
+        "beforeGc": {
+          "rssMB": 205.2,
+          "heapUsedMB": 14.67,
+          "heapTotalMB": 134.97,
+          "externalMB": 33.87,
+          "arrayBuffersMB": 0.01,
+          "at": "2026-11-18T12:44:08.559Z"
+        },
+        "afterGc": {
+          "rssMB": 205.27,
+          "heapUsedMB": 6.14,
+          "heapTotalMB": 135.22,
+          "externalMB": 33.87,
+          "arrayBuffersMB": 0.01,
+          "at": "2026-11-18T12:44:08.563Z"
+        }
+      },
+      {
+        "label": "progress",
+        "index": 3200,
+        "beforeGc": {
+          "rssMB": 205.29,
+          "heapUsedMB": 14.78,
+          "heapTotalMB": 135.47,
+          "externalMB": 33.87,
+          "arrayBuffersMB": 0.01,
+          "at": "2026-11-18T12:44:08.593Z"
+        },
+        "afterGc": {
+          "rssMB": 205.31,
+          "heapUsedMB": 6.14,
+          "heapTotalMB": 135.22,
+          "externalMB": 33.87,
+          "arrayBuffersMB": 0.01,
+          "at": "2026-11-18T12:44:08.596Z"
+        }
+      },
+      {
+        "label": "progress",
+        "index": 3300,
+        "beforeGc": {
+          "rssMB": 205.16,
+          "heapUsedMB": 10.14,
+          "heapTotalMB": 135.22,
+          "externalMB": 33.87,
+          "arrayBuffersMB": 0.01,
+          "at": "2026-11-18T12:44:08.614Z"
+        },
+        "afterGc": {
+          "rssMB": 205.19,
+          "heapUsedMB": 6.14,
+          "heapTotalMB": 135.22,
+          "externalMB": 33.87,
+          "arrayBuffersMB": 0.01,
+          "at": "2026-11-18T12:44:08.617Z"
+        }
+      },
+      {
+        "label": "progress",
+        "index": 3400,
+        "beforeGc": {
+          "rssMB": 204.74,
+          "heapUsedMB": 10.14,
+          "heapTotalMB": 135.47,
+          "externalMB": 33.87,
+          "arrayBuffersMB": 0.01,
+          "at": "2026-11-18T12:44:08.637Z"
+        },
+        "afterGc": {
+          "rssMB": 204.76,
+          "heapUsedMB": 6.15,
+          "heapTotalMB": 134.97,
+          "externalMB": 33.87,
+          "arrayBuffersMB": 0.01,
+          "at": "2026-11-18T12:44:08.641Z"
+        }
+      },
+      {
+        "label": "progress",
+        "index": 3500,
+        "beforeGc": {
+          "rssMB": 205.21,
+          "heapUsedMB": 10.04,
+          "heapTotalMB": 135.47,
+          "externalMB": 33.87,
+          "arrayBuffersMB": 0.01,
+          "at": "2026-11-18T12:44:08.658Z"
+        },
+        "afterGc": {
+          "rssMB": 205.21,
+          "heapUsedMB": 6.15,
+          "heapTotalMB": 135.22,
+          "externalMB": 33.87,
+          "arrayBuffersMB": 0.01,
+          "at": "2026-11-18T12:44:08.661Z"
+        }
+      },
+      {
+        "label": "progress",
+        "index": 3600,
+        "beforeGc": {
+          "rssMB": 205.39,
+          "heapUsedMB": 10.08,
+          "heapTotalMB": 135.47,
+          "externalMB": 33.87,
+          "arrayBuffersMB": 0.01,
+          "at": "2026-11-18T12:44:08.677Z"
+        },
+        "afterGc": {
+          "rssMB": 204.5,
+          "heapUsedMB": 6.15,
+          "heapTotalMB": 135.22,
+          "externalMB": 33.87,
+          "arrayBuffersMB": 0.01,
+          "at": "2026-11-18T12:44:08.681Z"
+        }
+      },
+      {
+        "label": "progress",
+        "index": 3700,
+        "beforeGc": {
+          "rssMB": 205.21,
+          "heapUsedMB": 10.05,
+          "heapTotalMB": 135.22,
+          "externalMB": 33.87,
+          "arrayBuffersMB": 0.01,
+          "at": "2026-11-18T12:44:08.696Z"
+        },
+        "afterGc": {
+          "rssMB": 205.3,
+          "heapUsedMB": 6.15,
+          "heapTotalMB": 135.22,
+          "externalMB": 33.87,
+          "arrayBuffersMB": 0.01,
+          "at": "2026-11-18T12:44:08.700Z"
+        }
+      },
+      {
+        "label": "progress",
+        "index": 3800,
+        "beforeGc": {
+          "rssMB": 205.37,
+          "heapUsedMB": 9.97,
+          "heapTotalMB": 135.22,
+          "externalMB": 33.87,
+          "arrayBuffersMB": 0.01,
+          "at": "2026-11-18T12:44:08.717Z"
+        },
+        "afterGc": {
+          "rssMB": 205.37,
+          "heapUsedMB": 6.15,
+          "heapTotalMB": 135.22,
+          "externalMB": 33.87,
+          "arrayBuffersMB": 0.01,
+          "at": "2026-11-18T12:44:08.720Z"
+        }
+      },
+      {
+        "label": "progress",
+        "index": 3900,
+        "beforeGc": {
+          "rssMB": 204.43,
+          "heapUsedMB": 10,
+          "heapTotalMB": 135.22,
+          "externalMB": 33.87,
+          "arrayBuffersMB": 0.01,
+          "at": "2026-11-18T12:44:08.737Z"
+        },
+        "afterGc": {
+          "rssMB": 204.59,
+          "heapUsedMB": 6.15,
+          "heapTotalMB": 135.22,
+          "externalMB": 33.87,
+          "arrayBuffersMB": 0.01,
+          "at": "2026-11-18T12:44:08.740Z"
+        }
+      },
+      {
+        "label": "progress",
+        "index": 4000,
+        "beforeGc": {
+          "rssMB": 204.56,
+          "heapUsedMB": 10,
+          "heapTotalMB": 135.22,
+          "externalMB": 33.87,
+          "arrayBuffersMB": 0.01,
+          "at": "2026-11-18T12:44:08.756Z"
+        },
+        "afterGc": {
+          "rssMB": 204.62,
+          "heapUsedMB": 6.15,
+          "heapTotalMB": 135.22,
+          "externalMB": 33.87,
+          "arrayBuffersMB": 0.01,
+          "at": "2026-11-18T12:44:08.759Z"
+        }
+      },
+      {
+        "label": "progress",
+        "index": 4100,
+        "beforeGc": {
+          "rssMB": 204.54,
+          "heapUsedMB": 9.9,
+          "heapTotalMB": 135.22,
+          "externalMB": 33.87,
+          "arrayBuffersMB": 0.01,
+          "at": "2026-11-18T12:44:08.774Z"
+        },
+        "afterGc": {
+          "rssMB": 204.69,
+          "heapUsedMB": 6.15,
+          "heapTotalMB": 135.22,
+          "externalMB": 33.87,
+          "arrayBuffersMB": 0.01,
+          "at": "2026-11-18T12:44:08.777Z"
+        }
+      },
+      {
+        "label": "progress",
+        "index": 4200,
+        "beforeGc": {
+          "rssMB": 205.27,
+          "heapUsedMB": 9.93,
+          "heapTotalMB": 135.22,
+          "externalMB": 33.87,
+          "arrayBuffersMB": 0.01,
+          "at": "2026-11-18T12:44:08.792Z"
+        },
+        "afterGc": {
+          "rssMB": 205.28,
+          "heapUsedMB": 6.15,
+          "heapTotalMB": 135.22,
+          "externalMB": 33.87,
+          "arrayBuffersMB": 0.01,
+          "at": "2026-11-18T12:44:08.796Z"
+        }
+      },
+      {
+        "label": "progress",
+        "index": 4300,
+        "beforeGc": {
+          "rssMB": 205.4,
+          "heapUsedMB": 9.91,
+          "heapTotalMB": 135.22,
+          "externalMB": 33.87,
+          "arrayBuffersMB": 0.01,
+          "at": "2026-11-18T12:44:08.810Z"
+        },
+        "afterGc": {
+          "rssMB": 205.41,
+          "heapUsedMB": 6.15,
+          "heapTotalMB": 135.22,
+          "externalMB": 33.87,
+          "arrayBuffersMB": 0.01,
+          "at": "2026-11-18T12:44:08.814Z"
+        }
+      },
+      {
+        "label": "progress",
+        "index": 4400,
+        "beforeGc": {
+          "rssMB": 204.44,
+          "heapUsedMB": 9.82,
+          "heapTotalMB": 135.22,
+          "externalMB": 33.87,
+          "arrayBuffersMB": 0.01,
+          "at": "2026-11-18T12:44:08.830Z"
+        },
+        "afterGc": {
+          "rssMB": 204.51,
+          "heapUsedMB": 6.18,
+          "heapTotalMB": 135.22,
+          "externalMB": 33.87,
+          "arrayBuffersMB": 0.01,
+          "at": "2026-11-18T12:44:08.834Z"
+        }
+      },
+      {
+        "label": "progress",
+        "index": 4500,
+        "beforeGc": {
+          "rssMB": 204.48,
+          "heapUsedMB": 9.5,
+          "heapTotalMB": 135.22,
+          "externalMB": 33.87,
+          "arrayBuffersMB": 0.01,
+          "at": "2026-11-18T12:44:08.847Z"
+        },
+        "afterGc": {
+          "rssMB": 204.54,
+          "heapUsedMB": 6.2,
+          "heapTotalMB": 135.22,
+          "externalMB": 33.87,
+          "arrayBuffersMB": 0.01,
+          "at": "2026-11-18T12:44:08.850Z"
+        }
+      },
+      {
+        "label": "progress",
+        "index": 4600,
+        "beforeGc": {
+          "rssMB": 204.75,
+          "heapUsedMB": 10.2,
+          "heapTotalMB": 135.47,
+          "externalMB": 33.87,
+          "arrayBuffersMB": 0.01,
+          "at": "2026-11-18T12:44:08.867Z"
+        },
+        "afterGc": {
+          "rssMB": 204.76,
+          "heapUsedMB": 6.2,
+          "heapTotalMB": 135.47,
+          "externalMB": 33.87,
+          "arrayBuffersMB": 0.01,
+          "at": "2026-11-18T12:44:08.870Z"
+        }
+      },
+      {
+        "label": "progress",
+        "index": 4700,
+        "beforeGc": {
+          "rssMB": 204.91,
+          "heapUsedMB": 10.12,
+          "heapTotalMB": 135.72,
+          "externalMB": 33.87,
+          "arrayBuffersMB": 0.01,
+          "at": "2026-11-18T12:44:08.887Z"
+        },
+        "afterGc": {
+          "rssMB": 204.91,
+          "heapUsedMB": 6.2,
+          "heapTotalMB": 135.47,
+          "externalMB": 33.87,
+          "arrayBuffersMB": 0.01,
+          "at": "2026-11-18T12:44:08.892Z"
+        }
+      },
+      {
+        "label": "progress",
+        "index": 4800,
+        "beforeGc": {
+          "rssMB": 205.38,
+          "heapUsedMB": 10.15,
+          "heapTotalMB": 135.47,
+          "externalMB": 33.87,
+          "arrayBuffersMB": 0.01,
+          "at": "2026-11-18T12:44:08.913Z"
+        },
+        "afterGc": {
+          "rssMB": 205.38,
+          "heapUsedMB": 6.2,
+          "heapTotalMB": 135.47,
+          "externalMB": 33.87,
+          "arrayBuffersMB": 0.01,
+          "at": "2026-11-18T12:44:08.918Z"
+        }
+      },
+      {
+        "label": "progress",
+        "index": 4900,
+        "beforeGc": {
+          "rssMB": 205.39,
+          "heapUsedMB": 10.13,
+          "heapTotalMB": 135.72,
+          "externalMB": 33.87,
+          "arrayBuffersMB": 0.01,
+          "at": "2026-11-18T12:44:08.936Z"
+        },
+        "afterGc": {
+          "rssMB": 204.5,
+          "heapUsedMB": 6.2,
+          "heapTotalMB": 135.47,
+          "externalMB": 33.87,
+          "arrayBuffersMB": 0.01,
+          "at": "2026-11-18T12:44:08.940Z"
+        }
+      },
+      {
+        "label": "progress",
+        "index": 5000,
+        "beforeGc": {
+          "rssMB": 204.46,
+          "heapUsedMB": 10.04,
+          "heapTotalMB": 135.47,
+          "externalMB": 33.87,
+          "arrayBuffersMB": 0.01,
+          "at": "2026-11-18T12:44:08.959Z"
+        },
+        "afterGc": {
+          "rssMB": 204.63,
+          "heapUsedMB": 6.2,
+          "heapTotalMB": 135.47,
+          "externalMB": 33.87,
+          "arrayBuffersMB": 0.01,
+          "at": "2026-11-18T12:44:08.964Z"
+        }
+      },
+      {
+        "label": "progress",
+        "index": 5100,
+        "beforeGc": {
+          "rssMB": 205.21,
+          "heapUsedMB": 10.1,
+          "heapTotalMB": 135.47,
+          "externalMB": 33.87,
+          "arrayBuffersMB": 0.01,
+          "at": "2026-11-18T12:44:08.986Z"
+        },
+        "afterGc": {
+          "rssMB": 205.22,
+          "heapUsedMB": 6.21,
+          "heapTotalMB": 135.47,
+          "externalMB": 33.87,
+          "arrayBuffersMB": 0.01,
+          "at": "2026-11-18T12:44:08.989Z"
+        }
+      },
+      {
+        "label": "progress",
+        "index": 5200,
+        "beforeGc": {
+          "rssMB": 205.39,
+          "heapUsedMB": 10.07,
+          "heapTotalMB": 135.47,
+          "externalMB": 33.87,
+          "arrayBuffersMB": 0.01,
+          "at": "2026-11-18T12:44:09.005Z"
+        },
+        "afterGc": {
+          "rssMB": 204.47,
+          "heapUsedMB": 6.21,
+          "heapTotalMB": 135.47,
+          "externalMB": 33.87,
+          "arrayBuffersMB": 0.01,
+          "at": "2026-11-18T12:44:09.008Z"
+        }
+      },
+      {
+        "label": "end",
+        "index": 5220,
+        "beforeGc": {
+          "rssMB": 204.47,
+          "heapUsedMB": 6.98,
+          "heapTotalMB": 135.47,
+          "externalMB": 33.87,
+          "arrayBuffersMB": 0.01,
+          "at": "2026-11-18T12:44:09.012Z"
+        },
+        "afterGc": {
+          "rssMB": 204.64,
+          "heapUsedMB": 6.21,
+          "heapTotalMB": 135.47,
+          "externalMB": 33.87,
+          "arrayBuffersMB": 0.01,
+          "at": "2026-11-18T12:44:09.016Z"
+        }
+      },
+      {
+        "label": "phaseB-start",
+        "index": 0,
+        "beforeGc": {
+          "rssMB": 204.67,
+          "heapUsedMB": 6.52,
+          "heapTotalMB": 135.47,
+          "externalMB": 33.87,
+          "arrayBuffersMB": 0.01,
+          "at": "2026-11-18T12:44:09.016Z"
+        },
+        "afterGc": {
+          "rssMB": 204.68,
+          "heapUsedMB": 6.21,
+          "heapTotalMB": 135.47,
+          "externalMB": 33.87,
+          "arrayBuffersMB": 0.01,
+          "at": "2026-11-18T12:44:09.019Z"
+        }
+      },
+      {
+        "label": "phaseB-explicit-start",
+        "index": 0,
+        "beforeGc": {
+          "rssMB": 206.88,
+          "heapUsedMB": 6.22,
+          "heapTotalMB": 135.47,
+          "externalMB": 33.87,
+          "arrayBuffersMB": 0.01,
+          "at": "2026-11-18T12:44:09.137Z"
+        },
+        "afterGc": {
+          "rssMB": 206.88,
+          "heapUsedMB": 6.22,
+          "heapTotalMB": 135.47,
+          "externalMB": 33.87,
+          "arrayBuffersMB": 0.01,
+          "at": "2026-11-18T12:44:09.141Z"
+        }
+      }
+    ],
+    "perGrammar": {
+      "javascript": {
+        "files": 3480,
+        "bytes": 33080498,
+        "errors": 0,
+        "nodes": 19305892,
+        "minNodes": 78,
+        "maxNodes": 23700,
+        "p50ParseMs": 0.082,
+        "p95ParseMs": 12.601,
+        "maxParseMs": 29.89,
+        "errorRate": 0
+      },
+      "typescript": {
+        "files": 870,
+        "bytes": 8446824,
+        "errors": 0,
+        "nodes": 4885414,
+        "minNodes": 143,
+        "maxNodes": 23635,
+        "p50ParseMs": 0.171,
+        "p95ParseMs": 12.901,
+        "maxParseMs": 24.302,
+        "errorRate": 0
+      },
+      "tsx": {
+        "files": 870,
+        "bytes": 8532583,
+        "errors": 0,
+        "nodes": 4935001,
+        "minNodes": 202,
+        "maxNodes": 23637,
+        "p50ParseMs": 0.215,
+        "p95ParseMs": 12.735,
+        "maxParseMs": 29.207,
+        "errorRate": 0
+      }
+    },
+    "errorFiles": [],
+    "exceptions": [],
+    "exceptionCount": 0,
+    "phaseB": {
+      "retained": [],
+      "noDelete": {
+        "trees": null,
+        "retainedTrees": 500,
+        "afterParseBeforeGc": {
+          "rssMB": 206.83,
+          "heapUsedMB": 6.8,
+          "heapTotalMB": 135.47,
+          "externalMB": 33.87,
+          "arrayBuffersMB": 0.01,
+          "at": "2026-11-18T12:44:09.069Z"
+        },
+        "afterGcWithRefs": {
+          "rssMB": 206.88,
+          "heapUsedMB": 6.64,
+          "heapTotalMB": 135.72,
+          "externalMB": 33.87,
+          "arrayBuffersMB": 0.01,
+          "at": "2026-11-18T12:44:09.073Z"
+        },
+        "afterDropRefsGc": {
+          "rssMB": 206.88,
+          "heapUsedMB": 6.22,
+          "heapTotalMB": 135.47,
+          "externalMB": 33.87,
+          "arrayBuffersMB": 0.01,
+          "at": "2026-11-18T12:44:09.137Z"
+        }
+      },
+      "explicitDelete": {
+        "afterParseBeforeGc": {
+          "rssMB": 211.43,
+          "heapUsedMB": 6.8,
+          "heapTotalMB": 135.47,
+          "externalMB": 33.87,
+          "arrayBuffersMB": 0.01,
+          "at": "2026-11-18T12:44:09.186Z"
+        },
+        "afterDeleteGc": {
+          "rssMB": 211.43,
+          "heapUsedMB": 6.64,
+          "heapTotalMB": 135.97,
+          "externalMB": 33.87,
+          "arrayBuffersMB": 0.01,
+          "at": "2026-11-18T12:44:09.191Z"
+        }
+      }
+    }
+  },
+  "criteria": {
+    "P1_stable": {
+      "pass": true,
+      "filesCompleted": 5220,
+      "filesTotal": 5220,
+      "parseExceptions": 0,
+      "allExceptions": 0
+    },
+    "P2_smoke": {
+      "pass": true,
+      "hasErrorCount": 0,
+      "hasErrorRate": 0,
+      "perGrammarMaxNodes": {
+        "javascript": 23700,
+        "typescript": 23635,
+        "tsx": 23637
+      }
+    },
+    "P3_boundedMemory": {
+      "pass": true,
+      "heapGrowthMbFromQuarterToEnd": 0.15,
+      "lastGcHeapMB": 6.22,
+      "quarterGcHeapMB": 6.07,
+      "rssPeakMB": 206.88,
+      "heapPeakMB": 53.15,
+      "externalPeakMB": 38.92,
+      "arrayBuffersPeakMB": 5.17,
+      "externalGrowthMb": 5.15,
+      "note": "P3 uses JS heap growth + RSS peak; WASM linear memory shows up in external/arrayBuffers and is reported, not asserted"
+    },
+    "P4_throughput": {
+      "pass": true,
+      "p50MsPerFile": 0.155,
+      "p95MsPerFile": 12.968,
+      "p99MsPerFile": 15.009,
+      "maxMsPerFile": 30.114,
+      "filesPerSecond": 200.85,
+      "mbPerSecond": 1.84,
+      "wallMs": 25989.4,
+      "note": "p95 < 500ms threshold is human-set for outlier detection only; not a performance promise"
+    },
+    "P5_leakShape": {
+      "explicitDeleteReduces": true,
+      "gcReclaimsWithoutDelete": true,
+      "note": "compare heapUsed/external/arrayBuffers across phase B snapshots"
+    }
+  },
+  "verdict": {
+    "passed": true,
+    "failedCriteria": []
+  }
+}

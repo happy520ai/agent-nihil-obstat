@@ -1,0 +1,35 @@
+schema = 1
+id = "I"
+name = "Infrastructure as code"
+kind = "iac"
+status = "defined"
+schema_hash = "4a5cabbacba63ced36534e8300bceb5a421faa7c017ca0f5a81641dcef042f1b"
+notes = "Defined only. Not validated by a real infrastructure project."
+
+[requirements."i.drift-detection"]
+title = "Drift detection is running and reviewed"
+scope = "I"
+evidence = "machine"
+freshness_days = 7
+kinds = ["monitor_export"]
+
+[requirements."i.env-apply-destroy"]
+title = "Isolated environment apply and destroy have been rehearsed"
+scope = "I"
+evidence = "machine"
+freshness_days = 30
+kinds = ["drill_record"]
+
+[requirements."i.plan-review"]
+title = "Change plan review is recorded before apply"
+scope = "I"
+evidence = "machine_or_attested"
+freshness_days = 30
+kinds = ["deploy_record"]
+
+[requirements."i.state-backup"]
+title = "State storage backup and restore have been rehearsed"
+scope = "I"
+evidence = "machine_or_attested"
+freshness_days = 90
+kinds = ["backup_drill", "drill_record"]

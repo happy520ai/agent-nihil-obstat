@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "milestone": "M16",
+  "description": "Protocol-first multi-writer HA on real local TCP: epoch fencing, quorum commits, deterministic fork merge, fault injection, logical clock and local RTO/RPO. Physical three-node HA remains explicitly unverified.",
+  "tasks": {
+    "T-133": { "depends_on": [] },
+    "T-134": { "depends_on": ["T-133"] },
+    "T-135": { "depends_on": ["T-133"] },
+    "T-136": { "depends_on": ["T-134", "T-135"] },
+    "T-137": { "depends_on": ["T-136"] },
+    "T-138": { "depends_on": ["T-134"] },
+    "T-139": { "depends_on": ["T-136", "T-137", "T-138"] },
+    "T-140": { "depends_on": ["T-137", "T-138"] },
+    "T-141": { "depends_on": ["T-139", "T-140"] },
+    "T-142": { "depends_on": ["T-141"], "gate": "phase-multi-writer-ha", "mutex_group": "m16-final-integration" }
+  }
+}

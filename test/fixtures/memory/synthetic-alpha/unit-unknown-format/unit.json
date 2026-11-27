@@ -1,0 +1,11 @@
+{
+  "synthetic": true,
+  "_comment": "Synthetic unit with an unknown format version; discovery must skip only this unit.",
+  "format_version": "synthetic-v9",
+  "unit_id": "alpha-unknown-format",
+  "session_id": "synthetic-session-alpha-unknown",
+  "title": "Synthetic unknown format session",
+  "started_at": "2026-11-01T06:00:00.000Z",
+  "visibility": "visible",
+  "transcript": "transcript.jsonl"
+}

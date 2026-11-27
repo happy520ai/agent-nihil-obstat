@@ -1,0 +1,11 @@
+{
+  "synthetic": true,
+  "_comment": "Synthetic hidden fixture; the secret-like value is a placeholder, not real data.",
+  "format_version": "synthetic-v1",
+  "unit_id": "alpha-hidden",
+  "session_id": "synthetic-session-alpha-hidden",
+  "title": "Synthetic hidden session",
+  "started_at": "2026-11-01T07:00:00.000Z",
+  "visibility": "hidden",
+  "transcript": "transcript.jsonl"
+}

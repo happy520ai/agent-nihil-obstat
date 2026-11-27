@@ -1,0 +1,42 @@
+schema = 1
+id = "F"
+name = "Desktop application"
+kind = "desktop"
+status = "defined"
+schema_hash = "88e06eb298ae6ca1f115a5c923d1ab7bc6bbf4d990c5e0e565b05150362770a8"
+notes = "Defined only. Not validated by a real desktop project."
+
+[requirements."f.crash-reporting"]
+title = "Crash reporting is enabled for packaged builds"
+scope = "F"
+evidence = "machine"
+freshness_days = 30
+kinds = ["monitor_export"]
+
+[requirements."f.installer-signing"]
+title = "Installers are signed and notarized on each platform"
+scope = "F"
+evidence = "attested"
+freshness_days = 90
+kinds = []
+
+[requirements."f.uninstall-clean"]
+title = "Uninstall leaves no unexpected residue"
+scope = "F"
+evidence = "machine"
+freshness_days = 30
+kinds = ["smoke_test"]
+
+[requirements."f.update-channel"]
+title = "Auto-update channel and rollback exist"
+scope = "F"
+evidence = "machine_or_attested"
+freshness_days = 90
+kinds = ["drill_record"]
+
+[requirements."f.update-signature"]
+title = "Update packages are signature-verified"
+scope = "F"
+evidence = "machine"
+freshness_days = 30
+kinds = ["artifact_scan"]

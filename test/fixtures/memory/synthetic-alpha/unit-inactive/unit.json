@@ -1,0 +1,11 @@
+{
+  "synthetic": true,
+  "_comment": "Synthetic inactive history fixture; no real client session.",
+  "format_version": "synthetic-v1",
+  "unit_id": "alpha-inactive",
+  "session_id": "synthetic-session-alpha-inactive",
+  "title": "Synthetic inactive session",
+  "started_at": "2026-11-01T08:00:00.000Z",
+  "visibility": "inactive",
+  "transcript": "transcript.jsonl"
+}

@@ -1,0 +1,35 @@
+schema = 1
+id = "B"
+name = "Command-line tool"
+kind = "cli"
+status = "defined"
+schema_hash = "e383bb88c9cfb0dc1b7082533aed566c41db8e6bdf3996a58706fdee7cfe4565"
+notes = "Defined only. Not validated by a real CLI project."
+
+[requirements."b.exit-code-contract"]
+title = "Exit codes and error output match the contract tests"
+scope = "B"
+evidence = "machine"
+freshness_days = 30
+kinds = ["ci_run"]
+
+[requirements."b.no-silent-writes"]
+title = "The tool does not silently modify user files"
+scope = "B"
+evidence = "attested"
+freshness_days = 180
+kinds = []
+
+[requirements."b.platform-install-smoke"]
+title = "Install and uninstall smoke pass on each target platform"
+scope = "B"
+evidence = "machine"
+freshness_days = 30
+kinds = ["smoke_test"]
+
+[requirements."b.upgrade-path"]
+title = "Upgrade path from the previous release is tested"
+scope = "B"
+evidence = "machine_or_attested"
+freshness_days = 90
+kinds = ["drill_record"]

@@ -1,0 +1,1240 @@
+{
+  "schema": "ano.t168.zcode-hooks-validation.v1",
+  "task": "T-168",
+  "generatedAt": "2026-11-26T05:20:38.807Z",
+  "verdict": "PASS",
+  "spec": "docs/m19-m22-implementation-spec.md T-168 (M19); docs/adr/ADR-013-personal-project-brain.md §2/§4/§5",
+  "redaction": "沿用 src/clients/redact.ts 的 CLIENT_ENTRY_SAFE_KEYS/SECRET_CONTAINERS：仅保留非秘密元数据；prompt/response/tool 内容、transcript 路径、env 值、凭证一概不记录；权限提示正文以 [host-permission-message] 代替，仅保留 ANO 钩子来源的 ruleId/decision/reason。",
+  "environment": {
+    "host": "ZCode headless CLI zcode.cjs 0.18.0 (D:/zcode/resources/glm/zcode.cjs)",
+    "node": "v24.14.0",
+    "platform": "win32 x64",
+    "isolatedProject": "os.tmpdir()/ano-t168-work/project — 真实 Git 仓库，含 package.json 与 src/*.ts",
+    "isolatedHead": "f375fbe (初始提交)",
+    "isolatedHome": "os.tmpdir()/ano-t168-work/isolated-home — HOME/USERPROFILE 仅指向此处；真实用户配置与 ANO 仓库配置从未写入",
+    "cliUnderTest": "F:/Agent Nihil Obstat/dist/surface/cli.js（当前 dist，绝对 node 路径）",
+    "installer": "真实 CLI: ano clients install zcode --with-hooks --confirm（beforeHash/afterHash/backupId 见安装回执）",
+    "graphRevision": "f954b7217fd64edfbfea6889c8a710ac2e125f662dc8fcfd836fcdb764179b0d",
+    "graphRevisionBeforeExplore": "4d9f1839539e0a84b97949e319330ea0d9003f66275cfb9977fa640c22d8bb66",
+    "source": "真实 ZCode 宿主进程 + 真实 ano hook CLI；无合成样本冒充实测"
+  },
+  "install": {
+    "clientId": "zcode",
+    "targetPath": "D:\\Temp\\ano-t168-work\\isolated-home\\.zcode\\cli\\config.json",
+    "mode": "apply",
+    "applied": true,
+    "changed": true,
+    "beforeHash": "2b3d13243cd748f95ec00f05a5afa71f482d5640fb7f9d7015fcde19ff976dc1",
+    "afterHash": "73daab18a61f36f304946b007a7ec60e5e0f3080d6dbad547e63e5a33a02c8fe",
+    "backupId": "cfg-mwx3emq4-a8b6f11a",
+    "warnings": [],
+    "restoredOnFailure": false,
+    "error": null
+  },
+  "checks": {
+    "Q1_sessionStartBrief": {
+      "status": "PASS",
+      "method": "真实 ZCode 新会话 --prompt，模型被要求复述 SessionStart 注入的 ANO brief 首行/焦点/断点",
+      "observed": "模型原样输出「# ANO brief (最小投影)」「- （无焦点任务）」「- （无断点记录）」",
+      "hostLog": "hook.session_start_context.resolved result=written（每次新会话均出现）",
+      "ledgerEvent": "01M8B447VQ1J8FG0GR1J6N3QGW",
+      "teeStdout": "# ANO brief (最小投影) / ## 当前焦点 / ## 断点下一步"
+    },
+    "Q2_preToolUnexplored": {
+      "status": "PASS",
+      "advisory": "permissionDecision=ask，reason 含「src/math.ts 在当前 revision 没有结构探查证据」，工具未执行、无 PostToolUse",
+      "strict": "permissionDecision=deny，exitCode=2（宿主 tool.permission.resolved ruleId=hook.PreToolUse.deny / hook error 由 stderr ExperimentalWarning 引起，决定仍送达）",
+      "hostLog": "hook.run.allowed source=config.PreToolUse.0.0 后跟 tool.permission.resolved ruleId=hook.PreToolUse.ask，decision=deny",
+      "decisionEvidence": "hook-trace.jsonl / hook-trace-strict.jsonl（见 decisionCounts）"
+    },
+    "Q3_afterExploreAllow": {
+      "status": "PASS",
+      "method": "对 src/math.ts 执行真实 file-level outline 查询（structureFileQuery），写入 structure.queried 事件并绑定当前 revision；随后新会话再次 Edit",
+      "structureQueryEvent": [
+        {
+          "id": "01M8B496ZT09KNHYAAM3RS9PHB",
+          "file": "src/math.ts",
+          "granularity": "file",
+          "graphRevision": "4d9f1839539e0a84b97949e319330ea0d9003f66275cfb9977fa640c22d8bb66"
+        },
+        {
+          "id": "01M8B4N2BJ0P5HWAJ780JZZQEG",
+          "file": "src/math.ts",
+          "granularity": "file",
+          "graphRevision": "f954b7217fd64edfbfea6889c8a710ac2e125f662dc8fcfd836fcdb764179b0d"
+        }
+      ],
+      "observed": "permissionDecision=allow，Edit 成功落地（git diff 显示 add→addTwo）；Read/Edit 两次 pre-tool 均 allow",
+      "noteOnRevision": "新增 src/other.ts 后 graph revision 变化，explored 证据按 revision 绑定失效；rebuild graph + 重新 outline 后 allow 恢复，符合 ADR-013 §4.3 设计"
+    },
+    "Q4_stopAccounting": {
+      "status": "PASS",
+      "unownedChange": "会话内 Edit 改动 src/math.ts 且无归属任务 → Stop 返回 decision=block + systemMessage「C1: 为无归属改动建任务或说明：src/math.ts」；账本 session.stop_checked seq=1 C1.ok=false decision=continue",
+      "noInfiniteLoop": "宿主 stop_hook_active=true 的第二次 Stop 返回 {}（stop-ok），账本 seq=2 decision=stop-ok/continuations_used=1，未再次触发 continue；符合 ADR-013 §4.4「最多2次 continue + 尊重 stopContinuation」",
+      "afterBookkeeping": "补记 task.created(T168-OWN-3, declared_files=[src/math.ts]) 与 note.recorded(checkpoint 下一步) 后，账本 seq=3 的 session.stop_checked C1.ok=true（见 keyStopEventIds），Stop 正常结束",
+      "keyStopEventIds": [
+        "01M8B4A1W435R30C8HQ2TWB4H9",
+        "01M8B4D2M0NGDA0P631096F97Z",
+        "01M8B4KEDC20V51XQNKCXVXD27"
+      ],
+      "noteEventId": "01M8B4HZQNNNCC0WS1M1K39JRS"
+    }
+  },
+  "decisionCounts": [
+    {
+      "file": "hook-trace.jsonl",
+      "invocations": 34,
+      "counts": {
+        "session-start": {
+          "context-injected": 1
+        },
+        "prompt": {
+          "noop/allow": 1
+        },
+        "pre-tool": {
+          "allow": 23,
+          "ask": 5,
+          "unknown": 2
+        },
+        "stop": {
+          "continue(block)": 1,
+          "noop/allow": 1
+        }
+      }
+    },
+    {
+      "file": "hook-trace-strict.jsonl",
+      "invocations": 6,
+      "counts": {
+        "session-start": {
+          "context-injected": 1
+        },
+        "prompt": {
+          "noop/allow": 1
+        },
+        "pre-tool": {
+          "deny": 3
+        },
+        "stop": {
+          "noop/allow": 1
+        }
+      }
+    },
+    {
+      "file": "hook-trace2.jsonl",
+      "invocations": 5,
+      "counts": {
+        "session-start": {
+          "context-injected": 1
+        },
+        "prompt": {
+          "noop/allow": 1
+        },
+        "pre-tool": {
+          "ask": 2
+        },
+        "stop": {
+          "noop/allow": 1
+        }
+      }
+    },
+    {
+      "file": "hook-trace3.jsonl",
+      "invocations": 3,
+      "counts": {
+        "session-start": {
+          "context-injected": 1
+        },
+        "prompt": {
+          "noop/allow": 1
+        },
+        "stop": {
+          "noop/allow": 1
+        }
+      }
+    }
+  ],
+  "hostLogExcerpts": [
+    {
+      "at": "2026-11-26T05:09:21.945Z",
+      "event": "hook.session_start_context.resolved",
+      "sessionId": "sess_49109b2c-21c4-4d50-9df8-742f1410824c",
+      "tool": null,
+      "source": null,
+      "ruleId": null,
+      "decision": null,
+      "result": "written",
+      "outcome": null
+    },
+    {
+      "at": "2026-11-26T05:09:57.496Z",
+      "event": "hook.session_start_context.resolved",
+      "sessionId": "sess_87b86667-feab-432c-85d0-9db77ffa88ef",
+      "tool": null,
+      "source": null,
+      "ruleId": null,
+      "decision": null,
+      "result": "written",
+      "outcome": null
+    },
+    {
+      "at": "2026-11-26T05:10:04.248Z",
+      "event": "hook.run.allowed",
+      "sessionId": "sess_87b86667-feab-432c-85d0-9db77ffa88ef",
+      "tool": "Read",
+      "source": "config.PreToolUse.0.0",
+      "ruleId": null,
+      "decision": null,
+      "result": null,
+      "outcome": null
+    },
+    {
+      "at": "2026-11-26T05:10:04.254Z",
+      "event": "tool.permission.resolved",
+      "sessionId": "sess_87b86667-feab-432c-85d0-9db77ffa88ef",
+      "tool": "Read",
+      "source": null,
+      "ruleId": "hook.PreToolUse.ask",
+      "decision": "deny",
+      "result": null,
+      "outcome": null
+    },
+    {
+      "at": "2026-11-26T05:10:08.135Z",
+      "event": "hook.run.allowed",
+      "sessionId": "sess_87b86667-feab-432c-85d0-9db77ffa88ef",
+      "tool": "Edit",
+      "source": "config.PreToolUse.0.0",
+      "ruleId": null,
+      "decision": null,
+      "result": null,
+      "outcome": null
+    },
+    {
+      "at": "2026-11-26T05:10:08.139Z",
+      "event": "tool.permission.resolved",
+      "sessionId": "sess_87b86667-feab-432c-85d0-9db77ffa88ef",
+      "tool": "Edit",
+      "source": null,
+      "ruleId": "hook.PreToolUse.ask",
+      "decision": "deny",
+      "result": null,
+      "outcome": null
+    },
+    {
+      "at": "2026-11-26T05:11:27.217Z",
+      "event": "hook.session_start_context.resolved",
+      "sessionId": "sess_c63e0c70-84d8-406b-b2e2-4937a077fa0d",
+      "tool": null,
+      "source": null,
+      "ruleId": null,
+      "decision": null,
+      "result": "written",
+      "outcome": null
+    },
+    {
+      "at": "2026-11-26T05:11:36.561Z",
+      "event": "hook.run.allowed",
+      "sessionId": "sess_c63e0c70-84d8-406b-b2e2-4937a077fa0d",
+      "tool": "Read",
+      "source": "config.PreToolUse.0.0",
+      "ruleId": null,
+      "decision": null,
+      "result": null,
+      "outcome": null
+    },
+    {
+      "at": "2026-11-26T05:11:36.569Z",
+      "event": "tool.permission.resolved",
+      "sessionId": "sess_c63e0c70-84d8-406b-b2e2-4937a077fa0d",
+      "tool": "Read",
+      "source": null,
+      "ruleId": "hook.PreToolUse.ask",
+      "decision": "deny",
+      "result": null,
+      "outcome": null
+    },
+    {
+      "at": "2026-11-26T05:11:42.091Z",
+      "event": "hook.run.allowed",
+      "sessionId": "sess_c63e0c70-84d8-406b-b2e2-4937a077fa0d",
+      "tool": "Edit",
+      "source": "config.PreToolUse.0.0",
+      "ruleId": null,
+      "decision": null,
+      "result": null,
+      "outcome": null
+    },
+    {
+      "at": "2026-11-26T05:11:42.096Z",
+      "event": "tool.permission.resolved",
+      "sessionId": "sess_c63e0c70-84d8-406b-b2e2-4937a077fa0d",
+      "tool": "Edit",
+      "source": null,
+      "ruleId": "hook.PreToolUse.ask",
+      "decision": "deny",
+      "result": null,
+      "outcome": null
+    },
+    {
+      "at": "2026-11-26T05:12:17.824Z",
+      "event": "hook.session_start_context.resolved",
+      "sessionId": "sess_bb299147-19ed-406c-a858-1c1eea485a1b",
+      "tool": null,
+      "source": null,
+      "ruleId": null,
+      "decision": null,
+      "result": "written",
+      "outcome": null
+    },
+    {
+      "at": "2026-11-26T05:12:26.709Z",
+      "event": "hook.run.allowed",
+      "sessionId": "sess_bb299147-19ed-406c-a858-1c1eea485a1b",
+      "tool": "Read",
+      "source": "config.PreToolUse.0.0",
+      "ruleId": null,
+      "decision": null,
+      "result": null,
+      "outcome": null
+    },
+    {
+      "at": "2026-11-26T05:12:29.477Z",
+      "event": "hook.run.allowed",
+      "sessionId": "sess_bb299147-19ed-406c-a858-1c1eea485a1b",
+      "tool": "Edit",
+      "source": "config.PreToolUse.0.0",
+      "ruleId": null,
+      "decision": null,
+      "result": null,
+      "outcome": null
+    },
+    {
+      "at": "2026-11-26T05:12:36.192Z",
+      "event": "hook.run.allowed",
+      "sessionId": "sess_bb299147-19ed-406c-a858-1c1eea485a1b",
+      "tool": "Bash",
+      "source": "config.PreToolUse.0.0",
+      "ruleId": null,
+      "decision": null,
+      "result": null,
+      "outcome": null
+    },
+    {
+      "at": "2026-11-26T05:12:36.201Z",
+      "event": "tool.permission.resolved",
+      "sessionId": "sess_bb299147-19ed-406c-a858-1c1eea485a1b",
+      "tool": "Bash",
+      "source": null,
+      "ruleId": "hook.PreToolUse.ask",
+      "decision": "deny",
+      "result": null,
+      "outcome": null
+    },
+    {
+      "at": "2026-11-26T05:12:44.857Z",
+      "event": "hook.run.allowed",
+      "sessionId": "sess_bb299147-19ed-406c-a858-1c1eea485a1b",
+      "tool": "Read",
+      "source": "config.PreToolUse.0.0",
+      "ruleId": null,
+      "decision": null,
+      "result": null,
+      "outcome": null
+    },
+    {
+      "at": "2026-11-26T05:12:51.988Z",
+      "event": "hook.run.allowed",
+      "sessionId": "sess_bb299147-19ed-406c-a858-1c1eea485a1b",
+      "tool": "Read",
+      "source": "config.PreToolUse.0.0",
+      "ruleId": null,
+      "decision": null,
+      "result": null,
+      "outcome": null
+    },
+    {
+      "at": "2026-11-26T05:12:51.991Z",
+      "event": "tool.permission.resolved",
+      "sessionId": "sess_bb299147-19ed-406c-a858-1c1eea485a1b",
+      "tool": "Read",
+      "source": null,
+      "ruleId": "hook.PreToolUse.ask",
+      "decision": "deny",
+      "result": null,
+      "outcome": null
+    },
+    {
+      "at": "2026-11-26T05:12:57.192Z",
+      "event": "hook.run.allowed",
+      "sessionId": "sess_bb299147-19ed-406c-a858-1c1eea485a1b",
+      "tool": "Bash",
+      "source": "config.PreToolUse.0.0",
+      "ruleId": null,
+      "decision": null,
+      "result": null,
+      "outcome": null
+    },
+    {
+      "at": "2026-11-26T05:12:57.196Z",
+      "event": "tool.permission.resolved",
+      "sessionId": "sess_bb299147-19ed-406c-a858-1c1eea485a1b",
+      "tool": "Bash",
+      "source": null,
+      "ruleId": "hook.PreToolUse.ask",
+      "decision": "deny",
+      "result": null,
+      "outcome": null
+    },
+    {
+      "at": "2026-11-26T05:13:02.299Z",
+      "event": "hook.run.allowed",
+      "sessionId": "sess_bb299147-19ed-406c-a858-1c1eea485a1b",
+      "tool": "Read",
+      "source": "config.PreToolUse.0.0",
+      "ruleId": null,
+      "decision": null,
+      "result": null,
+      "outcome": null
+    },
+    {
+      "at": "2026-11-26T05:13:02.306Z",
+      "event": "hook.run.allowed",
+      "sessionId": "sess_bb299147-19ed-406c-a858-1c1eea485a1b",
+      "tool": "Read",
+      "source": "config.PreToolUse.0.0",
+      "ruleId": null,
+      "decision": null,
+      "result": null,
+      "outcome": null
+    },
+    {
+      "at": "2026-11-26T05:13:02.330Z",
+      "event": "hook.run.allowed",
+      "sessionId": "sess_bb299147-19ed-406c-a858-1c1eea485a1b",
+      "tool": "Read",
+      "source": "config.PreToolUse.0.0",
+      "ruleId": null,
+      "decision": null,
+      "result": null,
+      "outcome": null
+    },
+    {
+      "at": "2026-11-26T05:13:08.903Z",
+      "event": "hook.run.allowed",
+      "sessionId": "sess_bb299147-19ed-406c-a858-1c1eea485a1b",
+      "tool": "Agent",
+      "source": "config.PreToolUse.0.0",
+      "ruleId": null,
+      "decision": null,
+      "result": null,
+      "outcome": null
+    },
+    {
+      "at": "2026-11-26T05:13:08.906Z",
+      "event": "tool.permission.resolved",
+      "sessionId": "sess_bb299147-19ed-406c-a858-1c1eea485a1b",
+      "tool": "Agent",
+      "source": null,
+      "ruleId": "hook.PreToolUse.ask",
+      "decision": "deny",
+      "result": null,
+      "outcome": null
+    },
+    {
+      "at": "2026-11-26T05:13:13.085Z",
+      "event": "hook.run.allowed",
+      "sessionId": "sess_bb299147-19ed-406c-a858-1c1eea485a1b",
+      "tool": "Read",
+      "source": "config.PreToolUse.0.0",
+      "ruleId": null,
+      "decision": null,
+      "result": null,
+      "outcome": null
+    },
+    {
+      "at": "2026-11-26T05:13:13.107Z",
+      "event": "hook.run.allowed",
+      "sessionId": "sess_bb299147-19ed-406c-a858-1c1eea485a1b",
+      "tool": "Read",
+      "source": "config.PreToolUse.0.0",
+      "ruleId": null,
+      "decision": null,
+      "result": null,
+      "outcome": null
+    },
+    {
+      "at": "2026-11-26T05:13:13.119Z",
+      "event": "hook.run.allowed",
+      "sessionId": "sess_bb299147-19ed-406c-a858-1c1eea485a1b",
+      "tool": "Read",
+      "source": "config.PreToolUse.0.0",
+      "ruleId": null,
+      "decision": null,
+      "result": null,
+      "outcome": null
+    },
+    {
+      "at": "2026-11-26T05:13:13.145Z",
+      "event": "hook.run.allowed",
+      "sessionId": "sess_bb299147-19ed-406c-a858-1c1eea485a1b",
+      "tool": "Read",
+      "source": "config.PreToolUse.0.0",
+      "ruleId": null,
+      "decision": null,
+      "result": null,
+      "outcome": null
+    },
+    {
+      "at": "2026-11-26T05:13:24.864Z",
+      "event": "hook.run.allowed",
+      "sessionId": "sess_bb299147-19ed-406c-a858-1c1eea485a1b",
+      "tool": "Read",
+      "source": "config.PreToolUse.0.0",
+      "ruleId": null,
+      "decision": null,
+      "result": null,
+      "outcome": null
+    },
+    {
+      "at": "2026-11-26T05:13:24.868Z",
+      "event": "tool.permission.resolved",
+      "sessionId": "sess_bb299147-19ed-406c-a858-1c1eea485a1b",
+      "tool": "Read",
+      "source": null,
+      "ruleId": "hook.PreToolUse.ask",
+      "decision": "deny",
+      "result": null,
+      "outcome": null
+    },
+    {
+      "at": "2026-11-26T05:13:24.869Z",
+      "event": "hook.run.allowed",
+      "sessionId": "sess_bb299147-19ed-406c-a858-1c1eea485a1b",
+      "tool": "Read",
+      "source": "config.PreToolUse.0.0",
+      "ruleId": null,
+      "decision": null,
+      "result": null,
+      "outcome": null
+    },
+    {
+      "at": "2026-11-26T05:13:24.872Z",
+      "event": "hook.run.allowed",
+      "sessionId": "sess_bb299147-19ed-406c-a858-1c1eea485a1b",
+      "tool": "Read",
+      "source": "config.PreToolUse.0.0",
+      "ruleId": null,
+      "decision": null,
+      "result": null,
+      "outcome": null
+    },
+    {
+      "at": "2026-11-26T05:13:24.874Z",
+      "event": "hook.run.allowed",
+      "sessionId": "sess_bb299147-19ed-406c-a858-1c1eea485a1b",
+      "tool": "Read",
+      "source": "config.PreToolUse.0.0",
+      "ruleId": null,
+      "decision": null,
+      "result": null,
+      "outcome": null
+    },
+    {
+      "at": "2026-11-26T05:13:24.876Z",
+      "event": "hook.run.allowed",
+      "sessionId": "sess_bb299147-19ed-406c-a858-1c1eea485a1b",
+      "tool": "Read",
+      "source": "config.PreToolUse.0.0",
+      "ruleId": null,
+      "decision": null,
+      "result": null,
+      "outcome": null
+    },
+    {
+      "at": "2026-11-26T05:13:24.878Z",
+      "event": "hook.run.allowed",
+      "sessionId": "sess_bb299147-19ed-406c-a858-1c1eea485a1b",
+      "tool": "Read",
+      "source": "config.PreToolUse.0.0",
+      "ruleId": null,
+      "decision": null,
+      "result": null,
+      "outcome": null
+    },
+    {
+      "at": "2026-11-26T05:13:31.397Z",
+      "event": "hook.run.failed",
+      "sessionId": "sess_bb299147-19ed-406c-a858-1c1eea485a1b",
+      "tool": null,
+      "source": "config.PreToolUse.0.0",
+      "ruleId": null,
+      "decision": null,
+      "result": null,
+      "outcome": "timed_out"
+    },
+    {
+      "at": "2026-11-26T05:13:31.400Z",
+      "event": "hook.run.failed",
+      "sessionId": "sess_bb299147-19ed-406c-a858-1c1eea485a1b",
+      "tool": null,
+      "source": "config.PreToolUse.0.0",
+      "ruleId": null,
+      "decision": null,
+      "result": null,
+      "outcome": "timed_out"
+    },
+    {
+      "at": "2026-11-26T05:13:31.405Z",
+      "event": "hook.run.failed",
+      "sessionId": "sess_bb299147-19ed-406c-a858-1c1eea485a1b",
+      "tool": null,
+      "source": "config.PreToolUse.0.0",
+      "ruleId": null,
+      "decision": null,
+      "result": null,
+      "outcome": "timed_out"
+    },
+    {
+      "at": "2026-11-26T05:13:31.407Z",
+      "event": "hook.run.failed",
+      "sessionId": "sess_bb299147-19ed-406c-a858-1c1eea485a1b",
+      "tool": null,
+      "source": "config.PreToolUse.0.0",
+      "ruleId": null,
+      "decision": null,
+      "result": null,
+      "outcome": "timed_out"
+    },
+    {
+      "at": "2026-11-26T05:13:31.410Z",
+      "event": "hook.run.failed",
+      "sessionId": "sess_bb299147-19ed-406c-a858-1c1eea485a1b",
+      "tool": null,
+      "source": "config.PreToolUse.0.0",
+      "ruleId": null,
+      "decision": null,
+      "result": null,
+      "outcome": "timed_out"
+    },
+    {
+      "at": "2026-11-26T05:13:31.412Z",
+      "event": "hook.run.failed",
+      "sessionId": "sess_bb299147-19ed-406c-a858-1c1eea485a1b",
+      "tool": null,
+      "source": "config.PreToolUse.0.0",
+      "ruleId": null,
+      "decision": null,
+      "result": null,
+      "outcome": "timed_out"
+    },
+    {
+      "at": "2026-11-26T05:13:53.256Z",
+      "event": "hook.run.allowed",
+      "sessionId": "sess_bb299147-19ed-406c-a858-1c1eea485a1b",
+      "tool": "Read",
+      "source": "config.PreToolUse.0.0",
+      "ruleId": null,
+      "decision": null,
+      "result": null,
+      "outcome": null
+    },
+    {
+      "at": "2026-11-26T05:13:53.264Z",
+      "event": "hook.run.allowed",
+      "sessionId": "sess_bb299147-19ed-406c-a858-1c1eea485a1b",
+      "tool": "Read",
+      "source": "config.PreToolUse.0.0",
+      "ruleId": null,
+      "decision": null,
+      "result": null,
+      "outcome": null
+    },
+    {
+      "at": "2026-11-26T05:13:53.272Z",
+      "event": "hook.run.allowed",
+      "sessionId": "sess_bb299147-19ed-406c-a858-1c1eea485a1b",
+      "tool": "Read",
+      "source": "config.PreToolUse.0.0",
+      "ruleId": null,
+      "decision": null,
+      "result": null,
+      "outcome": null
+    },
+    {
+      "at": "2026-11-26T05:13:53.275Z",
+      "event": "hook.run.allowed",
+      "sessionId": "sess_bb299147-19ed-406c-a858-1c1eea485a1b",
+      "tool": "Read",
+      "source": "config.PreToolUse.0.0",
+      "ruleId": null,
+      "decision": null,
+      "result": null,
+      "outcome": null
+    },
+    {
+      "at": "2026-11-26T05:13:53.284Z",
+      "event": "hook.run.allowed",
+      "sessionId": "sess_bb299147-19ed-406c-a858-1c1eea485a1b",
+      "tool": "Read",
+      "source": "config.PreToolUse.0.0",
+      "ruleId": null,
+      "decision": null,
+      "result": null,
+      "outcome": null
+    },
+    {
+      "at": "2026-11-26T05:13:53.286Z",
+      "event": "hook.run.allowed",
+      "sessionId": "sess_bb299147-19ed-406c-a858-1c1eea485a1b",
+      "tool": "Read",
+      "source": "config.PreToolUse.0.0",
+      "ruleId": null,
+      "decision": null,
+      "result": null,
+      "outcome": null
+    },
+    {
+      "at": "2026-11-26T05:13:53.294Z",
+      "event": "hook.run.allowed",
+      "sessionId": "sess_bb299147-19ed-406c-a858-1c1eea485a1b",
+      "tool": "Read",
+      "source": "config.PreToolUse.0.0",
+      "ruleId": null,
+      "decision": null,
+      "result": null,
+      "outcome": null
+    },
+    {
+      "at": "2026-11-26T05:13:53.317Z",
+      "event": "hook.run.allowed",
+      "sessionId": "sess_bb299147-19ed-406c-a858-1c1eea485a1b",
+      "tool": "Read",
+      "source": "config.PreToolUse.0.0",
+      "ruleId": null,
+      "decision": null,
+      "result": null,
+      "outcome": null
+    },
+    {
+      "at": "2026-11-26T05:15:22.166Z",
+      "event": "hook.session_start_context.resolved",
+      "sessionId": "sess_0ad578cf-5005-422a-bd13-2855703e6d39",
+      "tool": null,
+      "source": null,
+      "ruleId": null,
+      "decision": null,
+      "result": "written",
+      "outcome": null
+    },
+    {
+      "at": "2026-11-26T05:15:29.259Z",
+      "event": "hook.run.allowed",
+      "sessionId": "sess_0ad578cf-5005-422a-bd13-2855703e6d39",
+      "tool": "Read",
+      "source": "config.PreToolUse.0.0",
+      "ruleId": null,
+      "decision": null,
+      "result": null,
+      "outcome": null
+    },
+    {
+      "at": "2026-11-26T05:15:29.266Z",
+      "event": "tool.permission.resolved",
+      "sessionId": "sess_0ad578cf-5005-422a-bd13-2855703e6d39",
+      "tool": "Read",
+      "source": null,
+      "ruleId": "hook.PreToolUse.ask",
+      "decision": "deny",
+      "result": null,
+      "outcome": null
+    },
+    {
+      "at": "2026-11-26T05:15:43.611Z",
+      "event": "hook.run.failed",
+      "sessionId": "sess_0ad578cf-5005-422a-bd13-2855703e6d39",
+      "tool": null,
+      "source": "config.PreToolUse.0.0",
+      "ruleId": null,
+      "decision": null,
+      "result": null,
+      "outcome": "timed_out"
+    },
+    {
+      "at": "2026-11-26T05:15:46.535Z",
+      "event": "hook.run.allowed",
+      "sessionId": "sess_0ad578cf-5005-422a-bd13-2855703e6d39",
+      "tool": "Read",
+      "source": "config.PreToolUse.0.0",
+      "ruleId": null,
+      "decision": null,
+      "result": null,
+      "outcome": null
+    },
+    {
+      "at": "2026-11-26T05:15:46.539Z",
+      "event": "tool.permission.resolved",
+      "sessionId": "sess_0ad578cf-5005-422a-bd13-2855703e6d39",
+      "tool": "Read",
+      "source": null,
+      "ruleId": "hook.PreToolUse.ask",
+      "decision": "deny",
+      "result": null,
+      "outcome": null
+    },
+    {
+      "at": "2026-11-26T05:15:50.888Z",
+      "event": "hook.run.allowed",
+      "sessionId": "sess_0ad578cf-5005-422a-bd13-2855703e6d39",
+      "tool": "Read",
+      "source": "config.PreToolUse.0.0",
+      "ruleId": null,
+      "decision": null,
+      "result": null,
+      "outcome": null
+    },
+    {
+      "at": "2026-11-26T05:15:50.891Z",
+      "event": "tool.permission.resolved",
+      "sessionId": "sess_0ad578cf-5005-422a-bd13-2855703e6d39",
+      "tool": "Read",
+      "source": null,
+      "ruleId": "hook.PreToolUse.ask",
+      "decision": "deny",
+      "result": null,
+      "outcome": null
+    },
+    {
+      "at": "2026-11-26T05:15:53.664Z",
+      "event": "hook.run.allowed",
+      "sessionId": "sess_0ad578cf-5005-422a-bd13-2855703e6d39",
+      "tool": "Bash",
+      "source": "config.PreToolUse.0.0",
+      "ruleId": null,
+      "decision": null,
+      "result": null,
+      "outcome": null
+    },
+    {
+      "at": "2026-11-26T05:15:53.670Z",
+      "event": "tool.permission.resolved",
+      "sessionId": "sess_0ad578cf-5005-422a-bd13-2855703e6d39",
+      "tool": "Bash",
+      "source": null,
+      "ruleId": "hook.PreToolUse.ask",
+      "decision": "deny",
+      "result": null,
+      "outcome": null
+    },
+    {
+      "at": "2026-11-26T05:15:58.221Z",
+      "event": "hook.run.allowed",
+      "sessionId": "sess_0ad578cf-5005-422a-bd13-2855703e6d39",
+      "tool": "Bash",
+      "source": "config.PreToolUse.0.0",
+      "ruleId": null,
+      "decision": null,
+      "result": null,
+      "outcome": null
+    },
+    {
+      "at": "2026-11-26T05:15:58.226Z",
+      "event": "tool.permission.resolved",
+      "sessionId": "sess_0ad578cf-5005-422a-bd13-2855703e6d39",
+      "tool": "Bash",
+      "source": null,
+      "ruleId": "hook.PreToolUse.ask",
+      "decision": "deny",
+      "result": null,
+      "outcome": null
+    },
+    {
+      "at": "2026-11-26T05:16:01.928Z",
+      "event": "hook.run.allowed",
+      "sessionId": "sess_0ad578cf-5005-422a-bd13-2855703e6d39",
+      "tool": "Edit",
+      "source": "config.PreToolUse.0.0",
+      "ruleId": null,
+      "decision": null,
+      "result": null,
+      "outcome": null
+    },
+    {
+      "at": "2026-11-26T05:16:01.932Z",
+      "event": "tool.permission.resolved",
+      "sessionId": "sess_0ad578cf-5005-422a-bd13-2855703e6d39",
+      "tool": "Edit",
+      "source": null,
+      "ruleId": "hook.PreToolUse.ask",
+      "decision": "deny",
+      "result": null,
+      "outcome": null
+    },
+    {
+      "at": "2026-11-26T05:16:04.596Z",
+      "event": "hook.run.allowed",
+      "sessionId": "sess_0ad578cf-5005-422a-bd13-2855703e6d39",
+      "tool": "Bash",
+      "source": "config.PreToolUse.0.0",
+      "ruleId": null,
+      "decision": null,
+      "result": null,
+      "outcome": null
+    },
+    {
+      "at": "2026-11-26T05:16:04.600Z",
+      "event": "tool.permission.resolved",
+      "sessionId": "sess_0ad578cf-5005-422a-bd13-2855703e6d39",
+      "tool": "Bash",
+      "source": null,
+      "ruleId": "hook.PreToolUse.ask",
+      "decision": "deny",
+      "result": null,
+      "outcome": null
+    },
+    {
+      "at": "2026-11-26T05:16:10.851Z",
+      "event": "hook.run.allowed",
+      "sessionId": "sess_0ad578cf-5005-422a-bd13-2855703e6d39",
+      "tool": "Bash",
+      "source": "config.PreToolUse.0.0",
+      "ruleId": null,
+      "decision": null,
+      "result": null,
+      "outcome": null
+    },
+    {
+      "at": "2026-11-26T05:16:10.855Z",
+      "event": "tool.permission.resolved",
+      "sessionId": "sess_0ad578cf-5005-422a-bd13-2855703e6d39",
+      "tool": "Bash",
+      "source": null,
+      "ruleId": "hook.PreToolUse.ask",
+      "decision": "deny",
+      "result": null,
+      "outcome": null
+    },
+    {
+      "at": "2026-11-26T05:16:13.851Z",
+      "event": "hook.run.allowed",
+      "sessionId": "sess_0ad578cf-5005-422a-bd13-2855703e6d39",
+      "tool": "Bash",
+      "source": "config.PreToolUse.0.0",
+      "ruleId": null,
+      "decision": null,
+      "result": null,
+      "outcome": null
+    },
+    {
+      "at": "2026-11-26T05:16:13.855Z",
+      "event": "tool.permission.resolved",
+      "sessionId": "sess_0ad578cf-5005-422a-bd13-2855703e6d39",
+      "tool": "Bash",
+      "source": null,
+      "ruleId": "hook.PreToolUse.ask",
+      "decision": "deny",
+      "result": null,
+      "outcome": null
+    },
+    {
+      "at": "2026-11-26T05:16:18.065Z",
+      "event": "hook.run.allowed",
+      "sessionId": "sess_0ad578cf-5005-422a-bd13-2855703e6d39",
+      "tool": "Edit",
+      "source": "config.PreToolUse.0.0",
+      "ruleId": null,
+      "decision": null,
+      "result": null,
+      "outcome": null
+    },
+    {
+      "at": "2026-11-26T05:16:18.069Z",
+      "event": "tool.permission.resolved",
+      "sessionId": "sess_0ad578cf-5005-422a-bd13-2855703e6d39",
+      "tool": "Edit",
+      "source": null,
+      "ruleId": "hook.PreToolUse.ask",
+      "decision": "deny",
+      "result": null,
+      "outcome": null
+    },
+    {
+      "at": "2026-11-26T05:17:00.186Z",
+      "event": "hook.session_start_context.resolved",
+      "sessionId": "sess_f90967a0-d622-46d9-a354-538e2620a7dd",
+      "tool": null,
+      "source": null,
+      "ruleId": null,
+      "decision": null,
+      "result": "written",
+      "outcome": null
+    },
+    {
+      "at": "2026-11-26T05:17:05.357Z",
+      "event": "hook.run.allowed",
+      "sessionId": "sess_f90967a0-d622-46d9-a354-538e2620a7dd",
+      "tool": "Read",
+      "source": "config.PreToolUse.0.0",
+      "ruleId": null,
+      "decision": null,
+      "result": null,
+      "outcome": null
+    },
+    {
+      "at": "2026-11-26T05:17:05.361Z",
+      "event": "tool.permission.resolved",
+      "sessionId": "sess_f90967a0-d622-46d9-a354-538e2620a7dd",
+      "tool": "Read",
+      "source": null,
+      "ruleId": "hook.PreToolUse.ask",
+      "decision": "deny",
+      "result": null,
+      "outcome": null
+    },
+    {
+      "at": "2026-11-26T05:17:09.216Z",
+      "event": "hook.run.allowed",
+      "sessionId": "sess_f90967a0-d622-46d9-a354-538e2620a7dd",
+      "tool": "Edit",
+      "source": "config.PreToolUse.0.0",
+      "ruleId": null,
+      "decision": null,
+      "result": null,
+      "outcome": null
+    },
+    {
+      "at": "2026-11-26T05:17:09.220Z",
+      "event": "tool.permission.resolved",
+      "sessionId": "sess_f90967a0-d622-46d9-a354-538e2620a7dd",
+      "tool": "Edit",
+      "source": null,
+      "ruleId": "hook.PreToolUse.ask",
+      "decision": "deny",
+      "result": null,
+      "outcome": null
+    },
+    {
+      "at": "2026-11-26T05:17:29.560Z",
+      "event": "hook.session_start_context.resolved",
+      "sessionId": "sess_bb299147-19ed-406c-a858-1c1eea485a1b",
+      "tool": null,
+      "source": null,
+      "ruleId": null,
+      "decision": null,
+      "result": "written",
+      "outcome": null
+    },
+    {
+      "at": "2026-11-26T05:17:58.881Z",
+      "event": "hook.session_start_context.resolved",
+      "sessionId": "sess_8b3e856c-aa28-4a88-8a6e-440732a7b09d",
+      "tool": null,
+      "source": null,
+      "ruleId": null,
+      "decision": null,
+      "result": "written",
+      "outcome": null
+    },
+    {
+      "at": "2026-11-26T05:18:04.902Z",
+      "event": "hook.run.allowed",
+      "sessionId": "sess_8b3e856c-aa28-4a88-8a6e-440732a7b09d",
+      "tool": "Read",
+      "source": "config.PreToolUse.0.0",
+      "ruleId": null,
+      "decision": null,
+      "result": null,
+      "outcome": null
+    },
+    {
+      "at": "2026-11-26T05:18:04.907Z",
+      "event": "tool.permission.resolved",
+      "sessionId": "sess_8b3e856c-aa28-4a88-8a6e-440732a7b09d",
+      "tool": "Read",
+      "source": null,
+      "ruleId": "hook.PreToolUse.ask",
+      "decision": "deny",
+      "result": null,
+      "outcome": null
+    },
+    {
+      "at": "2026-11-26T05:18:11.987Z",
+      "event": "hook.run.allowed",
+      "sessionId": "sess_8b3e856c-aa28-4a88-8a6e-440732a7b09d",
+      "tool": "Edit",
+      "source": "config.PreToolUse.0.0",
+      "ruleId": null,
+      "decision": null,
+      "result": null,
+      "outcome": null
+    },
+    {
+      "at": "2026-11-26T05:18:11.991Z",
+      "event": "tool.permission.resolved",
+      "sessionId": "sess_8b3e856c-aa28-4a88-8a6e-440732a7b09d",
+      "tool": "Edit",
+      "source": null,
+      "ruleId": "hook.PreToolUse.ask",
+      "decision": "deny",
+      "result": null,
+      "outcome": null
+    },
+    {
+      "at": "2026-11-26T05:18:35.224Z",
+      "event": "hook.session_start_context.resolved",
+      "sessionId": "sess_9911b87e-98a5-4cbf-987d-63176642c4c8",
+      "tool": null,
+      "source": null,
+      "ruleId": null,
+      "decision": null,
+      "result": "written",
+      "outcome": null
+    },
+    {
+      "at": "2026-11-26T05:18:40.685Z",
+      "event": "hook.run.allowed",
+      "sessionId": "sess_9911b87e-98a5-4cbf-987d-63176642c4c8",
+      "tool": "Read",
+      "source": "config.PreToolUse.0.0",
+      "ruleId": null,
+      "decision": null,
+      "result": null,
+      "outcome": null
+    },
+    {
+      "at": "2026-11-26T05:18:40.689Z",
+      "event": "tool.permission.resolved",
+      "sessionId": "sess_9911b87e-98a5-4cbf-987d-63176642c4c8",
+      "tool": "Read",
+      "source": null,
+      "ruleId": "hook.PreToolUse.ask",
+      "decision": "deny",
+      "result": null,
+      "outcome": null
+    },
+    {
+      "at": "2026-11-26T05:18:43.860Z",
+      "event": "hook.run.allowed",
+      "sessionId": "sess_9911b87e-98a5-4cbf-987d-63176642c4c8",
+      "tool": "Edit",
+      "source": "config.PreToolUse.0.0",
+      "ruleId": null,
+      "decision": null,
+      "result": null,
+      "outcome": null
+    },
+    {
+      "at": "2026-11-26T05:18:43.864Z",
+      "event": "tool.permission.resolved",
+      "sessionId": "sess_9911b87e-98a5-4cbf-987d-63176642c4c8",
+      "tool": "Edit",
+      "source": null,
+      "ruleId": "hook.PreToolUse.ask",
+      "decision": "deny",
+      "result": null,
+      "outcome": null
+    },
+    {
+      "at": "2026-11-26T05:19:14.061Z",
+      "event": "hook.session_start_context.resolved",
+      "sessionId": "sess_6994c3a8-d736-4f74-bb4b-cda612471b92",
+      "tool": null,
+      "source": null,
+      "ruleId": null,
+      "decision": null,
+      "result": "written",
+      "outcome": null
+    },
+    {
+      "at": "2026-11-26T05:19:37.388Z",
+      "event": "hook.run.failed",
+      "sessionId": "sess_6994c3a8-d736-4f74-bb4b-cda612471b92",
+      "tool": null,
+      "source": "config.PreToolUse.0.0",
+      "ruleId": null,
+      "decision": null,
+      "result": null,
+      "outcome": "timed_out"
+    }
+  ],
+  "ledgerEventIds": {
+    "segment.started": [
+      "01M8B447VQB4PAGYY3VW0JR84T",
+      "01M8B44FQRE1KS8VY8P9AEA1W0",
+      "01M8B45AJJNSVDKZ4QFA0VN2JQ",
+      "01M8B45T7XFN5PV7881XKCRNRH",
+      "01M8B48268XGENW651K4EJMM2T",
+      "01M8B48MZVBNHZKZYC3Q8EGKC8",
+      "01M8B496ZTZA0XE9873Y2D5ES9",
+      "01M8B49KKFW4GJ2JG3M9B954SY",
+      "01M8B4A1W4QKEHZAVDB9774BJN",
+      "01M8B4D2M0CV5MCGCCRXNQ4V1R",
+      "01M8B4DPN4PASQYAK4GQ88F2ZK",
+      "01M8B4ECY0PHE8GX7KGZ3T44Y7",
+      "01M8B4F7MCS0206KJ5PBDWPGTQ",
+      "01M8B4H34SKS8C5W4AH73QRG15",
+      "01M8B4HA06YVR2T1A6JH37JH30",
+      "01M8B4HZQNSTDT150X4TX6GS3R",
+      "01M8B4J7B77YTHJQWSQF7GYJKD",
+      "01M8B4JMFHGW54DR57HT5AGJV2",
+      "01M8B4KEDC62GEBGHR12CR0M1B",
+      "01M8B4M0NNJ3E3H9D6XTV8VSCP",
+      "01M8B4MHFERC5E66830AYTF4G7",
+      "01M8B4N2BJRY165W3YF1JNDWHY",
+      "01M8B4N45BFQME6Y0SE37YRHJ0",
+      "01M8B4NGKG4NPFVJDRJAQVV6GY",
+      "01M8B4PA2VW8YMQNHPNNZ4JDFP",
+      "01M8B4Q7PKNDWT7CZBX0SM0A18"
+    ],
+    "session.started": [
+      "01M8B447VQ1J8FG0GR1J6N3QGW",
+      "01M8B45AJJHN4B9H2A4SZT87EV",
+      "01M8B482685YAFC5GDV7B7XDRE",
+      "01M8B49KKF4ASGGG7KRBX7YCGG",
+      "01M8B4F7MCSNBV44N9CQSZ29SC",
+      "01M8B4J7B76KMJVZ01S6XFEDS1",
+      "01M8B4M0NNR6P8H6Q00M6BPZXC",
+      "01M8B4N45BG73F5W01JVYNH4P6",
+      "01M8B4PA2VCPQ06MJPS5H5Q2BX"
+    ],
+    "session.stop_checked": [
+      "01M8B44FQRN1CRQK6VTJAC15TE",
+      "01M8B45T7XKT6SPT2X0R3K30CB",
+      "01M8B48MZVGTCMF471GKCDQA8F",
+      "01M8B4A1W435R30C8HQ2TWB4H9",
+      "01M8B4D2M0NGDA0P631096F97Z",
+      "01M8B4H34SM151C6JVJQX0MZXC",
+      "01M8B4JMFHEMYAR7DD8XX33S3Z",
+      "01M8B4KEDC20V51XQNKCXVXD27",
+      "01M8B4MHFEY0Q1XY95V51SKY0Q",
+      "01M8B4NGKG07ZD4MRH6D8W0XFM",
+      "01M8B4Q7PKE5PNAV5GM1QRN3XZ"
+    ],
+    "structure.queried": [
+      "01M8B496ZT09KNHYAAM3RS9PHB",
+      "01M8B4N2BJ0P5HWAJ780JZZQEG"
+    ],
+    "task.created": [
+      "01M8B4DPN4Q0544TZDQK3GTWEZ",
+      "01M8B4HA06AZ47TPRFSBC1F9CS"
+    ],
+    "task.updated": [
+      "01M8B4DPNJNN8CGX68AH9VZYJN",
+      "01M8B4ECY07872J65E7ZF8YD09",
+      "01M8B4HA0M0CCGN3Z4FC8WKBBP"
+    ],
+    "note.recorded": [
+      "01M8B4HZQNNNCC0WS1M1K39JRS"
+    ]
+  },
+  "limits": [
+    "PermissionRequest 事件在无头模式无子进程样本（沿用 S8 Q2 例外），本任务未依赖该事件；ask/deny 阻断在 PreToolUse 与宿主权限层已实测。",
+    "无头 --prompt 的写权限偶发由宿主权限层先行拦截（yolo 且无交互授权），因此 allow 路径以「会话内 Edit 成功一次」的真实样本为准；其余被宿主先行拦截的调用不计入 ANO 决定。",
+    "严格模式 deny 时宿主将 CLI stderr 的 Node ExperimentalWarning 展示为 \"hook error\"；permissionDecision=deny/exit=2 仍被正确执行，属宿主展示层行为，非 ANO 判定缺陷。"
+  ],
+  "enforcementDecision": {
+    "zcode": "hooks-validated",
+    "claudeCode": "hooks-documented",
+    "rationale": "Q1/Q2(ask+deny)/Q3/Q4 均有真实 ZCode 宿主日志 + 钩子 stdout + 账本事件 ID；按规格 T-168 将 ZCode enforcement 升级为 hooks-validated；Claude Code 仍仅公开文档 hooks-documented。"
+  }
+}

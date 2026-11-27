@@ -1,0 +1,643 @@
+{
+  "generatedAt": "2026-11-19T05:45:26.815Z",
+  "node": "v24.14.0",
+  "platform": "win32 x64",
+  "command": "node scripts/bench-concurrency.ts --workers 20 --unique 3 --shared 2",
+  "workers": 20,
+  "uniquePerWorker": 3,
+  "sharedTasks": 2,
+  "elapsedMs": 6956,
+  "root": "D:\\Temp\\ano-p2-concurrency-8KgnlX",
+  "segments": 20,
+  "bytes": 110972,
+  "events": 184,
+  "segmentSha256": {
+    "2026-11-19T05-45-20-301Z-BENCH-W5.jsonl": "a0022d3886640d04ba5392a9eac2c20efb8be8bbb2d1ea14d2dc39d9a0cd180f",
+    "2026-11-19T05-45-20-304Z-BENCH-W1.jsonl": "1bd2c84e5a6bfbca834ebb31749796609168131e5bc170aa78de9561f4d96818",
+    "2026-11-19T05-45-20-313Z-BENCH-W2.jsonl": "53cc525ae4332b3f4c9bec9efd4ff6e5ebad5733f37147d9442d3cadce232f1b",
+    "2026-11-19T05-45-20-316Z-BENCH-W10.jsonl": "d464a4af389a100fad23f097858d32f8dd45fee63c133841982d385ad2bc69e4",
+    "2026-11-19T05-45-20-337Z-BENCH-W0.jsonl": "70cd13ffb8664ef0ba5330ec75a15754dc6370cfc4ffed8434067d46676262bb",
+    "2026-11-19T05-45-20-358Z-BENCH-W3.jsonl": "6a2a24cb3df29abb71b908dd47589f7e3c45bbc1d2840a2b251c5cb953f534f8",
+    "2026-11-19T05-45-20-368Z-BENCH-W4.jsonl": "8d461fc25c7d282ebc24bc40ebe2dd408a1b96316d4e3284f0a6455c1a761213",
+    "2026-11-19T05-45-20-376Z-BENCH-W11.jsonl": "1126db2716898ca199fa7cb494e741acfb7941c9e07d4e5cb363951eaafd210a",
+    "2026-11-19T05-45-20-408Z-BENCH-W8.jsonl": "4bb46d5311e8bd0c9116f012d3a2942be5ea5ef9b23e1e12071179b9c5068dec",
+    "2026-11-19T05-45-20-410Z-BENCH-W7.jsonl": "de43cb66c3c5d9102b874c30ed7e51feedae6e61f5a8f4628316f0e296b912bb",
+    "2026-11-19T05-45-20-420Z-BENCH-W9.jsonl": "b375b6bb7284c70674ddeefb63fa9d22f6183a06a44e37436f7c285838788a21",
+    "2026-11-19T05-45-20-432Z-BENCH-W6.jsonl": "d4e3d1200fa92e85ff303cb1919c7586f6eae19e1d39a06ba14f37364c5266e1",
+    "2026-11-19T05-45-20-442Z-BENCH-W12.jsonl": "6d88fd30668a62a2277975e05c4500906e61a993c5b3aad86ff14205f8bca84a",
+    "2026-11-19T05-45-20-464Z-BENCH-W13.jsonl": "1aa801ca55bc3e4d8d09335d4853980ca875ed5a5843e16a40cc13f199000299",
+    "2026-11-19T05-45-20-470Z-BENCH-W14.jsonl": "0f9beb7fe004ef0c95eaee10b75c18ef4acf1c59f33e31deb8701a58efa16f64",
+    "2026-11-19T05-45-20-478Z-BENCH-W15.jsonl": "b587262989810ea562e0238a4500ba3a1ca8de0fc81312d08a186effdbd50ba7",
+    "2026-11-19T05-45-20-496Z-BENCH-W16.jsonl": "d6aba6806750020e2658358b707c015466b3256b0532db3925f25edf8e90f16b",
+    "2026-11-19T05-45-20-516Z-BENCH-W18.jsonl": "21f4b6bc8a13cb9ecfa75c62f480e754bdf54c5d60344e7d4f7e0f525b97a99b",
+    "2026-11-19T05-45-20-523Z-BENCH-W19.jsonl": "7885837f0eb31ee40f52e599d640277dba7dac2633c83aef8bea72e71dd63449",
+    "2026-11-19T05-45-20-545Z-BENCH-W17.jsonl": "b407e2df448ff87190a7019b162b0cb1c8d15f10fcdd201cb58b99b61817a71f"
+  },
+  "kinds": {
+    "segment.started": 20,
+    "task.created": 62,
+    "evidence.recorded": 60,
+    "run.lease.acquired": 21,
+    "run.lease.heartbeat": 21
+  },
+  "idempotency": {
+    "keys": 164,
+    "duplicated": []
+  },
+  "duplicates": {
+    "sharedCreate": 78,
+    "uniqueCreate": 60,
+    "evidence": 60,
+    "expectedSharedCreate": 78,
+    "expectedUniqueCreate": 60,
+    "expectedEvidence": 60
+  },
+  "ledger": {
+    "tasks": 62,
+    "evidence": 60,
+    "runLeases": 21,
+    "sharedLeaseStatus": "active",
+    "sharedLeaseOwner": "bench-worker-18"
+  },
+  "workersReported": [
+    {
+      "worker": 0,
+      "shared": {
+        "attempts": 4,
+        "created": 0,
+        "duplicate": 4,
+        "conflicts": 0
+      },
+      "unique": {
+        "attempts": 6,
+        "created": 3,
+        "duplicate": 3
+      },
+      "evidence": {
+        "attempts": 6,
+        "created": 3,
+        "duplicate": 3
+      },
+      "leases": {
+        "uniqueAcquired": true,
+        "sharedOwned": false,
+        "heartbeats": 1,
+        "contended": 1
+      },
+      "errors": []
+    },
+    {
+      "worker": 1,
+      "shared": {
+        "attempts": 4,
+        "created": 0,
+        "duplicate": 4,
+        "conflicts": 0
+      },
+      "unique": {
+        "attempts": 6,
+        "created": 3,
+        "duplicate": 3
+      },
+      "evidence": {
+        "attempts": 6,
+        "created": 3,
+        "duplicate": 3
+      },
+      "leases": {
+        "uniqueAcquired": true,
+        "sharedOwned": false,
+        "heartbeats": 1,
+        "contended": 1
+      },
+      "errors": []
+    },
+    {
+      "worker": 2,
+      "shared": {
+        "attempts": 4,
+        "created": 0,
+        "duplicate": 4,
+        "conflicts": 0
+      },
+      "unique": {
+        "attempts": 6,
+        "created": 3,
+        "duplicate": 3
+      },
+      "evidence": {
+        "attempts": 6,
+        "created": 3,
+        "duplicate": 3
+      },
+      "leases": {
+        "uniqueAcquired": true,
+        "sharedOwned": false,
+        "heartbeats": 1,
+        "contended": 1
+      },
+      "errors": []
+    },
+    {
+      "worker": 3,
+      "shared": {
+        "attempts": 4,
+        "created": 0,
+        "duplicate": 4,
+        "conflicts": 0
+      },
+      "unique": {
+        "attempts": 6,
+        "created": 3,
+        "duplicate": 3
+      },
+      "evidence": {
+        "attempts": 6,
+        "created": 3,
+        "duplicate": 3
+      },
+      "leases": {
+        "uniqueAcquired": true,
+        "sharedOwned": false,
+        "heartbeats": 1,
+        "contended": 1
+      },
+      "errors": []
+    },
+    {
+      "worker": 4,
+      "shared": {
+        "attempts": 4,
+        "created": 2,
+        "duplicate": 2,
+        "conflicts": 0
+      },
+      "unique": {
+        "attempts": 6,
+        "created": 3,
+        "duplicate": 3
+      },
+      "evidence": {
+        "attempts": 6,
+        "created": 3,
+        "duplicate": 3
+      },
+      "leases": {
+        "uniqueAcquired": true,
+        "sharedOwned": false,
+        "heartbeats": 1,
+        "contended": 1
+      },
+      "errors": []
+    },
+    {
+      "worker": 5,
+      "shared": {
+        "attempts": 4,
+        "created": 0,
+        "duplicate": 4,
+        "conflicts": 0
+      },
+      "unique": {
+        "attempts": 6,
+        "created": 3,
+        "duplicate": 3
+      },
+      "evidence": {
+        "attempts": 6,
+        "created": 3,
+        "duplicate": 3
+      },
+      "leases": {
+        "uniqueAcquired": true,
+        "sharedOwned": false,
+        "heartbeats": 1,
+        "contended": 1
+      },
+      "errors": []
+    },
+    {
+      "worker": 6,
+      "shared": {
+        "attempts": 4,
+        "created": 0,
+        "duplicate": 4,
+        "conflicts": 0
+      },
+      "unique": {
+        "attempts": 6,
+        "created": 3,
+        "duplicate": 3
+      },
+      "evidence": {
+        "attempts": 6,
+        "created": 3,
+        "duplicate": 3
+      },
+      "leases": {
+        "uniqueAcquired": true,
+        "sharedOwned": false,
+        "heartbeats": 1,
+        "contended": 1
+      },
+      "errors": []
+    },
+    {
+      "worker": 7,
+      "shared": {
+        "attempts": 4,
+        "created": 0,
+        "duplicate": 4,
+        "conflicts": 0
+      },
+      "unique": {
+        "attempts": 6,
+        "created": 3,
+        "duplicate": 3
+      },
+      "evidence": {
+        "attempts": 6,
+        "created": 3,
+        "duplicate": 3
+      },
+      "leases": {
+        "uniqueAcquired": true,
+        "sharedOwned": false,
+        "heartbeats": 1,
+        "contended": 1
+      },
+      "errors": []
+    },
+    {
+      "worker": 8,
+      "shared": {
+        "attempts": 4,
+        "created": 0,
+        "duplicate": 4,
+        "conflicts": 0
+      },
+      "unique": {
+        "attempts": 6,
+        "created": 3,
+        "duplicate": 3
+      },
+      "evidence": {
+        "attempts": 6,
+        "created": 3,
+        "duplicate": 3
+      },
+      "leases": {
+        "uniqueAcquired": true,
+        "sharedOwned": false,
+        "heartbeats": 1,
+        "contended": 1
+      },
+      "errors": []
+    },
+    {
+      "worker": 9,
+      "shared": {
+        "attempts": 4,
+        "created": 0,
+        "duplicate": 4,
+        "conflicts": 0
+      },
+      "unique": {
+        "attempts": 6,
+        "created": 3,
+        "duplicate": 3
+      },
+      "evidence": {
+        "attempts": 6,
+        "created": 3,
+        "duplicate": 3
+      },
+      "leases": {
+        "uniqueAcquired": true,
+        "sharedOwned": false,
+        "heartbeats": 1,
+        "contended": 1
+      },
+      "errors": []
+    },
+    {
+      "worker": 10,
+      "shared": {
+        "attempts": 4,
+        "created": 0,
+        "duplicate": 4,
+        "conflicts": 0
+      },
+      "unique": {
+        "attempts": 6,
+        "created": 3,
+        "duplicate": 3
+      },
+      "evidence": {
+        "attempts": 6,
+        "created": 3,
+        "duplicate": 3
+      },
+      "leases": {
+        "uniqueAcquired": true,
+        "sharedOwned": false,
+        "heartbeats": 1,
+        "contended": 1
+      },
+      "errors": []
+    },
+    {
+      "worker": 11,
+      "shared": {
+        "attempts": 4,
+        "created": 0,
+        "duplicate": 4,
+        "conflicts": 0
+      },
+      "unique": {
+        "attempts": 6,
+        "created": 3,
+        "duplicate": 3
+      },
+      "evidence": {
+        "attempts": 6,
+        "created": 3,
+        "duplicate": 3
+      },
+      "leases": {
+        "uniqueAcquired": true,
+        "sharedOwned": false,
+        "heartbeats": 1,
+        "contended": 1
+      },
+      "errors": []
+    },
+    {
+      "worker": 12,
+      "shared": {
+        "attempts": 4,
+        "created": 0,
+        "duplicate": 4,
+        "conflicts": 0
+      },
+      "unique": {
+        "attempts": 6,
+        "created": 3,
+        "duplicate": 3
+      },
+      "evidence": {
+        "attempts": 6,
+        "created": 3,
+        "duplicate": 3
+      },
+      "leases": {
+        "uniqueAcquired": true,
+        "sharedOwned": false,
+        "heartbeats": 1,
+        "contended": 1
+      },
+      "errors": []
+    },
+    {
+      "worker": 13,
+      "shared": {
+        "attempts": 4,
+        "created": 0,
+        "duplicate": 4,
+        "conflicts": 0
+      },
+      "unique": {
+        "attempts": 6,
+        "created": 3,
+        "duplicate": 3
+      },
+      "evidence": {
+        "attempts": 6,
+        "created": 3,
+        "duplicate": 3
+      },
+      "leases": {
+        "uniqueAcquired": true,
+        "sharedOwned": false,
+        "heartbeats": 1,
+        "contended": 1
+      },
+      "errors": []
+    },
+    {
+      "worker": 14,
+      "shared": {
+        "attempts": 4,
+        "created": 0,
+        "duplicate": 4,
+        "conflicts": 0
+      },
+      "unique": {
+        "attempts": 6,
+        "created": 3,
+        "duplicate": 3
+      },
+      "evidence": {
+        "attempts": 6,
+        "created": 3,
+        "duplicate": 3
+      },
+      "leases": {
+        "uniqueAcquired": true,
+        "sharedOwned": false,
+        "heartbeats": 1,
+        "contended": 1
+      },
+      "errors": []
+    },
+    {
+      "worker": 15,
+      "shared": {
+        "attempts": 4,
+        "created": 0,
+        "duplicate": 4,
+        "conflicts": 0
+      },
+      "unique": {
+        "attempts": 6,
+        "created": 3,
+        "duplicate": 3
+      },
+      "evidence": {
+        "attempts": 6,
+        "created": 3,
+        "duplicate": 3
+      },
+      "leases": {
+        "uniqueAcquired": true,
+        "sharedOwned": false,
+        "heartbeats": 1,
+        "contended": 1
+      },
+      "errors": []
+    },
+    {
+      "worker": 16,
+      "shared": {
+        "attempts": 4,
+        "created": 0,
+        "duplicate": 4,
+        "conflicts": 0
+      },
+      "unique": {
+        "attempts": 6,
+        "created": 3,
+        "duplicate": 3
+      },
+      "evidence": {
+        "attempts": 6,
+        "created": 3,
+        "duplicate": 3
+      },
+      "leases": {
+        "uniqueAcquired": true,
+        "sharedOwned": false,
+        "heartbeats": 1,
+        "contended": 1
+      },
+      "errors": []
+    },
+    {
+      "worker": 17,
+      "shared": {
+        "attempts": 4,
+        "created": 0,
+        "duplicate": 4,
+        "conflicts": 0
+      },
+      "unique": {
+        "attempts": 6,
+        "created": 3,
+        "duplicate": 3
+      },
+      "evidence": {
+        "attempts": 6,
+        "created": 3,
+        "duplicate": 3
+      },
+      "leases": {
+        "uniqueAcquired": true,
+        "sharedOwned": false,
+        "heartbeats": 1,
+        "contended": 1
+      },
+      "errors": []
+    },
+    {
+      "worker": 18,
+      "shared": {
+        "attempts": 4,
+        "created": 0,
+        "duplicate": 4,
+        "conflicts": 0
+      },
+      "unique": {
+        "attempts": 6,
+        "created": 3,
+        "duplicate": 3
+      },
+      "evidence": {
+        "attempts": 6,
+        "created": 3,
+        "duplicate": 3
+      },
+      "leases": {
+        "uniqueAcquired": true,
+        "sharedOwned": true,
+        "heartbeats": 2,
+        "contended": 0
+      },
+      "errors": []
+    },
+    {
+      "worker": 19,
+      "shared": {
+        "attempts": 4,
+        "created": 0,
+        "duplicate": 4,
+        "conflicts": 0
+      },
+      "unique": {
+        "attempts": 6,
+        "created": 3,
+        "duplicate": 3
+      },
+      "evidence": {
+        "attempts": 6,
+        "created": 3,
+        "duplicate": 3
+      },
+      "leases": {
+        "uniqueAcquired": true,
+        "sharedOwned": false,
+        "heartbeats": 1,
+        "contended": 1
+      },
+      "errors": []
+    }
+  ],
+  "checks": [
+    {
+      "name": "workers_exited_cleanly",
+      "ok": true,
+      "detail": "20/20"
+    },
+    {
+      "name": "segments_committed",
+      "ok": true,
+      "detail": "20/20"
+    },
+    {
+      "name": "hash_chains_and_checksums",
+      "ok": true,
+      "detail": "184 events"
+    },
+    {
+      "name": "no_duplicate_event_ids",
+      "ok": true,
+      "detail": "184 unique ids"
+    },
+    {
+      "name": "idempotency_keys_unique",
+      "ok": true,
+      "detail": "164 keys"
+    },
+    {
+      "name": "event_counts_match",
+      "ok": true,
+      "detail": "{\"segment.started\":20,\"task.created\":62,\"evidence.recorded\":60,\"run.lease.acquired\":21,\"run.lease.heartbeat\":21}"
+    },
+    {
+      "name": "shared_creations_once",
+      "ok": true,
+      "detail": "2/2"
+    },
+    {
+      "name": "unique_creations_persisted",
+      "ok": true,
+      "detail": "60/60"
+    },
+    {
+      "name": "evidence_persisted",
+      "ok": true,
+      "detail": "60/60"
+    },
+    {
+      "name": "shared_lease_single_owner",
+      "ok": true,
+      "detail": "owners=1 contended=19"
+    },
+    {
+      "name": "ledger_views_match_events",
+      "ok": true,
+      "detail": "tasks=62 leases=21"
+    }
+  ],
+  "failures": [],
+  "verdict": "pass"
+}

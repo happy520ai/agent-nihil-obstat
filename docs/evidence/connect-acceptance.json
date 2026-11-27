@@ -1,0 +1,69 @@
+{
+  "schema": "ano.connect-acceptance/1",
+  "generatedAt": "2026-11-20T04:52:24.969Z",
+  "scope": "Local pm-mcp read-only Connect reference adapter",
+  "testRoot": "isolated-temp-directories-only",
+  "formalProjectConnected": false,
+  "globalConfigurationChanged": false,
+  "checks": {
+    "engineCliMcpWizard": { "passed": 69, "failed": 0, "skipped": 0 },
+    "fullRegression": { "passed": 402, "failed": 0, "skipped": 0 },
+    "spikeRegression": { "passed": 22, "failed": 0, "skipped": 0 },
+    "coverage": { "lines": 95.61, "branches": 86.76, "functions": 94.68 },
+    "typecheck": "passed",
+    "build": "passed",
+    "docs": "passed",
+    "schemaPin": "explicitly updated for recall and track only; seven tool names and ledger event hash unchanged",
+    "qualityMatrix": ".pm/quality-runs/quality-20261120-045224-969-0000.json",
+    "qualityMatrixSourceStable": true,
+    "packageSmoke": "docs/evidence/package-smoke.json",
+    "packageSmokeVerdict": "passed",
+    "securityAudit": "no unresolved findings; fourteen existing accepted risks reported"
+  },
+  "engineCases": [
+    "preflight has no write side effects and preserves source bytes and mtimes",
+    "historical done remains completed while ANO verification remains unverified",
+    "Gate and native ledger remain unchanged",
+    "unknown fields and ordinary/binary files survive exact-byte export reconstruction",
+    "same source reruns do not create duplicate versions",
+    "A-to-B-to-A source rollback reuses immutable content snapshots and records version-specific changes",
+    "batch, snapshot and manifest crash windows resume without duplicate writes",
+    "stale expected digest prevents commit",
+    "duplicate identifiers, malformed JSON, symlink/junction and path escape fail closed",
+    "all historical snapshot hashes and blobs are checked before status, recall and export",
+    "derived search caches are explicitly excluded and inventoried, never silently ignored",
+    "project rename preserves identity",
+    "non-Node and non-Git source roots can connect",
+    "full handoff is explicitly blocked"
+  ],
+  "browserAcceptance": {
+    "pageRender": "passed",
+    "projectDisplayName": "passed",
+    "automatedClick": "passed",
+    "detail": "2026-11-20T04:27:48.911Z：在隔离 fixture D:\\Temp\\ano-m6-gui-diag-6NVDwD 中通过真实 ZCode in-app browser 点击可见“开始使用”，页面导航到“接入成功”，版本 1、文件/记录/任务 2/2/1，任务 verification=unverified 且明确不回写 pm-mcp。诊断捕获的 POST（已排除 cookie）为 Host=127.0.0.1:61808、Origin=http://127.0.0.1:61808、Referer=http://127.0.0.1:61808/session/mCGFGY2L_c3VpAoL8EF2CF_t_d3peuW2JhyS3teYbns/、Sec-Fetch-Site=same-origin、Sec-Fetch-Mode=navigate、Sec-Fetch-Dest=document、Sec-Fetch-User=?1；响应页面为 200。返回向导显示历史版本 1 和 2 条已接入任务；再次点击“刷新接入”显示“接入已是最新（幂等重复）”，版本仍为 1、变更 added/updated/removed=0/0/0。",
+    "request": {
+      "host": "127.0.0.1:61808",
+      "origin": "http://127.0.0.1:61808",
+      "referer": "http://127.0.0.1:61808/session/mCGFGY2L_c3VpAoL8EF2CF_t_d3peuW2JhyS3teYbns/",
+      "secFetchSite": "same-origin",
+      "secFetchMode": "navigate",
+      "secFetchDest": "document",
+      "secFetchUser": "?1",
+      "responseStatus": 200
+    },
+    "idempotency": {
+      "firstVersion": 1,
+      "secondVersion": 1,
+      "secondOutcome": "duplicate",
+      "secondChanges": { "added": 0, "updated": 0, "removed": 0 }
+    }
+  },
+  "limitations": [
+    "No automatic/background continuous synchronization; explicit foreground watch is read-only",
+    "No full native milestone/task-edit/feature handoff",
+    "Only local pm-mcp is supported; no Jira, Linear, GitHub or CSV adapter",
+    "No batch multi-project wizard",
+    "Connect export excludes explicitly listed derived caches and is not a complete ANO/project backup",
+    "No formal project was connected and no global configuration was changed"
+  ]
+}

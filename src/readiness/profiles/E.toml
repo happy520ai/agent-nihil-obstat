@@ -1,0 +1,49 @@
+schema = 1
+id = "E"
+name = "Mobile application"
+kind = "mobile"
+status = "defined"
+schema_hash = "9e8372eeb56aa33edda0f6119558212e98588eae2cdb23956e49e9ed63491e0d"
+notes = "Defined only. Not validated by a real mobile project."
+
+[requirements."e.crash-reporting"]
+title = "Crash reporting is enabled in release builds"
+scope = "E"
+evidence = "machine"
+freshness_days = 30
+kinds = ["monitor_export"]
+
+[requirements."e.device-matrix"]
+title = "OS and device matrix tests pass"
+scope = "E"
+evidence = "machine"
+freshness_days = 30
+kinds = ["ci_run"]
+
+[requirements."e.min-version-policy"]
+title = "Forced upgrade and minimum supported version policy exists"
+scope = "E"
+evidence = "machine_or_attested"
+freshness_days = 90
+kinds = ["deploy_record"]
+
+[requirements."e.signing-certs"]
+title = "Signing identity and certificate validity are managed"
+scope = "E"
+evidence = "attested"
+freshness_days = 90
+kinds = []
+
+[requirements."e.staged-rollout"]
+title = "Staged release to app stores is planned and reversible"
+scope = "E"
+evidence = "attested"
+freshness_days = 90
+kinds = []
+
+[requirements."e.store-materials"]
+title = "Store review materials, privacy manifest and permissions are prepared"
+scope = "E"
+evidence = "attested"
+freshness_days = 180
+kinds = []

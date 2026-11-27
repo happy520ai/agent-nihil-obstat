@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "milestone": "M17",
+  "description": "Coverage recovery through deterministic protocol failure branches, guarded module decomposition and full-tree acceptance. No source exclusion or hidden skips.",
+  "tasks": {
+    "T-143": { "depends_on": [] },
+    "T-144": { "depends_on": ["T-143"] },
+    "T-145": { "depends_on": ["T-143"] },
+    "T-146": { "depends_on": ["T-143"] },
+    "T-147": { "depends_on": ["T-144", "T-145", "T-146"] },
+    "T-148": { "depends_on": ["T-147"] },
+    "T-149": { "depends_on": ["T-148"], "gate": "phase-coverage-recovery", "mutex_group": "m17-final-integration" }
+  }
+}

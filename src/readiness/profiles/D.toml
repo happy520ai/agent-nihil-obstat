@@ -1,0 +1,56 @@
+schema = 1
+id = "D"
+name = "Web frontend / SaaS"
+kind = "web"
+status = "defined"
+schema_hash = "435a5bc469603a58a6b627c61c0ca89904bd19bd125d4998fd20e8036cdcf4e0"
+notes = "Defined only. Not validated by a real web project."
+
+[requirements."d.accessibility"]
+title = "Accessibility checks pass for core flows"
+scope = "D"
+evidence = "machine"
+freshness_days = 30
+kinds = ["ci_run"]
+
+[requirements."d.browser-matrix"]
+title = "Browser compatibility matrix end-to-end tests pass"
+scope = "D"
+evidence = "machine"
+freshness_days = 30
+kinds = ["ci_run"]
+
+[requirements."d.cdn-fallback"]
+title = "CDN cache and fallback behavior has been exercised"
+scope = "D"
+evidence = "machine_or_attested"
+freshness_days = 90
+kinds = ["drill_record"]
+
+[requirements."d.csp-headers"]
+title = "CSP and security headers are present"
+scope = "D"
+evidence = "machine"
+freshness_days = 30
+kinds = ["artifact_scan"]
+
+[requirements."d.frontend-error-reporting"]
+title = "Frontend errors are reported to a monitored sink"
+scope = "D"
+evidence = "machine"
+freshness_days = 30
+kinds = ["monitor_export"]
+
+[requirements."d.performance-budget"]
+title = "Core pages meet the performance budget"
+scope = "D"
+evidence = "machine"
+freshness_days = 30
+kinds = ["load_test"]
+
+[requirements."d.rollout-switch"]
+title = "Gradual rollout or feature switch is exercised"
+scope = "D"
+evidence = "attested"
+freshness_days = 90
+kinds = []

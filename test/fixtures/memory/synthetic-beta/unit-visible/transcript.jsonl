@@ -1,0 +1,2 @@
+{"v":1,"type":"message","id":"beta-m1","role":"user","ts":"2026-11-02T10:00:01.000Z","text":"数据库连接池与调用链审计，refreshToken 在 beta 合成会话中。","files":["src/db/pool.ts"],"symbols":["src/db/pool.ts::createPool"]}
+{"v":1,"type":"message","id":"beta-m2","role":"assistant","ts":"2026-11-02T10:00:02.000Z","text":"beta 合成记录：账本租约到期后回滚。","files":["src/ledger/ledger.ts"],"symbols":["src/ledger/ledger.ts::Ledger"]}

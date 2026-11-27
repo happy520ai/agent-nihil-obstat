@@ -1,0 +1,354 @@
+{
+  "milestone": {
+    "id": "M23",
+    "title": "M23 Python 语言包（pytest 证据 + L0/L1 结构）",
+    "goal": "按 ADR-014：先让 Python 项目的“没证据不算完成”生效（pytest 适配器），再让 .py 成为可探查、可算影响范围、可计 T1 覆盖的受支持语言；不新增依赖、不放宽 Gate、不执行被分析代码；未过两级门槛不宣称支持。",
+    "status": "planned",
+    "order": 23
+  },
+  "tasks": [
+    {
+      "key": "PY-01",
+      "title": "PY-01 ADR-014 登记与停止扩展契约修订",
+      "type": "chore",
+      "priority": "P0",
+      "depends_on": [],
+      "tags": [
+        "adr014",
+        "python",
+        "docs"
+      ],
+      "steps": [
+        "具名审阅后把 ADR-014 状态改为已接受并写明审阅人",
+        "把 ADR-014 与 docs/m23-implementation-spec.md 放入仓库",
+        "在 T-176 的 checkpoint 写明：停止扩展契约须等 M22 与 M23 都关闭后才复位",
+        "登记 M23 与 PY-02～PY-12"
+      ],
+      "acceptance": "check-docs 通过；PROJECT.md 路线图出现 M23；T-176 已引用 ADR-014 的复位条件；ADR-013 已接受文本未被改写。",
+      "files": [
+        "docs/adr/ADR-014-python-language-pack.md",
+        "docs/m23-implementation-spec.md",
+        "README.md",
+        "AGENTS.md"
+      ]
+    },
+    {
+      "key": "PY-02",
+      "title": "PY-02 S9 spike：Python/pytest 环境与 tree-sitter-python 实测（隔离项目）",
+      "type": "chore",
+      "priority": "P0",
+      "depends_on": [
+        "PY-01"
+      ],
+      "tags": [
+        "adr014",
+        "python",
+        "spike",
+        "live"
+      ],
+      "steps": [
+        "在 os.tmpdir() 新建真实 git 仓库与真实 venv，记录 Python 版本与 Windows venv 布局（含中文与空格路径）",
+        "采集 pass/fail/error/skip/xfail/xpass/strict-xpass/收集错误的 JUnit XML 样本并脱敏",
+        "记录退出码 0～5 的触发条件与 XML 计数对照；测试 conftest.py 能否改写 JUnit 输出",
+        "验证 tree-sitter-python.wasm 在当前 web-tree-sitter 下可加载并记录节点类型清单",
+        "写判定门结论：M23a / M23b 各自可行或降级"
+      ],
+      "acceptance": "docs/spikes/S9-python.md 与 docs/evidence/s9-python-pytest.json 为真实实测；样本不足即判定降级，不得用合成样本冒充；与 ADR-014 §4.3 不符处先修订 ADR。",
+      "files": [
+        "docs/spikes/S9-python.md",
+        "docs/evidence/s9-python-pytest.json"
+      ]
+    },
+    {
+      "key": "PY-03",
+      "title": "PY-03 抽出 EvidenceAdapter 接口并原样迁移 Node 证据逻辑",
+      "type": "refactor",
+      "priority": "P0",
+      "depends_on": [
+        "PY-02"
+      ],
+      "tags": [
+        "adr014",
+        "gate",
+        "refactor"
+      ],
+      "steps": [
+        "迁移前保存现有 verify 相关测试的 Evidence/Verdict 快照",
+        "新增 src/gate/adapters/types.ts 与 node.ts，原样迁入 NODE_EXECUTABLES、BUILTIN_REPORTERS、parseTestCounts 等，不改正则与错误文本",
+        "verify.ts 改为按 argv 选择适配器",
+        "新增字节级一致性保护测试"
+      ],
+      "acceptance": "evidence-adapter-node-parity 测试证明同输入 Evidence/Verdict 字节级一致；test/redteam/verify-evidence.test.ts 与 verify-hardening.test.ts 零改动全绿；不一致即回退。",
+      "files": [
+        "src/gate/adapters/types.ts",
+        "src/gate/adapters/node.ts",
+        "src/gate/verify.ts",
+        "src/gate/evidence.ts",
+        "test/unit/evidence-adapter-node-parity.test.ts"
+      ]
+    },
+    {
+      "key": "PY-04",
+      "title": "PY-04 零依赖受限 JUnit XML 解析器",
+      "type": "feature",
+      "priority": "P0",
+      "depends_on": [
+        "PY-02"
+      ],
+      "tags": [
+        "adr014",
+        "gate",
+        "security"
+      ],
+      "steps": [
+        "只识别 testsuites/testsuite/testcase/failure/error/skipped 与计数属性",
+        "拒绝 DOCTYPE/ENTITY/处理指令，限制 16 MiB 与嵌套深度 64",
+        "按 testcase 重算计数并与 testsuite 属性交叉校验",
+        "用 S9 真实样本与畸形/截断/BOM/CRLF/实体攻击用例做测试"
+      ],
+      "acceptance": "junit-xml.ts 行/分支/函数覆盖 100%；实体膨胀用例不 OOM；无新增依赖（package.json 不变）。",
+      "files": [
+        "src/gate/adapters/junit-xml.ts",
+        "test/unit/junit-xml.test.ts"
+      ]
+    },
+    {
+      "key": "PY-05",
+      "title": "PY-05 pytest 适配器、解释器白名单与 Python 配置键",
+      "type": "feature",
+      "priority": "P0",
+      "depends_on": [
+        "PY-03",
+        "PY-04"
+      ],
+      "tags": [
+        "adr014",
+        "gate",
+        "python"
+      ],
+      "steps": [
+        "src/core/config.ts 增加 python.interpreter 与 python.roots 两个键（其余未知键仍只产生 warning）",
+        "实现解释器白名单、argv 形状校验与拒绝清单（ADR-014 §4.2）",
+        "由适配器追加 --junitxml 与 junit_family，读完删除只留哈希",
+        "按 §4.3 实现退出码 × XML 交叉校验",
+        "在 S9 隔离项目上跑五种场景的真实集成测试"
+      ],
+      "acceptance": "全通过/有失败/有 skip/无测试/收集错误五场景的 Verdict 与 Node 同类一致；本地真实运行无 skip；CI 无 Python 时按环境条件 skip 并单列。",
+      "files": [
+        "src/gate/adapters/pytest.ts",
+        "src/core/config.ts",
+        "src/gate/verify.ts",
+        "test/integration/verify-pytest.test.ts"
+      ]
+    },
+    {
+      "key": "PY-06",
+      "title": "PY-06 pytest 证据红队",
+      "type": "chore",
+      "priority": "P0",
+      "depends_on": [
+        "PY-05"
+      ],
+      "tags": [
+        "adr014",
+        "redteam"
+      ],
+      "steps": [
+        "裸 python 与 PATH 伪造解释器",
+        "自带 --junitxml 指向伪造全绿 XML",
+        "-p 自定义插件与 --collect-only",
+        "退出码与 XML 矛盾、实体攻击",
+        "存在 skipped 时 complete、测后改源码再 complete、声明测试文件未被 argv 选中"
+      ],
+      "acceptance": "test/redteam/pytest-evidence-boundary.test.ts 全部“先尝试钻、再断言钻不进”；Python 与 Node 的 done 公式一致性有断言。",
+      "files": [
+        "test/redteam/pytest-evidence-boundary.test.ts"
+      ]
+    },
+    {
+      "key": "PY-07",
+      "title": "PY-07 Python L1 提取器（tree-sitter-python）",
+      "type": "feature",
+      "priority": "P0",
+      "depends_on": [
+        "PY-02"
+      ],
+      "tags": [
+        "adr014",
+        "structure",
+        "python"
+      ],
+      "steps": [
+        "createPythonExtractor() 与 ts.ts 同形输出 ParsedFile",
+        "提取模块/class/def/async def/方法限定名/模块级赋值/__all__",
+        "记录导入原始记录及作用域（顶层/TYPE_CHECKING/try-except ImportError/函数体）",
+        "记录 importlib/__import__/exec/eval/getattr/sys.path 盲区；沿用 AST 深度 1000 与作用域 16 预算",
+        ".pyi 全部导入记 type-only"
+      ],
+      "acceptance": "python-extractor 单测每类语法正反用例齐全；重复提取结果一致；不调用解释器、不读 site-packages。",
+      "files": [
+        "src/structure/extractors/python.ts",
+        "test/unit/python-extractor.test.ts"
+      ]
+    },
+    {
+      "key": "PY-08",
+      "title": "PY-08 Python 导入解析与三态映射",
+      "type": "feature",
+      "priority": "P0",
+      "depends_on": [
+        "PY-07",
+        "PY-05"
+      ],
+      "tags": [
+        "adr014",
+        "structure",
+        "python"
+      ],
+      "steps": [
+        "resolvePythonRoots：python.roots > pyproject 两个键 > src 布局 > 项目根",
+        "resolvePythonImport：resolved/external/ambiguous/unresolved",
+        "按 ADR-014 §5.3 表格实现三态映射与 __init__.py 具名重导出穿透",
+        "覆盖 src/平铺布局、命名空间包、相对导入越界、多根歧义、.py 与 .pyi 同名"
+      ],
+      "acceptance": "python-imports 单测全部通过；不改 src/structure/imports.ts 的 TS 行为。",
+      "files": [
+        "src/structure/imports-python.ts",
+        "test/unit/python-imports.test.ts"
+      ]
+    },
+    {
+      "key": "PY-09",
+      "title": "PY-09 多语言分派接线与受支持扩展名单一来源",
+      "type": "feature",
+      "priority": "P0",
+      "depends_on": [
+        "PY-08"
+      ],
+      "tags": [
+        "adr014",
+        "structure",
+        "hooks"
+      ],
+      "steps": [
+        "extractor.ts 按扩展名分派 TS/Python；新增 ENABLE_PYTHON_STRUCTURE（默认 false）",
+        "EXTRACTOR_VERSION 从 p4-caveats-v1 升版并写 CHANGELOG",
+        "pre-tool.ts 的 SUPPORTED_PRE_TOOL_EXTENSIONS 改为从结构层导出派生，删除手写副本并加恒等测试",
+        ".pyc 与 __pycache__/** 并入默认排除集",
+        "开关关闭时保护测试：现有结构测试与电商证据数值不变"
+      ],
+      "acceptance": "开关关闭时全量结构测试零变化；恒等测试通过；开关打开前 .py 仍为 UNSUPPORTED_LANGUAGE 放行并标降级。",
+      "files": [
+        "src/structure/extractor.ts",
+        "src/structure/extractors/ts.ts",
+        "src/hooks/pre-tool.ts",
+        "src/core/source-scan.ts",
+        "CHANGELOG.md"
+      ]
+    },
+    {
+      "key": "PY-10",
+      "title": "PY-10 Python 夹具金标准、T1 覆盖与结构红队",
+      "type": "chore",
+      "priority": "P0",
+      "depends_on": [
+        "PY-06",
+        "PY-09"
+      ],
+      "tags": [
+        "adr014",
+        "structure",
+        "redteam"
+      ],
+      "steps": [
+        "新增 test/fixtures/python 下 src-layout/flat-layout/namespace-pkg/mixed-ts-py 四个夹具与人工金标准 expected-edges.json",
+        "集成测试：边判定逐条一致；explore 对 .py 返回符号/影响范围/caveats；T1 只计 value-confirmed，fixture 注入不计",
+        "红队：深嵌套 AST、超长行、编码声明异常、二进制伪装 .py、符号链接",
+        "mixed-ts-py 夹具上 pytest verify 与结构证据联合走通"
+      ],
+      "acceptance": "金标准逐条一致；红队全部显式 gap 不崩溃；达到 supported-fixture-only。",
+      "files": [
+        "test/fixtures/python/",
+        "test/integration/python-structure.test.ts",
+        "test/redteam/python-structure-boundary.test.ts"
+      ]
+    },
+    {
+      "key": "PY-11",
+      "title": "PY-11 真实 Python 项目只读验收（需用户具名指定项目）",
+      "type": "chore",
+      "priority": "P0",
+      "depends_on": [
+        "PY-10"
+      ],
+      "tags": [
+        "adr014",
+        "python",
+        "live",
+        "human"
+      ],
+      "steps": [
+        "用户具名指定真实 Python 项目路径",
+        "在同配置临时副本上 rebuild graph/explore/brief，真实项目零写入",
+        "报告文件数、符号数、三态边比例、unknown 占比、盲区计数、构建 P50/P95",
+        "项目有 pytest 测试时在副本上真实 verify 一次",
+        "按 ADR-014 §6 判定 supported 或 supported-fixture-only"
+      ],
+      "acceptance": "docs/evidence/m23-python-real-project.md 与 JSON 齐全；判定如实；没有可用真实项目时记为 supported-fixture-only 并关闭本任务。",
+      "files": [
+        "docs/evidence/m23-python-real-project.md",
+        "docs/evidence/m23-python-real-project.json"
+      ]
+    },
+    {
+      "key": "PY-12",
+      "title": "PY-12 M23 收口：文档、能力声明与契约复位",
+      "type": "chore",
+      "priority": "P0",
+      "depends_on": [
+        "PY-11"
+      ],
+      "tags": [
+        "adr014",
+        "docs"
+      ],
+      "steps": [
+        "limitations.md 新增“Python 语言边界（M23）”一节",
+        "按最终状态更新 README、delivery-status、client-compatibility",
+        "supported 时打开 ENABLE_PYTHON_STRUCTURE；supported-fixture-only 时可开但文档不得写已支持",
+        "M22 已关闭时：停止扩展契约更新为“M23 为最后一个产品里程碑”；否则留给 T-176 一并复位"
+      ],
+      "acceptance": "check-docs 通过；全量 npm test 0 fail 且无新增 skip；覆盖率不低于 M18 基线；对外表述与 §6 状态一致。",
+      "files": [
+        "docs/limitations.md",
+        "README.md",
+        "AGENTS.md",
+        "docs/delivery-status.md",
+        "docs/client-compatibility.md"
+      ]
+    }
+  ],
+  "mutex": {
+    "src/gate/verify.ts": [
+      "PY-03",
+      "PY-05"
+    ],
+    "src/gate/evidence.ts": [
+      "PY-03"
+    ],
+    "src/core/config.ts": [
+      "PY-05"
+    ],
+    "src/structure/extractor.ts": [
+      "PY-09"
+    ],
+    "src/hooks/pre-tool.ts": [
+      "PY-09"
+    ],
+    "src/surface/service.ts": []
+  },
+  "notes": [
+    "实际任务号由登记工具分配（按当前最大 T-179 推算约为 T-180～T-191），标题前缀 PY-xx 作为稳定引用",
+    "type 只用仓库已有取值：feature/chore/fix/refactor/debt"
+  ]
+}

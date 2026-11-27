@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "milestone": "M12",
+  "description": "Complete 21-tool adaptive coding-client catalog. Each tool gets a supported MCP/rule/CLI route or explicit degradation; real writes require authorization.",
+  "tasks": {
+    "T-091": { "depends_on": [] },
+    "T-092": { "depends_on": ["T-091"] },
+    "T-093": { "depends_on": ["T-092"] },
+    "T-094": { "depends_on": ["T-092"] },
+    "T-095": { "depends_on": ["T-092"] },
+    "T-096": { "depends_on": ["T-092"] },
+    "T-097": { "depends_on": ["T-092"] },
+    "T-098": { "depends_on": ["T-093", "T-094", "T-095", "T-096", "T-097"] },
+    "T-099": { "depends_on": ["T-098"] },
+    "T-100": { "depends_on": ["T-099"] },
+    "T-101": { "depends_on": ["T-091", "T-092", "T-093", "T-094", "T-095", "T-096", "T-097", "T-098", "T-099", "T-100"], "gate": "phase-full-clients", "mutex_group": "m12-integration" },
+    "T-102": { "depends_on": ["T-101"], "gate": "phase-full-clients-final", "mutex_group": "m12-final-integration" }
+  }
+}

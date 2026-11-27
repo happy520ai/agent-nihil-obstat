@@ -1,0 +1,1237 @@
+{
+  "schema": 1,
+  "capturedAt": "2026-11-27T09:04:15.336Z",
+  "description": "PY-03 pre-migration Node evidence parity baseline captured from the unmodified src/gate sources.",
+  "captureSources": {
+    "src/gate/verify.ts": "e1d7a123b1c6732b8694dd827d06c9556936250197bc7b61868461e6e5de83e3",
+    "src/gate/evidence.ts": "13538fe7eaf8bc561878435cd63179bda586a1186fc6f6672f0b3f6046e7496c"
+  },
+  "environment": {
+    "node": "v0.0.0-py03-parity",
+    "platform": "parity-platform",
+    "arch": "parity-arch"
+  },
+  "sourceFingerprint": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "graphRevision": "py03-parity-graph",
+  "policy": {
+    "minimum": "T1",
+    "unknown": "strict"
+  },
+  "roots": {
+    "evidence": "<ROOT_EVIDENCE>",
+    "selection": "<ROOT_SELECTION>",
+    "verdict": "<ROOT_VERDICT>"
+  },
+  "scenarios": [
+    {
+      "name": "pass-summary",
+      "argv": [
+        "<EXEC>",
+        "-e",
+        "console.log('# tests 2\\n# pass 2')"
+      ],
+      "timeoutMs": 20000,
+      "realRun": true,
+      "spawnError": false,
+      "transcript": {
+        "stdout": "# tests 2\n# pass 2\n",
+        "stderr": "",
+        "exitCode": 0,
+        "signal": null,
+        "timedOut": false
+      },
+      "expectedDigest": "e5a06c337d6f7f47e3f20612d89eb030d3c7fd57896d139be0fba2daa65fa94d",
+      "expectedParse": {
+        "counts": {
+          "tests": 2,
+          "pass": 2
+        },
+        "ok": true
+      },
+      "expectedEvidence": "{\"id\":\"<uuid>\",\"argv\":[\"<EXEC>\",\"-e\",\"console.log('# tests 2\\\\n# pass 2')\"],\"cwd\":\"<ROOT_EVIDENCE>\",\"sourceFingerprint\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\"graphRevision\":\"py03-parity-graph\",\"environment\":{\"node\":\"v0.0.0-py03-parity\",\"platform\":\"parity-platform\",\"arch\":\"parity-arch\"},\"startedAt\":\"<timestamp>\",\"finishedAt\":\"<timestamp>\",\"durationMs\":0,\"exitCode\":0,\"signal\":null,\"timedOut\":false,\"counts\":{\"tests\":2,\"pass\":2},\"ok\":true,\"outputDigest\":\"e5a06c337d6f7f47e3f20612d89eb030d3c7fd57896d139be0fba2daa65fa94d\"}"
+    },
+    {
+      "name": "mixed-failure",
+      "argv": [
+        "<EXEC>",
+        "-e",
+        "console.log('# tests 3\\n# pass 2\\n# fail 1'); process.exitCode = 1;"
+      ],
+      "timeoutMs": 20000,
+      "realRun": true,
+      "spawnError": false,
+      "transcript": {
+        "stdout": "# tests 3\n# pass 2\n# fail 1\n",
+        "stderr": "",
+        "exitCode": 1,
+        "signal": null,
+        "timedOut": false
+      },
+      "expectedDigest": "1f17a08f316091a9f22780cb41f63e60b81924e7aad8a7f249034178caa50cfd",
+      "expectedParse": {
+        "counts": {
+          "tests": 3,
+          "pass": 2,
+          "fail": 1
+        },
+        "ok": false
+      },
+      "expectedEvidence": "{\"id\":\"<uuid>\",\"argv\":[\"<EXEC>\",\"-e\",\"console.log('# tests 3\\\\n# pass 2\\\\n# fail 1'); process.exitCode = 1;\"],\"cwd\":\"<ROOT_EVIDENCE>\",\"sourceFingerprint\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\"graphRevision\":\"py03-parity-graph\",\"environment\":{\"node\":\"v0.0.0-py03-parity\",\"platform\":\"parity-platform\",\"arch\":\"parity-arch\"},\"startedAt\":\"<timestamp>\",\"finishedAt\":\"<timestamp>\",\"durationMs\":0,\"exitCode\":1,\"signal\":null,\"timedOut\":false,\"counts\":{\"tests\":3,\"pass\":2,\"fail\":1},\"ok\":false,\"outputDigest\":\"1f17a08f316091a9f22780cb41f63e60b81924e7aad8a7f249034178caa50cfd\"}"
+    },
+    {
+      "name": "failed-alias",
+      "argv": [
+        "<EXEC>",
+        "-e",
+        "console.log('# tests 2\\n# pass 1\\n# failed 1'); process.exitCode = 1;"
+      ],
+      "timeoutMs": 20000,
+      "realRun": true,
+      "spawnError": false,
+      "transcript": {
+        "stdout": "# tests 2\n# pass 1\n# failed 1\n",
+        "stderr": "",
+        "exitCode": 1,
+        "signal": null,
+        "timedOut": false
+      },
+      "expectedDigest": "10e723155713d1dc17bf3bcb764cdf7898a8b3755b668fc3c5e2018d24897097",
+      "expectedParse": {
+        "counts": {
+          "tests": 2,
+          "pass": 1,
+          "fail": 1
+        },
+        "ok": false
+      },
+      "expectedEvidence": "{\"id\":\"<uuid>\",\"argv\":[\"<EXEC>\",\"-e\",\"console.log('# tests 2\\\\n# pass 1\\\\n# failed 1'); process.exitCode = 1;\"],\"cwd\":\"<ROOT_EVIDENCE>\",\"sourceFingerprint\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\"graphRevision\":\"py03-parity-graph\",\"environment\":{\"node\":\"v0.0.0-py03-parity\",\"platform\":\"parity-platform\",\"arch\":\"parity-arch\"},\"startedAt\":\"<timestamp>\",\"finishedAt\":\"<timestamp>\",\"durationMs\":0,\"exitCode\":1,\"signal\":null,\"timedOut\":false,\"counts\":{\"tests\":2,\"pass\":1,\"fail\":1},\"ok\":false,\"outputDigest\":\"10e723155713d1dc17bf3bcb764cdf7898a8b3755b668fc3c5e2018d24897097\"}"
+    },
+    {
+      "name": "skipped-summary",
+      "argv": [
+        "<EXEC>",
+        "-e",
+        "console.log('# tests 2\\n# pass 1\\n# skipped 1')"
+      ],
+      "timeoutMs": 20000,
+      "realRun": true,
+      "spawnError": false,
+      "transcript": {
+        "stdout": "# tests 2\n# pass 1\n# skipped 1\n",
+        "stderr": "",
+        "exitCode": 0,
+        "signal": null,
+        "timedOut": false
+      },
+      "expectedDigest": "0d5ad1f6337a3c392019f9b31642731a51ac5ffb238de3779674ecf53b8a9604",
+      "expectedParse": {
+        "counts": {
+          "tests": 2,
+          "pass": 1,
+          "skipped": 1
+        },
+        "ok": false
+      },
+      "expectedEvidence": "{\"id\":\"<uuid>\",\"argv\":[\"<EXEC>\",\"-e\",\"console.log('# tests 2\\\\n# pass 1\\\\n# skipped 1')\"],\"cwd\":\"<ROOT_EVIDENCE>\",\"sourceFingerprint\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\"graphRevision\":\"py03-parity-graph\",\"environment\":{\"node\":\"v0.0.0-py03-parity\",\"platform\":\"parity-platform\",\"arch\":\"parity-arch\"},\"startedAt\":\"<timestamp>\",\"finishedAt\":\"<timestamp>\",\"durationMs\":0,\"exitCode\":0,\"signal\":null,\"timedOut\":false,\"counts\":{\"tests\":2,\"pass\":1,\"skipped\":1},\"ok\":false,\"outputDigest\":\"0d5ad1f6337a3c392019f9b31642731a51ac5ffb238de3779674ecf53b8a9604\"}"
+    },
+    {
+      "name": "todo-summary",
+      "argv": [
+        "<EXEC>",
+        "-e",
+        "console.log('# tests 2\\n# pass 1\\n# todo 1')"
+      ],
+      "timeoutMs": 20000,
+      "realRun": true,
+      "spawnError": false,
+      "transcript": {
+        "stdout": "# tests 2\n# pass 1\n# todo 1\n",
+        "stderr": "",
+        "exitCode": 0,
+        "signal": null,
+        "timedOut": false
+      },
+      "expectedDigest": "465f70a20df7f43138f2cc1a3d0a1638fa17c062c3dbc5eeaab2c31678e39228",
+      "expectedParse": {
+        "counts": {
+          "tests": 2,
+          "pass": 1,
+          "todo": 1
+        },
+        "ok": false
+      },
+      "expectedEvidence": "{\"id\":\"<uuid>\",\"argv\":[\"<EXEC>\",\"-e\",\"console.log('# tests 2\\\\n# pass 1\\\\n# todo 1')\"],\"cwd\":\"<ROOT_EVIDENCE>\",\"sourceFingerprint\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\"graphRevision\":\"py03-parity-graph\",\"environment\":{\"node\":\"v0.0.0-py03-parity\",\"platform\":\"parity-platform\",\"arch\":\"parity-arch\"},\"startedAt\":\"<timestamp>\",\"finishedAt\":\"<timestamp>\",\"durationMs\":0,\"exitCode\":0,\"signal\":null,\"timedOut\":false,\"counts\":{\"tests\":2,\"pass\":1,\"todo\":1},\"ok\":false,\"outputDigest\":\"465f70a20df7f43138f2cc1a3d0a1638fa17c062c3dbc5eeaab2c31678e39228\"}"
+    },
+    {
+      "name": "cancelled-summary",
+      "argv": [
+        "<EXEC>",
+        "-e",
+        "console.log('# tests 2\\n# pass 1\\n# cancelled 1')"
+      ],
+      "timeoutMs": 20000,
+      "realRun": true,
+      "spawnError": false,
+      "transcript": {
+        "stdout": "# tests 2\n# pass 1\n# cancelled 1\n",
+        "stderr": "",
+        "exitCode": 0,
+        "signal": null,
+        "timedOut": false
+      },
+      "expectedDigest": "800098d2b8512d0192476c0ee4b99095fb7409199186aa758aa2d3c6f58a23b6",
+      "expectedParse": {
+        "counts": {
+          "tests": 2,
+          "pass": 1,
+          "cancelled": 1
+        },
+        "ok": false
+      },
+      "expectedEvidence": "{\"id\":\"<uuid>\",\"argv\":[\"<EXEC>\",\"-e\",\"console.log('# tests 2\\\\n# pass 1\\\\n# cancelled 1')\"],\"cwd\":\"<ROOT_EVIDENCE>\",\"sourceFingerprint\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\"graphRevision\":\"py03-parity-graph\",\"environment\":{\"node\":\"v0.0.0-py03-parity\",\"platform\":\"parity-platform\",\"arch\":\"parity-arch\"},\"startedAt\":\"<timestamp>\",\"finishedAt\":\"<timestamp>\",\"durationMs\":0,\"exitCode\":0,\"signal\":null,\"timedOut\":false,\"counts\":{\"tests\":2,\"pass\":1,\"cancelled\":1},\"ok\":false,\"outputDigest\":\"800098d2b8512d0192476c0ee4b99095fb7409199186aa758aa2d3c6f58a23b6\"}"
+    },
+    {
+      "name": "no-counts",
+      "argv": [
+        "<EXEC>",
+        "-e",
+        "process.exitCode = 0;"
+      ],
+      "timeoutMs": 20000,
+      "realRun": true,
+      "spawnError": false,
+      "transcript": {
+        "stdout": "",
+        "stderr": "",
+        "exitCode": 0,
+        "signal": null,
+        "timedOut": false
+      },
+      "expectedDigest": "ce23b690b1ba0b553ec416a2c080d33fea4191428954a8316ad922ebbfed1968",
+      "expectedParse": {
+        "counts": {},
+        "ok": false
+      },
+      "expectedEvidence": "{\"id\":\"<uuid>\",\"argv\":[\"<EXEC>\",\"-e\",\"process.exitCode = 0;\"],\"cwd\":\"<ROOT_EVIDENCE>\",\"sourceFingerprint\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\"graphRevision\":\"py03-parity-graph\",\"environment\":{\"node\":\"v0.0.0-py03-parity\",\"platform\":\"parity-platform\",\"arch\":\"parity-arch\"},\"startedAt\":\"<timestamp>\",\"finishedAt\":\"<timestamp>\",\"durationMs\":0,\"exitCode\":0,\"signal\":null,\"timedOut\":false,\"counts\":{},\"ok\":false,\"outputDigest\":\"ce23b690b1ba0b553ec416a2c080d33fea4191428954a8316ad922ebbfed1968\"}"
+    },
+    {
+      "name": "empty-plan",
+      "argv": [
+        "<EXEC>",
+        "-e",
+        "console.log('1..0')"
+      ],
+      "timeoutMs": 20000,
+      "realRun": true,
+      "spawnError": false,
+      "transcript": {
+        "stdout": "1..0\n",
+        "stderr": "",
+        "exitCode": 0,
+        "signal": null,
+        "timedOut": false
+      },
+      "expectedDigest": "5e43ca9cad600af04e11e3797aa7534d2afbc3967bec882a9d8dc5445cc409a8",
+      "expectedParse": {
+        "counts": {},
+        "ok": false
+      },
+      "expectedEvidence": "{\"id\":\"<uuid>\",\"argv\":[\"<EXEC>\",\"-e\",\"console.log('1..0')\"],\"cwd\":\"<ROOT_EVIDENCE>\",\"sourceFingerprint\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\"graphRevision\":\"py03-parity-graph\",\"environment\":{\"node\":\"v0.0.0-py03-parity\",\"platform\":\"parity-platform\",\"arch\":\"parity-arch\"},\"startedAt\":\"<timestamp>\",\"finishedAt\":\"<timestamp>\",\"durationMs\":0,\"exitCode\":0,\"signal\":null,\"timedOut\":false,\"counts\":{},\"ok\":false,\"outputDigest\":\"5e43ca9cad600af04e11e3797aa7534d2afbc3967bec882a9d8dc5445cc409a8\"}"
+    },
+    {
+      "name": "no-tests-found",
+      "argv": [
+        "<EXEC>",
+        "-e",
+        "console.log('no tests found')"
+      ],
+      "timeoutMs": 20000,
+      "realRun": true,
+      "spawnError": false,
+      "transcript": {
+        "stdout": "no tests found\n",
+        "stderr": "",
+        "exitCode": 0,
+        "signal": null,
+        "timedOut": false
+      },
+      "expectedDigest": "e05c91e10631f5f2ef20757401d660ac9999f4eb4b9600d0900085e368009990",
+      "expectedParse": {
+        "counts": {},
+        "ok": false
+      },
+      "expectedEvidence": "{\"id\":\"<uuid>\",\"argv\":[\"<EXEC>\",\"-e\",\"console.log('no tests found')\"],\"cwd\":\"<ROOT_EVIDENCE>\",\"sourceFingerprint\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\"graphRevision\":\"py03-parity-graph\",\"environment\":{\"node\":\"v0.0.0-py03-parity\",\"platform\":\"parity-platform\",\"arch\":\"parity-arch\"},\"startedAt\":\"<timestamp>\",\"finishedAt\":\"<timestamp>\",\"durationMs\":0,\"exitCode\":0,\"signal\":null,\"timedOut\":false,\"counts\":{},\"ok\":false,\"outputDigest\":\"e05c91e10631f5f2ef20757401d660ac9999f4eb4b9600d0900085e368009990\"}"
+    },
+    {
+      "name": "no-tests-matching",
+      "argv": [
+        "<EXEC>",
+        "-e",
+        "console.log('no tests matching pattern')"
+      ],
+      "timeoutMs": 20000,
+      "realRun": true,
+      "spawnError": false,
+      "transcript": {
+        "stdout": "no tests matching pattern\n",
+        "stderr": "",
+        "exitCode": 0,
+        "signal": null,
+        "timedOut": false
+      },
+      "expectedDigest": "6bc02246fa66a6a52b4a6158403ede86711f793b6299cee39549cedcee787f9a",
+      "expectedParse": {
+        "counts": {},
+        "ok": false
+      },
+      "expectedEvidence": "{\"id\":\"<uuid>\",\"argv\":[\"<EXEC>\",\"-e\",\"console.log('no tests matching pattern')\"],\"cwd\":\"<ROOT_EVIDENCE>\",\"sourceFingerprint\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\"graphRevision\":\"py03-parity-graph\",\"environment\":{\"node\":\"v0.0.0-py03-parity\",\"platform\":\"parity-platform\",\"arch\":\"parity-arch\"},\"startedAt\":\"<timestamp>\",\"finishedAt\":\"<timestamp>\",\"durationMs\":0,\"exitCode\":0,\"signal\":null,\"timedOut\":false,\"counts\":{},\"ok\":false,\"outputDigest\":\"6bc02246fa66a6a52b4a6158403ede86711f793b6299cee39549cedcee787f9a\"}"
+    },
+    {
+      "name": "inconsistent-summary",
+      "argv": [
+        "<EXEC>",
+        "-e",
+        "console.log('# tests 5\\n# pass 1')"
+      ],
+      "timeoutMs": 20000,
+      "realRun": true,
+      "spawnError": false,
+      "transcript": {
+        "stdout": "# tests 5\n# pass 1\n",
+        "stderr": "",
+        "exitCode": 0,
+        "signal": null,
+        "timedOut": false
+      },
+      "expectedDigest": "a7240bf505920e882704ecd134c2180d9cc679e86b987ad8d30fa1de3c80646d",
+      "expectedParse": {
+        "counts": {
+          "tests": 5,
+          "pass": 1
+        },
+        "ok": false
+      },
+      "expectedEvidence": "{\"id\":\"<uuid>\",\"argv\":[\"<EXEC>\",\"-e\",\"console.log('# tests 5\\\\n# pass 1')\"],\"cwd\":\"<ROOT_EVIDENCE>\",\"sourceFingerprint\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\"graphRevision\":\"py03-parity-graph\",\"environment\":{\"node\":\"v0.0.0-py03-parity\",\"platform\":\"parity-platform\",\"arch\":\"parity-arch\"},\"startedAt\":\"<timestamp>\",\"finishedAt\":\"<timestamp>\",\"durationMs\":0,\"exitCode\":0,\"signal\":null,\"timedOut\":false,\"counts\":{\"tests\":5,\"pass\":1},\"ok\":false,\"outputDigest\":\"a7240bf505920e882704ecd134c2180d9cc679e86b987ad8d30fa1de3c80646d\"}"
+    },
+    {
+      "name": "forged-summary-lines",
+      "argv": [
+        "<EXEC>",
+        "-e",
+        "console.log('ok 1 - # pass 999\\n✔ tests 999 (1ms)\\nℹ tests 1\\nℹ pass 1')"
+      ],
+      "timeoutMs": 20000,
+      "realRun": true,
+      "spawnError": false,
+      "transcript": {
+        "stdout": "ok 1 - # pass 999\n✔ tests 999 (1ms)\nℹ tests 1\nℹ pass 1\n",
+        "stderr": "",
+        "exitCode": 0,
+        "signal": null,
+        "timedOut": false
+      },
+      "expectedDigest": "d361781bb29a479d2c6804f9e0ccb9447d49a7c1b198a6b14a8aa927702ff709",
+      "expectedParse": {
+        "counts": {
+          "tests": 1,
+          "pass": 1
+        },
+        "ok": true
+      },
+      "expectedEvidence": "{\"id\":\"<uuid>\",\"argv\":[\"<EXEC>\",\"-e\",\"console.log('ok 1 - # pass 999\\\\n✔ tests 999 (1ms)\\\\nℹ tests 1\\\\nℹ pass 1')\"],\"cwd\":\"<ROOT_EVIDENCE>\",\"sourceFingerprint\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\"graphRevision\":\"py03-parity-graph\",\"environment\":{\"node\":\"v0.0.0-py03-parity\",\"platform\":\"parity-platform\",\"arch\":\"parity-arch\"},\"startedAt\":\"<timestamp>\",\"finishedAt\":\"<timestamp>\",\"durationMs\":0,\"exitCode\":0,\"signal\":null,\"timedOut\":false,\"counts\":{\"tests\":1,\"pass\":1},\"ok\":true,\"outputDigest\":\"d361781bb29a479d2c6804f9e0ccb9447d49a7c1b198a6b14a8aa927702ff709\"}"
+    },
+    {
+      "name": "failure-excerpt-paths",
+      "argv": [
+        "<EXEC>",
+        "-e",
+        "console.error('Error: boom at C:\\\\secret\\\\file.ts'); process.exitCode = 4;"
+      ],
+      "timeoutMs": 20000,
+      "realRun": true,
+      "spawnError": false,
+      "transcript": {
+        "stdout": "",
+        "stderr": "Error: boom at C:\\secret\\file.ts\n",
+        "exitCode": 4,
+        "signal": null,
+        "timedOut": false
+      },
+      "expectedDigest": "973d0891dde0516762b3e4d1585b791e6d1b0a78538c88ba2765c858300b504b",
+      "expectedParse": {
+        "counts": {},
+        "ok": false
+      },
+      "expectedEvidence": "{\"id\":\"<uuid>\",\"argv\":[\"<EXEC>\",\"-e\",\"console.error('Error: boom at C:\\\\\\\\secret\\\\\\\\file.ts'); process.exitCode = 4;\"],\"cwd\":\"<ROOT_EVIDENCE>\",\"sourceFingerprint\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\"graphRevision\":\"py03-parity-graph\",\"environment\":{\"node\":\"v0.0.0-py03-parity\",\"platform\":\"parity-platform\",\"arch\":\"parity-arch\"},\"startedAt\":\"<timestamp>\",\"finishedAt\":\"<timestamp>\",\"durationMs\":0,\"exitCode\":4,\"signal\":null,\"timedOut\":false,\"counts\":{},\"ok\":false,\"outputDigest\":\"973d0891dde0516762b3e4d1585b791e6d1b0a78538c88ba2765c858300b504b\",\"failureExcerpt\":\"Error: boom at [path]\"}"
+    },
+    {
+      "name": "failure-secret-redaction",
+      "argv": [
+        "<EXEC>",
+        "-e",
+        "console.error('Error: token=abc123 leaked'); process.exitCode = 2;"
+      ],
+      "timeoutMs": 20000,
+      "realRun": true,
+      "spawnError": false,
+      "transcript": {
+        "stdout": "",
+        "stderr": "Error: token=abc123 leaked\n",
+        "exitCode": 2,
+        "signal": null,
+        "timedOut": false
+      },
+      "expectedDigest": "18007d3526b14c78efe444c908eab67d5bae4c9cdeaac557941b1bcda2579c82",
+      "expectedParse": {
+        "counts": {},
+        "ok": false
+      },
+      "expectedEvidence": "{\"id\":\"<uuid>\",\"argv\":[\"<EXEC>\",\"-e\",\"console.error('Error: token=[redacted] leaked'); process.exitCode = 2;\"],\"cwd\":\"<ROOT_EVIDENCE>\",\"sourceFingerprint\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\"graphRevision\":\"py03-parity-graph\",\"environment\":{\"node\":\"v0.0.0-py03-parity\",\"platform\":\"parity-platform\",\"arch\":\"parity-arch\"},\"startedAt\":\"<timestamp>\",\"finishedAt\":\"<timestamp>\",\"durationMs\":0,\"exitCode\":2,\"signal\":null,\"timedOut\":false,\"counts\":{},\"ok\":false,\"outputDigest\":\"18007d3526b14c78efe444c908eab67d5bae4c9cdeaac557941b1bcda2579c82\",\"failureExcerpt\":\"Error: token=[redacted] leaked\"}"
+    },
+    {
+      "name": "failure-stdout",
+      "argv": [
+        "<EXEC>",
+        "-e",
+        "console.log('Error: stdout failure'); process.exitCode = 3;"
+      ],
+      "timeoutMs": 20000,
+      "realRun": true,
+      "spawnError": false,
+      "transcript": {
+        "stdout": "Error: stdout failure\n",
+        "stderr": "",
+        "exitCode": 3,
+        "signal": null,
+        "timedOut": false
+      },
+      "expectedDigest": "f32d9372c2cd61f70e42ed0a4137c3addc17f9f12ca2d8e3aacc02787ef3a2d1",
+      "expectedParse": {
+        "counts": {},
+        "ok": false
+      },
+      "expectedEvidence": "{\"id\":\"<uuid>\",\"argv\":[\"<EXEC>\",\"-e\",\"console.log('Error: stdout failure'); process.exitCode = 3;\"],\"cwd\":\"<ROOT_EVIDENCE>\",\"sourceFingerprint\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\"graphRevision\":\"py03-parity-graph\",\"environment\":{\"node\":\"v0.0.0-py03-parity\",\"platform\":\"parity-platform\",\"arch\":\"parity-arch\"},\"startedAt\":\"<timestamp>\",\"finishedAt\":\"<timestamp>\",\"durationMs\":0,\"exitCode\":3,\"signal\":null,\"timedOut\":false,\"counts\":{},\"ok\":false,\"outputDigest\":\"f32d9372c2cd61f70e42ed0a4137c3addc17f9f12ca2d8e3aacc02787ef3a2d1\",\"failureExcerpt\":\"Error: stdout failure\"}"
+    },
+    {
+      "name": "stderr-and-failure",
+      "argv": [
+        "<EXEC>",
+        "-e",
+        "console.log('# tests 1\\n# pass 1'); console.error('Exception in worker'); process.exitCode = 1;"
+      ],
+      "timeoutMs": 20000,
+      "realRun": true,
+      "spawnError": false,
+      "transcript": {
+        "stdout": "# tests 1\n# pass 1\n",
+        "stderr": "Exception in worker\n",
+        "exitCode": 1,
+        "signal": null,
+        "timedOut": false
+      },
+      "expectedDigest": "bc1b8b11e5d2de6d9933caba2ed5ad51cf49f5ec51bdc02a84579e477b7bd825",
+      "expectedParse": {
+        "counts": {
+          "tests": 1,
+          "pass": 1
+        },
+        "ok": false
+      },
+      "expectedEvidence": "{\"id\":\"<uuid>\",\"argv\":[\"<EXEC>\",\"-e\",\"console.log('# tests 1\\\\n# pass 1'); console.error('Exception in worker'); process.exitCode = 1;\"],\"cwd\":\"<ROOT_EVIDENCE>\",\"sourceFingerprint\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\"graphRevision\":\"py03-parity-graph\",\"environment\":{\"node\":\"v0.0.0-py03-parity\",\"platform\":\"parity-platform\",\"arch\":\"parity-arch\"},\"startedAt\":\"<timestamp>\",\"finishedAt\":\"<timestamp>\",\"durationMs\":0,\"exitCode\":1,\"signal\":null,\"timedOut\":false,\"counts\":{\"tests\":1,\"pass\":1},\"ok\":false,\"outputDigest\":\"bc1b8b11e5d2de6d9933caba2ed5ad51cf49f5ec51bdc02a84579e477b7bd825\",\"failureExcerpt\":\"Exception in worker\"}"
+    },
+    {
+      "name": "timeout",
+      "argv": [
+        "<EXEC>",
+        "-e",
+        "setTimeout(() => {}, 5000);"
+      ],
+      "timeoutMs": 60,
+      "realRun": false,
+      "spawnError": false,
+      "transcript": {
+        "stdout": "",
+        "stderr": "",
+        "exitCode": null,
+        "signal": "SIGKILL",
+        "timedOut": true
+      },
+      "expectedDigest": "ce23b690b1ba0b553ec416a2c080d33fea4191428954a8316ad922ebbfed1968",
+      "expectedParse": {
+        "counts": {},
+        "ok": false
+      },
+      "expectedEvidence": null
+    },
+    {
+      "name": "spawn-error",
+      "argv": [
+        "<ROOT_EVIDENCE>\\missing-runner.exe",
+        "--test",
+        "test/a.test.ts"
+      ],
+      "timeoutMs": 10000,
+      "realRun": false,
+      "spawnError": true,
+      "transcript": {
+        "stdout": "",
+        "stderr": "",
+        "exitCode": null,
+        "signal": null,
+        "timedOut": false
+      },
+      "expectedDigest": "ce23b690b1ba0b553ec416a2c080d33fea4191428954a8316ad922ebbfed1968",
+      "expectedParse": {
+        "counts": {},
+        "ok": false
+      },
+      "expectedEvidence": null
+    }
+  ],
+  "parseCountsCorpus": [
+    {
+      "input": "# tests 3\n# pass 2\n# skipped 1\n",
+      "counts": {
+        "tests": 3,
+        "pass": 2,
+        "skipped": 1
+      }
+    },
+    {
+      "input": "ℹ tests 1\nℹ pass 1\n",
+      "counts": {
+        "tests": 1,
+        "pass": 1
+      }
+    },
+    {
+      "input": "ok 1 - # pass 999\n✔ tests 999 (1ms)\nℹ tests 1\nℹ pass 1\n",
+      "counts": {
+        "tests": 1,
+        "pass": 1
+      }
+    },
+    {
+      "input": "# failed 2\n# fail 1\n",
+      "counts": {
+        "fail": 1
+      }
+    },
+    {
+      "input": "# tests 1\r\n# pass 1\r\n",
+      "counts": {
+        "tests": 1,
+        "pass": 1
+      }
+    },
+    {
+      "input": " # tests 1",
+      "counts": {}
+    },
+    {
+      "input": "# tests 1 # comment",
+      "counts": {}
+    },
+    {
+      "input": "# Tests 7\n# PASS 7",
+      "counts": {
+        "tests": 7,
+        "pass": 7
+      }
+    },
+    {
+      "input": "# todo 2\n# cancelled 1\n",
+      "counts": {
+        "todo": 2,
+        "cancelled": 1
+      }
+    },
+    {
+      "input": "ℹtests 1",
+      "counts": {}
+    },
+    {
+      "input": "x # tests 9",
+      "counts": {}
+    },
+    {
+      "input": "# tests 1\n# tests 2",
+      "counts": {
+        "tests": 2
+      }
+    },
+    {
+      "input": "#  tests 3",
+      "counts": {
+        "tests": 3
+      }
+    },
+    {
+      "input": "ℹ  pass 4",
+      "counts": {
+        "pass": 4
+      }
+    },
+    {
+      "input": "✔ pass 999 (1ms)",
+      "counts": {}
+    },
+    {
+      "input": "# pass 0\n# tests 0",
+      "counts": {
+        "pass": 0,
+        "tests": 0
+      }
+    },
+    {
+      "input": "# tests ١",
+      "counts": {}
+    },
+    {
+      "input": "\n# fail 0\n# fail 3\n",
+      "counts": {
+        "fail": 3
+      }
+    }
+  ],
+  "selectionFiles": {
+    ".gitignore": ".ano/\n",
+    "package.json": "{\"private\":true,\"type\":\"module\"}\n",
+    "src/a.ts": "export const a = 1;\n",
+    "test/a.test.ts": "import test from 'node:test';\nimport assert from 'node:assert/strict';\ntest('a', () => assert.equal(1, 1));\n",
+    "test/b.test.ts": "import test from 'node:test';\nimport assert from 'node:assert/strict';\ntest('b', () => assert.equal(2, 2));\n",
+    "node.exe": "not a real node runtime"
+  },
+  "selectionCases": [
+    {
+      "name": "absolute-exec-and-relative-test",
+      "argv": [
+        "<EXEC>",
+        "--test",
+        "test/a.test.ts"
+      ],
+      "tests": [
+        "test/a.test.ts"
+      ],
+      "result": {
+        "ok": true
+      }
+    },
+    {
+      "name": "reporter-inline-value",
+      "argv": [
+        "<EXEC>",
+        "--test",
+        "--test-reporter=spec",
+        "test/a.test.ts"
+      ],
+      "tests": [
+        "test/a.test.ts"
+      ],
+      "result": {
+        "ok": true
+      }
+    },
+    {
+      "name": "reporter-separate-value",
+      "argv": [
+        "<EXEC>",
+        "--test",
+        "--test-reporter",
+        "spec",
+        "test/a.test.ts"
+      ],
+      "tests": [
+        "test/a.test.ts"
+      ],
+      "result": {
+        "ok": true
+      }
+    },
+    {
+      "name": "env-file-value-flag",
+      "argv": [
+        "<EXEC>",
+        "--test",
+        "--env-file",
+        ".env.test",
+        "test/a.test.ts"
+      ],
+      "tests": [
+        "test/a.test.ts"
+      ],
+      "result": {
+        "ok": true
+      }
+    },
+    {
+      "name": "test-timeout-inline-value",
+      "argv": [
+        "<EXEC>",
+        "--test",
+        "--test-timeout=5000",
+        "test/a.test.ts"
+      ],
+      "tests": [
+        "test/a.test.ts"
+      ],
+      "result": {
+        "ok": true
+      }
+    },
+    {
+      "name": "declared-selection-with-dot-prefix",
+      "argv": [
+        "<EXEC>",
+        "--test",
+        "./test/a.test.ts"
+      ],
+      "tests": [
+        "test/a.test.ts"
+      ],
+      "result": {
+        "ok": true
+      }
+    },
+    {
+      "name": "absolute-test-argument",
+      "argv": [
+        "<EXEC>",
+        "--test",
+        "<ABS_TEST_A>"
+      ],
+      "tests": [
+        "./test/a.test.ts"
+      ],
+      "result": {
+        "ok": true
+      }
+    },
+    {
+      "name": "extra-declared-test-file",
+      "argv": [
+        "<EXEC>",
+        "--test",
+        "test/a.test.ts",
+        "test/b.test.ts"
+      ],
+      "tests": [
+        "test/a.test.ts"
+      ],
+      "result": {
+        "error": "Argument is not selected as a declared test file: test/b.test.ts"
+      }
+    },
+    {
+      "name": "undeclared-runner-script",
+      "argv": [
+        "<EXEC>",
+        "--test",
+        "forged-runner.mjs",
+        "test/a.test.ts"
+      ],
+      "tests": [
+        "test/a.test.ts"
+      ],
+      "result": {
+        "error": "Argument is not selected as a declared test file: forged-runner.mjs"
+      }
+    },
+    {
+      "name": "python-runner",
+      "argv": [
+        "python",
+        "fake.py",
+        "test/a.test.ts"
+      ],
+      "tests": [
+        "test/a.test.ts"
+      ],
+      "result": {
+        "error": "Verification must use the supported Node test runner (node/node.exe); refusing executable: python"
+      }
+    },
+    {
+      "name": "python-with-test-flag",
+      "argv": [
+        "python",
+        "--test",
+        "test/a.test.ts"
+      ],
+      "tests": [
+        "test/a.test.ts"
+      ],
+      "result": {
+        "error": "Verification must use the supported Node test runner (node/node.exe); refusing executable: python"
+      }
+    },
+    {
+      "name": "deno-runner",
+      "argv": [
+        "deno",
+        "--test",
+        "test/a.test.ts"
+      ],
+      "tests": [
+        "test/a.test.ts"
+      ],
+      "result": {
+        "error": "Verification must use the supported Node test runner (node/node.exe); refusing executable: deno"
+      }
+    },
+    {
+      "name": "shell-sh",
+      "argv": [
+        "sh",
+        "-c",
+        "node --test test/a.test.ts"
+      ],
+      "tests": [
+        "test/a.test.ts"
+      ],
+      "result": {
+        "error": "Verification must not execute through a shell; the declared test file is not selected by argv: sh"
+      }
+    },
+    {
+      "name": "shell-cmd",
+      "argv": [
+        "cmd",
+        "/c",
+        "node --test test/a.test.ts"
+      ],
+      "tests": [
+        "test/a.test.ts"
+      ],
+      "result": {
+        "error": "Verification must not execute through a shell; the declared test file is not selected by argv: cmd"
+      }
+    },
+    {
+      "name": "require-preload",
+      "argv": [
+        "<EXEC>",
+        "--test",
+        "--require",
+        "./hook.mjs",
+        "test/a.test.ts"
+      ],
+      "tests": [
+        "test/a.test.ts"
+      ],
+      "result": {
+        "error": "Verification must not preload a hook or run another script; the declared test file is not selected by argv: --require"
+      }
+    },
+    {
+      "name": "import-preload",
+      "argv": [
+        "<EXEC>",
+        "--test",
+        "--import=./hook.mjs",
+        "test/a.test.ts"
+      ],
+      "tests": [
+        "test/a.test.ts"
+      ],
+      "result": {
+        "error": "Verification must not preload a hook or run another script; the declared test file is not selected by argv: --import=./hook.mjs"
+      }
+    },
+    {
+      "name": "experimental-loader-preload",
+      "argv": [
+        "<EXEC>",
+        "--test",
+        "--experimental-loader=./hook.mjs",
+        "test/a.test.ts"
+      ],
+      "tests": [
+        "test/a.test.ts"
+      ],
+      "result": {
+        "error": "Verification must not preload a hook or run another script; the declared test file is not selected by argv: --experimental-loader=./hook.mjs"
+      }
+    },
+    {
+      "name": "snapshot-blob-preload",
+      "argv": [
+        "<EXEC>",
+        "--test",
+        "--snapshot-blob",
+        "blob.bin",
+        "test/a.test.ts"
+      ],
+      "tests": [
+        "test/a.test.ts"
+      ],
+      "result": {
+        "error": "Verification must not preload a hook or run another script; the declared test file is not selected by argv: --snapshot-blob"
+      }
+    },
+    {
+      "name": "run-package-script",
+      "argv": [
+        "<EXEC>",
+        "--run",
+        "fake",
+        "--test",
+        "test/a.test.ts"
+      ],
+      "tests": [
+        "test/a.test.ts"
+      ],
+      "result": {
+        "error": "Verification must not preload a hook or run another script; the declared test file is not selected by argv: --run"
+      }
+    },
+    {
+      "name": "attached-require-preload",
+      "argv": [
+        "<EXEC>",
+        "-rhook.js",
+        "--test",
+        "test/a.test.ts"
+      ],
+      "tests": [
+        "test/a.test.ts"
+      ],
+      "result": {
+        "error": "Verification must not preload a hook or run another script; the declared test file is not selected by argv: -rhook.js"
+      }
+    },
+    {
+      "name": "custom-reporter",
+      "argv": [
+        "<EXEC>",
+        "--test",
+        "--test-reporter=./evil.mjs",
+        "test/a.test.ts"
+      ],
+      "tests": [
+        "test/a.test.ts"
+      ],
+      "result": {
+        "error": "Verification only supports Node's built-in test reporters; refusing reporter: ./evil.mjs"
+      }
+    },
+    {
+      "name": "reporter-without-value",
+      "argv": [
+        "<EXEC>",
+        "--test",
+        "--test-reporter"
+      ],
+      "tests": [
+        "test/a.test.ts"
+      ],
+      "result": {
+        "error": "The --test-reporter flag requires a value"
+      }
+    },
+    {
+      "name": "env-file-without-value",
+      "argv": [
+        "<EXEC>",
+        "--test",
+        "--env-file"
+      ],
+      "tests": [
+        "test/a.test.ts"
+      ],
+      "result": {
+        "error": "The --env-file flag requires a value"
+      }
+    },
+    {
+      "name": "inline-eval",
+      "argv": [
+        "<EXEC>",
+        "-e",
+        "console.log(1)",
+        "test/a.test.ts"
+      ],
+      "tests": [
+        "test/a.test.ts"
+      ],
+      "result": {
+        "error": "Verification must not execute inline script arguments; the declared test file is not selected by argv: -e"
+      }
+    },
+    {
+      "name": "attached-inline-eval",
+      "argv": [
+        "<EXEC>",
+        "-econsole.log(1)",
+        "test/a.test.ts"
+      ],
+      "tests": [
+        "test/a.test.ts"
+      ],
+      "result": {
+        "error": "Verification must not execute inline script arguments; the declared test file is not selected by argv: -econsole.log(1)"
+      }
+    },
+    {
+      "name": "inline-eval-equals-form",
+      "argv": [
+        "<EXEC>",
+        "--eval=console.log(1)",
+        "test/a.test.ts"
+      ],
+      "tests": [
+        "test/a.test.ts"
+      ],
+      "result": {
+        "error": "Verification must not execute inline script arguments; the declared test file is not selected by argv: --eval=console.log(1)"
+      }
+    },
+    {
+      "name": "pattern-consumes-test-path",
+      "argv": [
+        "<EXEC>",
+        "--test",
+        "--test-name-pattern",
+        "test/a.test.ts"
+      ],
+      "tests": [
+        "test/a.test.ts"
+      ],
+      "result": {
+        "error": "Declared test is not selected by argv: test/a.test.ts"
+      }
+    },
+    {
+      "name": "missing-declared-file",
+      "argv": [
+        "<EXEC>",
+        "--test",
+        "test/missing.test.ts"
+      ],
+      "tests": [
+        "test/missing.test.ts"
+      ],
+      "result": {
+        "error": "Declared test file does not exist: test/missing.test.ts"
+      }
+    },
+    {
+      "name": "declared-directory",
+      "argv": [
+        "<EXEC>",
+        "--test",
+        "test/directory.test.ts"
+      ],
+      "tests": [
+        "test/directory.test.ts"
+      ],
+      "result": {
+        "error": "Declared test path is not a regular file: test/directory.test.ts"
+      }
+    },
+    {
+      "name": "declared-outside-project",
+      "argv": [
+        "<EXEC>",
+        "--test",
+        "../outside.test.ts"
+      ],
+      "tests": [
+        "../outside.test.ts"
+      ],
+      "result": {
+        "error": "Test path resolves outside the project: ../outside.test.ts"
+      }
+    },
+    {
+      "name": "no-test-flag",
+      "argv": [
+        "<EXEC>",
+        "test/a.test.ts"
+      ],
+      "tests": [
+        "test/a.test.ts"
+      ],
+      "result": {
+        "error": "Verification requires the Node test runner flag --test; the declared test file is not selected by argv"
+      }
+    },
+    {
+      "name": "test-flag-without-positional",
+      "argv": [
+        "<EXEC>",
+        "--test"
+      ],
+      "tests": [
+        "test/a.test.ts"
+      ],
+      "result": {
+        "error": "Declared test is not selected by argv: test/a.test.ts"
+      }
+    },
+    {
+      "name": "separator-extra-file",
+      "argv": [
+        "<EXEC>",
+        "--test",
+        "test/a.test.ts",
+        "--",
+        "test/b.test.ts"
+      ],
+      "tests": [
+        "test/a.test.ts"
+      ],
+      "result": {
+        "error": "Argument is not selected as a declared test file: test/b.test.ts"
+      }
+    },
+    {
+      "name": "project-local-node",
+      "argv": [
+        "./node.exe",
+        "--test",
+        "test/a.test.ts"
+      ],
+      "tests": [
+        "test/a.test.ts"
+      ],
+      "result": {
+        "error": "Node executable must not come from inside the project under test"
+      }
+    },
+    {
+      "name": "empty-argv",
+      "argv": [],
+      "tests": [
+        "test/a.test.ts"
+      ],
+      "result": {
+        "error": "Verification requires an argv array"
+      }
+    }
+  ],
+  "parameterCases": [
+    {
+      "name": "plain",
+      "taskId": "T",
+      "argv": [
+        "<EXEC>",
+        "--test",
+        "test/a.test.ts"
+      ],
+      "tests": [
+        "test/a.test.ts"
+      ],
+      "canonical": "{\"argv\":[\"C:\\\\Program Files\\\\nodejs\\\\node.exe\",\"--test\",\"test/a.test.ts\"],\"argv_digest\":\"e1d8948323be0d6381c722155bb8c5ba83f98c2842b5269d3852a8afe78c3a9b\",\"policy\":{\"minimum\":\"T1\",\"unknown\":\"strict\"},\"task_id\":\"T\",\"test_files\":[\"test/a.test.ts\"]}"
+    },
+    {
+      "name": "secret-in-flag",
+      "taskId": "T",
+      "argv": [
+        "<EXEC>",
+        "--test",
+        "--test-name-pattern=AKIAIOSFODNN7EXAMPLE",
+        "test/a.test.ts"
+      ],
+      "tests": [
+        "test/a.test.ts"
+      ],
+      "canonical": "{\"argv\":[\"C:\\\\Program Files\\\\nodejs\\\\node.exe\",\"--test\",\"--test-name-pattern=[redacted]\",\"test/a.test.ts\"],\"argv_digest\":\"81af3c2436a17e5f4f3980e58e52d8c9333c542a0e4dcb0aa897c1fe917745cf\",\"policy\":{\"minimum\":\"T1\",\"unknown\":\"strict\"},\"task_id\":\"T\",\"test_files\":[\"test/a.test.ts\"]}"
+    }
+  ],
+  "verdict": {
+    "files": {
+      ".gitignore": ".ano/\n",
+      "package.json": "{\"private\":true,\"type\":\"module\"}\n",
+      "src/a.ts": "export const a = 1;\n",
+      "src/b.ts": "export const b = 2;\n",
+      "test/a.test.ts": "import test from 'node:test';\nimport assert from 'node:assert/strict';\nimport { a } from '../src/a.ts';\ntest('a', () => assert.equal(a, 1));\n",
+      "test/b.test.ts": "import test from 'node:test';\nimport assert from 'node:assert/strict';\ntest('b', () => assert.equal(2, 2));\n"
+    },
+    "taskId": "T",
+    "declaredFiles": [
+      "src/a.ts",
+      "test/a.test.ts"
+    ],
+    "sessionId": "PY03-PARITY",
+    "argv": [
+      "<EXEC>",
+      "--test",
+      "test/a.test.ts"
+    ],
+    "testFiles": [
+      "test/a.test.ts"
+    ],
+    "idemKey": "py03-parity",
+    "rejections": [
+      {
+        "name": "python-runner",
+        "argv": [
+          "python",
+          "fake.py",
+          "test/a.test.ts"
+        ],
+        "error": "Verification must use the supported Node test runner (node/node.exe); refusing executable: python"
+      },
+      {
+        "name": "python-with-test-flag",
+        "argv": [
+          "python",
+          "--test",
+          "test/a.test.ts"
+        ],
+        "error": "Verification must use the supported Node test runner (node/node.exe); refusing executable: python"
+      },
+      {
+        "name": "deno-runner",
+        "argv": [
+          "deno",
+          "--test",
+          "test/a.test.ts"
+        ],
+        "error": "Verification must use the supported Node test runner (node/node.exe); refusing executable: deno"
+      },
+      {
+        "name": "shell-sh",
+        "argv": [
+          "sh",
+          "-c",
+          "node --test test/a.test.ts"
+        ],
+        "error": "Verification must not execute through a shell; the declared test file is not selected by argv: sh"
+      },
+      {
+        "name": "shell-cmd",
+        "argv": [
+          "cmd",
+          "/c",
+          "node --test test/a.test.ts"
+        ],
+        "error": "Verification must not execute through a shell; the declared test file is not selected by argv: cmd"
+      }
+    ],
+    "expected": "{\"taskId\":\"T\",\"status\":\"done\",\"level\":\"T1\",\"evidenceId\":\"<uuid>\",\"sourceFingerprint\":\"9acf1c7cfe11dea3d442dea4e1d1cc876d7d39e9df74cfa09f6fa75fef939896\",\"graphRevision\":\"6314b34d79a8dfe8f7c5f250f37522efd397769aa96bb20ccce8f66c36658296\",\"freshness\":{\"status\":\"fresh\",\"stale\":0},\"blastRadius\":{\"impacted\":[\"src/a.ts\",\"test/a.test.ts\"],\"covered\":[\"src/a.ts\",\"test/a.test.ts\"],\"uncovered\":[],\"advisory\":[]},\"policy\":{\"minimum\":\"T1\",\"unknown\":\"strict\"},\"caveats\":{\"edgeCounts\":{\"value-confirmed\":1,\"type-only\":0,\"unknown\":4},\"heuristicEdges\":0,\"unknownRatio\":0.8,\"filesWithUnresolvableDynamicLoads\":0,\"dynamicLoadCount\":0,\"degradedReasons\":[],\"callEdges\":0,\"resolvedCallEdges\":0,\"heuristicCallEdges\":0,\"typeOnlyCallSites\":0,\"unresolvedCallSites\":4,\"commonjsExports\":0,\"semanticGaps\":[],\"dynamicLoadKinds\":{\"resolved\":0,\"heuristic\":0,\"unknown\":0},\"dynamicLoadSites\":[],\"registryFiles\":[],\"reflectionFiles\":[],\"zeroSymbolFiles\":[\"test/a.test.ts\",\"test/b.test.ts\"]},\"reasons\":[]}",
+    "ledgerSummary": {
+      "argv": [
+        "<EXEC>",
+        "--test",
+        "test/a.test.ts"
+      ],
+      "counts": {
+        "tests": 1,
+        "pass": 1,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "ok": true,
+      "exitCode": 0,
+      "timedOut": false,
+      "signal": null,
+      "testFiles": [
+        "test/a.test.ts"
+      ]
+    }
+  }
+}

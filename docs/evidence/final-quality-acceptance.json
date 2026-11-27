@@ -1,0 +1,114 @@
+{
+  "schemaVersion": 1,
+  "documentKind": "acceptance-contract-and-evidence-reference",
+  "milestone": "M18",
+  "taskRange": [
+    "T-150",
+    "T-151",
+    "T-152",
+    "T-153",
+    "T-154",
+    "T-155",
+    "T-156"
+  ],
+  "scopeContract": "docs/evidence/final-quality-scope.md",
+  "dynamicEvidenceIndex": ".pm/m18-final-quality-runs.json",
+  "verdictRule": "本文件不是已通过声明。最终结果、原始计数、报告路径、当前源码指纹和主控核验结果仅从 dynamicEvidenceIndex 与 .pm 任务/编排台账核对；文件缺失、旧源码、不完整或任何条件失败均不得判定通过。",
+  "sourceFingerprintRule": "三轮完整矩阵必须稳定且共用 sha256-tree-v1 指纹，并等于核验时当前树；本文件自身在三轮前冻结，不嵌入自身最终报告哈希。",
+  "requiredEvidence": {
+    "repositoryCoverageEachRound": {
+      "linesPctAtLeast": 97,
+      "branchesPctAtLeast": 88,
+      "functionsPctAtLeast": 97,
+      "include": "src/**/*.ts",
+      "exclude": []
+    },
+    "pureModules": [
+      "src/memory/tcp-frame-codec.ts",
+      "src/memory/probe-merge.ts",
+      "src/memory/leader-state.ts",
+      "src/memory/logical-clock.ts"
+    ],
+    "pureModuleRule": "每模块行/分支/函数原始 covered==total 且分母>0；不得使用四舍五入文本代替原始计数。",
+    "securityRule": "冻结的8域安全清单每个可达分支方向均执行，关联原始分母、命中计数与测试文件/名称；不可达项需独立证据而非静默排除。",
+    "mutationRule": "代表性变异必须导致预期测试断言失败；基线和恢复副本全绿，变异仅在临时副本，fuzz有界且种子确定。",
+    "stabilityRule": "连续三轮同源码全量test/typecheck/coverage/build/check-docs与关键协议回归；无未说明skip、进程/socket/定时器泄漏或未解释性能回退。",
+    "audits": [
+      "snapshot_codebase",
+      "audit_security",
+      "audit_structure",
+      "audit_license"
+    ],
+    "controllerRule": "七任务done且逐项主控验收；最终state verify/gate成功，不把命令通过直接等同最终验收。"
+  },
+  "maintenancePolicy": {
+    "noSuccessorFeatureMilestones": true,
+    "afterVerifiedAcceptanceAllowOnly": [
+      "defect-fixes",
+      "environment-adaptation",
+      "documentation"
+    ],
+    "productionReleaseRequiresNamedHuman": true,
+    "realProjectCutoverRequiresNamedHuman": true,
+    "noGuaranteeOfZeroBugsOrProductionHA": true
+  },
+  "limitationsReference": "docs/limitations.md",
+  "status": "verified-pending-final-gate",
+  "verifiedAt": "2026-11-25",
+  "acceptanceEvidence": {
+    "pureModules": [
+      "tcp-frame-codec 306/306,40/40,13/13",
+      "probe-merge 603/603,158/158,41/41",
+      "leader-state 153/153,59/59,12/12",
+      "logical-clock 369/369,74/74,22/22"
+    ],
+    "securityDomains": {
+      "denominator": 457,
+      "executed": 451,
+      "registeredUnreachable": 6,
+      "remainingReachable": 0,
+      "domains": 8,
+      "manifest": ".pm/m18-security-branches.json"
+    },
+    "repositoryCoverage": {
+      "linesPct": 97.87,
+      "branchesPct": 88.55,
+      "functionsPct": 97.67,
+      "manifestCovered": 166,
+      "manifestTotal": 166
+    },
+    "mutation": {
+      "killed": 6,
+      "survived": 0,
+      "harnessErrors": 0,
+      "detectionRate": 1,
+      "report": "D:/Temp/ano-mutation-m18-final.json",
+      "sourceUnchanged": true
+    },
+    "stability": {
+      "rounds": 3,
+      "reports": [
+        "quality-20261125-134620-620-0000.json",
+        "quality-20261125-135209-998-0000.json",
+        "quality-20261125-135807-240-0000.json"
+      ],
+      "tests": 2067,
+      "passed": 2067,
+      "failed": 0,
+      "skipped": 0,
+      "sourceStable": true
+    },
+    "audits": {
+      "security": "0 open after 4 fixture acceptances",
+      "license": "MIT/BSD/ISC/Apache/Unlicense, no GPL headers",
+      "structure": "recorded; refactor quota noted as debt"
+    },
+    "networkFuzz": {
+      "cases": 12,
+      "assertions": 17,
+      "seed": 20261125,
+      "errorCodes": 7
+    }
+  },
+  "controllerVerdict": "pending-final-gate"
+}

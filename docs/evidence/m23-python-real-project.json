@@ -1,0 +1,37 @@
+{
+  "schema": 1,
+  "date": "2026-11-27",
+  "task": "T-190",
+  "key": "PY-11",
+  "status": "closed-fixture-only",
+  "supportStatus": "supported-fixture-only",
+  "userDecision": "On 2026-11-27 the user explicitly chose fixture-only closeout without a real project.",
+  "realProjectAccepted": false,
+  "realProject": {
+    "root": null,
+    "namedByUser": false,
+    "read": false,
+    "writes": 0,
+    "copyValidation": "not-run",
+    "pytestVerification": "not-run",
+    "metrics": null
+  },
+  "fixtureGate": {
+    "status": "passed",
+    "fixtures": ["src-layout", "flat-layout", "namespace-pkg", "mixed-ts-py"],
+    "fullTests": 2506,
+    "failed": 0,
+    "skipped": 0,
+    "coverage": {
+      "lines": 97.89,
+      "branches": 88.91,
+      "functions": 97.67
+    },
+    "evidence": ".pm/m18-coverage-raw.json"
+  },
+  "notes": [
+    "Fixture and isolated pytest evidence do not prove real-project support.",
+    "A real project requires an explicit user-named path and a same-configuration temporary copy; the real project remains zero-write.",
+    "The user explicitly declined to provide a real project, so PY-11 closed only as supported-fixture-only under ADR-014 section 6."
+  ]
+}

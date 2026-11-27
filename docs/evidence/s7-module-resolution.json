@@ -1,0 +1,424 @@
+{
+  "spike": "S7",
+  "title": "模块解析三路线对比",
+  "generatedAt": "2026-11-18T12:58:30.554Z",
+  "startedAt": "2026-11-18T12:58:29.878Z",
+  "environment": {
+    "node": "v24.14.0",
+    "platform": "win32 x64",
+    "os": "Windows_NT 10.0.19041",
+    "cwd": "F:\\Agent Nihil Obstat"
+  },
+  "problem": "模块解析三条路线在含相对路径、tsconfig paths、package exports、workspaces 的合成 monorepo 上的成功率与成本；宿主 TypeScript 动态加载按 G10 禁止，不实现。",
+  "method": "脚本自写合成 fixture；路线①用 Node 内置能力自写解析器；路线②用 scripts/node_modules/typescript 的 ts.resolveModuleName 读取同一 tsconfig；路线③仅记录拒绝与 unknown 降级；测量导入/RSS/解析耗时与 TypeScript 安装体积。",
+  "passCriteria": [
+    "路线①与②对同一组合成用例给出可核对结果，失败项显式 unknown",
+    "路线②使用项目自带 TypeScript，版本、体积、启动、内存、解析成本有实测",
+    "路线③明确未实现，写明 G10 拒绝理由与未知降级",
+    "合成 fixtures 只由本 Spike 写入允许目录，未执行其中代码",
+    "成本数据标注小规模、不外推"
+  ],
+  "fixture": {
+    "root": "F:\\Agent Nihil Obstat\\scripts\\fixtures\\generated\\s7",
+    "installMethod": "junction",
+    "fileCount": 10,
+    "bytes": 1398,
+    "files": [
+      {
+        "path": "node_modules/@fixture/lib",
+        "bytes": 0
+      },
+      {
+        "path": "package.json",
+        "bytes": 112
+      },
+      {
+        "path": "packages/app/package.json",
+        "bytes": 149
+      },
+      {
+        "path": "packages/app/src/local.ts",
+        "bytes": 30
+      },
+      {
+        "path": "packages/app/src/main.ts",
+        "bytes": 368
+      },
+      {
+        "path": "packages/app/tsconfig.json",
+        "bytes": 265
+      },
+      {
+        "path": "packages/lib/package.json",
+        "bytes": 342
+      },
+      {
+        "path": "packages/lib/src/feature.ts",
+        "bytes": 34
+      },
+      {
+        "path": "packages/lib/src/index.ts",
+        "bytes": 70
+      },
+      {
+        "path": "packages/lib/src/util.ts",
+        "bytes": 28
+      }
+    ],
+    "authoredBySpike": true,
+    "executed": false,
+    "note": "仅写文件并解析 package.json/tsconfig/TS 源码；没有 import/require 任何 fixture 代码。"
+  },
+  "routes": {
+    "route1": {
+      "name": "自写轻量解析（相对路径 + paths + exports + workspaces）",
+      "thirdPartyImports": 0,
+      "supported": [
+        "relative",
+        "tsconfig paths",
+        "package exports",
+        "workspaces discovery"
+      ],
+      "metrics": {
+        "coldMs": 2.17,
+        "warmTotalMs": 59.589,
+        "warmAvgMs": 0.0851,
+        "warmP95Ms": 0.1475,
+        "calls": 700,
+        "rssDeltaBytes": 2473984,
+        "thirdPartyImports": 0,
+        "coldResults": [
+          {
+            "spec": "./local.js",
+            "status": "resolved",
+            "path": "F:\\Agent Nihil Obstat\\scripts\\fixtures\\generated\\s7\\packages\\app\\src\\local.ts",
+            "method": "relative"
+          },
+          {
+            "spec": "@lib/util",
+            "status": "resolved",
+            "path": "F:\\Agent Nihil Obstat\\scripts\\fixtures\\generated\\s7\\packages\\lib\\src\\util.ts",
+            "method": "paths"
+          },
+          {
+            "spec": "@fixture/lib",
+            "status": "resolved",
+            "path": "F:\\Agent Nihil Obstat\\scripts\\fixtures\\generated\\s7\\packages\\lib\\src\\index.ts",
+            "method": "workspace-exports"
+          },
+          {
+            "spec": "@fixture/lib/feature",
+            "status": "resolved",
+            "path": "F:\\Agent Nihil Obstat\\scripts\\fixtures\\generated\\s7\\packages\\lib\\src\\feature.ts",
+            "method": "workspace-exports"
+          },
+          {
+            "spec": "../../lib/src/util.js",
+            "status": "resolved",
+            "path": "F:\\Agent Nihil Obstat\\scripts\\fixtures\\generated\\s7\\packages\\lib\\src\\util.ts",
+            "method": "relative"
+          },
+          {
+            "spec": "@fixture/missing",
+            "status": "unknown",
+            "reason": "package not installed or not in workspaces: @fixture/missing"
+          },
+          {
+            "spec": "external-pkg",
+            "status": "unknown",
+            "reason": "package not installed or not in workspaces: external-pkg"
+          }
+        ],
+        "workspaceCount": 2
+      }
+    },
+    "route2": {
+      "name": "项目自带 TypeScript ts.resolveModuleName",
+      "metrics": {
+        "typescriptPath": "F:\\Agent Nihil Obstat\\scripts\\node_modules\\typescript\\lib\\typescript.js",
+        "typescriptPackageDir": "F:\\Agent Nihil Obstat\\scripts\\node_modules\\typescript",
+        "version": "5.9.3",
+        "installBytes": 23625066,
+        "installMiB": 22.531,
+        "installFiles": 132,
+        "importMs": 128.607,
+        "rssDeltaAfterImportBytes": 19689472,
+        "configParseMs": 7.034,
+        "coldMs": 9.436,
+        "warmTotalMs": 447.717,
+        "warmAvgMs": 0.6396,
+        "warmP95Ms": 1.6604,
+        "calls": 700,
+        "coldResults": [
+          {
+            "spec": "./local.js",
+            "status": "resolved",
+            "path": "F:/Agent Nihil Obstat/scripts/fixtures/generated/s7/packages/app/src/local.ts",
+            "method": "typescript",
+            "isExternalLibraryImport": false,
+            "extension": ".ts",
+            "failedLookupCount": 0
+          },
+          {
+            "spec": "@lib/util",
+            "status": "resolved",
+            "path": "F:/Agent Nihil Obstat/scripts/fixtures/generated/s7/packages/lib/src/util.ts",
+            "method": "typescript",
+            "isExternalLibraryImport": false,
+            "extension": ".ts",
+            "failedLookupCount": 0
+          },
+          {
+            "spec": "@fixture/lib",
+            "status": "resolved",
+            "path": "F:/Agent Nihil Obstat/scripts/fixtures/generated/s7/packages/lib/src/index.ts",
+            "method": "node_modules",
+            "isExternalLibraryImport": true,
+            "extension": ".ts",
+            "failedLookupCount": 42
+          },
+          {
+            "spec": "@fixture/lib/feature",
+            "status": "resolved",
+            "path": "F:/Agent Nihil Obstat/scripts/fixtures/generated/s7/packages/lib/src/feature.ts",
+            "method": "node_modules",
+            "isExternalLibraryImport": true,
+            "extension": ".ts",
+            "failedLookupCount": 49
+          },
+          {
+            "spec": "../../lib/src/util.js",
+            "status": "resolved",
+            "path": "F:/Agent Nihil Obstat/scripts/fixtures/generated/s7/packages/lib/src/util.ts",
+            "method": "typescript",
+            "isExternalLibraryImport": false,
+            "extension": ".ts",
+            "failedLookupCount": 0
+          },
+          {
+            "spec": "@fixture/missing",
+            "status": "unknown",
+            "reason": "ts.resolveModuleName returned no module",
+            "failedLookupCount": 147
+          },
+          {
+            "spec": "external-pkg",
+            "status": "unknown",
+            "reason": "ts.resolveModuleName returned no module",
+            "failedLookupCount": 147
+          }
+        ]
+      }
+    },
+    "route3": {
+      "implemented": false,
+      "attempted": false,
+      "status": "rejected",
+      "basis": "用户 G10 明确禁止动态加载宿主项目 TypeScript；该路线会执行项目 node_modules 中的代码，供应链与权限边界不可接受。",
+      "fallback": "若宿主无 TypeScript、版本不在声明支持范围、加载失败或未显式开启，则解析结果为 unknown/heuristic，不猜测、不执行宿主代码。",
+      "codeImportedFromHost": false
+    }
+  },
+  "comparison": [
+    {
+      "spec": "./local.js",
+      "kind": "relative-with-js-extension",
+      "expected": "resolved",
+      "route1": {
+        "status": "resolved",
+        "path": "packages/app/src/local.ts",
+        "realPath": "packages/app/src/local.ts",
+        "method": "relative",
+        "reason": null,
+        "matchesExpected": true
+      },
+      "route2": {
+        "status": "resolved",
+        "path": "packages/app/src/local.ts",
+        "realPath": "packages/app/src/local.ts",
+        "method": "typescript",
+        "extension": ".ts",
+        "isExternalLibraryImport": false,
+        "failedLookupCount": 0,
+        "reason": null,
+        "matchesExpected": true
+      },
+      "statusesAgree": true,
+      "resolvedRealPathsAgree": true
+    },
+    {
+      "spec": "@lib/util",
+      "kind": "tsconfig-paths-alias",
+      "expected": "resolved",
+      "route1": {
+        "status": "resolved",
+        "path": "packages/lib/src/util.ts",
+        "realPath": "packages/lib/src/util.ts",
+        "method": "paths",
+        "reason": null,
+        "matchesExpected": true
+      },
+      "route2": {
+        "status": "resolved",
+        "path": "packages/lib/src/util.ts",
+        "realPath": "packages/lib/src/util.ts",
+        "method": "typescript",
+        "extension": ".ts",
+        "isExternalLibraryImport": false,
+        "failedLookupCount": 0,
+        "reason": null,
+        "matchesExpected": true
+      },
+      "statusesAgree": true,
+      "resolvedRealPathsAgree": true
+    },
+    {
+      "spec": "@fixture/lib",
+      "kind": "workspace-root-exports",
+      "expected": "resolved",
+      "route1": {
+        "status": "resolved",
+        "path": "packages/lib/src/index.ts",
+        "realPath": "packages/lib/src/index.ts",
+        "method": "workspace-exports",
+        "reason": null,
+        "matchesExpected": true
+      },
+      "route2": {
+        "status": "resolved",
+        "path": "packages/lib/src/index.ts",
+        "realPath": "packages/lib/src/index.ts",
+        "method": "node_modules",
+        "extension": ".ts",
+        "isExternalLibraryImport": true,
+        "failedLookupCount": 42,
+        "reason": null,
+        "matchesExpected": true
+      },
+      "statusesAgree": true,
+      "resolvedRealPathsAgree": true
+    },
+    {
+      "spec": "@fixture/lib/feature",
+      "kind": "workspace-exports-subpath",
+      "expected": "resolved",
+      "route1": {
+        "status": "resolved",
+        "path": "packages/lib/src/feature.ts",
+        "realPath": "packages/lib/src/feature.ts",
+        "method": "workspace-exports",
+        "reason": null,
+        "matchesExpected": true
+      },
+      "route2": {
+        "status": "resolved",
+        "path": "packages/lib/src/feature.ts",
+        "realPath": "packages/lib/src/feature.ts",
+        "method": "node_modules",
+        "extension": ".ts",
+        "isExternalLibraryImport": true,
+        "failedLookupCount": 49,
+        "reason": null,
+        "matchesExpected": true
+      },
+      "statusesAgree": true,
+      "resolvedRealPathsAgree": true
+    },
+    {
+      "spec": "../../lib/src/util.js",
+      "kind": "cross-package-relative",
+      "expected": "resolved",
+      "route1": {
+        "status": "resolved",
+        "path": "packages/lib/src/util.ts",
+        "realPath": "packages/lib/src/util.ts",
+        "method": "relative",
+        "reason": null,
+        "matchesExpected": true
+      },
+      "route2": {
+        "status": "resolved",
+        "path": "packages/lib/src/util.ts",
+        "realPath": "packages/lib/src/util.ts",
+        "method": "typescript",
+        "extension": ".ts",
+        "isExternalLibraryImport": false,
+        "failedLookupCount": 0,
+        "reason": null,
+        "matchesExpected": true
+      },
+      "statusesAgree": true,
+      "resolvedRealPathsAgree": true
+    },
+    {
+      "spec": "@fixture/missing",
+      "kind": "missing-workspace-package",
+      "expected": "unknown",
+      "route1": {
+        "status": "unknown",
+        "path": null,
+        "realPath": null,
+        "method": null,
+        "reason": "package not installed or not in workspaces: @fixture/missing",
+        "matchesExpected": true
+      },
+      "route2": {
+        "status": "unknown",
+        "path": null,
+        "realPath": null,
+        "method": null,
+        "extension": null,
+        "isExternalLibraryImport": null,
+        "failedLookupCount": 147,
+        "reason": "ts.resolveModuleName returned no module",
+        "matchesExpected": true
+      },
+      "statusesAgree": true,
+      "resolvedRealPathsAgree": true
+    },
+    {
+      "spec": "external-pkg",
+      "kind": "uninstalled-external-package",
+      "expected": "unknown",
+      "route1": {
+        "status": "unknown",
+        "path": null,
+        "realPath": null,
+        "method": null,
+        "reason": "package not installed or not in workspaces: external-pkg",
+        "matchesExpected": true
+      },
+      "route2": {
+        "status": "unknown",
+        "path": null,
+        "realPath": null,
+        "method": null,
+        "extension": null,
+        "isExternalLibraryImport": null,
+        "failedLookupCount": 147,
+        "reason": "ts.resolveModuleName returned no module",
+        "matchesExpected": true
+      },
+      "statusesAgree": true,
+      "resolvedRealPathsAgree": true
+    }
+  ],
+  "summary": {
+    "route1Correct": true,
+    "route2Correct": true,
+    "statusesAgree": true,
+    "resolvedRealPathsAgree": 7,
+    "totalSpecifiers": 7,
+    "route1Resolved": 5,
+    "route2Resolved": 5,
+    "route3Implemented": false
+  },
+  "pass": true,
+  "caveats": [
+    "Fixture 只有 2 个 workspace 包、7 个 import 用例，测量结果很小，不能外推到大型真实仓库。",
+    "workspace 链接用 junction 模拟安装；若系统不支持则退化为目录复制，具体方式已记录。",
+    "路线②只调用解析 API，不编译也不执行 fixture 代码。",
+    "路线③被 G10 禁止，本 Spike 没有实现，也没有任何动态 import 宿主 TypeScript 的代码路径。",
+    "耗时包含 JIT/文件系统缓存影响；warm 数据是重复调用后的结果，不代表冷启动分布。"
+  ]
+}

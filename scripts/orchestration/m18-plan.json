@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "milestone": "M18",
+  "description": "Final quality freeze: critical logic at 100%, security-critical branches at 100%, mutation-proven tests, residual cleanup and maintenance-mode acceptance. No new features after this milestone.",
+  "tasks": {
+    "T-150": { "depends_on": [] },
+    "T-151": { "depends_on": ["T-150"] },
+    "T-152": { "depends_on": ["T-150"] },
+    "T-153": { "depends_on": ["T-151", "T-152"] },
+    "T-154": { "depends_on": ["T-151", "T-152", "T-153"] },
+    "T-155": { "depends_on": ["T-153", "T-154"] },
+    "T-156": { "depends_on": ["T-155"], "gate": "phase-final-quality-freeze", "mutex_group": "m18-final-integration" }
+  }
+}

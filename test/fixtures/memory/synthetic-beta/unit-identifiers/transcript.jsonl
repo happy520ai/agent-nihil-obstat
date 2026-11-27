@@ -1,0 +1,1 @@
+{"v":1,"type":"message","id":"beta-ident-m1","role":"assistant","ts":"2026-11-02T11:00:01.000Z","text":"XMLHttpRequest 与 parseHTMLString 的合成测试，utf8Decode 和 base64 也在。","files":["src/net/http.ts"],"symbols":["src/net/http.ts::XMLHttpRequest"]}

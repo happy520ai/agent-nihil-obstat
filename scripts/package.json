@@ -1,0 +1,17 @@
+{
+  "name": "ano-spikes",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22.18"
+  },
+  "scripts": {
+    "test": "node --test spikes/*.test.mjs",
+    "typecheck": "node --check spikes/run.ts"
+  },
+  "devDependencies": {
+    "tree-sitter-wasms": "^0.1.13",
+    "typescript": "^5.9.3",
+    "web-tree-sitter": "^0.25.10"
+  }
+}

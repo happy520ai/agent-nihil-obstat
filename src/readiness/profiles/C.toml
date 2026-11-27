@@ -1,0 +1,80 @@
+schema = 1
+id = "C"
+name = "Backend service / API"
+kind = "service"
+status = "defined"
+schema_hash = "53d2e90385bd08aefae6faf4da14380f14da1bd685a31cc1755996d2ae81401f"
+notes = "Defined only. Not validated by a real service project; see docs/readiness/profile-c.md."
+
+[requirements."c.alerts-runbooks"]
+title = "Each critical alert has a matching runbook"
+scope = "C"
+evidence = "machine_or_attested"
+freshness_days = 90
+kinds = ["drill_record", "monitor_export"]
+
+[requirements."c.backup-restore-drill"]
+title = "Backup restore has been rehearsed"
+scope = "C"
+evidence = "machine"
+freshness_days = 90
+kinds = ["backup_drill", "drill_record"]
+
+[requirements."c.db-migration-rehearsal"]
+title = "Database migrations were rehearsed in pre-production and can be rolled back"
+scope = "C"
+evidence = "machine_or_attested"
+freshness_days = 90
+kinds = ["drill_record"]
+
+[requirements."c.health-endpoints"]
+title = "Health and readiness endpoints are declared"
+scope = "C"
+evidence = "machine"
+freshness_days = 7
+check = "c.health-endpoints"
+kinds = ["artifact_scan", "deploy_record"]
+
+[requirements."c.least-privilege"]
+title = "Service accounts use least privilege"
+scope = "C"
+evidence = "attested"
+freshness_days = 180
+kinds = []
+
+[requirements."c.load-test-capacity"]
+title = "Load test results support the declared capacity target"
+scope = "C"
+evidence = "machine"
+freshness_days = 30
+kinds = ["load_test", "capacity_test"]
+
+[requirements."c.prestage-deploy-rollback"]
+title = "Pre-production deploy and rollback both succeeded"
+scope = "C"
+evidence = "machine"
+freshness_days = 30
+kinds = ["deploy_record"]
+
+[requirements."c.resilience-config"]
+title = "Rate limiting, timeouts and circuit breaking are configured"
+scope = "C"
+evidence = "machine"
+freshness_days = 30
+check = "c.resilience-config"
+kinds = ["artifact_scan"]
+
+[requirements."c.secrets-managed"]
+title = "Runtime secrets come from a managed source, not the repository"
+scope = "C"
+evidence = "machine"
+freshness_days = 30
+check = "c.secrets-managed"
+kinds = ["artifact_scan", "secret_scan"]
+
+[requirements."c.structured-logs-tracing"]
+title = "Structured logs and request tracing are exported"
+scope = "C"
+evidence = "machine"
+freshness_days = 30
+kinds = ["monitor_export"]

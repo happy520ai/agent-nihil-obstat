@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "milestone": "M10",
+  "description": "Project-scoped enforced takeover. PM-mcp remains authoritative for task state; production target changes require explicit project authorization.",
+  "tasks": {
+    "T-065": { "depends_on": [] },
+    "T-066": { "depends_on": ["T-065"] },
+    "T-067": { "depends_on": ["T-066"] },
+    "T-068": { "depends_on": ["T-065"] },
+    "T-069": { "depends_on": ["T-065"] },
+    "T-070": { "depends_on": ["T-067", "T-068"] },
+    "T-071": { "depends_on": ["T-067"] },
+    "T-072": { "depends_on": ["T-067", "T-068", "T-070", "T-071"] },
+    "T-073": { "depends_on": ["T-069", "T-072"] },
+    "T-074": { "depends_on": ["T-072"] },
+    "T-075": { "depends_on": ["T-072", "T-074"] },
+    "T-076": { "depends_on": ["T-069", "T-070", "T-071", "T-072", "T-073", "T-074", "T-075"], "gate": "phase-takeover", "mutex_group": "m10-integration" },
+    "T-077": { "depends_on": ["T-076"] },
+    "T-078": { "depends_on": ["T-077"], "gate": "phase-takeover-final", "mutex_group": "m10-final-integration" }
+  }
+}

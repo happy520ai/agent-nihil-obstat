@@ -1,0 +1,216 @@
+{
+  "schemaVersion": 1,
+  "description": "Hand-authored gold standard for PY-10. Every project-file Python edge is listed with its ADR-014 tri-state. Test-only comments are intentionally absent so the file is valid JSON. No fixture uses an interpreter, venv or site-packages.",
+  "fixtures": {
+    "src-layout": {
+      "roots": ["src"],
+      "pythonFiles": [
+        "src/app/__init__.py",
+        "src/app/api.pyi",
+        "src/app/chain_a.py",
+        "src/app/chain_b.py",
+        "src/app/chain_consumer.py",
+        "src/app/conditional.py",
+        "src/app/cycle_a.py",
+        "src/app/cycle_b.py",
+        "src/app/cycle_consumer.py",
+        "src/app/dynamic.py",
+        "src/app/fast.py",
+        "src/app/fixture_only.py",
+        "src/app/late.py",
+        "src/app/lazy.py",
+        "src/app/main.py",
+        "src/app/models.py",
+        "src/app/service.py",
+        "src/app/slow.py",
+        "src/app/tests/__init__.py",
+        "src/app/tests/conftest.py",
+        "src/app/tests/test_conditional.py",
+        "src/app/tests/test_dynamic.py",
+        "src/app/tests/test_fixture_user.py",
+        "src/app/tests/test_lazy.py",
+        "src/app/tests/test_stub.py",
+        "src/app/tests/test_type.py",
+        "src/app/tests/test_value.py",
+        "src/app/tests/test_wildcard.py",
+        "src/app/types.py",
+        "src/app/wildcard.py"
+      ],
+      "edges": [
+        { "from": "src/app/__init__.py", "to": "src/app/service.py", "kind": "value-confirmed", "provenance": "resolved", "label": null, "importedNames": ["Service"] },
+        { "from": "src/app/chain_a.py", "to": "src/app/chain_b.py", "kind": "value-confirmed", "provenance": "resolved", "label": null, "importedNames": ["value"] },
+        { "from": "src/app/chain_consumer.py", "to": "src/app/chain_b.py", "kind": "value-confirmed", "provenance": "resolved", "label": null, "importedNames": ["value"] },
+        { "from": "src/app/conditional.py", "to": "src/app/fast.py", "kind": "unknown", "provenance": "heuristic", "label": "conditional_import", "importedNames": ["fast_value"] },
+        { "from": "src/app/conditional.py", "to": "src/app/slow.py", "kind": "unknown", "provenance": "heuristic", "label": "conditional_import", "importedNames": ["slow_value"] },
+        { "from": "src/app/cycle_a.py", "to": "src/app/cycle_b.py", "kind": "unknown", "provenance": "heuristic", "label": "depth_limit", "importedNames": ["ping"] },
+        { "from": "src/app/cycle_b.py", "to": "src/app/cycle_a.py", "kind": "unknown", "provenance": "heuristic", "label": "depth_limit", "importedNames": ["ping"] },
+        { "from": "src/app/cycle_consumer.py", "to": "src/app/cycle_a.py", "kind": "unknown", "provenance": "heuristic", "label": "depth_limit", "importedNames": ["ping"] },
+        { "from": "src/app/lazy.py", "to": "src/app/late.py", "kind": "unknown", "provenance": "heuristic", "label": "lazy_import", "importedNames": ["late_value"] },
+        { "from": "src/app/main.py", "to": "src/app/models.py", "kind": "value-confirmed", "provenance": "resolved", "label": null, "importedNames": ["Model"] },
+        { "from": "src/app/main.py", "to": "src/app/service.py", "kind": "value-confirmed", "provenance": "resolved", "label": null, "importedNames": ["Service"] },
+        { "from": "src/app/service.py", "to": "src/app/models.py", "kind": "value-confirmed", "provenance": "resolved", "label": null, "importedNames": ["Model"] },
+        { "from": "src/app/service.py", "to": "src/app/types.py", "kind": "value-confirmed", "provenance": "resolved", "label": null, "importedNames": ["Payload"] },
+        { "from": "src/app/tests/conftest.py", "to": "src/app/fixture_only.py", "kind": "unknown", "provenance": "heuristic", "label": "lazy_import", "importedNames": ["fixture_value"] },
+        { "from": "src/app/tests/conftest.py", "to": "src/app/service.py", "kind": "unknown", "provenance": "heuristic", "label": "lazy_import", "importedNames": ["Service"] },
+        { "from": "src/app/tests/test_conditional.py", "to": "src/app/fast.py", "kind": "unknown", "provenance": "heuristic", "label": "conditional_import", "importedNames": ["fast_value"] },
+        { "from": "src/app/tests/test_dynamic.py", "to": "src/app/dynamic.py", "kind": "value-confirmed", "provenance": "resolved", "label": null, "importedNames": ["app.dynamic"] },
+        { "from": "src/app/tests/test_lazy.py", "to": "src/app/lazy.py", "kind": "value-confirmed", "provenance": "resolved", "label": null, "importedNames": ["load"] },
+        { "from": "src/app/tests/test_stub.py", "to": "src/app/api.pyi", "kind": "type-only", "provenance": "resolved", "label": null, "importedNames": ["Protocol"] },
+        { "from": "src/app/tests/test_type.py", "to": "src/app/types.py", "kind": "type-only", "provenance": "resolved", "label": null, "importedNames": ["Payload"] },
+        { "from": "src/app/tests/test_value.py", "to": "src/app/service.py", "kind": "value-confirmed", "provenance": "resolved", "label": null, "importedNames": ["Service"] },
+        { "from": "src/app/tests/test_wildcard.py", "to": "src/app/wildcard.py", "kind": "unknown", "provenance": "heuristic", "label": "barrel_wildcard", "importedNames": ["*"] },
+        { "from": "src/app/types.py", "to": "src/app/api.pyi", "kind": "type-only", "provenance": "resolved", "label": null, "importedNames": ["Protocol"] },
+        { "from": "src/app/wildcard.py", "to": "src/app/models.py", "kind": "unknown", "provenance": "heuristic", "label": "barrel_wildcard", "importedNames": ["*"] }
+      ],
+      "caveats": {
+        "patterns": ["python-import-external", "python-reexport"],
+        "dynamicLoadSites": [
+          { "file": "src/app/dynamic.py", "line": 5, "pattern": "dynamic-import", "tier": "unknown", "target": "name" }
+        ]
+      },
+      "t1": {
+        "executed": [
+          "src/app/tests/test_conditional.py",
+          "src/app/tests/test_dynamic.py",
+          "src/app/tests/test_fixture_user.py",
+          "src/app/tests/test_lazy.py",
+          "src/app/tests/test_stub.py",
+          "src/app/tests/test_type.py",
+          "src/app/tests/test_value.py",
+          "src/app/tests/test_wildcard.py"
+        ],
+        "covered": [
+          "src/app/dynamic.py",
+          "src/app/lazy.py",
+          "src/app/models.py",
+          "src/app/service.py",
+          "src/app/tests/test_conditional.py",
+          "src/app/tests/test_dynamic.py",
+          "src/app/tests/test_fixture_user.py",
+          "src/app/tests/test_lazy.py",
+          "src/app/tests/test_stub.py",
+          "src/app/tests/test_type.py",
+          "src/app/tests/test_value.py",
+          "src/app/tests/test_wildcard.py",
+          "src/app/types.py"
+        ],
+        "notCovered": [
+          "src/app/__init__.py",
+          "src/app/api.pyi",
+          "src/app/chain_a.py",
+          "src/app/chain_b.py",
+          "src/app/chain_consumer.py",
+          "src/app/conditional.py",
+          "src/app/cycle_a.py",
+          "src/app/cycle_b.py",
+          "src/app/cycle_consumer.py",
+          "src/app/fast.py",
+          "src/app/fixture_only.py",
+          "src/app/late.py",
+          "src/app/main.py",
+          "src/app/slow.py",
+          "src/app/tests/__init__.py",
+          "src/app/tests/conftest.py",
+          "src/app/wildcard.py"
+        ]
+      }
+    },
+    "flat-layout": {
+      "roots": [""],
+      "pythonFiles": [
+        "app.py",
+        "flat_tests/test_flat.py",
+        "flat_tests/test_unknown.py",
+        "helper.py",
+        "pkg/__init__.py",
+        "pkg/core.py",
+        "pkg/user.py"
+      ],
+      "edges": [
+        { "from": "app.py", "to": "helper.py", "kind": "value-confirmed", "provenance": "resolved", "label": null, "importedNames": ["helper"] },
+        { "from": "app.py", "to": "pkg/user.py", "kind": "value-confirmed", "provenance": "resolved", "label": null, "importedNames": ["value"] },
+        { "from": "flat_tests/test_flat.py", "to": "helper.py", "kind": "value-confirmed", "provenance": "resolved", "label": null, "importedNames": ["helper"] },
+        { "from": "flat_tests/test_flat.py", "to": "pkg/user.py", "kind": "value-confirmed", "provenance": "resolved", "label": null, "importedNames": ["value"] },
+        { "from": "pkg/__init__.py", "to": "pkg/core.py", "kind": "value-confirmed", "provenance": "resolved", "label": null, "importedNames": ["thing"] },
+        { "from": "pkg/user.py", "to": "pkg/core.py", "kind": "value-confirmed", "provenance": "resolved", "label": null, "importedNames": ["core", "thing"] }
+      ],
+      "caveats": {
+        "patterns": ["python-import-external"],
+        "dynamicLoadSites": []
+      },
+      "t1": {
+        "executed": ["flat_tests/test_flat.py", "flat_tests/test_unknown.py"],
+        "covered": ["flat_tests/test_flat.py", "flat_tests/test_unknown.py", "helper.py", "pkg/core.py", "pkg/user.py"],
+        "notCovered": ["app.py", "pkg/__init__.py"]
+      }
+    },
+    "namespace-pkg": {
+      "roots": [""],
+      "pythonFiles": [
+        "acme/tools/__init__.py",
+        "acme/tools/runner.py",
+        "acme/widgets/__init__.py",
+        "acme/widgets/core.py",
+        "acme/widgets/facade.py",
+        "consumer.py",
+        "deep_consumer.py",
+        "namespace_only/mod.py",
+        "ns_consumer.py",
+        "tests/test_consumer.py"
+      ],
+      "edges": [
+        { "from": "acme/tools/runner.py", "to": "acme/widgets/core.py", "kind": "value-confirmed", "provenance": "resolved", "label": null, "importedNames": ["Widget"] },
+        { "from": "acme/widgets/__init__.py", "to": "acme/widgets/core.py", "kind": "value-confirmed", "provenance": "resolved", "label": null, "importedNames": ["Widget"] },
+        { "from": "acme/widgets/facade.py", "to": "acme/widgets/core.py", "kind": "value-confirmed", "provenance": "resolved", "label": null, "importedNames": ["Widget", "core"] },
+        { "from": "consumer.py", "to": "acme/widgets/core.py", "kind": "value-confirmed", "provenance": "resolved", "label": null, "importedNames": ["Widget"] },
+        { "from": "deep_consumer.py", "to": "namespace_only/mod.py", "kind": "value-confirmed", "provenance": "resolved", "label": null, "importedNames": ["VALUE"] },
+        { "from": "ns_consumer.py", "to": "acme/tools/runner.py", "kind": "value-confirmed", "provenance": "resolved", "label": null, "importedNames": ["acme.tools.runner"] },
+        { "from": "tests/test_consumer.py", "to": "consumer.py", "kind": "value-confirmed", "provenance": "resolved", "label": null, "importedNames": ["CONSUMER"] }
+      ],
+      "caveats": {
+        "patterns": [],
+        "dynamicLoadSites": []
+      },
+      "t1": {
+        "executed": ["tests/test_consumer.py"],
+        "covered": ["acme/widgets/core.py", "consumer.py", "tests/test_consumer.py"],
+        "notCovered": [
+          "acme/tools/__init__.py",
+          "acme/tools/runner.py",
+          "acme/widgets/__init__.py",
+          "acme/widgets/facade.py",
+          "deep_consumer.py",
+          "namespace_only/mod.py",
+          "ns_consumer.py"
+        ]
+      }
+    },
+    "mixed-ts-py": {
+      "roots": ["src"],
+      "pythonFiles": [
+        "src/py/bridge.py",
+        "src/py/helper.py",
+        "src/py/main.py",
+        "src/py/tests/test_main.py"
+      ],
+      "edges": [
+        { "from": "src/py/bridge.py", "to": "src/py/helper.py", "kind": "value-confirmed", "provenance": "resolved", "label": null, "importedNames": ["helper_value"] },
+        { "from": "src/py/main.py", "to": "src/py/bridge.py", "kind": "value-confirmed", "provenance": "resolved", "label": null, "importedNames": ["VALUE"] },
+        { "from": "src/py/tests/test_main.py", "to": "src/py/bridge.py", "kind": "value-confirmed", "provenance": "resolved", "label": null, "importedNames": ["VALUE"] }
+      ],
+      "tsEdges": [
+        { "from": "src/js/bridge.ts", "to": "src/js/util.ts", "kind": "value-confirmed", "provenance": "resolved", "label": null, "importedNames": ["utilValue"] },
+        { "from": "src/js/consumer.ts", "to": "src/js/bridge.ts", "kind": "value-confirmed", "provenance": "resolved", "label": null, "importedNames": ["bridgeValue"] }
+      ],
+      "caveats": {
+        "patterns": [],
+        "dynamicLoadSites": []
+      },
+      "t1": {
+        "executed": ["src/py/tests/test_main.py"],
+        "covered": ["src/py/bridge.py", "src/py/helper.py", "src/py/tests/test_main.py"],
+        "notCovered": ["src/py/main.py"]
+      }
+    }
+  }
+}

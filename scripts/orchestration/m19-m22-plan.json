@@ -1,0 +1,342 @@
+{
+  "schema_version": 1,
+  "milestone": "M19",
+  "schema": "ano.orchestration.plan.v1",
+  "created_at": "2026-11-26",
+  "authority": "ADR-013-personal-project-brain (accepted by Administrator, 2026-11-26)",
+  "spec": "docs/m19-m22-implementation-spec.md",
+  "principle": "PM is authoritative for live status. T-177/T-178 are the current repair roots; PM in_progress never proves a host session is running. Every dispatch or recovery must recheck accepted dependencies, current evidence and named-owner blockers; S8 approval and real-project takeover are never inferred from task status.",
+  "milestones": [
+    { "id": "M19", "title": "钩子强制与 ZCode 实测", "tasks": ["T-162", "T-163", "T-164", "T-165", "T-166", "T-167", "T-168"] },
+    { "id": "M20", "title": "收工自动记忆与跨会话连续性", "tasks": ["T-169", "T-170", "T-171"] },
+    { "id": "M21", "title": "个人模式与 setup 快速接入", "tasks": ["T-172", "T-173", "T-174"] },
+    { "id": "M22", "title": "真实项目闭环与最终产品收口", "tasks": ["T-175", "T-176", "T-177", "T-178"] }
+  ],
+  "mutex": [
+    { "file": "src/surface/service.ts", "allowed_tasks": ["T-170"], "rule": "Only T-170 may modify this churn hotspot." },
+    { "file": "src/surface/cli.ts", "allowed_tasks": ["T-166", "T-172", "T-177"], "rule": "Serial: T-166 completes before T-172; T-177 repairs setup/takeover after the existing implementation and preserves named-owner authorization." },
+    { "file": "src/ledger/event.ts", "allowed_tasks": ["T-165"], "rule": "Only T-165 may add event kinds; existing kinds are never changed." }
+  ],
+  "gates": [
+    {
+      "id": "S8",
+      "task": "T-162",
+      "condition": "Q1/Q2/Q4/Q5 each has real measured evidence in an os.tmpdir() isolated Git project. If any is unavailable, M19 degrades to 'Claude Code documented + instruction mode' per ADR-013 §9; T-168 records the honest unavailability. Synthetic samples are forbidden.",
+      "release": "Named owner (Administrator) reviews S8 evidence before T-163 starts."
+    }
+  ],
+  "task_specs": [
+    {
+      "id": "T-162",
+      "title": "S8 ZCode 钩子实测（隔离 Git 项目）",
+      "milestone": "M19",
+      "type": "spike",
+      "priority": "P0",
+      "status": "todo",
+      "blocked_by": ["T-161"],
+      "gate": "S8",
+      "files": ["docs/spikes/S8-hooks.md", "docs/evidence/s8-zcode-hooks.json"],
+      "steps": [
+        "在 os.tmpdir() 创建隔离 Git 项目；只在该项目内创建 ZCode 工作区配置，禁止改用户级配置与 ANO 仓库配置",
+        "Q1：定位钩子配置文件与键，实测 user/workspace 作用域合并并保留原样配置片段与生效日志",
+        "Q2：采集 7 个事件（SessionStart/UserPromptSubmit/PreToolUse/PermissionRequest/PostToolUse/PostToolUseFailure/Stop）的脱敏 stdin 样本与关键字段",
+        "Q3/Q4：确认内置编辑/写入/shell 工具名；实测 PreToolUse deny/ask 输出格式及模型侧可见结果",
+        "Q5/Q6：实测 SessionStart additionalContext 是否进入模型上下文及长度上限；Stop 继续格式、3 次计数与继续中标志",
+        "Q7/Q8：实测超时/非零退出/非 JSON stdout 的宿主行为；钩子进程 cwd、环境变量、Windows 中文与空格路径",
+        "按 src/clients/redact.ts 脱敏后写 docs/spikes/S8-hooks.md 与 docs/evidence/s8-zcode-hooks.json，逐项标注 measured/documented/unavailable",
+        "判定 Q1/Q2/Q4/Q5 门并上报；不可用时按 ADR-013 降级，不得用合成样本补位"
+      ],
+      "acceptance": "Q1-Q8 每项有真实证据或如实 unavailable；Q1/Q2/Q4/Q5 判定明确；未修改用户真实项目、用户级配置、ANO 仓库配置；样本脱敏；T-163 未启动。"
+    },
+    {
+      "id": "T-163",
+      "title": "钩子契约层",
+      "milestone": "M19",
+      "type": "feature",
+      "priority": "P0",
+      "status": "backlog",
+      "blocked_by": ["T-162", "S8 判定门由具名所有者核验"],
+      "files": ["src/hooks/contract.ts", "test/unit/hook-contract.test.ts"],
+      "steps": [
+        "定义 HOOK_EVENTS/HOOK_MODES/HOOK_DEGRADED_CODES 与 HookInput/HookDecision 类型",
+        "为每个输入与决定实现 zod .strict() schema，未知顶层字段只进 hostExtra",
+        "实现 failClosedDecision(mode, code, detail)：advisory→ask，strict→deny，任何组合不得 allow",
+        "测试未知/缺失字段拒绝与 failClosed 全组合；达到行/分支/函数 100%"
+      ],
+      "acceptance": "contract.ts 不 import node:fs/node:child_process；failClosed 全组合无 allow；契约层覆盖 100/100/100。"
+    },
+    {
+      "id": "T-164",
+      "title": "pre-tool 判定引擎",
+      "milestone": "M19",
+      "type": "feature",
+      "priority": "P0",
+      "status": "backlog",
+      "blocked_by": ["T-163"],
+      "files": ["src/hooks/pre-tool.ts", "src/memory/explored-state.ts", "test/unit/hook-pre-tool.test.ts", "test/benchmark/hook-pre-tool.bench.ts"],
+      "steps": [
+        "从 service.ts 抽取只读 exploredState 投影到纯读取模块，先加行为保护测试，抽取不改行为",
+        "按 ADR-013 §4.3 顺序实现 7 条规则（越界、豁免、新建、非支持语言、stale/degraded、revision 已探查、其余 ask/deny）",
+        "保证 pre-tool 路径零账本写入、不触发 graph rebuild、不创建 segment",
+        "7 条规则正反用例 + 重复判定一致 + revision 变化后旧 explored 失效",
+        "1200 文件夹具 benchmark：P95 ≤ 300ms（冷启动单独报告）"
+      ],
+      "acceptance": "规则顺序与决定符合 ADR-013 §4.3；pre-tool 零账本写入；P95 ≤ 300ms；抽取有保护测试且行为不变。"
+    },
+    {
+      "id": "T-165",
+      "title": "session-start / stop 引擎",
+      "milestone": "M19",
+      "type": "feature",
+      "priority": "P0",
+      "status": "backlog",
+      "blocked_by": ["T-163"],
+      "files": ["src/hooks/session.ts", "src/ledger/event.ts", "test/integration/hook-session.test.ts"],
+      "steps": [
+        "仅在 event.ts 新增 session.started 与 session.stop_checked，已有 kind 不变，schema hash 显式升版",
+        "onSessionStart：幂等写 session.started、脏文件基线（≤500，超限 truncated）、检测上一会话未关闭",
+        "onStop：计算 C1-C4，写 session.stop_checked，最多 2 次 continue，尊重 stopContinuation",
+        "非 Git 根降级 NOT_GIT_ROOT：跳过 C1，其余照常",
+        "真实 git + SQLite + 子进程测试：无归属改动 continue、第 3 次 stop-ok、重放 session-start 仅 1 条事件、中途被杀下次检出"
+      ],
+      "acceptance": "事件只新增且升版；幂等键生效；C1-C4 判定与 continue 上限正确；非 Git 降级如实；event.ts 只由本任务修改。"
+    },
+    {
+      "id": "T-166",
+      "title": "客户端适配、CLI 入口与安装",
+      "milestone": "M19",
+      "type": "feature",
+      "priority": "P0",
+      "status": "backlog",
+      "blocked_by": ["T-163", "S8 实测字段"],
+      "files": ["src/hooks/adapters/zcode.ts", "src/hooks/adapters/claude-code.ts", "src/surface/cli.ts", "src/clients/install.ts", "src/clients/config.ts", "src/clients/capabilities.ts", "test/unit/hook-adapters.test.ts", "test/integration/clients-install-hooks.test.ts"],
+      "steps": [
+        "ZCode adapter 只使用 S8 实测字段；Claude Code adapter 只使用公开文档并标 documented",
+        "CLI 新增 ano hook <event> --client <id> [--root] [--mode]；stdin ≤1MiB，全程 try/catch，硬超时用 AbortSignal",
+        "install --with-hooks：只写 S8 确认键，沿用备份/漂移/原子合并/安装记录，restore 可还原",
+        "钩子命令固定为绝对 node + 绝对 cli.js + 固定参数，不拼接任何外部输入",
+        "capabilities 新增 enforcement 层级；output-interception 维持 unavailable",
+        "测试 dry-run 零写、confirm 写入、restore 还原、mcp 段行为不变、其他字段原样保留"
+      ],
+      "acceptance": "无第八个 MCP 工具；钩子配置只经授权链写入且可 restore；ZCode 拒绝写仅对 hooks 段放开；cli.ts 在 T-172 前完成。"
+    },
+    {
+      "id": "T-167",
+      "title": "钩子红队",
+      "milestone": "M19",
+      "type": "test",
+      "priority": "P0",
+      "status": "backlog",
+      "blocked_by": ["T-164", "T-165", "T-166"],
+      "files": ["test/redteam/hooks-boundary.test.ts"],
+      "steps": [
+        "覆盖非 JSON/超 1MiB/深嵌套/缺 session_id → 降级不崩溃且永不 allow",
+        "覆盖 targetPaths ..、绝对逃逸、symlink/junction、UNC → ask 不 allow",
+        "覆盖 tool_input shell 元字符/换行不进入命令行",
+        "覆盖慢 IO 硬超时、伪造 stopContinuation 最多 2 次 continue、pre-tool 零账本写入",
+        "覆盖安装并发漂移 beforeHash 拒绝、shell 写文件绕过如实放行但 stop C1 检出、自动摘要不得作为 Gate 证据"
+      ],
+      "acceptance": "红队攻击矩阵逐项通过；任何失败路径无 allow；零账本写入与漂移拒绝有断言。"
+    },
+    {
+      "id": "T-168",
+      "title": "ZCode 实测验收",
+      "milestone": "M19",
+      "type": "chore",
+      "priority": "P0",
+      "status": "backlog",
+      "blocked_by": ["T-167", "S8 判定门"],
+      "files": ["docs/evidence/m19-zcode-hooks-validation.md", "docs/evidence/m19-zcode-hooks-validation.json"],
+      "steps": [
+        "在隔离测试项目安装钩子并启动真实 ZCode 会话",
+        "验证新会话自动出现 brief、未 explore 改 TS 被 ask/deny、explore 后放行",
+        "验证无归属改动收工被要求补记、补记后正常结束",
+        "记录主机日志片段、账本事件 ID、钩子决定计数并脱敏",
+        "S8 不可用时按 ADR-013 记录如实不可用，不冒充 hooks-validated"
+      ],
+      "acceptance": "真实 ZCode 证据齐全；仅在实测通过时标 hooks-validated，否则如实 unavailable/degraded。"
+    },
+    {
+      "id": "T-169",
+      "title": "机械会话摘要",
+      "milestone": "M20",
+      "type": "feature",
+      "priority": "P0",
+      "status": "backlog",
+      "blocked_by": ["T-165"],
+      "files": ["src/hooks/summary.ts", "test/unit/session-summary.test.ts"],
+      "steps": [
+        "实现纯函数 buildSessionSummary(sessionStarted, ledgerWindow, gitNow)",
+        "persistSessionSummary 经既有 note 路径写 kind=session_summary/source=hook:auto，幂等键 seq",
+        "字段按 ADR-013 §5；files_changed ≤200、tasks ≤50，超限只给计数",
+        "continue 与 stop-ok 都写；interrupted 补写由 session-start 调用",
+        "确定性测试（相同输入字节级相同）+ 假密钥/提示词不得出现"
+      ],
+      "acceptance": "摘要不含提示词/回答/文件内容；无 evidence_id；相同输入字节级一致；上限与计数正确。"
+    },
+    {
+      "id": "T-170",
+      "title": "brief 上次会话段与紧凑投影",
+      "milestone": "M20",
+      "type": "feature",
+      "priority": "P0",
+      "status": "backlog",
+      "blocked_by": ["T-169"],
+      "files": ["src/surface/service.ts", "test/unit/brief-compact.test.ts"],
+      "steps": [
+        "brief 新增 last_sessions：最近 1 条摘要全文 + 3 条一行摘要 + 全部未解决 unmet_checks",
+        "实现 briefCompact(root,{budgetChars=6000}) 与优先级截断，显式写 truncated",
+        "unmet_checks 解决判据：后续 checkpoint 或对应文件已归属",
+        "保护测试：既有字段形状不变；预算边界、截断顺序、中文按码点计数"
+      ],
+      "acceptance": "只新增字段不改旧字段；6000 字符预算与截断顺序正确；service.ts 仅由本任务修改。"
+    },
+    {
+      "id": "T-171",
+      "title": "三会话连续集成测试",
+      "milestone": "M20",
+      "type": "test",
+      "priority": "P0",
+      "status": "backlog",
+      "blocked_by": ["T-170"],
+      "files": ["test/integration/three-session-continuity.test.ts"],
+      "steps": [
+        "会话 1：建任务、改文件、未 checkpoint 结束 → 摘要 unmet_checks 含 C2",
+        "会话 2：session-start 注入会话 1 断点与 C2 → checkpoint 后 C2 解除",
+        "会话 3：verify 通过并以 evidence_id complete → brief 不再出现该遗留",
+        "真实 git + SQLite + 子进程钩子；全量测试无新增 skip"
+      ],
+      "acceptance": "三段断言全过；无新增 skip；真实子进程与真实账本。"
+    },
+    {
+      "id": "T-172",
+      "title": "profile 配置与默认可见性",
+      "milestone": "M21",
+      "type": "feature",
+      "priority": "P1",
+      "status": "backlog",
+      "blocked_by": ["T-168", "T-171"],
+      "files": ["src/core/config.ts", "src/surface/cli.ts", "src/clients/doctor.ts", "test/unit/config-profile.test.ts"],
+      "steps": [
+        "确认现有配置读取位置；无则新增 .ano/config.toml 解析 profile/hooks.mode/hooks.exempt/hooks.prompt_hint",
+        "新项目默认 personal/advisory；已有项目无配置按 full 且不迁移",
+        "CLI --help 按 profile 分组并新增 help --all；doctor personal 只显示已装客户端",
+        "测试 profile 默认、未知键警告、帮助快照；保持 M11-M17 代码/接口/测试不变"
+      ],
+      "acceptance": "已有项目不迁移；personal 只改默认可见性；cli.ts 在 T-166 完成后串行修改。"
+    },
+    {
+      "id": "T-173",
+      "title": "ano setup 向导",
+      "milestone": "M21",
+      "type": "feature",
+      "priority": "P1",
+      "status": "backlog",
+      "blocked_by": ["T-172"],
+      "files": ["src/surface/cli.ts", "src/clients/setup.ts", "test/integration/setup-wizard.test.ts"],
+      "steps": [
+        "预检 git 根、Node 版本、.pm/ 是否存在、客户端是否安装",
+        "存在 .pm/：打印 takeover grant → TTY 确认 → grant → 再次确认 → apply --confirm",
+        "钩子 dry-run diff → TTY 确认 → clients install --with-hooks；写 personal config；doctor 自检",
+        "非 TTY 只输出完整计划零写入；每步单独确认，拒绝则停止并给出 restore/disable",
+        "隔离夹具从零到首次 brief ≤5 分钟（人工计时记录）"
+      ],
+      "acceptance": "非 TTY 零写；每步单独授权；拒绝路径可回退；5 分钟计时有证据。"
+    },
+    {
+      "id": "T-174",
+      "title": "MCP 工具描述精简",
+      "milestone": "M21",
+      "type": "chore",
+      "priority": "P2",
+      "status": "backlog",
+      "blocked_by": ["T-172"],
+      "files": ["src/surface/tool-catalog.ts", "scripts/verify-zcode-mcp.ts", "docs/tool-catalog.md"],
+      "steps": [
+        "确认 schema hash 是否包含 description；包含则显式升版并更新 verify-zcode-mcp 期望",
+        "personal 下每个 description ≤200 字符，讲清何时调用；参数 schema 不变",
+        "npm run gen-docs && npm run check-docs 通过；真实握手仍 7 个工具"
+      ],
+      "acceptance": "七工具不变；description 长度达标；schema hash 变更显式且可解释。"
+    },
+    {
+      "id": "T-175",
+      "title": "真实项目闭环（具名人工）",
+      "milestone": "M22",
+      "type": "chore",
+      "priority": "P0",
+      "status": "backlog",
+      "blocked_by": ["T-173", "T-174", "具名人工确认 <example-project>"],
+      "files": ["scripts/m22-metrics.ts", "docs/evidence/m22-real-project-loop.md", "docs/evidence/m22-real-project-loop.json"],
+      "steps": [
+        "用户具名指定项目路径（<example-project>）并完成 takeover grant + apply --confirm",
+        "完成 3 次真实工作会话，每次至少 1 个真实小任务，内容由用户决定",
+        "采集 ADR-013 §7 全部指标；误拦由人工逐条标注",
+        "按停止判据检查；触发即锁 advisory 并登记调整任务",
+        "具名人工确认关闭；任务 Gate 通过不构成该确认"
+      ],
+      "acceptance": "3 次真实会话证据齐全；指标完整；误拦人工标注；具名人工确认；无绕过 Gate 尝试。"
+    },
+    {
+      "id": "T-176",
+      "title": "收口与契约复位",
+      "milestone": "M22",
+      "type": "docs",
+      "priority": "P0",
+      "status": "backlog",
+      "blocked_by": ["T-175"],
+      "files": ["docs/limitations.md", "README.md", "AGENTS.md", "docs/delivery-status.md", "docs/client-compatibility.md"],
+      "steps": [
+        "limitations 新增钩子强制边界与个人模式边界两节",
+        "README/AGENTS 停止扩展契约更新为 M22 为最后一个产品里程碑",
+        "delivery-status 与 client-compatibility 更新 enforcement 列",
+        "按 M22 数据在 ADR-013 §8 写入实际数值；check-docs 通过"
+      ],
+      "acceptance": "文档与实测一致；check-docs 通过；M22 关闭后契约以新范围生效。"
+    },
+    {
+      "id": "T-177",
+      "title": "修复接入与接管全链路的可用性和真实状态报告",
+      "milestone": "M22",
+      "type": "fix",
+      "priority": "P0",
+      "blocked_by": [],
+      "files": ["src/core/setup.ts", "src/surface/doctor.ts", "src/surface/cli.ts", "src/clients/install.ts", "test/unit/setup.test.ts", "test/unit/surface-doctor.test.ts", "test/integration/clients-install-hooks.test.ts", "test/integration/hooks-project-scope.test.ts"],
+      "acceptance": "接入链路缺陷有回归及匹配当前源码的成功质量报告；真实目标只在具名授权条件满足时写入，否则保留明确人工入口与阻塞。"
+    },
+    {
+      "id": "T-178",
+      "title": "修复 DAG 主控恢复与验收同步的使用闭环",
+      "milestone": "M22",
+      "type": "fix",
+      "priority": "P0",
+      "blocked_by": [],
+      "files": ["scripts/orchestration/dag.ts", "scripts/orchestration/cli.ts", "scripts/orchestration/store.ts", "scripts/orchestration/state-command.ts", "scripts/orchestration/m19-m22-plan.json", "test/unit/orchestration-dag.test.ts", "test/unit/orchestration-safety.test.ts", "test/unit/orchestration-freshness.test.ts", "test/unit/orchestration-state-command.test.ts"],
+      "acceptance": "派发与恢复都检查依赖、当前报告/源指纹、人工门禁和容量；不得把 PM in_progress 冒充运行会话；计划、定向回归、scripts 类型检查及最终全量矩阵有真实证据。"
+    }
+  ],
+  "tasks": {
+    "T-162": { "depends_on": [] },
+    "T-163": { "depends_on": ["T-162"] },
+    "T-164": { "depends_on": ["T-163"] },
+    "T-165": { "depends_on": ["T-163"] },
+    "T-166": { "depends_on": ["T-163"] },
+    "T-167": { "depends_on": ["T-164", "T-165", "T-166"] },
+    "T-168": { "depends_on": ["T-167"], "gate": "phase-m19-hooks", "mutex_group": "m19-validation" },
+    "T-169": { "depends_on": ["T-165"] },
+    "T-170": { "depends_on": ["T-169"] },
+    "T-171": { "depends_on": ["T-170"], "gate": "phase-m20-memory", "mutex_group": "m20-validation" },
+    "T-172": { "depends_on": ["T-168", "T-171"] },
+    "T-173": { "depends_on": ["T-172"] },
+    "T-174": { "depends_on": ["T-172"], "gate": "phase-m21-personal", "mutex_group": "m21-validation" },
+    "T-175": { "depends_on": ["T-173", "T-174", "T-177", "T-178"] },
+    "T-176": { "depends_on": ["T-175"], "gate": "phase-m22-real-project", "mutex_group": "m22-closeout" },
+    "T-177": { "depends_on": [] },
+    "T-178": { "depends_on": [] }
+  },
+  "execution_policy": {
+    "open_now": ["T-177", "T-178"],
+    "never_auto_start": ["T-163", "T-175"],
+    "rule": "open_now identifies repair roots, not permission to bypass blockers. T-163 still requires named-owner S8 release; T-175 requires named-owner real TTY takeover and three real sessions. All dispatch and recovery recheck every dependency and manual blocker against current evidence."
+  }
+}

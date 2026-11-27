@@ -1,0 +1,11 @@
+{
+  "synthetic": true,
+  "_comment": "Hand-authored synthetic beta fixture. No real client format is represented.",
+  "format_version": "synthetic-v1",
+  "unit_id": "beta-visible",
+  "session_id": "synthetic-session-beta",
+  "title": "Synthetic beta session",
+  "started_at": "2026-11-02T10:00:00.000Z",
+  "visibility": "visible",
+  "transcript": "transcript.jsonl"
+}

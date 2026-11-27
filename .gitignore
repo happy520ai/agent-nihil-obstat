@@ -1,0 +1,9 @@
+node_modules/
+dist/
+coverage/
+.ano/
+*.log
+*.tmp
+scripts/node_modules/
+scripts/fixtures/generated/
+docs/evidence/*-actual.tmp

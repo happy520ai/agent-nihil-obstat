@@ -1,0 +1,525 @@
+{
+  "spike": "S3",
+  "status": "measured",
+  "startedAt": "2026-11-18T12:52:33.271Z",
+  "environment": {
+    "node": "v22.18.0",
+    "platform": "win32",
+    "note": "Virtual clock only. No Date.now(), no NTP, no sleep, no persistence."
+  },
+  "algorithm": {
+    "name": "Hybrid Logical Clock (Kulkarni et al. 2014)",
+    "local": "p=max(prev.p, wall); l=(p===prev.p ? prev.l+1 : 0)",
+    "receive": "p=max(prev.p, remote.p, wall); l depends on which component won (max(l,lr)+1 or winner+1 or 0)",
+    "orderKey": "(physical, logical, actorId)",
+    "tieBreakNote": "actorId is an external convention; HLC itself only orders (physical, logical)."
+  },
+  "config": {
+    "startEpoch": 1767225600000,
+    "tickMs": 5,
+    "rollbackMs": 5000,
+    "roundsD": 50,
+    "permutationsPerRound": 6
+  },
+  "scenarios": {
+    "A": {
+      "description": "single actor, monotonic clock, 200 events",
+      "events": 200,
+      "monotonic": true,
+      "backwardsInLog": 0,
+      "first": {
+        "id": "A:A:1",
+        "scenario": "A",
+        "actor": "A",
+        "kind": "tick",
+        "physical": 1767225600000,
+        "logical": 0,
+        "parents": [],
+        "payload": {
+          "i": 0
+        }
+      },
+      "last": {
+        "id": "A:A:200",
+        "scenario": "A",
+        "actor": "A",
+        "kind": "tick",
+        "physical": 1767225600995,
+        "logical": 0,
+        "parents": [],
+        "payload": {
+          "i": 199
+        }
+      },
+      "physicalStart": 1767225600000,
+      "physicalEnd": 1767225600995,
+      "logicalMax": 0
+    },
+    "B": {
+      "description": "single actor: 200 events, rollback 5000ms, 100 events, then recover",
+      "events": 301,
+      "rollbackMs": 5000,
+      "wallBefore": 1767225602000,
+      "wallAfter": 1767225597000,
+      "lastBefore": {
+        "id": "B:B:200",
+        "hlc": [
+          1767225601995,
+          0
+        ]
+      },
+      "firstAfter": {
+        "id": "B:B:201",
+        "hlc": [
+          1767225601995,
+          1
+        ]
+      },
+      "firstAfterStrictlyGreater": true,
+      "postRollbackStrictlyIncreasing": true,
+      "physicalPinnedEvents": 100,
+      "logicalAdvancedEvents": 100,
+      "uniquePhysicalLogical": true,
+      "recoveredHlc": [
+        1767225603500,
+        0
+      ],
+      "recoveredPhysicalJumpMs": 1505,
+      "wallRecovered": 1767225603500
+    },
+    "C": {
+      "description": "3 actors x 100 events, A/B concurrent siblings joined by C, merged",
+      "events": 300,
+      "causal": {
+        "label": "C",
+        "events": 300,
+        "directEdges": 398,
+        "transitivePairs": 44750,
+        "violations": 0,
+        "examples": []
+      },
+      "duplicates": {
+        "events": 300,
+        "distinctPhysicalLogical": 200,
+        "duplicatePhysicalLogical": 100,
+        "distinctTriples": 300,
+        "duplicateTriples": 0
+      },
+      "stableOrderHashes": [
+        "7c6e75c002abf734"
+      ],
+      "stableAcrossShuffles": true,
+      "withoutTieBreakHashes": [
+        "bde3af273d997c3d",
+        "022bc4cb5816b2da",
+        "a49ef67cd04f4004",
+        "99dc65d867673ac9"
+      ],
+      "withoutTieBreakStable": false,
+      "firstTen": [
+        {
+          "id": "C:A:1",
+          "hlc": [
+            1767225603501,
+            0
+          ]
+        },
+        {
+          "id": "C:B:1",
+          "hlc": [
+            1767225603501,
+            0
+          ]
+        },
+        {
+          "id": "C:C:1",
+          "hlc": [
+            1767225603501,
+            3
+          ]
+        },
+        {
+          "id": "C:A:2",
+          "hlc": [
+            1767225603503,
+            1
+          ]
+        },
+        {
+          "id": "C:B:2",
+          "hlc": [
+            1767225603503,
+            1
+          ]
+        },
+        {
+          "id": "C:C:2",
+          "hlc": [
+            1767225603503,
+            4
+          ]
+        },
+        {
+          "id": "C:A:3",
+          "hlc": [
+            1767225603505,
+            1
+          ]
+        },
+        {
+          "id": "C:B:3",
+          "hlc": [
+            1767225603505,
+            1
+          ]
+        },
+        {
+          "id": "C:C:3",
+          "hlc": [
+            1767225603505,
+            4
+          ]
+        },
+        {
+          "id": "C:A:4",
+          "hlc": [
+            1767225603507,
+            1
+          ]
+        }
+      ],
+      "lastTen": [
+        {
+          "id": "C:C:97",
+          "hlc": [
+            1767225603693,
+            4
+          ]
+        },
+        {
+          "id": "C:A:98",
+          "hlc": [
+            1767225603695,
+            1
+          ]
+        },
+        {
+          "id": "C:B:98",
+          "hlc": [
+            1767225603695,
+            1
+          ]
+        },
+        {
+          "id": "C:C:98",
+          "hlc": [
+            1767225603695,
+            4
+          ]
+        },
+        {
+          "id": "C:A:99",
+          "hlc": [
+            1767225603697,
+            1
+          ]
+        },
+        {
+          "id": "C:B:99",
+          "hlc": [
+            1767225603697,
+            1
+          ]
+        },
+        {
+          "id": "C:C:99",
+          "hlc": [
+            1767225603697,
+            4
+          ]
+        },
+        {
+          "id": "C:A:100",
+          "hlc": [
+            1767225603699,
+            1
+          ]
+        },
+        {
+          "id": "C:B:100",
+          "hlc": [
+            1767225603699,
+            1
+          ]
+        },
+        {
+          "id": "C:C:100",
+          "hlc": [
+            1767225603699,
+            4
+          ]
+        }
+      ]
+    },
+    "D": {
+      "description": "one parent, 3 concurrent children from 3 actors, 50 rounds, 6 permutations each",
+      "rounds": 50,
+      "unstableRounds": 0,
+      "parentNotFirstRounds": 0,
+      "roundsWithIdenticalChildHlc": 50,
+      "sampleRound": {
+        "round": 0,
+        "parentHlc": [
+          1767225603710,
+          0
+        ],
+        "childHlc": [
+          [
+            1767225603710,
+            2
+          ],
+          [
+            1767225603710,
+            2
+          ],
+          [
+            1767225603710,
+            2
+          ]
+        ],
+        "childActors": [
+          "B",
+          "C",
+          "D"
+        ],
+        "order": [
+          "D:P:1",
+          "D:B:1",
+          "D:C:1",
+          "D:D:1"
+        ],
+        "permutations": 6,
+        "distinctOrderHashes": 1
+      },
+      "roundsWithDistinctHashes": 0
+    },
+    "E": {
+      "description": "clock rolled back 5s, then receive (1) an event 3s ahead of the rolled wall but behind the pinned physical, (2) an event 5s ahead of the pinned physical",
+      "rolledWall": 1767225600200,
+      "pinnedPhysical": 1767225605200,
+      "case1": {
+        "remote": {
+          "id": "remote:future-vs-wall",
+          "hlc": [
+            1767225603200,
+            7
+          ]
+        },
+        "afterReceive": [
+          1767225605200,
+          2
+        ],
+        "afterLocal": [
+          1767225605200,
+          3
+        ],
+        "receiveAdvancedPastRemote": true,
+        "localAfterReceiveAdvanced": true,
+        "physicalUnchanged": true,
+        "note": "remote is behind the pinned physical, so only logical advances"
+      },
+      "case2": {
+        "remote": {
+          "id": "remote:future-vs-local",
+          "hlc": [
+            1767225610200,
+            1
+          ]
+        },
+        "afterReceive": [
+          1767225610200,
+          3
+        ],
+        "receiveAdvancedPastRemote": true,
+        "physicalJumpMs": 5000,
+        "note": "a remote event ahead of the local HLC drags physical forward by its full amount; HLC has no upper bound on remote skew"
+      }
+    },
+    "F": {
+      "description": "global uniqueness over all scenarios",
+      "events": 1005,
+      "distinctPhysicalLogical": 805,
+      "duplicatePhysicalLogical": 200,
+      "distinctTriples": 1005,
+      "duplicateTriples": 0,
+      "uniqueIds": true
+    },
+    "G": {
+      "description": "global causal verification (direct + transitive)",
+      "label": "ALL",
+      "events": 1005,
+      "directEdges": 548,
+      "transitivePairs": 44900,
+      "violations": 0,
+      "examples": []
+    }
+  },
+  "checks": [
+    {
+      "id": "P1a",
+      "name": "single-actor monotonic log strictly increasing",
+      "pass": true,
+      "detail": {
+        "backwards": 0
+      }
+    },
+    {
+      "id": "P1",
+      "name": "rollback does not move HLC backwards",
+      "pass": true,
+      "detail": {
+        "lastBefore": [
+          1767225601995,
+          0
+        ],
+        "firstAfter": [
+          1767225601995,
+          1
+        ]
+      }
+    },
+    {
+      "id": "P2",
+      "name": "all 300 rollback-scenario events present and unique",
+      "pass": true,
+      "detail": {
+        "events": 301,
+        "coreEvents": 300,
+        "unique": true
+      }
+    },
+    {
+      "id": "P3",
+      "name": "multi-actor merge preserves every causal edge",
+      "pass": true,
+      "detail": {
+        "label": "C",
+        "events": 300,
+        "directEdges": 398,
+        "transitivePairs": 44750,
+        "violations": 0,
+        "examples": []
+      }
+    },
+    {
+      "id": "P6",
+      "name": "merge is a stable total order under 8 shuffles",
+      "pass": true,
+      "detail": [
+        "7c6e75c002abf734"
+      ]
+    },
+    {
+      "id": "P4",
+      "name": "same-parent concurrent children have one deterministic order per round",
+      "pass": true,
+      "detail": {
+        "unstable": 0,
+        "parentNotFirst": 0
+      }
+    },
+    {
+      "id": "P1b",
+      "name": "receive after rollback never regresses below remote or local state",
+      "pass": true,
+      "detail": {
+        "case1": {
+          "remote": {
+            "id": "remote:future-vs-wall",
+            "hlc": [
+              1767225603200,
+              7
+            ]
+          },
+          "afterReceive": [
+            1767225605200,
+            2
+          ],
+          "afterLocal": [
+            1767225605200,
+            3
+          ],
+          "receiveAdvancedPastRemote": true,
+          "localAfterReceiveAdvanced": true,
+          "physicalUnchanged": true,
+          "note": "remote is behind the pinned physical, so only logical advances"
+        },
+        "case2": {
+          "remote": {
+            "id": "remote:future-vs-local",
+            "hlc": [
+              1767225610200,
+              1
+            ]
+          },
+          "afterReceive": [
+            1767225610200,
+            3
+          ],
+          "receiveAdvancedPastRemote": true,
+          "physicalJumpMs": 5000,
+          "note": "a remote event ahead of the local HLC drags physical forward by its full amount; HLC has no upper bound on remote skew"
+        }
+      }
+    },
+    {
+      "id": "P5",
+      "name": "every event has a unique (physical, logical, actor) and id",
+      "pass": true,
+      "detail": {
+        "duplicatePhysicalLogical": 200,
+        "duplicateTriples": 0,
+        "uniqueIds": true
+      }
+    },
+    {
+      "id": "P6b",
+      "name": "global total order is strict (no equal neighbours)",
+      "pass": true,
+      "detail": {
+        "total": 1005
+      }
+    }
+  ],
+  "totals": {
+    "events": 1005,
+    "duplicatePhysicalLogical": 200,
+    "causalViolations": 0,
+    "firstEvent": {
+      "id": "A:A:1",
+      "scenario": "A",
+      "actor": "A",
+      "kind": "tick",
+      "physical": 1767225600000,
+      "logical": 0,
+      "parents": [],
+      "payload": {
+        "i": 0
+      }
+    },
+    "lastEvent": {
+      "id": "E:E:4",
+      "scenario": "E",
+      "actor": "E",
+      "kind": "after-receive-2",
+      "physical": 1767225610200,
+      "logical": 3,
+      "parents": [],
+      "payload": {}
+    }
+  },
+  "verdict": {
+    "passed": true,
+    "failed": []
+  }
+}

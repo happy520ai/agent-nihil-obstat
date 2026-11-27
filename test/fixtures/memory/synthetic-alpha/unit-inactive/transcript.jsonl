@@ -1,0 +1,1 @@
+{"v":1,"type":"message","id":"alpha-inactive-m1","role":"assistant","ts":"2026-11-01T08:00:01.000Z","text":"旧的 refreshToken 实现已废弃，账本切换记录保留为 inactive。","files":["src/auth/session.ts"],"symbols":["src/auth/session.ts::oldRefreshToken"]}

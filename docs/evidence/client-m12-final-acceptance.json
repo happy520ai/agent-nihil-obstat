@@ -1,0 +1,103 @@
+{
+  "schema": "ano.m12-final-acceptance/1",
+  "task": "T-102 / CX-12",
+  "milestone": "M12",
+  "generatedAt": "2026-11-23T06:22:00.000Z",
+  "scope": "M12 全工具支持矩阵、文档、审计与最终验收；不自动修改真实客户端配置、不读取真实会话或秘密",
+  "gates": {
+    "phase-full-clients": {
+      "passed": true,
+      "verified_at": "2026-11-23T06:00:39.219Z",
+      "verification": ".pm/quality-runs/quality-20261123-055704-585-0000.json"
+    },
+    "phase-full-clients-final": {
+      "passed": null,
+      "note": "尚未开启，由主控以 T-102 报告开启"
+    }
+  },
+  "tasks": [
+    { "id": "T-091", "title": "全客户端目录与 registry 收口", "status": "done", "acceptance_verified": true, "verification": ".pm/quality-runs/quality-20261123-025301-212-0000.json", "ok": true, "sourceFingerprint": "12c086da6c20f7dece7230baa171842c3b5cd344dfd83916dd78eab76af558af" },
+    { "id": "T-092", "title": "能力探针与分层降级", "status": "done", "acceptance_verified": true, "verification": ".pm/quality-runs/quality-20261123-034225-015-0000.json", "ok": true, "sourceFingerprint": "75e064ee7bc0..." },
+    { "id": "T-093", "title": "客户端配置与写路径", "status": "done", "acceptance_verified": true, "verification": ".pm/quality-runs/quality-20261123-034225-015-0000.json", "ok": true, "sourceFingerprint": "75e064ee7bc0..." },
+    { "id": "T-094", "title": "备份与原子写", "status": "done", "acceptance_verified": true, "verification": ".pm/quality-runs/quality-20261123-034225-015-0000.json", "ok": true, "sourceFingerprint": "75e064ee7bc0..." },
+    { "id": "T-095", "title": "doctor 与 plan 渲染", "status": "done", "acceptance_verified": true, "verification": ".pm/quality-runs/quality-20261123-034225-015-0000.json", "ok": true, "sourceFingerprint": "75e064ee7bc0..." },
+    { "id": "T-096", "title": "红队边界与秘密面", "status": "done", "acceptance_verified": true, "verification": ".pm/quality-runs/quality-20261123-034225-015-0000.json", "ok": true, "sourceFingerprint": "75e064ee7bc0..." },
+    { "id": "T-097", "title": "文档与机器可读矩阵", "status": "done", "acceptance_verified": true, "verification": ".pm/quality-runs/quality-20261123-034225-015-0000.json", "ok": true, "sourceFingerprint": "75e064ee7bc0..." },
+    { "id": "T-098", "title": "registry 口径修正移交", "status": "done", "acceptance_verified": true, "verification": ".pm/quality-runs/quality-20261123-043128-246-0000.json", "ok": true, "sourceFingerprint": "56cbeafe376b..." },
+    { "id": "T-099", "title": "ZCode 真机复测", "status": "done", "acceptance_verified": true, "verification": ".pm/quality-runs/quality-20261123-045132-895-0000.json", "ok": true, "sourceFingerprint": "4718806252dd..." },
+    { "id": "T-100", "title": "T-100 探针与缺陷定位", "status": "done", "acceptance_verified": true, "verification": ".pm/quality-runs/quality-20261123-052726-799-0000.json", "ok": true, "sourceFingerprint": "0dffed42dad5..." },
+    { "id": "T-101", "title": "CX-11 集成验收与三缺陷修复", "status": "done", "acceptance_verified": true, "verification": ".pm/quality-runs/quality-20261123-055704-585-0000.json", "ok": true, "sourceFingerprint": "70eab1406243..." },
+    { "id": "T-102", "title": "CX-12 全工具支持矩阵、文档与最终验收", "status": "in_progress", "acceptance_verified": null, "verification": ".pm/quality-runs/quality-20261123-060457-393-0000.json", "ok": true, "sourceFingerprint": "70eab1406243..." }
+  ],
+  "matrix": {
+    "source": "docs/evidence/client-support-matrix.json",
+    "schema": "ano.client-support-matrix/1",
+    "clients": 24,
+    "adr008Tools": 21,
+    "routes": { "mcp": 14, "rules": 1, "cli": 1, "explicit-workflow": 2, "skip": 6 },
+    "evidenceTiers": { "measured": ["zcode"], "assumed": ["claude-code", "codex", "openclaw", "tongyi-lingma", "qoder", "codebuddy"], "absentCount": 17 },
+    "validated": ["zcode"],
+    "adr008Validated": 0,
+    "adr008Unvalidated": 21,
+    "matrixValidated": 1,
+    "note": "全适配不等于全部 validated；MCP 列=核心五层最弱值，未握手者一律 unavailable；规则接管上限 degraded；DAG 绝不 validated；history 无授权样本 unavailable；输出拦截全 unavailable"
+  },
+  "commandConsistency": [
+    { "command": "ano doctor clients [--json] [--plan] [--root <path>] [--home <path>] [--env KEY=VALUE] [--probe-path <dir>] [--timeout-ms <ms>]", "cliHelpLine": 62, "documented": ["docs/usage.md", "README.md"], "consistent": true },
+    { "command": "ano doctor client <id> [--json] [--root <path>] [--home <path>] [--env KEY=VALUE] [--probe-path <dir>] [--timeout-ms <ms>]", "cliHelpLine": 63, "documented": ["docs/usage.md", "README.md"], "consistent": true },
+    { "command": "ano clients plan [--json] [--root <path>] [--home <path>] [--env KEY=VALUE] [--probe-path <dir>] [--timeout-ms <ms>]", "cliHelpLine": 64, "documented": ["docs/usage.md", "README.md"], "consistent": true },
+    { "command": "ano clients install <id> --granted-by <name> --statement <text> --scope <...>[,...] [--confirm] [--dry-run] [--config-scope] [--config-path] [--home] [--role] [--granted-at] [--json]", "cliHelpLine": 65, "documented": ["docs/usage.md", "README.md"], "consistent": true },
+    { "command": "ano clients restore <id> --backup-id <id> --granted-by <name> --statement <text> --scope <...>[,...] [--confirm] [--dry-run] [--config-scope] [--config-path] [--home] [--role] [--granted-at] [--json]", "cliHelpLine": 66, "documented": ["docs/usage.md", "README.md"], "consistent": true }
+  ],
+  "audits": {
+    "structure": { "hardFailures": 0, "notes": ["重构占比 8%<20% 配额", "churn 热点 src/surface/service.ts 21 / cli.ts 17 / mcp.ts 12", "复杂度预算告警", "s5-atomic-append.json >2MB", "F-014 无 entry_files", "用途索引覆盖 0%"], "disposition": "记录为结构观察，不阻塞 M12" },
+    "security": { "high": 0, "newMedium": 5, "locations": ["test/redteam/full-client-catalog-boundary.test.ts"], "kinds": ["secret.generic-assignment x3", "danger.eval x2"], "verified": "逐行核实为合成哨兵/静态守卫字符串，非真实漏洞", "acceptedRisks": 28, "disposition": "resolve_finding accepted 留痕建议由主控执行（test/** 只读边界）" },
+    "license": { "license": "MIT", "copyleftConflicts": 0, "gplHeaders": 0, "dependencies": { "direct": 6, "transitive": 90 }, "disposition": "无需处置" }
+  },
+  "quality": {
+    "report": ".pm/quality-runs/quality-20261123-060457-393-0000.json",
+    "sha256": "261eafbb524b7435c65bf256f16956748378be5561adc60e4843fe43cf846d6d",
+    "bytes": 6016,
+    "ok": true,
+    "reported_ok": true,
+    "execute": true,
+    "evidence_level": "tests_observed",
+    "environment": { "platform": "win32", "arch": "x64", "node": "v24.14.0" },
+    "sourceFingerprint": "70eab1406243f6ee879122ac0edff4d6308058e9d52e2c1cd636b17f18da26f9",
+    "sourceFiles": 416,
+    "sourceBytes": 69698687,
+    "stable": true,
+    "results": [
+      { "unit": "root", "kind": "test", "passed": true, "exit_code": 0, "detail": "22/22" },
+      { "unit": "root", "kind": "build", "passed": true, "exit_code": 0 },
+      { "unit": "root", "kind": "typecheck", "passed": true, "exit_code": 0 },
+      { "unit": "root", "kind": "coverage", "passed": true, "exit_code": 0, "detail": "1065/1065 lines 95.21 / branches 82.83 / functions 95.04" },
+      { "unit": "scripts", "kind": "test", "passed": true, "exit_code": 0, "detail": "22/22" },
+      { "unit": "scripts", "kind": "typecheck", "passed": true, "exit_code": 0 }
+    ],
+    "checkDocs": { "exit_code": 0 },
+    "annotation": "本节于该矩阵运行后追加，仅改文档字节、不改源码/测试；源码指纹仍为 70eab140...；主控按当前树重跑一次即可复核"
+  },
+  "feature": {
+    "id": "F-031",
+    "name": "M12 全 24 工具客户端目录与分层接入",
+    "module": "clients",
+    "status": "implemented",
+    "entry_files": ["src/clients/registry.ts", "src/clients/doctor.ts", "src/clients/capabilities.ts", "src/clients/config.ts", "src/clients/install.ts", "src/clients/scope.ts", "src/clients/redact.ts", "src/surface/cli.ts"],
+    "test_files": ["test/redteam/full-client-catalog-boundary.test.ts", "test/redteam/client-adapters-boundary.test.ts", "test/unit/client-config.test.ts", "test/integration/client-takeover.test.ts", "test/unit/client-doctor.test.ts"],
+    "missing": []
+  },
+  "unverified": [
+    "除 ZCode 外无真实客户端安装，configured/mcp/tools/brief 真实兼容未实测",
+    "history 全层 unavailable（无真实会话样本、公开格式未核实）",
+    "输出拦截全 unavailable",
+    "21 个 ADR-008 工具（catalog=adr-008-21）仍全部为 unvalidated（unavailable/unverified/absent）；24 行中唯一 validated 是 M11 既有的 zcode",
+    "Cursor 配置格式 assumed",
+    "OpenClaw 仅 E2 存在性",
+    "OpenCode 路径口径差异保留",
+    "真实宿主是否读取所写配置未实测",
+    "跨 root 授权续接、移动目录身份续接、掉电持久性未验证（沿用 M10）"
+  ],
+  "authorizationBoundary": "不自动修改真实客户端配置、不读取真实会话或秘密；任何写操作必须用户显式 --confirm + --granted-by/--statement/--scope，默认只读 + dry-run",
+  "snapshot": { "path": ".pm/snapshots/snap-20261123-060309.json", "files": 417, "loc": 133251, "testFiles": 128, "indexCoveragePct": 0 }
+}

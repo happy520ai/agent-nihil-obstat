@@ -1,0 +1,49 @@
+{
+  "schema": "ano.t102-checkpoint/1",
+  "task": "T-102 / CX-12",
+  "milestone": "M12",
+  "generatedAt": "2026-11-23T06:25:00.000Z",
+  "status": "in_progress（待主控验收）",
+  "checkpoint": {
+    "progress": "M12 全工具支持矩阵、文档与最终验收完成：12 任务证据链核对（T-091~T-101 done 且 acceptance_verified=true；引用报告 ok=true/reported_ok=true）、24 行五列矩阵收口（§12.1 + client-support-matrix.json）、命令一致性核对表（对照 src/surface/cli.ts 帮助文本 62-66 行）、三审计（structure/security/license）记录与处置建议、T-102 独占全量质量矩阵 + npm run check-docs、F-031 登记确认。",
+    "nextStep": "主控核验 T-102：置 done、verify、gate phase-full-clients-final（以 quality-20261123-060457-393-0000.json 为报告）→ 12/12 → M12 milestone done → complete_goal → M12 收尾报告。"
+  },
+  "scopeFiles": [
+    "README.md",
+    "docs/usage.md",
+    "docs/client-compatibility.md",
+    "docs/delivery-status.md",
+    "docs/limitations.md",
+    "docs/evidence/client-m12-final-acceptance.json",
+    "docs/evidence/client-m12-t102-checkpoint.json"
+  ],
+  "readOnlyUntouched": [
+    "src/**",
+    "test/**",
+    "scripts/**",
+    "docs/adr/**",
+    "docs/evidence/client-support-matrix.json",
+    "docs/evidence/client-*.md",
+    ".pm/**",
+    ".ano/**"
+  ],
+  "evidence": {
+    "matrix": "docs/evidence/client-support-matrix.json",
+    "finalAcceptance": "docs/evidence/client-m12-final-acceptance.json",
+    "compatibility": "docs/client-compatibility.md §12-§13",
+    "qualityReport": ".pm/quality-runs/quality-20261123-060457-393-0000.json",
+    "snapshot": ".pm/snapshots/snap-20261123-060309.json"
+  },
+  "authorizationBoundary": "未自动修改真实客户端配置、未读取真实会话或秘密；仅改文档与新建 docs/evidence 证据文件。任何真实写入需用户显式授权。",
+  "unverified": [
+    "除 ZCode 外无真实客户端安装",
+    "history 全层 unavailable",
+    "输出拦截全 unavailable",
+    "21 个 ADR-008 工具全部 unvalidated",
+    "Cursor 配置格式 assumed",
+    "OpenClaw 仅 E2 存在性",
+    "OpenCode 路径口径差异",
+    "真实宿主是否读取所写配置未实测",
+    "跨 root 授权续接 / 移动目录身份续接 / 掉电持久性未验证"
+  ]
+}

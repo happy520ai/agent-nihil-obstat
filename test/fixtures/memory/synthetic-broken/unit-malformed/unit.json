@@ -1,0 +1,4 @@
+{
+  "synthetic": true,
+  "_comment": "Deliberately malformed synthetic unit metadata; discovery must skip this unit only.",
+  "format_version": "synthetic-v1",

@@ -1,0 +1,11 @@
+{
+  "synthetic": true,
+  "_comment": "Synthetic mixed-version records: unknown records are skipped per line, valid records still index.",
+  "format_version": "synthetic-v1",
+  "unit_id": "alpha-bad-records",
+  "session_id": "synthetic-session-alpha-bad-records",
+  "title": "Synthetic partial records session",
+  "started_at": "2026-11-01T04:00:00.000Z",
+  "visibility": "visible",
+  "transcript": "transcript.jsonl"
+}

@@ -1,0 +1,1595 @@
+{
+  "schema": "ano.takeover-recovery-evidence/1",
+  "task": "T-074",
+  "generated_at": "2026-11-22T12:49:16.466Z",
+  "platform": "win32",
+  "node_version": "v24.14.0",
+  "isolated": true,
+  "root": "D:\\Temp\\ano-takeover-recovery-q4js4D",
+  "scenarios": [
+    {
+      "id": "S1",
+      "name": "full takeover: grant -> apply -> six phases -> active",
+      "status": "pass",
+      "started_at": "2026-11-22T12:49:15.049Z",
+      "finished_at": "2026-11-22T12:49:15.368Z",
+      "steps": [
+        {
+          "name": "isolated fixture ready",
+          "at": "2026-11-22T12:49:15.058Z",
+          "detail": {
+            "root": "D:\\Temp\\ano-takeover-recovery-q4js4D",
+            "pmSnapshot": "[{\"path\":\"features.json\",\"sha256\":\"d54899b4b5186d027d2eaf15628ba8270b43ca15b8c12d8c60ddac79a8a8c2df\",\"bytes\":91},{\"path\":\"project.json\",\"sha256\":\"bc5bc980e8b4bd9e8c4e89b74eef01d983eb5ee1138db4263bf69b4197fd09a6\",\"bytes\":60},{\"path\":\"roadmap.json\",\"sha256\":\"457dc1d1621c6af090eeb52c12fc43f53f8a3fed462f7044685f6651e4c793e2\",\"bytes\":115},{\"path\":\"sessions.json\",\"sha256\":\"a7d408d14b502adb05291f593fb69153405308eb6f0eb111363f5f474ee09efb\",\"bytes\":91},{\"path\":\"tasks.json\",\"sha256\":\"4098817b929fe3bb83d1ef7e9a6ee70fcb1a7f3c5ffee37b9cac86c06fb29010\",\"bytes\":264}]"
+          }
+        },
+        {
+          "name": "full takeover complete",
+          "at": "2026-11-22T12:49:15.368Z",
+          "detail": {
+            "txId": "b299ac2081d3e5ad2c89da9fdc0d56f26cb802a6599bfcc5114f5b70d97d899b",
+            "backupId": "takeover-mwru2w5j-1b6af793",
+            "backupHash": "08bb0ce1c007a66e02c987fabed10df825c06beeb8140b5e61b1405c06ae9452"
+          }
+        }
+      ],
+      "assertions": [
+        {
+          "name": "grant authorizationId is sha256",
+          "ok": true,
+          "actual": true,
+          "expected": true
+        },
+        {
+          "name": "grant reuses Connect projectKey",
+          "ok": true,
+          "actual": "field:id:fixture-project",
+          "expected": "field:id:fixture-project"
+        },
+        {
+          "name": "grant projectId is 12 hex",
+          "ok": true,
+          "actual": true,
+          "expected": true
+        },
+        {
+          "name": "grant writes no policy before apply",
+          "ok": true,
+          "actual": null,
+          "expected": null
+        },
+        {
+          "name": "grant does not touch .pm",
+          "ok": true,
+          "actual": "[{\"path\":\"features.json\",\"sha256\":\"d54899b4b5186d027d2eaf15628ba8270b43ca15b8c12d8c60ddac79a8a8c2df\",\"bytes\":91},{\"path\":\"project.json\",\"sha256\":\"bc5bc980e8b4bd9e8c4e89b74eef01d983eb5ee1138db4263bf69b4197fd09a6\",\"bytes\":60},{\"path\":\"roadmap.json\",\"sha256\":\"457dc1d1621c6af090eeb52c12fc43f53f8a3fed462f7044685f6651e4c793e2\",\"bytes\":115},{\"path\":\"sessions.json\",\"sha256\":\"a7d408d14b502adb05291f593fb69153405308eb6f0eb111363f5f474ee09efb\",\"bytes\":91},{\"path\":\"tasks.json\",\"sha256\":\"4098817b929fe3bb83d1ef7e9a6ee70fcb1a7f3c5ffee37b9cac86c06fb29010\",\"bytes\":264}]",
+          "expected": "[{\"path\":\"features.json\",\"sha256\":\"d54899b4b5186d027d2eaf15628ba8270b43ca15b8c12d8c60ddac79a8a8c2df\",\"bytes\":91},{\"path\":\"project.json\",\"sha256\":\"bc5bc980e8b4bd9e8c4e89b74eef01d983eb5ee1138db4263bf69b4197fd09a6\",\"bytes\":60},{\"path\":\"roadmap.json\",\"sha256\":\"457dc1d1621c6af090eeb52c12fc43f53f8a3fed462f7044685f6651e4c793e2\",\"bytes\":115},{\"path\":\"sessions.json\",\"sha256\":\"a7d408d14b502adb05291f593fb69153405308eb6f0eb111363f5f474ee09efb\",\"bytes\":91},{\"path\":\"tasks.json\",\"sha256\":\"4098817b929fe3bb83d1ef7e9a6ee70fcb1a7f3c5ffee37b9cac86c06fb29010\",\"bytes\":264}]"
+        },
+        {
+          "name": "grant does not touch AGENTS.md",
+          "ok": true,
+          "actual": "<!-- pm-mcp:agents-md:v1:begin -->\npm rules\n<!-- pm-mcp:agents-md:v1:end -->\n\n# User notes\n\nkeep this 字节\n",
+          "expected": "<!-- pm-mcp:agents-md:v1:begin -->\npm rules\n<!-- pm-mcp:agents-md:v1:end -->\n\n# User notes\n\nkeep this 字节\n"
+        },
+        {
+          "name": "grant writes .ano/takeover/authorization.json",
+          "ok": true,
+          "actual": true,
+          "expected": true
+        },
+        {
+          "name": "apply active",
+          "ok": true,
+          "actual": true,
+          "expected": true
+        },
+        {
+          "name": "apply state",
+          "ok": true,
+          "actual": "enforced",
+          "expected": "enforced"
+        },
+        {
+          "name": "apply phase",
+          "ok": true,
+          "actual": "active",
+          "expected": "active"
+        },
+        {
+          "name": "apply aborted",
+          "ok": true,
+          "actual": false,
+          "expected": false
+        },
+        {
+          "name": "apply created",
+          "ok": true,
+          "actual": true,
+          "expected": true
+        },
+        {
+          "name": "apply resumed",
+          "ok": true,
+          "actual": false,
+          "expected": false
+        },
+        {
+          "name": "apply failedPhase",
+          "ok": true,
+          "actual": null,
+          "expected": null
+        },
+        {
+          "name": "apply error",
+          "ok": true,
+          "actual": null,
+          "expected": null
+        },
+        {
+          "name": "txId binds (authorizationId, sourceDigest, backupHash)",
+          "ok": true,
+          "actual": "b299ac2081d3e5ad2c89da9fdc0d56f26cb802a6599bfcc5114f5b70d97d899b",
+          "expected": "b299ac2081d3e5ad2c89da9fdc0d56f26cb802a6599bfcc5114f5b70d97d899b"
+        },
+        {
+          "name": "source digest is the migration source digest",
+          "ok": true,
+          "actual": "8a57e0b2545deef8a166299bf0215354cf31d40ab8083683d40209e7af9772e5",
+          "expected": "8a57e0b2545deef8a166299bf0215354cf31d40ab8083683d40209e7af9772e5"
+        },
+        {
+          "name": "journal phase sequence",
+          "ok": true,
+          "actual": [
+            "prepared",
+            "migrated",
+            "reconciled",
+            "verified",
+            "installed",
+            "active"
+          ],
+          "expected": [
+            "prepared",
+            "migrated",
+            "reconciled",
+            "verified",
+            "installed",
+            "active"
+          ]
+        },
+        {
+          "name": "journal entries share txId",
+          "ok": true,
+          "actual": true,
+          "expected": true
+        },
+        {
+          "name": "policy state",
+          "ok": true,
+          "actual": "enforced",
+          "expected": "enforced"
+        },
+        {
+          "name": "policy enforcedAt is ISO-8601",
+          "ok": true,
+          "actual": true,
+          "expected": true
+        },
+        {
+          "name": "policy baselineDigest",
+          "ok": true,
+          "actual": "8a57e0b2545deef8a166299bf0215354cf31d40ab8083683d40209e7af9772e5",
+          "expected": "8a57e0b2545deef8a166299bf0215354cf31d40ab8083683d40209e7af9772e5"
+        },
+        {
+          "name": "policy hostCapability",
+          "ok": true,
+          "actual": "degraded",
+          "expected": "degraded"
+        },
+        {
+          "name": "status state",
+          "ok": true,
+          "actual": "enforced",
+          "expected": "enforced"
+        },
+        {
+          "name": "status transaction phase",
+          "ok": true,
+          "actual": "active",
+          "expected": "active"
+        },
+        {
+          "name": "status transaction count",
+          "ok": true,
+          "actual": 6,
+          "expected": 6
+        },
+        {
+          "name": "artifact prepared.json",
+          "ok": true,
+          "actual": true,
+          "expected": true
+        },
+        {
+          "name": "artifact migration-summary.json",
+          "ok": true,
+          "actual": true,
+          "expected": true
+        },
+        {
+          "name": "artifact reconcile.json",
+          "ok": true,
+          "actual": true,
+          "expected": true
+        },
+        {
+          "name": "artifact verification.json",
+          "ok": true,
+          "actual": true,
+          "expected": true
+        },
+        {
+          "name": "artifact installed.json",
+          "ok": true,
+          "actual": true,
+          "expected": true
+        },
+        {
+          "name": "backup manifest exists",
+          "ok": true,
+          "actual": true,
+          "expected": true
+        },
+        {
+          "name": "backup hash matches",
+          "ok": true,
+          "actual": "08bb0ce1c007a66e02c987fabed10df825c06beeb8140b5e61b1405c06ae9452",
+          "expected": "08bb0ce1c007a66e02c987fabed10df825c06beeb8140b5e61b1405c06ae9452"
+        },
+        {
+          "name": "backup id is takeover-*",
+          "ok": true,
+          "actual": true,
+          "expected": true
+        },
+        {
+          "name": "backup verifies",
+          "ok": true,
+          "actual": true,
+          "expected": true
+        },
+        {
+          "name": "backup pm file count",
+          "ok": true,
+          "actual": 5,
+          "expected": 5
+        },
+        {
+          "name": "backup ledger file count",
+          "ok": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "backup path is .ano/backup/<id>/manifest.json",
+          "ok": true,
+          "actual": true,
+          "expected": true
+        },
+        {
+          "name": "AGENTS.md keeps user prefix",
+          "ok": true,
+          "actual": true,
+          "expected": true
+        },
+        {
+          "name": "AGENTS.md has managed section",
+          "ok": true,
+          "actual": true,
+          "expected": true
+        },
+        {
+          "name": "AGENTS.md managed declaration is enforced",
+          "ok": true,
+          "actual": true,
+          "expected": true
+        },
+        {
+          "name": "AGENTS.md user bytes preserved outside section",
+          "ok": true,
+          "actual": "<!-- pm-mcp:agents-md:v1:begin -->\npm rules\n<!-- pm-mcp:agents-md:v1:end -->\n\n# User notes\n\nkeep this 字节\n",
+          "expected": "<!-- pm-mcp:agents-md:v1:begin -->\npm rules\n<!-- pm-mcp:agents-md:v1:end -->\n\n# User notes\n\nkeep this 字节\n"
+        },
+        {
+          "name": ".pm bytes unchanged by takeover",
+          "ok": true,
+          "actual": "[{\"path\":\"features.json\",\"sha256\":\"d54899b4b5186d027d2eaf15628ba8270b43ca15b8c12d8c60ddac79a8a8c2df\",\"bytes\":91},{\"path\":\"project.json\",\"sha256\":\"bc5bc980e8b4bd9e8c4e89b74eef01d983eb5ee1138db4263bf69b4197fd09a6\",\"bytes\":60},{\"path\":\"roadmap.json\",\"sha256\":\"457dc1d1621c6af090eeb52c12fc43f53f8a3fed462f7044685f6651e4c793e2\",\"bytes\":115},{\"path\":\"sessions.json\",\"sha256\":\"a7d408d14b502adb05291f593fb69153405308eb6f0eb111363f5f474ee09efb\",\"bytes\":91},{\"path\":\"tasks.json\",\"sha256\":\"4098817b929fe3bb83d1ef7e9a6ee70fcb1a7f3c5ffee37b9cac86c06fb29010\",\"bytes\":264}]",
+          "expected": "[{\"path\":\"features.json\",\"sha256\":\"d54899b4b5186d027d2eaf15628ba8270b43ca15b8c12d8c60ddac79a8a8c2df\",\"bytes\":91},{\"path\":\"project.json\",\"sha256\":\"bc5bc980e8b4bd9e8c4e89b74eef01d983eb5ee1138db4263bf69b4197fd09a6\",\"bytes\":60},{\"path\":\"roadmap.json\",\"sha256\":\"457dc1d1621c6af090eeb52c12fc43f53f8a3fed462f7044685f6651e4c793e2\",\"bytes\":115},{\"path\":\"sessions.json\",\"sha256\":\"a7d408d14b502adb05291f593fb69153405308eb6f0eb111363f5f474ee09efb\",\"bytes\":91},{\"path\":\"tasks.json\",\"sha256\":\"4098817b929fe3bb83d1ef7e9a6ee70fcb1a7f3c5ffee37b9cac86c06fb29010\",\"bytes\":264}]"
+        },
+        {
+          "name": "migration created both tasks",
+          "ok": true,
+          "actual": 2,
+          "expected": 2
+        },
+        {
+          "name": "migration.recorded summary present",
+          "ok": true,
+          "actual": true,
+          "expected": true
+        },
+        {
+          "name": "migration summary binds source digest",
+          "ok": true,
+          "actual": "8a57e0b2545deef8a166299bf0215354cf31d40ab8083683d40209e7af9772e5",
+          "expected": "8a57e0b2545deef8a166299bf0215354cf31d40ab8083683d40209e7af9772e5"
+        },
+        {
+          "name": "reconcile matched",
+          "ok": true,
+          "actual": 2,
+          "expected": 2
+        },
+        {
+          "name": "reconcile missing",
+          "ok": true,
+          "actual": [],
+          "expected": []
+        },
+        {
+          "name": "reconcile conflicts",
+          "ok": true,
+          "actual": [],
+          "expected": []
+        },
+        {
+          "name": "reconcile sourceUnchanged",
+          "ok": true,
+          "actual": true,
+          "expected": true
+        },
+        {
+          "name": "verification evidence all ok",
+          "ok": true,
+          "actual": true,
+          "expected": true
+        },
+        {
+          "name": "verification has backup evidence",
+          "ok": true,
+          "actual": true,
+          "expected": true
+        },
+        {
+          "name": "verification has reconcile evidence",
+          "ok": true,
+          "actual": true,
+          "expected": true
+        },
+        {
+          "name": "verification hostCapability degraded",
+          "ok": true,
+          "actual": "degraded",
+          "expected": "degraded"
+        },
+        {
+          "name": "verification baselineDigest binds source",
+          "ok": true,
+          "actual": "8a57e0b2545deef8a166299bf0215354cf31d40ab8083683d40209e7af9772e5",
+          "expected": "8a57e0b2545deef8a166299bf0215354cf31d40ab8083683d40209e7af9772e5"
+        },
+        {
+          "name": "prepared agents sha256",
+          "ok": true,
+          "actual": "ed351daa3ec57bf421dab72f33363f9c8cb4080eed64583da71f4485c353e0a6",
+          "expected": "ed351daa3ec57bf421dab72f33363f9c8cb4080eed64583da71f4485c353e0a6"
+        },
+        {
+          "name": "prepared agents bytes",
+          "ok": true,
+          "actual": 109,
+          "expected": 109
+        },
+        {
+          "name": "prepared pm manifest size",
+          "ok": true,
+          "actual": 5,
+          "expected": 5
+        },
+        {
+          "name": "prepared ledger manifest size",
+          "ok": true,
+          "actual": 0,
+          "expected": 0
+        }
+      ],
+      "facts": {
+        "backupPath": ".ano/backup/takeover-mwru2w5j-1b6af793/",
+        "migrationSummary": {
+          "source_file": ".pm",
+          "entity": "migration",
+          "id": "migrate-8a57e0b2545deef8a166299bf0",
+          "source_sha256": "8a57e0b2545deef8a166299bf0215354cf31d40ab8083683d40209e7af9772e5",
+          "sources": [
+            {
+              "path": ".pm/tasks.json",
+              "sha256": "4098817b929fe3bb83d1ef7e9a6ee70fcb1a7f3c5ffee37b9cac86c06fb29010",
+              "bytes": 264,
+              "missing": false
+            },
+            {
+              "path": ".pm/roadmap.json",
+              "sha256": "457dc1d1621c6af090eeb52c12fc43f53f8a3fed462f7044685f6651e4c793e2",
+              "bytes": 115,
+              "missing": false
+            },
+            {
+              "path": ".pm/features.json",
+              "sha256": "d54899b4b5186d027d2eaf15628ba8270b43ca15b8c12d8c60ddac79a8a8c2df",
+              "bytes": 91,
+              "missing": false
+            },
+            {
+              "path": ".pm/sessions.json",
+              "sha256": "a7d408d14b502adb05291f593fb69153405308eb6f0eb111363f5f474ee09efb",
+              "bytes": 91,
+              "missing": false
+            }
+          ],
+          "source_records": {
+            "tasks": 2,
+            "milestones": 1,
+            "features": 1,
+            "sessions": 1
+          }
+        },
+        "reconcileReport": {
+          "canApply": true,
+          "conflicts": [],
+          "ledgerTasks": 2,
+          "matched": 2,
+          "missing": [],
+          "records": {
+            "features": 1,
+            "milestones": 1,
+            "sessions": 1
+          },
+          "root": "D:\\Temp\\ano-takeover-recovery-q4js4D",
+          "schema": "ano.migration-reconcile/1",
+          "sourceDigest": "8a57e0b2545deef8a166299bf0215354cf31d40ab8083683d40209e7af9772e5",
+          "sourceTasks": 2,
+          "sourceUnchanged": true
+        },
+        "verificationEvidenceHash": "8698bbef7f42c867ee3f8dfa0c7f180e8742865e4b9c53e048f7f980aa1af265",
+        "hostCapability": "degraded"
+      },
+      "txId": "b299ac2081d3e5ad2c89da9fdc0d56f26cb802a6599bfcc5114f5b70d97d899b",
+      "backupId": "takeover-mwru2w5j-1b6af793",
+      "backupHash": "08bb0ce1c007a66e02c987fabed10df825c06beeb8140b5e61b1405c06ae9452",
+      "phaseSequence": [
+        "prepared",
+        "migrated",
+        "reconciled",
+        "verified",
+        "installed",
+        "active"
+      ],
+      "journalLength": 6,
+      "gaps": [],
+      "error": null
+    },
+    {
+      "id": "S2",
+      "name": "repeat takeover: same authorization/source idempotent replay + post-takeover ledger write",
+      "status": "pass",
+      "started_at": "2026-11-22T12:49:15.368Z",
+      "finished_at": "2026-11-22T12:49:15.394Z",
+      "steps": [
+        {
+          "name": "repeat takeover and post-takeover ledger write complete",
+          "at": "2026-11-22T12:49:15.394Z",
+          "detail": {
+            "txId": "b299ac2081d3e5ad2c89da9fdc0d56f26cb802a6599bfcc5114f5b70d97d899b",
+            "ledgerEventId": "01M81MVEKYEGN2ZDR2R9KDMZJY"
+          }
+        }
+      ],
+      "assertions": [
+        {
+          "name": "repeat apply active",
+          "ok": true,
+          "actual": true,
+          "expected": true
+        },
+        {
+          "name": "repeat apply state",
+          "ok": true,
+          "actual": "enforced",
+          "expected": "enforced"
+        },
+        {
+          "name": "repeat txId unchanged",
+          "ok": true,
+          "actual": "b299ac2081d3e5ad2c89da9fdc0d56f26cb802a6599bfcc5114f5b70d97d899b",
+          "expected": "b299ac2081d3e5ad2c89da9fdc0d56f26cb802a6599bfcc5114f5b70d97d899b"
+        },
+        {
+          "name": "repeat backupId unchanged",
+          "ok": true,
+          "actual": "takeover-mwru2w5j-1b6af793",
+          "expected": "takeover-mwru2w5j-1b6af793"
+        },
+        {
+          "name": "repeat backupHash unchanged",
+          "ok": true,
+          "actual": "08bb0ce1c007a66e02c987fabed10df825c06beeb8140b5e61b1405c06ae9452",
+          "expected": "08bb0ce1c007a66e02c987fabed10df825c06beeb8140b5e61b1405c06ae9452"
+        },
+        {
+          "name": "repeat created",
+          "ok": true,
+          "actual": false,
+          "expected": false
+        },
+        {
+          "name": "repeat resumed",
+          "ok": true,
+          "actual": true,
+          "expected": true
+        },
+        {
+          "name": "repeat adds no journal entries",
+          "ok": true,
+          "actual": 6,
+          "expected": 6
+        },
+        {
+          "name": "repeat creates no backup",
+          "ok": true,
+          "actual": 1,
+          "expected": 1
+        },
+        {
+          "name": "repeat leaves AGENTS.md bytes",
+          "ok": true,
+          "actual": "<!-- pm-mcp:agents-md:v1:begin -->\npm rules\n<!-- pm-mcp:agents-md:v1:end -->\n\n# User notes\n\nkeep this 字节\n\n<!-- ano:takeover:managed:v1:begin -->\n<!-- ANO 接管工作流（受管段，自动维护） -->\n\nschema: ano.takeover-managed-instructions/1\n\n- 本段由 ANO 强制接管流程维护；策略状态以 `.ano/takeover/policy.json` 为准。\n- 策略状态：enforced\n- 默认工作流使用 ANO：brief / 任务 / 记忆 / 验收 / DAG。\n- 旧 PM（PM-mcp 与 .pm/）在接管生效期间为只读来源，不主写。\n- 移除本段不等于撤销授权；退出接管须执行 takeover disable/recover。\n<!-- ano:takeover:managed:v1:end -->\n",
+          "expected": "<!-- pm-mcp:agents-md:v1:begin -->\npm rules\n<!-- pm-mcp:agents-md:v1:end -->\n\n# User notes\n\nkeep this 字节\n\n<!-- ano:takeover:managed:v1:begin -->\n<!-- ANO 接管工作流（受管段，自动维护） -->\n\nschema: ano.takeover-managed-instructions/1\n\n- 本段由 ANO 强制接管流程维护；策略状态以 `.ano/takeover/policy.json` 为准。\n- 策略状态：enforced\n- 默认工作流使用 ANO：brief / 任务 / 记忆 / 验收 / DAG。\n- 旧 PM（PM-mcp 与 .pm/）在接管生效期间为只读来源，不主写。\n- 移除本段不等于撤销授权；退出接管须执行 takeover disable/recover。\n<!-- ano:takeover:managed:v1:end -->\n"
+        },
+        {
+          "name": "post-takeover ledger event appended once",
+          "ok": true,
+          "actual": false,
+          "expected": false
+        },
+        {
+          "name": "post-takeover ledger event has id",
+          "ok": true,
+          "actual": true,
+          "expected": true
+        }
+      ],
+      "facts": {
+        "postTakeoverLedgerEventId": "01M81MVEKYEGN2ZDR2R9KDMZJY"
+      },
+      "txId": "b299ac2081d3e5ad2c89da9fdc0d56f26cb802a6599bfcc5114f5b70d97d899b",
+      "backupId": "takeover-mwru2w5j-1b6af793",
+      "backupHash": "08bb0ce1c007a66e02c987fabed10df825c06beeb8140b5e61b1405c06ae9452",
+      "phaseSequence": [
+        "prepared",
+        "migrated",
+        "reconciled",
+        "verified",
+        "installed",
+        "active"
+      ],
+      "journalLength": 6,
+      "gaps": [],
+      "error": null
+    },
+    {
+      "id": "S3",
+      "name": "external drift: localizable report, no write-back, policy unchanged",
+      "status": "pass",
+      "started_at": "2026-11-22T12:49:15.394Z",
+      "finished_at": "2026-11-22T12:49:15.421Z",
+      "steps": [
+        {
+          "name": "external drift localized without write-back",
+          "at": "2026-11-22T12:49:15.421Z",
+          "detail": {
+            "recommendation": "recovery",
+            "files": [
+              "external-note.json",
+              "tasks.json"
+            ]
+          }
+        }
+      ],
+      "assertions": [
+        {
+          "name": "external write changed .pm",
+          "ok": true,
+          "actual": true,
+          "expected": true
+        },
+        {
+          "name": "drift report exists while enforced",
+          "ok": true,
+          "actual": true,
+          "expected": true
+        },
+        {
+          "name": "drift detected",
+          "ok": true,
+          "actual": true,
+          "expected": true
+        },
+        {
+          "name": "drift recommendation is recovery",
+          "ok": true,
+          "actual": "recovery",
+          "expected": "recovery"
+        },
+        {
+          "name": "drift marks reconcile stale",
+          "ok": true,
+          "actual": true,
+          "expected": true
+        },
+        {
+          "name": "drift baseline is takeover source digest",
+          "ok": true,
+          "actual": "8a57e0b2545deef8a166299bf0215354cf31d40ab8083683d40209e7af9772e5",
+          "expected": "8a57e0b2545deef8a166299bf0215354cf31d40ab8083683d40209e7af9772e5"
+        },
+        {
+          "name": "drift current digest differs",
+          "ok": true,
+          "actual": true,
+          "expected": true
+        },
+        {
+          "name": "drift keeps policy enforced",
+          "ok": true,
+          "actual": "enforced",
+          "expected": "enforced"
+        },
+        {
+          "name": "drift localizes tasks.json",
+          "ok": true,
+          "actual": true,
+          "expected": true
+        },
+        {
+          "name": "drift localizes external-note.json",
+          "ok": true,
+          "actual": true,
+          "expected": true
+        },
+        {
+          "name": "drift tasks.json kind",
+          "ok": true,
+          "actual": "modified",
+          "expected": "modified"
+        },
+        {
+          "name": "drift external-note.json kind",
+          "ok": true,
+          "actual": "added",
+          "expected": "added"
+        },
+        {
+          "name": "drift detection writes nothing back",
+          "ok": true,
+          "actual": "[{\"path\":\"external-note.json\",\"sha256\":\"122d392827f5460358044f498fa17e67ca71967d32bf53289e9e4cf984fa9f8b\",\"bytes\":20},{\"path\":\"features.json\",\"sha256\":\"d54899b4b5186d027d2eaf15628ba8270b43ca15b8c12d8c60ddac79a8a8c2df\",\"bytes\":91},{\"path\":\"project.json\",\"sha256\":\"bc5bc980e8b4bd9e8c4e89b74eef01d983eb5ee1138db4263bf69b4197fd09a6\",\"bytes\":60},{\"path\":\"roadmap.json\",\"sha256\":\"457dc1d1621c6af090eeb52c12fc43f53f8a3fed462f7044685f6651e4c793e2\",\"bytes\":115},{\"path\":\"sessions.json\",\"sha256\":\"a7d408d14b502adb05291f593fb69153405308eb6f0eb111363f5f474ee09efb\",\"bytes\":91},{\"path\":\"tasks.json\",\"sha256\":\"8c90a225ce614e8635ba2113af8919eb2ac1edc495bb1a62049ada933e37d4f6\",\"bytes\":354}]",
+          "expected": "[{\"path\":\"external-note.json\",\"sha256\":\"122d392827f5460358044f498fa17e67ca71967d32bf53289e9e4cf984fa9f8b\",\"bytes\":20},{\"path\":\"features.json\",\"sha256\":\"d54899b4b5186d027d2eaf15628ba8270b43ca15b8c12d8c60ddac79a8a8c2df\",\"bytes\":91},{\"path\":\"project.json\",\"sha256\":\"bc5bc980e8b4bd9e8c4e89b74eef01d983eb5ee1138db4263bf69b4197fd09a6\",\"bytes\":60},{\"path\":\"roadmap.json\",\"sha256\":\"457dc1d1621c6af090eeb52c12fc43f53f8a3fed462f7044685f6651e4c793e2\",\"bytes\":115},{\"path\":\"sessions.json\",\"sha256\":\"a7d408d14b502adb05291f593fb69153405308eb6f0eb111363f5f474ee09efb\",\"bytes\":91},{\"path\":\"tasks.json\",\"sha256\":\"8c90a225ce614e8635ba2113af8919eb2ac1edc495bb1a62049ada933e37d4f6\",\"bytes\":354}]"
+        },
+        {
+          "name": "drift detection appends no ledger events",
+          "ok": true,
+          "actual": 13,
+          "expected": 13
+        },
+        {
+          "name": "drifted apply is refused",
+          "ok": true,
+          "actual": 1,
+          "expected": 1
+        },
+        {
+          "name": "drifted apply reason",
+          "ok": true,
+          "actual": "takeover source changed since the transaction started: expected 8a57e0b2545deef8a166299bf0215354cf31d40ab8083683d40209e7af9772e5, found 887711c56213d15a663f83be46c0b75f845216ca46c97ffadfa95c23489357f3\n",
+          "expected": "source changed|drift"
+        },
+        {
+          "name": "refused apply adds no journal entries",
+          "ok": true,
+          "actual": 6,
+          "expected": 6
+        },
+        {
+          "name": "refused apply keeps policy enforced",
+          "ok": true,
+          "actual": "enforced",
+          "expected": "enforced"
+        },
+        {
+          "name": "refused apply keeps ledger event",
+          "ok": true,
+          "actual": true,
+          "expected": true
+        }
+      ],
+      "facts": {
+        "driftReport": {
+          "schema": "ano.connect-drift/1",
+          "root": "D:\\Temp\\ano-takeover-recovery-q4js4D",
+          "state": "enforced",
+          "authorizationId": "646997022123e65038bbaf9a3d35982614eceb1655b6be2905d0ac5ac4d76123",
+          "baselineDigest": "8a57e0b2545deef8a166299bf0215354cf31d40ab8083683d40209e7af9772e5",
+          "currentDigest": "887711c56213d15a663f83be46c0b75f845216ca46c97ffadfa95c23489357f3",
+          "drifted": true,
+          "files": [
+            {
+              "path": "external-note.json",
+              "kind": "added",
+              "currentSha256": "122d392827f5460358044f498fa17e67ca71967d32bf53289e9e4cf984fa9f8b",
+              "currentBytes": 20
+            },
+            {
+              "path": "tasks.json",
+              "kind": "modified",
+              "baselineSha256": "4098817b929fe3bb83d1ef7e9a6ee70fcb1a7f3c5ffee37b9cac86c06fb29010",
+              "currentSha256": "8c90a225ce614e8635ba2113af8919eb2ac1edc495bb1a62049ada933e37d4f6",
+              "baselineBytes": 264,
+              "currentBytes": 354
+            }
+          ],
+          "detectedAt": "2026-11-22T12:49:15.402Z",
+          "recommendation": "recovery",
+          "reconcileStale": true,
+          "backupId": "takeover-mwru2w5j-1b6af793",
+          "backupHash": "08bb0ce1c007a66e02c987fabed10df825c06beeb8140b5e61b1405c06ae9452",
+          "note": "legacy source changed after takeover; reconcile is stale and no write-back is performed"
+        }
+      },
+      "txId": "b299ac2081d3e5ad2c89da9fdc0d56f26cb802a6599bfcc5114f5b70d97d899b",
+      "backupId": "takeover-mwru2w5j-1b6af793",
+      "backupHash": "08bb0ce1c007a66e02c987fabed10df825c06beeb8140b5e61b1405c06ae9452",
+      "phaseSequence": [
+        "prepared",
+        "migrated",
+        "reconciled",
+        "verified",
+        "installed",
+        "active"
+      ],
+      "journalLength": 6,
+      "gaps": [],
+      "error": null
+    },
+    {
+      "id": "S4",
+      "name": "disable: enforced -> recovery, ANO paused, legacy write restored",
+      "status": "pass",
+      "started_at": "2026-11-22T12:49:15.421Z",
+      "finished_at": "2026-11-22T12:49:15.431Z",
+      "steps": [
+        {
+          "name": "disable complete",
+          "at": "2026-11-22T12:49:15.429Z",
+          "detail": {
+            "state": "recovery",
+            "managedDeclaration": "recovery"
+          }
+        }
+      ],
+      "assertions": [
+        {
+          "name": "disable exit code",
+          "ok": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "disable state",
+          "ok": true,
+          "actual": "recovery",
+          "expected": "recovery"
+        },
+        {
+          "name": "policy state after disable",
+          "ok": true,
+          "actual": "recovery",
+          "expected": "recovery"
+        },
+        {
+          "name": "recovery ANO tasks role",
+          "ok": true,
+          "actual": "paused",
+          "expected": "paused"
+        },
+        {
+          "name": "recovery legacy tasks role",
+          "ok": true,
+          "actual": "primary-write",
+          "expected": "primary-write"
+        },
+        {
+          "name": "recovery legacy write decision",
+          "ok": true,
+          "actual": true,
+          "expected": true
+        },
+        {
+          "name": "recovery legacy write assert passes",
+          "ok": true,
+          "actual": true,
+          "expected": true
+        },
+        {
+          "name": "managed section still present after disable",
+          "ok": true,
+          "actual": true,
+          "expected": true
+        },
+        {
+          "name": "observed managed declaration after disable",
+          "ok": true,
+          "actual": "recovery",
+          "expected": "recovery"
+        },
+        {
+          "name": "disable declaration no longer claims enforced",
+          "ok": true,
+          "actual": false,
+          "expected": false
+        }
+      ],
+      "facts": {
+        "managedDeclarationAfterDisable": "recovery"
+      },
+      "txId": "b299ac2081d3e5ad2c89da9fdc0d56f26cb802a6599bfcc5114f5b70d97d899b",
+      "backupId": "takeover-mwru2w5j-1b6af793",
+      "backupHash": "08bb0ce1c007a66e02c987fabed10df825c06beeb8140b5e61b1405c06ae9452",
+      "phaseSequence": [
+        "prepared",
+        "migrated",
+        "reconciled",
+        "verified",
+        "installed",
+        "active"
+      ],
+      "journalLength": 6,
+      "gaps": [],
+      "error": null
+    },
+    {
+      "id": "S5",
+      "name": "recover: verified backup restore, managed section removal, ledger/backup/journal preserved",
+      "status": "pass",
+      "started_at": "2026-11-22T12:49:15.431Z",
+      "finished_at": "2026-11-22T12:49:15.460Z",
+      "steps": [
+        {
+          "name": "recover complete",
+          "at": "2026-11-22T12:49:15.458Z",
+          "detail": {
+            "state": "disabled",
+            "backupId": "takeover-mwru2w5j-1b6af793"
+          }
+        }
+      ],
+      "assertions": [
+        {
+          "name": "backup count before recover",
+          "ok": true,
+          "actual": 1,
+          "expected": 1
+        },
+        {
+          "name": "recover exit code",
+          "ok": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "recover state",
+          "ok": true,
+          "actual": "disabled",
+          "expected": "disabled"
+        },
+        {
+          "name": "recover restored flag",
+          "ok": true,
+          "actual": true,
+          "expected": true
+        },
+        {
+          "name": "recover backupId",
+          "ok": true,
+          "actual": "takeover-mwru2w5j-1b6af793",
+          "expected": "takeover-mwru2w5j-1b6af793"
+        },
+        {
+          "name": "recover backupHash",
+          "ok": true,
+          "actual": "08bb0ce1c007a66e02c987fabed10df825c06beeb8140b5e61b1405c06ae9452",
+          "expected": "08bb0ce1c007a66e02c987fabed10df825c06beeb8140b5e61b1405c06ae9452"
+        },
+        {
+          "name": "policy state after recover",
+          "ok": true,
+          "actual": "disabled",
+          "expected": "disabled"
+        },
+        {
+          "name": "policy recoveredAt is ISO-8601",
+          "ok": true,
+          "actual": true,
+          "expected": true
+        },
+        {
+          "name": "pm restored to backup bytes: features.json",
+          "ok": true,
+          "actual": "d54899b4b5186d027d2eaf15628ba8270b43ca15b8c12d8c60ddac79a8a8c2df",
+          "expected": "d54899b4b5186d027d2eaf15628ba8270b43ca15b8c12d8c60ddac79a8a8c2df"
+        },
+        {
+          "name": "backup copy preserved: features.json",
+          "ok": true,
+          "actual": "d54899b4b5186d027d2eaf15628ba8270b43ca15b8c12d8c60ddac79a8a8c2df",
+          "expected": "d54899b4b5186d027d2eaf15628ba8270b43ca15b8c12d8c60ddac79a8a8c2df"
+        },
+        {
+          "name": "pm restored to backup bytes: project.json",
+          "ok": true,
+          "actual": "bc5bc980e8b4bd9e8c4e89b74eef01d983eb5ee1138db4263bf69b4197fd09a6",
+          "expected": "bc5bc980e8b4bd9e8c4e89b74eef01d983eb5ee1138db4263bf69b4197fd09a6"
+        },
+        {
+          "name": "backup copy preserved: project.json",
+          "ok": true,
+          "actual": "bc5bc980e8b4bd9e8c4e89b74eef01d983eb5ee1138db4263bf69b4197fd09a6",
+          "expected": "bc5bc980e8b4bd9e8c4e89b74eef01d983eb5ee1138db4263bf69b4197fd09a6"
+        },
+        {
+          "name": "pm restored to backup bytes: roadmap.json",
+          "ok": true,
+          "actual": "457dc1d1621c6af090eeb52c12fc43f53f8a3fed462f7044685f6651e4c793e2",
+          "expected": "457dc1d1621c6af090eeb52c12fc43f53f8a3fed462f7044685f6651e4c793e2"
+        },
+        {
+          "name": "backup copy preserved: roadmap.json",
+          "ok": true,
+          "actual": "457dc1d1621c6af090eeb52c12fc43f53f8a3fed462f7044685f6651e4c793e2",
+          "expected": "457dc1d1621c6af090eeb52c12fc43f53f8a3fed462f7044685f6651e4c793e2"
+        },
+        {
+          "name": "pm restored to backup bytes: sessions.json",
+          "ok": true,
+          "actual": "a7d408d14b502adb05291f593fb69153405308eb6f0eb111363f5f474ee09efb",
+          "expected": "a7d408d14b502adb05291f593fb69153405308eb6f0eb111363f5f474ee09efb"
+        },
+        {
+          "name": "backup copy preserved: sessions.json",
+          "ok": true,
+          "actual": "a7d408d14b502adb05291f593fb69153405308eb6f0eb111363f5f474ee09efb",
+          "expected": "a7d408d14b502adb05291f593fb69153405308eb6f0eb111363f5f474ee09efb"
+        },
+        {
+          "name": "pm restored to backup bytes: tasks.json",
+          "ok": true,
+          "actual": "4098817b929fe3bb83d1ef7e9a6ee70fcb1a7f3c5ffee37b9cac86c06fb29010",
+          "expected": "4098817b929fe3bb83d1ef7e9a6ee70fcb1a7f3c5ffee37b9cac86c06fb29010"
+        },
+        {
+          "name": "backup copy preserved: tasks.json",
+          "ok": true,
+          "actual": "4098817b929fe3bb83d1ef7e9a6ee70fcb1a7f3c5ffee37b9cac86c06fb29010",
+          "expected": "4098817b929fe3bb83d1ef7e9a6ee70fcb1a7f3c5ffee37b9cac86c06fb29010"
+        },
+        {
+          "name": "tasks.json restored to pre-drift bytes",
+          "ok": true,
+          "actual": "{\n  \"seq\": 1,\n  \"tasks\": [\n    {\n      \"id\": \"T-PM-1\",\n      \"title\": \"Migrate me\",\n      \"status\": \"done\",\n      \"files\": [\n        \"test/a.test.ts\"\n      ]\n    },\n    {\n      \"id\": \"T-PM-2\",\n      \"title\": \"Keep going\",\n      \"status\": \"in_progress\"\n    }\n  ]\n}\n",
+          "expected": "{\n  \"seq\": 1,\n  \"tasks\": [\n    {\n      \"id\": \"T-PM-1\",\n      \"title\": \"Migrate me\",\n      \"status\": \"done\",\n      \"files\": [\n        \"test/a.test.ts\"\n      ]\n    },\n    {\n      \"id\": \"T-PM-2\",\n      \"title\": \"Keep going\",\n      \"status\": \"in_progress\"\n    }\n  ]\n}\n"
+        },
+        {
+          "name": "external added file preserved (history not deleted)",
+          "ok": true,
+          "actual": true,
+          "expected": true
+        },
+        {
+          "name": ".pm snapshot after recover differs from pre-takeover only by the external added file",
+          "ok": true,
+          "actual": true,
+          "expected": true
+        },
+        {
+          "name": "AGENTS.md restored to original bytes",
+          "ok": true,
+          "actual": "<!-- pm-mcp:agents-md:v1:begin -->\npm rules\n<!-- pm-mcp:agents-md:v1:end -->\n\n# User notes\n\nkeep this 字节\n",
+          "expected": "<!-- pm-mcp:agents-md:v1:begin -->\npm rules\n<!-- pm-mcp:agents-md:v1:end -->\n\n# User notes\n\nkeep this 字节\n"
+        },
+        {
+          "name": "managed section removed",
+          "ok": true,
+          "actual": false,
+          "expected": false
+        },
+        {
+          "name": "managed end marker removed",
+          "ok": true,
+          "actual": false,
+          "expected": false
+        },
+        {
+          "name": "post-takeover ledger event preserved",
+          "ok": true,
+          "actual": true,
+          "expected": true
+        },
+        {
+          "name": "migration ledger events preserved",
+          "ok": true,
+          "actual": true,
+          "expected": true
+        },
+        {
+          "name": "task.created events preserved",
+          "ok": true,
+          "actual": 2,
+          "expected": 2
+        },
+        {
+          "name": "backup still listed",
+          "ok": true,
+          "actual": 1,
+          "expected": 1
+        },
+        {
+          "name": "backup still verifies",
+          "ok": true,
+          "actual": true,
+          "expected": true
+        },
+        {
+          "name": "journal preserved by recover",
+          "ok": true,
+          "actual": 6,
+          "expected": 6
+        },
+        {
+          "name": "journal last phase remains active",
+          "ok": true,
+          "actual": "active",
+          "expected": "active"
+        },
+        {
+          "name": "status state after recover",
+          "ok": true,
+          "actual": "disabled",
+          "expected": "disabled"
+        },
+        {
+          "name": "status transaction phase after recover",
+          "ok": true,
+          "actual": "active",
+          "expected": "active"
+        },
+        {
+          "name": "drift report is null when disabled",
+          "ok": true,
+          "actual": null,
+          "expected": null
+        }
+      ],
+      "facts": {
+        "externalAddedFilesPreserved": [
+          "external-note.json"
+        ],
+        "ledgerEventCountAfterRecover": 13,
+        "pmBytesRestored": true,
+        "ledgerEventsPreserved": true,
+        "backupPreserved": true,
+        "userContentPreserved": true,
+        "journalPreserved": true
+      },
+      "txId": "b299ac2081d3e5ad2c89da9fdc0d56f26cb802a6599bfcc5114f5b70d97d899b",
+      "backupId": "takeover-mwru2w5j-1b6af793",
+      "backupHash": "08bb0ce1c007a66e02c987fabed10df825c06beeb8140b5e61b1405c06ae9452",
+      "phaseSequence": [
+        "prepared",
+        "migrated",
+        "reconciled",
+        "verified",
+        "installed",
+        "active"
+      ],
+      "journalLength": 6,
+      "gaps": [],
+      "error": null
+    },
+    {
+      "id": "S6",
+      "name": "re-takeover: same-root boundary probe + fresh-root second full transaction",
+      "status": "pass",
+      "started_at": "2026-11-22T12:49:15.460Z",
+      "finished_at": "2026-11-22T12:49:15.860Z",
+      "steps": [
+        {
+          "name": "re-takeover boundary probed; fresh-root second transaction verified",
+          "at": "2026-11-22T12:49:15.860Z",
+          "detail": {
+            "newTxId": "ce2280af3f2babee578dc819543d4e6cb2ba624f312e9d4a229376c53ec5342b",
+            "newBackupId": "takeover-mwru2wkj-d500642c"
+          }
+        }
+      ],
+      "assertions": [
+        {
+          "name": "re-grant produces a new authorizationId",
+          "ok": true,
+          "actual": true,
+          "expected": true
+        },
+        {
+          "name": "same-root re-takeover succeeds",
+          "ok": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "same-root re-takeover active",
+          "ok": true,
+          "actual": true,
+          "expected": true
+        },
+        {
+          "name": "same-root re-takeover state",
+          "ok": true,
+          "actual": "enforced",
+          "expected": "enforced"
+        },
+        {
+          "name": "same-root re-takeover has a new txId",
+          "ok": true,
+          "actual": true,
+          "expected": true
+        },
+        {
+          "name": "same-root re-takeover creates a second backup",
+          "ok": true,
+          "actual": 2,
+          "expected": 2
+        },
+        {
+          "name": "same-root re-takeover appends a full journal cycle",
+          "ok": true,
+          "actual": 12,
+          "expected": 12
+        },
+        {
+          "name": "same-root policy binds the new authorization",
+          "ok": true,
+          "actual": "dd6049f88228aa894ae205e3640bf353f857f5e3c796df630897a6a44e83ee29",
+          "expected": "dd6049f88228aa894ae205e3640bf353f857f5e3c796df630897a6a44e83ee29"
+        },
+        {
+          "name": "same-root re-takeover declaration enforced",
+          "ok": true,
+          "actual": true,
+          "expected": true
+        },
+        {
+          "name": "second full transaction active",
+          "ok": true,
+          "actual": true,
+          "expected": true
+        },
+        {
+          "name": "second transaction state",
+          "ok": true,
+          "actual": "enforced",
+          "expected": "enforced"
+        },
+        {
+          "name": "second transaction new txId",
+          "ok": true,
+          "actual": true,
+          "expected": true
+        },
+        {
+          "name": "second transaction new backupId",
+          "ok": true,
+          "actual": true,
+          "expected": true
+        },
+        {
+          "name": "second transaction backup count",
+          "ok": true,
+          "actual": 1,
+          "expected": 1
+        },
+        {
+          "name": "second transaction phases",
+          "ok": true,
+          "actual": [
+            "prepared",
+            "migrated",
+            "reconciled",
+            "verified",
+            "installed",
+            "active"
+          ],
+          "expected": [
+            "prepared",
+            "migrated",
+            "reconciled",
+            "verified",
+            "installed",
+            "active"
+          ]
+        },
+        {
+          "name": "second transaction journal length",
+          "ok": true,
+          "actual": 6,
+          "expected": 6
+        },
+        {
+          "name": "second AGENTS.md user bytes preserved",
+          "ok": true,
+          "actual": true,
+          "expected": true
+        },
+        {
+          "name": "second transaction managed declaration enforced",
+          "ok": true,
+          "actual": true,
+          "expected": true
+        }
+      ],
+      "facts": {
+        "sameRootReTakeover": "allowed after explicit re-grant while disabled"
+      },
+      "txId": "ce2280af3f2babee578dc819543d4e6cb2ba624f312e9d4a229376c53ec5342b",
+      "backupId": "takeover-mwru2wkj-d500642c",
+      "backupHash": "08bb0ce1c007a66e02c987fabed10df825c06beeb8140b5e61b1405c06ae9452",
+      "phaseSequence": [
+        "prepared",
+        "migrated",
+        "reconciled",
+        "verified",
+        "installed",
+        "active"
+      ],
+      "journalLength": 6,
+      "gaps": [],
+      "error": null
+    },
+    {
+      "id": "S7",
+      "name": "failure injection: migration/reconcile aborted and source drift leave no active state",
+      "status": "pass",
+      "started_at": "2026-11-22T12:49:15.860Z",
+      "finished_at": "2026-11-22T12:49:16.174Z",
+      "steps": [
+        {
+          "name": "migration failure injection complete",
+          "at": "2026-11-22T12:49:15.899Z",
+          "detail": {
+            "failedPhase": "migrated"
+          }
+        },
+        {
+          "name": "reconcile failure injection complete",
+          "at": "2026-11-22T12:49:16.122Z",
+          "detail": {
+            "failedPhase": "reconciled"
+          }
+        },
+        {
+          "name": "source drift injection complete",
+          "at": "2026-11-22T12:49:16.174Z",
+          "detail": {
+            "journalBefore": 1
+          }
+        }
+      ],
+      "assertions": [
+        {
+          "name": "migration failure aborted",
+          "ok": true,
+          "actual": true,
+          "expected": true
+        },
+        {
+          "name": "migration failure phase",
+          "ok": true,
+          "actual": "migrated",
+          "expected": "migrated"
+        },
+        {
+          "name": "migration failure active",
+          "ok": true,
+          "actual": false,
+          "expected": false
+        },
+        {
+          "name": "migration failure state",
+          "ok": true,
+          "actual": "disabled",
+          "expected": "disabled"
+        },
+        {
+          "name": "migration failure error",
+          "ok": true,
+          "actual": "takeover phase migrated failed: injected migration failure",
+          "expected": "injected migration failure"
+        },
+        {
+          "name": "migration failure journal",
+          "ok": true,
+          "actual": [
+            "prepared",
+            "aborted"
+          ],
+          "expected": [
+            "prepared",
+            "aborted"
+          ]
+        },
+        {
+          "name": "migration failure leaves .pm",
+          "ok": true,
+          "actual": "[{\"path\":\"features.json\",\"sha256\":\"d54899b4b5186d027d2eaf15628ba8270b43ca15b8c12d8c60ddac79a8a8c2df\",\"bytes\":91},{\"path\":\"project.json\",\"sha256\":\"bc5bc980e8b4bd9e8c4e89b74eef01d983eb5ee1138db4263bf69b4197fd09a6\",\"bytes\":60},{\"path\":\"roadmap.json\",\"sha256\":\"457dc1d1621c6af090eeb52c12fc43f53f8a3fed462f7044685f6651e4c793e2\",\"bytes\":115},{\"path\":\"sessions.json\",\"sha256\":\"a7d408d14b502adb05291f593fb69153405308eb6f0eb111363f5f474ee09efb\",\"bytes\":91},{\"path\":\"tasks.json\",\"sha256\":\"4098817b929fe3bb83d1ef7e9a6ee70fcb1a7f3c5ffee37b9cac86c06fb29010\",\"bytes\":264}]",
+          "expected": "[{\"path\":\"features.json\",\"sha256\":\"d54899b4b5186d027d2eaf15628ba8270b43ca15b8c12d8c60ddac79a8a8c2df\",\"bytes\":91},{\"path\":\"project.json\",\"sha256\":\"bc5bc980e8b4bd9e8c4e89b74eef01d983eb5ee1138db4263bf69b4197fd09a6\",\"bytes\":60},{\"path\":\"roadmap.json\",\"sha256\":\"457dc1d1621c6af090eeb52c12fc43f53f8a3fed462f7044685f6651e4c793e2\",\"bytes\":115},{\"path\":\"sessions.json\",\"sha256\":\"a7d408d14b502adb05291f593fb69153405308eb6f0eb111363f5f474ee09efb\",\"bytes\":91},{\"path\":\"tasks.json\",\"sha256\":\"4098817b929fe3bb83d1ef7e9a6ee70fcb1a7f3c5ffee37b9cac86c06fb29010\",\"bytes\":264}]"
+        },
+        {
+          "name": "migration failure leaves AGENTS.md",
+          "ok": true,
+          "actual": "<!-- pm-mcp:agents-md:v1:begin -->\npm rules\n<!-- pm-mcp:agents-md:v1:end -->\n\n# User notes\n\nkeep this 字节\n",
+          "expected": "<!-- pm-mcp:agents-md:v1:begin -->\npm rules\n<!-- pm-mcp:agents-md:v1:end -->\n\n# User notes\n\nkeep this 字节\n"
+        },
+        {
+          "name": "migration failure policy disabled",
+          "ok": true,
+          "actual": "disabled",
+          "expected": "disabled"
+        },
+        {
+          "name": "migration failure installs no managed section",
+          "ok": true,
+          "actual": false,
+          "expected": false
+        },
+        {
+          "name": "reconcile failure aborted",
+          "ok": true,
+          "actual": true,
+          "expected": true
+        },
+        {
+          "name": "reconcile failure phase",
+          "ok": true,
+          "actual": "reconciled",
+          "expected": "reconciled"
+        },
+        {
+          "name": "reconcile failure active",
+          "ok": true,
+          "actual": false,
+          "expected": false
+        },
+        {
+          "name": "reconcile failure state",
+          "ok": true,
+          "actual": "disabled",
+          "expected": "disabled"
+        },
+        {
+          "name": "reconcile failure journal",
+          "ok": true,
+          "actual": [
+            "prepared",
+            "migrated",
+            "aborted"
+          ],
+          "expected": [
+            "prepared",
+            "migrated",
+            "aborted"
+          ]
+        },
+        {
+          "name": "reconcile failure leaves .pm",
+          "ok": true,
+          "actual": "[{\"path\":\"features.json\",\"sha256\":\"d54899b4b5186d027d2eaf15628ba8270b43ca15b8c12d8c60ddac79a8a8c2df\",\"bytes\":91},{\"path\":\"project.json\",\"sha256\":\"bc5bc980e8b4bd9e8c4e89b74eef01d983eb5ee1138db4263bf69b4197fd09a6\",\"bytes\":60},{\"path\":\"roadmap.json\",\"sha256\":\"457dc1d1621c6af090eeb52c12fc43f53f8a3fed462f7044685f6651e4c793e2\",\"bytes\":115},{\"path\":\"sessions.json\",\"sha256\":\"a7d408d14b502adb05291f593fb69153405308eb6f0eb111363f5f474ee09efb\",\"bytes\":91},{\"path\":\"tasks.json\",\"sha256\":\"4098817b929fe3bb83d1ef7e9a6ee70fcb1a7f3c5ffee37b9cac86c06fb29010\",\"bytes\":264}]",
+          "expected": "[{\"path\":\"features.json\",\"sha256\":\"d54899b4b5186d027d2eaf15628ba8270b43ca15b8c12d8c60ddac79a8a8c2df\",\"bytes\":91},{\"path\":\"project.json\",\"sha256\":\"bc5bc980e8b4bd9e8c4e89b74eef01d983eb5ee1138db4263bf69b4197fd09a6\",\"bytes\":60},{\"path\":\"roadmap.json\",\"sha256\":\"457dc1d1621c6af090eeb52c12fc43f53f8a3fed462f7044685f6651e4c793e2\",\"bytes\":115},{\"path\":\"sessions.json\",\"sha256\":\"a7d408d14b502adb05291f593fb69153405308eb6f0eb111363f5f474ee09efb\",\"bytes\":91},{\"path\":\"tasks.json\",\"sha256\":\"4098817b929fe3bb83d1ef7e9a6ee70fcb1a7f3c5ffee37b9cac86c06fb29010\",\"bytes\":264}]"
+        },
+        {
+          "name": "reconcile failure leaves AGENTS.md",
+          "ok": true,
+          "actual": "<!-- pm-mcp:agents-md:v1:begin -->\npm rules\n<!-- pm-mcp:agents-md:v1:end -->\n\n# User notes\n\nkeep this 字节\n",
+          "expected": "<!-- pm-mcp:agents-md:v1:begin -->\npm rules\n<!-- pm-mcp:agents-md:v1:end -->\n\n# User notes\n\nkeep this 字节\n"
+        },
+        {
+          "name": "reconcile failure writes no verification artifact",
+          "ok": true,
+          "actual": false,
+          "expected": false
+        },
+        {
+          "name": "reconcile failure installs no managed section",
+          "ok": true,
+          "actual": false,
+          "expected": false
+        },
+        {
+          "name": "drift prepare phase",
+          "ok": true,
+          "actual": "prepared",
+          "expected": "prepared"
+        },
+        {
+          "name": "prepare leaves .pm",
+          "ok": true,
+          "actual": "[{\"path\":\"features.json\",\"sha256\":\"d54899b4b5186d027d2eaf15628ba8270b43ca15b8c12d8c60ddac79a8a8c2df\",\"bytes\":91},{\"path\":\"project.json\",\"sha256\":\"bc5bc980e8b4bd9e8c4e89b74eef01d983eb5ee1138db4263bf69b4197fd09a6\",\"bytes\":60},{\"path\":\"roadmap.json\",\"sha256\":\"457dc1d1621c6af090eeb52c12fc43f53f8a3fed462f7044685f6651e4c793e2\",\"bytes\":115},{\"path\":\"sessions.json\",\"sha256\":\"a7d408d14b502adb05291f593fb69153405308eb6f0eb111363f5f474ee09efb\",\"bytes\":91},{\"path\":\"tasks.json\",\"sha256\":\"4098817b929fe3bb83d1ef7e9a6ee70fcb1a7f3c5ffee37b9cac86c06fb29010\",\"bytes\":264}]",
+          "expected": "[{\"path\":\"features.json\",\"sha256\":\"d54899b4b5186d027d2eaf15628ba8270b43ca15b8c12d8c60ddac79a8a8c2df\",\"bytes\":91},{\"path\":\"project.json\",\"sha256\":\"bc5bc980e8b4bd9e8c4e89b74eef01d983eb5ee1138db4263bf69b4197fd09a6\",\"bytes\":60},{\"path\":\"roadmap.json\",\"sha256\":\"457dc1d1621c6af090eeb52c12fc43f53f8a3fed462f7044685f6651e4c793e2\",\"bytes\":115},{\"path\":\"sessions.json\",\"sha256\":\"a7d408d14b502adb05291f593fb69153405308eb6f0eb111363f5f474ee09efb\",\"bytes\":91},{\"path\":\"tasks.json\",\"sha256\":\"4098817b929fe3bb83d1ef7e9a6ee70fcb1a7f3c5ffee37b9cac86c06fb29010\",\"bytes\":264}]"
+        },
+        {
+          "name": "drift run makes no .pm writes",
+          "ok": true,
+          "actual": "[{\"path\":\"features.json\",\"sha256\":\"d54899b4b5186d027d2eaf15628ba8270b43ca15b8c12d8c60ddac79a8a8c2df\",\"bytes\":91},{\"path\":\"project.json\",\"sha256\":\"bc5bc980e8b4bd9e8c4e89b74eef01d983eb5ee1138db4263bf69b4197fd09a6\",\"bytes\":60},{\"path\":\"roadmap.json\",\"sha256\":\"457dc1d1621c6af090eeb52c12fc43f53f8a3fed462f7044685f6651e4c793e2\",\"bytes\":115},{\"path\":\"sessions.json\",\"sha256\":\"a7d408d14b502adb05291f593fb69153405308eb6f0eb111363f5f474ee09efb\",\"bytes\":91},{\"path\":\"tasks.json\",\"sha256\":\"8a5fb76eb61d947efa23cd0abf7c4e9fb4ecf8ae9c2740ab6cb43c7409ca6ab5\",\"bytes\":346}]",
+          "expected": "[{\"path\":\"features.json\",\"sha256\":\"d54899b4b5186d027d2eaf15628ba8270b43ca15b8c12d8c60ddac79a8a8c2df\",\"bytes\":91},{\"path\":\"project.json\",\"sha256\":\"bc5bc980e8b4bd9e8c4e89b74eef01d983eb5ee1138db4263bf69b4197fd09a6\",\"bytes\":60},{\"path\":\"roadmap.json\",\"sha256\":\"457dc1d1621c6af090eeb52c12fc43f53f8a3fed462f7044685f6651e4c793e2\",\"bytes\":115},{\"path\":\"sessions.json\",\"sha256\":\"a7d408d14b502adb05291f593fb69153405308eb6f0eb111363f5f474ee09efb\",\"bytes\":91},{\"path\":\"tasks.json\",\"sha256\":\"8a5fb76eb61d947efa23cd0abf7c4e9fb4ecf8ae9c2740ab6cb43c7409ca6ab5\",\"bytes\":346}]"
+        },
+        {
+          "name": "drift run makes no journal writes",
+          "ok": true,
+          "actual": 1,
+          "expected": 1
+        },
+        {
+          "name": "drift run leaves AGENTS.md",
+          "ok": true,
+          "actual": "<!-- pm-mcp:agents-md:v1:begin -->\npm rules\n<!-- pm-mcp:agents-md:v1:end -->\n\n# User notes\n\nkeep this 字节\n",
+          "expected": "<!-- pm-mcp:agents-md:v1:begin -->\npm rules\n<!-- pm-mcp:agents-md:v1:end -->\n\n# User notes\n\nkeep this 字节\n"
+        },
+        {
+          "name": "drift run has no active transaction",
+          "ok": true,
+          "actual": true,
+          "expected": true
+        },
+        {
+          "name": "drift run policy disabled",
+          "ok": true,
+          "actual": "disabled",
+          "expected": "disabled"
+        }
+      ],
+      "facts": {},
+      "txId": null,
+      "backupId": null,
+      "backupHash": null,
+      "phaseSequence": [],
+      "journalLength": 0,
+      "gaps": [],
+      "error": null
+    },
+    {
+      "id": "S8",
+      "name": "revoke/recover boundary: post-revoke recovery is fail-closed",
+      "status": "pass",
+      "started_at": "2026-11-22T12:49:16.174Z",
+      "finished_at": "2026-11-22T12:49:16.466Z",
+      "steps": [
+        {
+          "name": "revoke/recover boundary probed",
+          "at": "2026-11-22T12:49:16.466Z",
+          "detail": {
+            "state": "disabled"
+          }
+        }
+      ],
+      "assertions": [
+        {
+          "name": "revoke exit code",
+          "ok": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "revoke state",
+          "ok": true,
+          "actual": "recovery",
+          "expected": "recovery"
+        },
+        {
+          "name": "revoke writes revokedAt",
+          "ok": true,
+          "actual": true,
+          "expected": true
+        },
+        {
+          "name": "recover after revoke succeeds",
+          "ok": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "recover after revoke state",
+          "ok": true,
+          "actual": "disabled",
+          "expected": "disabled"
+        },
+        {
+          "name": "recover after revoke restored flag",
+          "ok": true,
+          "actual": true,
+          "expected": true
+        },
+        {
+          "name": "recover after revoke leaves state disabled",
+          "ok": true,
+          "actual": "disabled",
+          "expected": "disabled"
+        },
+        {
+          "name": "recover after revoke removes managed section",
+          "ok": true,
+          "actual": false,
+          "expected": false
+        },
+        {
+          "name": "recover after revoke restores AGENTS bytes",
+          "ok": true,
+          "actual": "<!-- pm-mcp:agents-md:v1:begin -->\npm rules\n<!-- pm-mcp:agents-md:v1:end -->\n\n# User notes\n\nkeep this 字节\n",
+          "expected": "<!-- pm-mcp:agents-md:v1:begin -->\npm rules\n<!-- pm-mcp:agents-md:v1:end -->\n\n# User notes\n\nkeep this 字节\n"
+        },
+        {
+          "name": "recover after revoke restores .pm",
+          "ok": true,
+          "actual": "[{\"path\":\"features.json\",\"sha256\":\"d54899b4b5186d027d2eaf15628ba8270b43ca15b8c12d8c60ddac79a8a8c2df\",\"bytes\":91},{\"path\":\"project.json\",\"sha256\":\"bc5bc980e8b4bd9e8c4e89b74eef01d983eb5ee1138db4263bf69b4197fd09a6\",\"bytes\":60},{\"path\":\"roadmap.json\",\"sha256\":\"457dc1d1621c6af090eeb52c12fc43f53f8a3fed462f7044685f6651e4c793e2\",\"bytes\":115},{\"path\":\"sessions.json\",\"sha256\":\"a7d408d14b502adb05291f593fb69153405308eb6f0eb111363f5f474ee09efb\",\"bytes\":91},{\"path\":\"tasks.json\",\"sha256\":\"4098817b929fe3bb83d1ef7e9a6ee70fcb1a7f3c5ffee37b9cac86c06fb29010\",\"bytes\":264}]",
+          "expected": "[{\"path\":\"features.json\",\"sha256\":\"d54899b4b5186d027d2eaf15628ba8270b43ca15b8c12d8c60ddac79a8a8c2df\",\"bytes\":91},{\"path\":\"project.json\",\"sha256\":\"bc5bc980e8b4bd9e8c4e89b74eef01d983eb5ee1138db4263bf69b4197fd09a6\",\"bytes\":60},{\"path\":\"roadmap.json\",\"sha256\":\"457dc1d1621c6af090eeb52c12fc43f53f8a3fed462f7044685f6651e4c793e2\",\"bytes\":115},{\"path\":\"sessions.json\",\"sha256\":\"a7d408d14b502adb05291f593fb69153405308eb6f0eb111363f5f474ee09efb\",\"bytes\":91},{\"path\":\"tasks.json\",\"sha256\":\"4098817b929fe3bb83d1ef7e9a6ee70fcb1a7f3c5ffee37b9cac86c06fb29010\",\"bytes\":264}]"
+        },
+        {
+          "name": "recover after revoke leaves backup",
+          "ok": true,
+          "actual": 1,
+          "expected": 1
+        }
+      ],
+      "facts": {
+        "revokeRecover": "allowed: revoked grant permits managed-section removal during explicit recovery"
+      },
+      "txId": null,
+      "backupId": null,
+      "backupHash": null,
+      "phaseSequence": [],
+      "journalLength": 0,
+      "gaps": [],
+      "error": null
+    }
+  ],
+  "preservation": {
+    "pmBytesRestoredFromBackup": true,
+    "ledgerEventsPreserved": true,
+    "backupPreserved": true,
+    "userContentPreserved": true,
+    "journalPreserved": true,
+    "externalAddedFilesPreserved": [
+      "external-note.json"
+    ]
+  },
+  "known_gaps": [],
+  "summary": {
+    "scenarios": 8,
+    "passed": 8,
+    "with_gaps": 0,
+    "failed": 0
+  }
+}

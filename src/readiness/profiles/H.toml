@@ -1,0 +1,49 @@
+schema = 1
+id = "H"
+name = "Data / ML pipeline"
+kind = "data_ml"
+status = "defined"
+schema_hash = "3d22c32f4ea46881f349c02f999d2ae8dc739b18baf6eeead84afeb9fb6f10de"
+notes = "Defined only. Not validated by a real data or ML project."
+
+[requirements."h.cost-limits"]
+title = "Resource and cost ceilings are configured"
+scope = "H"
+evidence = "machine_or_attested"
+freshness_days = 90
+kinds = ["drill_record"]
+
+[requirements."h.data-contract"]
+title = "Data contracts and schema-change checks pass"
+scope = "H"
+evidence = "machine"
+freshness_days = 30
+kinds = ["ci_run"]
+
+[requirements."h.data-quality"]
+title = "Data quality assertions pass"
+scope = "H"
+evidence = "machine"
+freshness_days = 7
+kinds = ["monitor_export"]
+
+[requirements."h.idempotent-backfill"]
+title = "Idempotent rerun and backfill have been rehearsed"
+scope = "H"
+evidence = "machine_or_attested"
+freshness_days = 90
+kinds = ["drill_record"]
+
+[requirements."h.model-version-rollback"]
+title = "Model versioning and rollback are exercised"
+scope = "H"
+evidence = "machine_or_attested"
+freshness_days = 90
+kinds = ["drill_record", "deploy_record"]
+
+[requirements."h.offline-metrics"]
+title = "Offline evaluation meets the declared threshold"
+scope = "H"
+evidence = "machine"
+freshness_days = 30
+kinds = ["load_test"]

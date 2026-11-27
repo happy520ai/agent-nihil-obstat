@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "milestone": "M11",
+  "description": "Adaptive coding-client MCP/takeover verification. Real configuration changes require explicit authorization and backups; missing capabilities degrade explicitly.",
+  "tasks": {
+    "T-079": { "depends_on": [] },
+    "T-080": { "depends_on": ["T-079"] },
+    "T-081": { "depends_on": ["T-079"] },
+    "T-082": { "depends_on": ["T-080", "T-081"] },
+    "T-083": { "depends_on": ["T-080", "T-081"] },
+    "T-084": { "depends_on": ["T-080", "T-081"] },
+    "T-085": { "depends_on": ["T-080", "T-081", "T-082", "T-083", "T-084"] },
+    "T-086": { "depends_on": ["T-085"] },
+    "T-087": { "depends_on": ["T-082", "T-083", "T-084"] },
+    "T-088": { "depends_on": ["T-085", "T-086", "T-087"] },
+    "T-089": { "depends_on": ["T-079", "T-080", "T-081", "T-082", "T-083", "T-084", "T-085", "T-086", "T-087", "T-088"], "gate": "phase-clients", "mutex_group": "m11-integration" },
+    "T-090": { "depends_on": ["T-089"], "gate": "phase-clients-final", "mutex_group": "m11-final-integration" }
+  }
+}

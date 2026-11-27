@@ -1,0 +1,11 @@
+{
+  "synthetic": true,
+  "_comment": "Synthetic unit whose transcript is absent; discovery skips only this unit.",
+  "format_version": "synthetic-v1",
+  "unit_id": "alpha-missing-transcript",
+  "session_id": "synthetic-session-alpha-missing",
+  "title": "Synthetic missing transcript session",
+  "started_at": "2026-11-01T03:00:00.000Z",
+  "visibility": "visible",
+  "transcript": "missing.jsonl"
+}

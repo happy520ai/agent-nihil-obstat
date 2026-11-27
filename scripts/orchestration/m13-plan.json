@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "milestone": "M13",
+  "description": "Real-project scan roots, safe fingerprinting and graph/takeover readiness for the authorized ecommerce repository.",
+  "tasks": {
+    "T-103": { "depends_on": [] },
+    "T-104": { "depends_on": ["T-103"] },
+    "T-105": { "depends_on": ["T-103"] },
+    "T-106": { "depends_on": ["T-104", "T-105"] },
+    "T-107": { "depends_on": ["T-103", "T-104"] },
+    "T-108": { "depends_on": ["T-106", "T-107"] },
+    "T-109": { "depends_on": ["T-104", "T-105", "T-106", "T-107"] },
+    "T-110": { "depends_on": ["T-108", "T-109"], "gate": "phase-project-scan", "mutex_group": "m13-final-integration" }
+  }
+}

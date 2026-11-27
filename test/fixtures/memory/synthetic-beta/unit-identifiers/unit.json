@@ -1,0 +1,11 @@
+{
+  "synthetic": true,
+  "_comment": "Synthetic beta session with only 2-character CJK and identifier subtokens.",
+  "format_version": "synthetic-v1",
+  "unit_id": "beta-identifiers",
+  "session_id": "synthetic-session-beta-identifiers",
+  "title": "Synthetic beta identifiers session",
+  "started_at": "2026-11-02T11:00:00.000Z",
+  "visibility": "visible",
+  "transcript": "transcript.jsonl"
+}

@@ -1,0 +1,35 @@
+schema = 1
+id = "G"
+name = "Mini program / browser extension"
+kind = "mini_program"
+status = "defined"
+schema_hash = "6b665080e171fab75303acaa36fe1e8347beb2b61885232ffa5e861be95004b1"
+notes = "Defined only. Not validated by a real mini-program or extension project."
+
+[requirements."g.host-api-compat"]
+title = "Host platform API changes are checked for compatibility"
+scope = "G"
+evidence = "machine"
+freshness_days = 30
+kinds = ["ci_run"]
+
+[requirements."g.permissions"]
+title = "Requested permissions are declared and justified"
+scope = "G"
+evidence = "attested"
+freshness_days = 180
+kinds = []
+
+[requirements."g.platform-review"]
+title = "Platform review result and materials are recorded"
+scope = "G"
+evidence = "attested"
+freshness_days = 180
+kinds = []
+
+[requirements."g.rollout"]
+title = "Versioned gradual rollout is exercised"
+scope = "G"
+evidence = "attested"
+freshness_days = 90
+kinds = []

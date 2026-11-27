@@ -1,0 +1,1002 @@
+{
+  "schema": "ano.client-support-matrix/1",
+  "generatedAt": "2026-11-23T05:52:12.468Z",
+  "task": "T-101 / CX-11 (M12) 集成验收复测（矩阵结构沿用 T-099）",
+  "contract": "docs/adr/ADR-008-full-client-catalog.md",
+  "machine": {
+    "platform": "win32",
+    "arch": "x64",
+    "node": "v24.14.0"
+  },
+  "evidenceTiers": {
+    "measured": "真实探测/调用成功（E3/E4），含时间/版本/来源；仅 ZCode 达到（真实 stdio 七工具握手）。",
+    "assumed": "仅本机存在性（E2）或公开文档（E1），未运行命令/未握手；不得写成支持。",
+    "declared": "客户端级身份已由公开来源核实（registry identityStatus=declared）；只证明身份，不证明接口实测。",
+    "absent": "无证据/未安装/前置不成立。"
+  },
+  "verdictTerms": {
+    "layers": [
+      "detected",
+      "configured",
+      "mcp",
+      "tools",
+      "brief",
+      "instructions",
+      "orchestration",
+      "history",
+      "output-interception"
+    ],
+    "verdicts": [
+      "validated",
+      "degraded",
+      "unavailable"
+    ],
+    "clientStatus": [
+      "declared",
+      "unknown"
+    ],
+    "note": "unknown 仅用于客户端身份状态；verdict 三值不用于身份。"
+  },
+  "columns": {
+    "mcp": "ADR-008 §4.6：MCP 列＝核心五层 detected/configured/mcp/tools/brief 的最弱值；只表示 ANO 包可被发现、配置并调用七工具，不等于完整接管。未做真实 stdio 握手者 mcp/tools/brief=unavailable，故该列最弱值=unavailable（不得记 degraded）。ZCode 是该列唯一 measured/validated：来自独立真实 stdio 握手（T-099 现场 + T-101 复测），doctor inspect 不握手故探针层仍为 unavailable。",
+    "rules": "规则接管（instructions 层）；只读探测上限 degraded，写入需显式授权。",
+    "dag": "DAG（orchestration 层）；无公开派发接口时为 degraded + explicit-workflow，不宣称自动派发。",
+    "history": "历史（history 层）；无授权样本或公开格式时 unavailable，合成 fixture 不升级。",
+    "outputInterception": "输出拦截（output-interception 层）；全客户端 unavailable，工具级 hooks 不算。"
+  },
+  "clients": [
+    {
+      "clientId": "claude-code",
+      "alias": "cloudcode",
+      "clientStatus": "declared",
+      "catalog": "adr-008-21",
+      "mcp": "unavailable",
+      "rules": "degraded",
+      "dag": "degraded",
+      "history": "unavailable",
+      "outputInterception": "unavailable",
+      "columnEvidence": {
+        "mcp": "absent",
+        "rules": "absent",
+        "dag": "assumed",
+        "history": "absent",
+        "outputInterception": "absent"
+      },
+      "identityEvidence": "declared",
+      "publicSources": [
+        "https://code.claude.com/docs"
+      ],
+      "localMeasurement": {
+        "executable": "not-found",
+        "configPath": "exists",
+        "tier": "assumed",
+        "detail": "claude 不在 PATH；~/.claude/ 与 ~/.claude.json 存在（E2 存在性，未读内容）"
+      },
+      "route": "mcp",
+      "mcpScope": "detected=degraded（仅配置目录/文件，无 executablePath/version）；configured 未实测；mcp/tools/brief 真实未实测=unavailable。",
+      "evidence": [
+        "docs/evidence/client-claude-codex.md",
+        "test/unit/client-claude-code.test.ts"
+      ]
+    },
+    {
+      "clientId": "github-copilot",
+      "alias": null,
+      "clientStatus": "declared",
+      "catalog": "adr-008-21",
+      "mcp": "unavailable",
+      "rules": "unavailable",
+      "dag": "degraded",
+      "history": "unavailable",
+      "outputInterception": "unavailable",
+      "columnEvidence": {
+        "mcp": "absent",
+        "rules": "absent",
+        "dag": "assumed",
+        "history": "absent",
+        "outputInterception": "absent"
+      },
+      "identityEvidence": "declared",
+      "publicSources": [
+        "https://docs.github.com/en/copilot",
+        "https://docs.github.com/en/copilot/concepts/copilot-surfaces/copilot-cli"
+      ],
+      "localMeasurement": {
+        "executable": "not-found",
+        "configPath": "missing",
+        "tier": "absent",
+        "detail": "copilot 不在 PATH；~/.copilot 与 mcp-config.json 缺失"
+      },
+      "route": "mcp",
+      "mcpScope": "本机未安装；E1 公开配置格式已核实，能力层未实测。",
+      "evidence": [
+        "docs/evidence/client-ide-coding.md",
+        "test/unit/client-ide-coding.test.ts"
+      ]
+    },
+    {
+      "clientId": "cursor",
+      "alias": null,
+      "clientStatus": "declared",
+      "catalog": "adr-008-21",
+      "mcp": "unavailable",
+      "rules": "unavailable",
+      "dag": "unavailable",
+      "history": "unavailable",
+      "outputInterception": "unavailable",
+      "columnEvidence": {
+        "mcp": "absent",
+        "rules": "absent",
+        "dag": "absent",
+        "history": "absent",
+        "outputInterception": "absent"
+      },
+      "identityEvidence": "declared",
+      "publicSources": [
+        "https://cursor.com/docs"
+      ],
+      "localMeasurement": {
+        "executable": "not-found",
+        "configPath": "missing",
+        "tier": "absent",
+        "detail": "cursor 不在 PATH；~/.cursor 与 ~/.cursor/mcp.json 缺失"
+      },
+      "route": "mcp",
+      "mcpScope": "本机未安装，detected=unavailable，下游前置不成立；配置格式仍为 assumed。",
+      "evidence": [
+        "docs/evidence/client-cursor-opencode.md",
+        "test/unit/client-cursor.test.ts"
+      ]
+    },
+    {
+      "clientId": "codex",
+      "alias": null,
+      "clientStatus": "declared",
+      "catalog": "adr-008-21",
+      "mcp": "unavailable",
+      "rules": "degraded",
+      "dag": "degraded",
+      "history": "unavailable",
+      "outputInterception": "unavailable",
+      "columnEvidence": {
+        "mcp": "absent",
+        "rules": "measured",
+        "dag": "assumed",
+        "history": "absent",
+        "outputInterception": "absent"
+      },
+      "identityEvidence": "declared",
+      "publicSources": [
+        "https://developers.openai.com/codex/cli/"
+      ],
+      "localMeasurement": {
+        "executable": "not-found",
+        "configPath": "exists",
+        "tier": "assumed",
+        "detail": "codex 不在 PATH；~/.codex/ 与 config.toml 存在（E2，未读内容）"
+      },
+      "route": "mcp",
+      "mcpScope": "detected=degraded；configured 未实测；TOML v1 只读，apply 一律 dry-run 零写。",
+      "evidence": [
+        "docs/evidence/client-claude-codex.md",
+        "test/unit/client-codex.test.ts"
+      ]
+    },
+    {
+      "clientId": "trae",
+      "alias": null,
+      "clientStatus": "declared",
+      "catalog": "adr-008-21",
+      "mcp": "unavailable",
+      "rules": "unavailable",
+      "dag": "unavailable",
+      "history": "unavailable",
+      "outputInterception": "unavailable",
+      "columnEvidence": {
+        "mcp": "absent",
+        "rules": "absent",
+        "dag": "absent",
+        "history": "absent",
+        "outputInterception": "absent"
+      },
+      "identityEvidence": "declared",
+      "publicSources": [
+        "https://www.trae.ai/",
+        "https://docs.trae.cn/",
+        "https://work.trae.ai"
+      ],
+      "localMeasurement": {
+        "executable": "not-found",
+        "configPath": "missing",
+        "tier": "absent",
+        "detail": "trae 不在 PATH；~/.trae 缺失"
+      },
+      "route": "mcp",
+      "mcpScope": "本机未安装；项目级 .trae/mcp.json 为 E1 声明候选，未实测。",
+      "evidence": [
+        "docs/evidence/client-cloud-ide.md",
+        "test/unit/client-cloud-ide.test.ts"
+      ]
+    },
+    {
+      "clientId": "antigravity",
+      "alias": null,
+      "clientStatus": "declared",
+      "catalog": "adr-008-21",
+      "mcp": "unavailable",
+      "rules": "unavailable",
+      "dag": "unavailable",
+      "history": "unavailable",
+      "outputInterception": "unavailable",
+      "columnEvidence": {
+        "mcp": "absent",
+        "rules": "absent",
+        "dag": "absent",
+        "history": "absent",
+        "outputInterception": "absent"
+      },
+      "identityEvidence": "declared",
+      "publicSources": [
+        "https://antigravity.google/",
+        "https://antigravity.google/docs/mcp/",
+        "https://antigravity.google/docs/plugins/"
+      ],
+      "localMeasurement": {
+        "executable": "not-found",
+        "configPath": "missing",
+        "tier": "absent",
+        "detail": "agy 不在 PATH；~/.gemini 缺失"
+      },
+      "route": "mcp",
+      "mcpScope": "本机未安装；E1 配置格式已核实，能力层未实测。",
+      "evidence": [
+        "docs/evidence/client-cloud-ide.md",
+        "test/unit/client-cloud-ide.test.ts"
+      ]
+    },
+    {
+      "clientId": "replit-agent",
+      "alias": null,
+      "clientStatus": "declared",
+      "catalog": "adr-008-21",
+      "mcp": "unavailable",
+      "rules": "unavailable",
+      "dag": "degraded",
+      "history": "unavailable",
+      "outputInterception": "unavailable",
+      "columnEvidence": {
+        "mcp": "absent",
+        "rules": "absent",
+        "dag": "assumed",
+        "history": "absent",
+        "outputInterception": "absent"
+      },
+      "identityEvidence": "declared",
+      "publicSources": [
+        "https://replit.com/site/agent",
+        "https://docs.replit.com/replitai/agent"
+      ],
+      "localMeasurement": {
+        "executable": "not-declared",
+        "configPath": "not-applicable",
+        "tier": "absent",
+        "detail": "cloud-only，无本地接口；不探测 Web 登录"
+      },
+      "route": "skip",
+      "mcpScope": "cloud-only；核心五层与 instructions/history/output-interception 全 unavailable，不生成无效配置。",
+      "evidence": [
+        "docs/evidence/client-cloud-ide.md",
+        "test/unit/client-cloud-ide.test.ts"
+      ]
+    },
+    {
+      "clientId": "cline",
+      "alias": null,
+      "clientStatus": "declared",
+      "catalog": "adr-008-21",
+      "mcp": "unavailable",
+      "rules": "unavailable",
+      "dag": "unavailable",
+      "history": "unavailable",
+      "outputInterception": "unavailable",
+      "columnEvidence": {
+        "mcp": "absent",
+        "rules": "absent",
+        "dag": "absent",
+        "history": "absent",
+        "outputInterception": "absent"
+      },
+      "identityEvidence": "declared",
+      "publicSources": [
+        "https://cline.bot/",
+        "https://docs.cline.bot/mcp/mcp-overview"
+      ],
+      "localMeasurement": {
+        "executable": "not-found",
+        "configPath": "missing",
+        "tier": "absent",
+        "detail": "cline 不在 PATH；~/.cline 与 cline_mcp_settings.json 缺失"
+      },
+      "route": "mcp",
+      "mcpScope": "本机未安装；E1 配置格式已核实，能力层未实测。",
+      "evidence": [
+        "docs/evidence/client-open-agents.md",
+        "test/unit/client-open-agents.test.ts"
+      ]
+    },
+    {
+      "clientId": "kilo-code",
+      "alias": null,
+      "clientStatus": "declared",
+      "catalog": "adr-008-21",
+      "mcp": "unavailable",
+      "rules": "unavailable",
+      "dag": "unavailable",
+      "history": "unavailable",
+      "outputInterception": "unavailable",
+      "columnEvidence": {
+        "mcp": "absent",
+        "rules": "absent",
+        "dag": "absent",
+        "history": "absent",
+        "outputInterception": "absent"
+      },
+      "identityEvidence": "declared",
+      "publicSources": [
+        "https://kilo.ai/",
+        "https://github.com/Kilo-Org/kilocode"
+      ],
+      "localMeasurement": {
+        "executable": "not-found",
+        "configPath": "missing",
+        "tier": "absent",
+        "detail": "kilo 不在 PATH；~/.config/kilo 缺失"
+      },
+      "route": "mcp",
+      "mcpScope": "本机未安装；E1 配置格式已核实，能力层未实测。",
+      "evidence": [
+        "docs/evidence/client-open-agents.md",
+        "test/unit/client-open-agents.test.ts"
+      ]
+    },
+    {
+      "clientId": "hermes-agent",
+      "alias": null,
+      "clientStatus": "declared",
+      "catalog": "adr-008-21",
+      "mcp": "unavailable",
+      "rules": "unavailable",
+      "dag": "unavailable",
+      "history": "unavailable",
+      "outputInterception": "unavailable",
+      "columnEvidence": {
+        "mcp": "absent",
+        "rules": "absent",
+        "dag": "absent",
+        "history": "absent",
+        "outputInterception": "absent"
+      },
+      "identityEvidence": "declared",
+      "publicSources": [
+        "https://hermes-agent.nousresearch.com/",
+        "https://github.com/NousResearch/hermes-agent"
+      ],
+      "localMeasurement": {
+        "executable": "not-found",
+        "configPath": "missing",
+        "tier": "absent",
+        "detail": "hermes 不在 PATH；~/.hermes 缺失"
+      },
+      "route": "rules",
+      "mcpScope": "本机未安装；YAML 载体 v1 不可写，rule 路径只读检测。",
+      "evidence": [
+        "docs/evidence/client-open-agents.md",
+        "test/unit/client-open-agents.test.ts"
+      ]
+    },
+    {
+      "clientId": "openclaw",
+      "alias": null,
+      "clientStatus": "declared",
+      "catalog": "adr-008-21",
+      "mcp": "unavailable",
+      "rules": "degraded",
+      "dag": "degraded",
+      "history": "unavailable",
+      "outputInterception": "unavailable",
+      "columnEvidence": {
+        "mcp": "absent",
+        "rules": "absent",
+        "dag": "assumed",
+        "history": "absent",
+        "outputInterception": "absent"
+      },
+      "identityEvidence": "declared",
+      "publicSources": [
+        "https://openclaw.ai/",
+        "https://github.com/openclaw/openclaw",
+        "https://docs.openclaw.ai/"
+      ],
+      "localMeasurement": {
+        "executable": "found",
+        "configPath": "exists",
+        "tier": "assumed",
+        "detail": "openclaw.cmd 存在（Git Bash alias → D:\\DevTools\\Installs\\node_global\\openclaw.cmd）；~/.openclaw/openclaw.json 存在（E2 存在性，未读内容）；未授权实测，未运行 CLI/未握手"
+      },
+      "route": "explicit-workflow",
+      "mcpScope": "E2 存在性仅支持 detected=degraded（无版本）；未授权实测，mcp/tools/brief 不升级；官方未明示 MCP，route=explicit-workflow。",
+      "evidence": [
+        "docs/evidence/client-open-agents.md",
+        "test/unit/client-open-agents.test.ts"
+      ]
+    },
+    {
+      "clientId": "zed",
+      "alias": null,
+      "clientStatus": "declared",
+      "catalog": "adr-008-21",
+      "mcp": "unavailable",
+      "rules": "unavailable",
+      "dag": "degraded",
+      "history": "unavailable",
+      "outputInterception": "unavailable",
+      "columnEvidence": {
+        "mcp": "absent",
+        "rules": "absent",
+        "dag": "assumed",
+        "history": "absent",
+        "outputInterception": "absent"
+      },
+      "identityEvidence": "declared",
+      "publicSources": [
+        "https://zed.dev/",
+        "https://zed.dev/docs/ai/mcp"
+      ],
+      "localMeasurement": {
+        "executable": "not-found",
+        "configPath": "missing",
+        "tier": "absent",
+        "detail": "zed 不在 PATH；三平台 settings 候选均缺失"
+      },
+      "route": "mcp",
+      "mcpScope": "本机未安装；settings 路径待核实，容器键 context_servers 为 E1。",
+      "evidence": [
+        "docs/evidence/client-ide-coding.md",
+        "test/unit/client-ide-coding.test.ts"
+      ]
+    },
+    {
+      "clientId": "tabnine",
+      "alias": null,
+      "clientStatus": "declared",
+      "catalog": "adr-008-21",
+      "mcp": "unavailable",
+      "rules": "unavailable",
+      "dag": "degraded",
+      "history": "unavailable",
+      "outputInterception": "unavailable",
+      "columnEvidence": {
+        "mcp": "absent",
+        "rules": "absent",
+        "dag": "assumed",
+        "history": "absent",
+        "outputInterception": "absent"
+      },
+      "identityEvidence": "declared",
+      "publicSources": [
+        "https://www.tabnine.com/",
+        "https://docs.tabnine.com/"
+      ],
+      "localMeasurement": {
+        "executable": "not-declared",
+        "configPath": "not-applicable",
+        "tier": "absent",
+        "detail": "IDE 插件 + 云端 Agent，无本地接口"
+      },
+      "route": "skip",
+      "mcpScope": "IDE 插件-only；无公开 MCP 接口，不冒充本地接管。",
+      "evidence": [
+        "docs/evidence/client-ide-coding.md",
+        "test/unit/client-ide-coding.test.ts"
+      ]
+    },
+    {
+      "clientId": "amazon-q",
+      "alias": null,
+      "clientStatus": "declared",
+      "catalog": "adr-008-21",
+      "mcp": "unavailable",
+      "rules": "unavailable",
+      "dag": "unavailable",
+      "history": "unavailable",
+      "outputInterception": "unavailable",
+      "columnEvidence": {
+        "mcp": "absent",
+        "rules": "absent",
+        "dag": "absent",
+        "history": "absent",
+        "outputInterception": "absent"
+      },
+      "identityEvidence": "declared",
+      "publicSources": [
+        "https://aws.amazon.com/q/developer/",
+        "https://kiro.dev/docs/cli"
+      ],
+      "localMeasurement": {
+        "executable": "not-found",
+        "configPath": "missing",
+        "tier": "absent",
+        "detail": "kiro/kiro-cli 不在 PATH；~/.kiro 缺失"
+      },
+      "route": "mcp",
+      "mcpScope": "本机未安装；E1 配置格式已核实，能力层未实测。",
+      "evidence": [
+        "docs/evidence/client-enterprise-ai.md",
+        "test/unit/client-enterprise-ai.test.ts"
+      ]
+    },
+    {
+      "clientId": "jetbrains-ai",
+      "alias": null,
+      "clientStatus": "declared",
+      "catalog": "adr-008-21",
+      "mcp": "unavailable",
+      "rules": "unavailable",
+      "dag": "degraded",
+      "history": "unavailable",
+      "outputInterception": "unavailable",
+      "columnEvidence": {
+        "mcp": "absent",
+        "rules": "absent",
+        "dag": "assumed",
+        "history": "absent",
+        "outputInterception": "absent"
+      },
+      "identityEvidence": "declared",
+      "publicSources": [
+        "https://www.jetbrains.com/ai/",
+        "https://www.jetbrains.com/help/ai-assistant/"
+      ],
+      "localMeasurement": {
+        "executable": "not-declared",
+        "configPath": "not-applicable",
+        "tier": "absent",
+        "detail": "IDE 插件，配置在 IDE 设置内，无公开接口"
+      },
+      "route": "skip",
+      "mcpScope": "IDE 插件-only；无公开 MCP 接口，不冒充本地接管。",
+      "evidence": [
+        "docs/evidence/client-ide-coding.md",
+        "test/unit/client-ide-coding.test.ts"
+      ]
+    },
+    {
+      "clientId": "codegeex",
+      "alias": null,
+      "clientStatus": "declared",
+      "catalog": "adr-008-21",
+      "mcp": "unavailable",
+      "rules": "unavailable",
+      "dag": "unavailable",
+      "history": "unavailable",
+      "outputInterception": "unavailable",
+      "columnEvidence": {
+        "mcp": "absent",
+        "rules": "absent",
+        "dag": "absent",
+        "history": "absent",
+        "outputInterception": "absent"
+      },
+      "identityEvidence": "declared",
+      "publicSources": [
+        "https://codegeex.cn/",
+        "https://github.com/zai-org/CodeGeeX",
+        "https://github.com/CodeGeeX/codegeex-vscode-extension"
+      ],
+      "localMeasurement": {
+        "executable": "not-declared",
+        "configPath": "not-applicable",
+        "tier": "absent",
+        "detail": "IDE 插件（VS Code/JetBrains），无公开本地接口"
+      },
+      "route": "skip",
+      "mcpScope": "IDE 插件-only；官方仓库/插件页无 MCP 记载，不生成无效配置。",
+      "evidence": [
+        "docs/evidence/client-enterprise-ai.md",
+        "test/unit/client-enterprise-ai.test.ts"
+      ]
+    },
+    {
+      "clientId": "tongyi-lingma",
+      "alias": null,
+      "clientStatus": "declared",
+      "catalog": "adr-008-21",
+      "mcp": "unavailable",
+      "rules": "degraded",
+      "dag": "degraded",
+      "history": "unavailable",
+      "outputInterception": "unavailable",
+      "columnEvidence": {
+        "mcp": "absent",
+        "rules": "measured",
+        "dag": "assumed",
+        "history": "absent",
+        "outputInterception": "absent"
+      },
+      "identityEvidence": "declared",
+      "publicSources": [
+        "https://lingma.aliyun.com/",
+        "https://docs.qoder.cn/",
+        "https://help.aliyun.com/zh/lingma/"
+      ],
+      "localMeasurement": {
+        "executable": "not-found",
+        "configPath": "exists",
+        "tier": "assumed",
+        "detail": "qodercn 不在 PATH；~/.qoder-cn/settings.json 存在（E2，未读内容）"
+      },
+      "route": "mcp",
+      "mcpScope": "detected=degraded（仅配置存在性）；configured 未实测；E1 配置格式已核实。",
+      "evidence": [
+        "docs/evidence/client-enterprise-ai.md",
+        "test/unit/client-enterprise-ai.test.ts"
+      ]
+    },
+    {
+      "clientId": "comate",
+      "alias": null,
+      "clientStatus": "declared",
+      "catalog": "adr-008-21",
+      "mcp": "unavailable",
+      "rules": "unavailable",
+      "dag": "unavailable",
+      "history": "unavailable",
+      "outputInterception": "unavailable",
+      "columnEvidence": {
+        "mcp": "absent",
+        "rules": "absent",
+        "dag": "absent",
+        "history": "absent",
+        "outputInterception": "absent"
+      },
+      "identityEvidence": "declared",
+      "publicSources": [
+        "https://comate.baidu.com/zh",
+        "https://cloud.baidu.com/doc/COMATE/"
+      ],
+      "localMeasurement": {
+        "executable": "not-found",
+        "configPath": "missing",
+        "tier": "absent",
+        "detail": "comatecli 不在 PATH；~/.comate 缺失"
+      },
+      "route": "mcp",
+      "mcpScope": "本机未安装；E1 配置格式已核实，能力层未实测。",
+      "evidence": [
+        "docs/evidence/client-enterprise-ai.md",
+        "test/unit/client-enterprise-ai.test.ts"
+      ]
+    },
+    {
+      "clientId": "qoder",
+      "alias": null,
+      "clientStatus": "unverified",
+      "catalog": "adr-008-21",
+      "mcp": "unavailable",
+      "rules": "unavailable",
+      "dag": "unavailable",
+      "history": "unavailable",
+      "outputInterception": "unavailable",
+      "columnEvidence": {
+        "mcp": "absent",
+        "rules": "absent",
+        "dag": "absent",
+        "history": "absent",
+        "outputInterception": "absent"
+      },
+      "identityEvidence": "absent",
+      "publicSources": [
+        "https://qoder.com/",
+        "https://docs.qoder.com/cli/mcp-servers",
+        "https://docs.qoder.com/"
+      ],
+      "localMeasurement": {
+        "executable": "not-found",
+        "configPath": "exists",
+        "tier": "assumed",
+        "detail": "qoder 不在 PATH；~/.qoder/settings.json 存在（E2，未读内容，顶层含 mcpServers、无 ano）"
+      },
+      "route": "cli",
+      "mcpScope": "detected/configured=degraded（无版本、未握手）；route=cli（qoder mcp add|list|remove）。",
+      "evidence": [
+        "docs/evidence/client-unknowns.md",
+        "test/unit/client-unknown.test.ts"
+      ]
+    },
+    {
+      "clientId": "codebuddy",
+      "alias": null,
+      "clientStatus": "declared",
+      "catalog": "adr-008-21",
+      "mcp": "unavailable",
+      "rules": "unavailable",
+      "dag": "unavailable",
+      "history": "unavailable",
+      "outputInterception": "unavailable",
+      "columnEvidence": {
+        "mcp": "absent",
+        "rules": "absent",
+        "dag": "absent",
+        "history": "absent",
+        "outputInterception": "absent"
+      },
+      "identityEvidence": "declared",
+      "publicSources": [
+        "https://www.codebuddy.cn/",
+        "https://www.codebuddy.ai/",
+        "https://copilot.tencent.com/ide/"
+      ],
+      "localMeasurement": {
+        "executable": "not-found",
+        "configPath": "exists",
+        "tier": "assumed",
+        "detail": "codebuddy/cbc 不在 PATH；~/.codebuddy 目录存在（E2，未读），声明的 .mcp.json/mcp.json 候选缺失"
+      },
+      "route": "mcp",
+      "mcpScope": "适配器声明来源未命中（detected=unavailable）；~/.codebuddy 目录存在性保留为 E2 证据，不写成支持。",
+      "evidence": [
+        "docs/evidence/client-cloud-ide.md",
+        "test/unit/client-cloud-ide.test.ts"
+      ]
+    },
+    {
+      "clientId": "deepseek-harness",
+      "alias": "dsh",
+      "clientStatus": "declared",
+      "catalog": "adr-008-21",
+      "mcp": "unavailable",
+      "rules": "unavailable",
+      "dag": "unavailable",
+      "history": "unavailable",
+      "outputInterception": "unavailable",
+      "columnEvidence": {
+        "mcp": "absent",
+        "rules": "absent",
+        "dag": "absent",
+        "history": "absent",
+        "outputInterception": "absent"
+      },
+      "identityEvidence": "declared",
+      "publicSources": [
+        "https://deepseek.com/harness",
+        "https://github.com/deepseek-ai/deepseek-harness",
+        "https://deepseek-harness.github.io/deepseek-harness/"
+      ],
+      "localMeasurement": {
+        "executable": "not-found",
+        "configPath": "missing",
+        "tier": "absent",
+        "detail": "dsh 不在 PATH；DSH_HOME 未设置；~/.dsh/~/.deepseek/~/.config/dsh 缺失"
+      },
+      "route": "explicit-workflow",
+      "mcpScope": "身份 declared（E1）；本机未探测到声明来源，detected=unavailable；ACP/SDK 握手不得当作 ANO MCP 七工具验证。",
+      "evidence": [
+        "docs/evidence/client-deepseek-harness.md",
+        "test/unit/client-deepseek-harness.test.ts"
+      ]
+    },
+    {
+      "clientId": "opencode",
+      "alias": null,
+      "clientStatus": "declared",
+      "catalog": "legacy-m11",
+      "mcp": "unavailable",
+      "rules": "unavailable",
+      "dag": "unavailable",
+      "history": "unavailable",
+      "outputInterception": "unavailable",
+      "columnEvidence": {
+        "mcp": "absent",
+        "rules": "absent",
+        "dag": "absent",
+        "history": "absent",
+        "outputInterception": "absent"
+      },
+      "identityEvidence": "declared",
+      "publicSources": [],
+      "localMeasurement": {
+        "executable": "not-found",
+        "configPath": "missing",
+        "tier": "absent",
+        "detail": "opencode 不在 PATH；~/.config/opencode 缺失"
+      },
+      "route": "mcp",
+      "mcpScope": "本机未安装，detected=unavailable；路径口径差异（.opencode/opencode.json）保留为限制。",
+      "evidence": [
+        "docs/evidence/client-cursor-opencode.md",
+        "test/unit/client-opencode.test.ts"
+      ]
+    },
+    {
+      "clientId": "pi",
+      "alias": null,
+      "clientStatus": "unknown",
+      "catalog": "legacy-m11",
+      "mcp": "unavailable",
+      "rules": "unavailable",
+      "dag": "unavailable",
+      "history": "unavailable",
+      "outputInterception": "unavailable",
+      "columnEvidence": {
+        "mcp": "absent",
+        "rules": "absent",
+        "dag": "absent",
+        "history": "absent",
+        "outputInterception": "absent"
+      },
+      "identityEvidence": "absent",
+      "publicSources": [],
+      "localMeasurement": {
+        "executable": "not-declared",
+        "configPath": "not-applicable",
+        "tier": "absent",
+        "detail": "身份/接口不明；无声明公开来源"
+      },
+      "route": "skip",
+      "mcpScope": "客户端 status=unknown（中间状态，非永久禁令）；全层 unavailable，无升级证据。",
+      "evidence": [
+        "docs/evidence/client-unknowns.md",
+        "test/unit/client-unknown.test.ts"
+      ]
+    },
+    {
+      "clientId": "zcode",
+      "alias": null,
+      "clientStatus": "declared",
+      "catalog": "legacy-m11",
+      "mcp": "validated",
+      "rules": "degraded",
+      "dag": "degraded",
+      "history": "unavailable",
+      "outputInterception": "unavailable",
+      "columnEvidence": {
+        "mcp": "measured",
+        "rules": "measured",
+        "dag": "assumed",
+        "history": "absent",
+        "outputInterception": "absent"
+      },
+      "identityEvidence": "declared",
+      "publicSources": [],
+      "localMeasurement": {
+        "executable": "not-declared",
+        "configPath": "exists",
+        "tier": "measured",
+        "detail": "~/.zcode/cli/config.json 与工作区 .zcode/config.json 均注册 ano（stdio）；T-099 现场用注册命令真实握手：initialize 成功、tools/list=7、brief phase=P7"
+      },
+      "route": "skip",
+      "mcpScope": "限「ANO 包可被发现、配置并调用七工具」；MCP 列 validated 来自真实 stdio（T-099 现场 + M11 证据），非 doctor inspect。",
+      "evidence": [
+        "docs/evidence/zcode-mcp.json",
+        "docs/evidence/host-capability-investigation.md",
+        "test/integration/mcp.test.ts",
+        "test/integration/zcode-config.test.ts"
+      ]
+    }
+  ],
+  "liveVerification": {
+    "zcode": {
+      "registeredCommand": {
+        "command": "C:/Program Files/nodejs/node.exe",
+        "args": [
+          "<home>/.zcode/ano-mcp.mjs"
+        ]
+      },
+      "probedAt": "2026-11-23T05:52:38.951Z",
+      "transport": "stdio",
+      "tools": [
+        "brief",
+        "explore",
+        "recall",
+        "track",
+        "note",
+        "verify",
+        "audit"
+      ],
+      "toolCount": 7,
+      "briefPhase": "P7",
+      "briefToolCount": 7,
+      "note": "用 ZCode 用户级注册命令做真实 MCP 握手；只读取本仓库账本，未读取真实会话或秘密。"
+    },
+    "openclaw": {
+      "probed": false,
+      "reason": "openclaw.cmd 存在但未授权实测；保留 E2 存在性证据，不运行 CLI、不握手。",
+      "evidence": [
+        "docs/evidence/client-open-agents.md §3"
+      ]
+    },
+    "otherClients": "其余 22 个 canonical id 本机未安装或未探测到声明来源（见各客户端 localMeasurement）。"
+  },
+  "writePath": {
+    "writableClients": [
+      "claude-code",
+      "github-copilot",
+      "cursor",
+      "codex",
+      "trae",
+      "antigravity",
+      "cline",
+      "kilo-code",
+      "zed",
+      "amazon-q",
+      "tongyi-lingma",
+      "comate",
+      "codebuddy",
+      "opencode"
+    ],
+    "refusedClients": {
+      "codex": "TOML v1 只读，即使授权齐备也拒绝写，只返回 dry-run。",
+      "hermes-agent": "YAML 载体 v1 不可写，rule 接管走显式 apply --confirm。",
+      "qoder": "公开接口未核实，适配器从不写配置；route=cli（qoder mcp add|list|remove）。",
+      "deepseek-harness": "Cordis YAML 载体 v1 不可写，ANO 经显式 Cordis patch 工作流加载。",
+      "pi": "身份/接口不明，无声明配置路径。",
+      "zcode": "宿主配置对客户端只读（M5/M10）。"
+    },
+    "writableRouteClients": [
+      "claude-code",
+      "github-copilot",
+      "cursor",
+      "codex",
+      "trae",
+      "antigravity",
+      "cline",
+      "kilo-code",
+      "zed",
+      "amazon-q",
+      "tongyi-lingma",
+      "comate",
+      "codebuddy",
+      "opencode"
+    ],
+    "cliRouteClients": [
+      "qoder"
+    ],
+    "rulesRouteClients": [
+      "hermes-agent"
+    ],
+    "explicitWorkflowClients": [
+      "openclaw",
+      "deepseek-harness"
+    ],
+    "skipClients": [
+      "replit-agent",
+      "tabnine",
+      "jetbrains-ai",
+      "codegeex",
+      "pi",
+      "zcode"
+    ],
+    "defaultMode": "dry-run（零写）",
+    "applyRequires": [
+      "--confirm",
+      "--granted-by",
+      "--statement",
+      "--scope 含 config+install（restore 含 restore）",
+      "已声明的目标作用域",
+      "内容哈希备份",
+      "beforeHash 漂移检查",
+      "原子合并"
+    ],
+    "codexNote": "TOML v1 只读，即使授权齐备也拒绝写，只返回 dry-run。",
+    "backupBinding": "备份 manifest 绑定目标路径与 beforeHash；restore 只接受校验通过且绑定同一目标的备份。"
+  },
+  "unverified": [
+    "除 ZCode 外无真实客户端安装，configured/mcp/tools/brief 真实兼容未实测。",
+    "真实会话样本 [数据缺失]，公开会话格式 unverified，history 全层 unavailable。",
+    "输出拦截全客户端 unavailable（含 ZCode，T-055 已证明无公开接口）。",
+    "OpenClaw 仅 E2 存在性（可执行 + openclaw.json），未授权实测，不升级为 measured。",
+    "Cursor 官方文档本机不可达，配置格式仍为 assumed。",
+    "OpenCode 路径口径（.opencode/opencode.json）与 registry 声明候选不一致，保留为限制。",
+    "跨 root 授权续接、移动目录身份续接、掉电持久性未验证（沿用 M10 结论）。"
+  ]
+}

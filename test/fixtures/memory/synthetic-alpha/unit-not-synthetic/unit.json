@@ -1,0 +1,11 @@
+{
+  "synthetic": false,
+  "_comment": "This fixture deliberately claims not to be synthetic so the privacy guard must refuse it.",
+  "format_version": "synthetic-v1",
+  "unit_id": "alpha-not-synthetic",
+  "session_id": "synthetic-session-alpha-not-synthetic",
+  "title": "Rejected fixture",
+  "started_at": "2026-11-01T05:00:00.000Z",
+  "visibility": "visible",
+  "transcript": "transcript.jsonl"
+}

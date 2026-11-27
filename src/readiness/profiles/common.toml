@@ -1,0 +1,82 @@
+# Common readiness requirements (architecture section 17).
+# Status is defined: these are a checklist, not a claim that any project passed them.
+schema = 1
+id = "common"
+name = "Common release requirements"
+kind = "common"
+status = "defined"
+schema_hash = "117cd98347c6d57fe7374a3b0ea9ca5569460b486716776a755a710c9a1086ac"
+notes = "Applies to every project type. Machine items stay missing until a file evidence record is bound to the current artifact."
+
+[requirements."common.code-gate"]
+title = "Code gate is green: task done, coverage level met, no speculative completion"
+scope = "common"
+evidence = "machine"
+freshness_days = 7
+kinds = ["ci_run"]
+
+[requirements."common.reproducible-build"]
+title = "Artifact builds reproducibly, or the non-reproducible reason is attested"
+scope = "common"
+evidence = "machine_or_attested"
+freshness_days = 30
+kinds = ["build_repro"]
+
+[requirements."common.clean-install-smoke"]
+title = "Clean-environment install/start and smoke test pass on the real artifact"
+scope = "common"
+evidence = "machine"
+freshness_days = 14
+kinds = ["smoke_test"]
+
+[requirements."common.dependency-license"]
+title = "No unresolved high-severity dependency or license findings"
+scope = "common"
+evidence = "machine"
+freshness_days = 7
+kinds = ["dependency_audit"]
+
+[requirements."common.limitations-public"]
+title = "Known limitations are documented and referenced"
+scope = "common"
+evidence = "machine"
+freshness_days = 30
+check = "common.limitations-public"
+kinds = ["docs_check", "artifact_scan"]
+
+[requirements."common.no-secrets"]
+title = "No plaintext secrets in the artifact or repository history"
+scope = "common"
+evidence = "machine"
+freshness_days = 7
+check = "common.no-secrets"
+kinds = ["secret_scan", "artifact_scan"]
+
+[requirements."common.privacy-review"]
+title = "Privacy and compliance review signed for projects handling user data"
+scope = "common"
+evidence = "attested"
+freshness_days = 180
+kinds = []
+
+[requirements."common.release-owner"]
+title = "Release owner and incident contact are named"
+scope = "common"
+evidence = "attested"
+freshness_days = 180
+kinds = []
+
+[requirements."common.rollback-plan"]
+title = "Rollback or withdrawal plan exists and has been rehearsed"
+scope = "common"
+evidence = "machine_or_attested"
+freshness_days = 90
+kinds = ["rollback_drill", "drill_record"]
+
+[requirements."common.version-changelog-docs"]
+title = "Version, changelog and public documentation agree"
+scope = "common"
+evidence = "machine"
+freshness_days = 7
+check = "common.version-changelog-docs"
+kinds = ["docs_check"]

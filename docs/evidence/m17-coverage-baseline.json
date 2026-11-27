@@ -1,0 +1,364 @@
+{
+  "schemaVersion": 1,
+  "task": "T-143 / CV-01",
+  "title": "M17 逐文件未覆盖分支基线与补测契约",
+  "generatedAt": "2026-11-25",
+  "repo": "F:/Agent Nihil Obstat",
+  "runtime": {
+    "node": "v24.14.0",
+    "platform": "win32 10.0.19041 x64",
+    "shell": "Git Bash"
+  },
+  "commands": {
+    "authoritativeFull": "node --test --experimental-test-coverage \"test/**/*.test.ts\"",
+    "srcOnlyTotals": "node --test --experimental-test-coverage --test-coverage-include='src/**/*.ts' \"test/**/*.test.ts\"",
+    "packageScript": "npm run coverage",
+    "note": "两次全量运行均 exit 0；six 个目标文件的行/分支/函数百分比与未覆盖行号完全一致，未覆盖行号取自 coverage 报告的 uncovered lines 列。srcOnlyTotals 仅用于全仓分母（排除 test/scripts 自身），六文件数字与 authoritativeFull 相同。"
+  },
+  "runSummary": {
+    "tests": 1497,
+    "pass": 1496,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 1,
+    "todo": 0,
+    "durationMsApprox": 55910,
+    "skipNote": "唯一 skip 为 scripts/spikes 工具链缺失的显式 SKIP（非目标模块、非静默 skip），见 scripts/run-tests.ts。"
+  },
+  "userBaseline": {
+    "src/memory/replica-transport.ts": { "line": 80.29, "branch": 60.94 },
+    "src/memory/replica-worker.ts": { "line": 88.54, "branch": 50.68 },
+    "src/memory/tcp-transport.ts": { "line": 87.47, "branch": 72.89 },
+    "src/memory/leader-lease.ts": { "line": 88.15, "branch": 75.49 },
+    "src/memory/ha-cluster.ts": { "line": 88.64, "branch": 72.90 },
+    "src/memory/distributed-probe.ts": { "line": 90.84, "branch": 79.18 }
+  },
+  "currentBaseline": {
+    "allFiles": { "line": 94.47, "branch": 82.66, "functions": 93.57 },
+    "modules": {
+      "src/memory/replica-transport.ts": { "line": 80.29, "branch": 60.94, "functions": 74.24, "deltaVsUser": { "line": 0.0, "branch": 0.0 } },
+      "src/memory/replica-worker.ts": { "line": 88.54, "branch": 50.68, "functions": 88.89, "deltaVsUser": { "line": 0.0, "branch": 0.0 } },
+      "src/memory/tcp-transport.ts": { "line": 87.47, "branch": 72.89, "functions": 81.30, "deltaVsUser": { "line": 0.0, "branch": 0.0 } },
+      "src/memory/leader-lease.ts": { "line": 88.15, "branch": 75.49, "functions": 80.72, "deltaVsUser": { "line": 0.0, "branch": 0.0 } },
+      "src/memory/ha-cluster.ts": { "line": 88.64, "branch": 72.90, "functions": 85.04, "deltaVsUser": { "line": 0.0, "branch": 0.0 } },
+      "src/memory/distributed-probe.ts": { "line": 90.84, "branch": 79.18, "functions": 86.87, "deltaVsUser": { "line": 0.0, "branch": 0.0 } }
+    },
+    "conclusion": "当前真实基线与用户给定基线逐位一致（delta=0.00）；差异仅在于本次补充了 functions%。"
+  },
+  "thresholds": {
+    "repo": { "line": 95.37, "branch": 83.54, "functions": 95.20, "source": "任务指标口径（以 --test-coverage-include=src/**/*.ts 全量为准）" },
+    "modulePolicy": {
+      "line": 90.0,
+      "branch": 80.0,
+      "appliesTo": [
+        "src/memory/replica-transport.ts",
+        "src/memory/tcp-transport.ts",
+        "src/memory/leader-lease.ts",
+        "src/memory/ha-cluster.ts",
+        "src/memory/distributed-probe.ts"
+      ],
+      "workerRelaxed": { "file": "src/memory/replica-worker.ts", "line": 90.0, "branch": 70.0 },
+      "assumption": "任务原文只写 transport/tcp/leader 行>=90 分支>=80、worker 行>=90 分支>=70；ha-cluster 与 distributed-probe 按同一 90/80 档执行（CV-07 验收口径），如主控另有口径以此处为准并回写本节。"
+    },
+    "gaps": {
+      "repo": { "line": 0.90, "branch": 0.88, "functions": 1.63 },
+      "src/memory/replica-transport.ts": { "line": 9.71, "branch": 19.06 },
+      "src/memory/replica-worker.ts": { "line": 1.46, "branch": 19.32 },
+      "src/memory/tcp-transport.ts": { "line": 2.53, "branch": 7.11 },
+      "src/memory/leader-lease.ts": { "line": 1.85, "branch": 4.51 },
+      "src/memory/ha-cluster.ts": { "line": 1.36, "branch": 7.10 },
+      "src/memory/distributed-probe.ts": { "line": 0.0, "branch": 0.82 }
+    }
+  },
+  "files": [
+    {
+      "file": "src/memory/replica-transport.ts",
+      "ownerTask": "CV-02",
+      "title": "子进程副本传输（M15 默认本地载体）",
+      "metrics": { "line": 80.29, "branch": 60.94, "functions": 74.24 },
+      "categories": [
+        { "category": "RT-UNUSED-HELPER", "ranges": ["86-88"], "trigger": "fake-spawn", "seam": "无需 seam；仅当写 stdin 失败时才可达", "expectedTest": "test/integration/replica-process.test.ts", "notes": "message() 辅助函数因写失败分支未覆盖而整体未命中。" },
+        { "category": "RT-START-INVALID", "ranges": ["233-234", "236-237", "239-240", "242-243", "251-252"], "trigger": "fake-spawn", "seam": "ReplicaStartOptions 校验；options.spawn 注入伪 spawn", "expectedTest": "test/integration/replica-process.test.ts", "notes": "启动参数/root/replicaId/projectScope/正整数超时全部非法分支。" },
+        { "category": "RT-STATUS-INVALID", "ranges": ["279-280", "283-284", "286-287", "289-290", "292-293", "296-297", "300-301"], "trigger": "fake-spawn", "seam": "注入返回畸形 status payload 的 workerPath 脚本或伪 spawn 子进程", "expectedTest": "test/integration/replica-transport-faults.test.ts（新建）", "notes": "validateStatusPayload 七个拒绝分支。" },
+        { "category": "RT-QUERY-INVALID", "ranges": ["326-327", "330-331", "334-335", "338-339", "341-342", "344-345", "347-348"], "trigger": "fake-spawn", "seam": "同上，畸形 query payload", "expectedTest": "test/integration/replica-transport-faults.test.ts（新建）", "notes": "validateQueryPayload 拒绝分支。" },
+        { "category": "RT-APPLY-INVALID", "ranges": ["366-367", "370-371", "375-376", "379-380"], "trigger": "fake-spawn", "seam": "同上，畸形 apply payload/report", "expectedTest": "test/integration/replica-transport-faults.test.ts（新建）", "notes": "validateApplyPayload 拒绝分支。" },
+        { "category": "RT-START-EXIT", "ranges": ["425-434"], "trigger": "real-subprocess", "seam": "workerPath 指向立即 exit(1) 且 stderr 非空的脚本", "expectedTest": "test/integration/replica-transport-faults.test.ts（新建）", "notes": "init 期间子进程退出 -> REPLICA_START_FAILED，并触发 #kill 清理。" },
+        { "category": "RT-RESTART", "ranges": ["466-467", "470-474"], "trigger": "real-subprocess", "seam": "restart 后立即杀死/构造 cursor 回退目录", "expectedTest": "test/integration/replica-transport-faults.test.ts（新建）", "notes": "REPLICA_RESTART_FAILED / REPLICA_RESTART_INCOMPLETE。" },
+        { "category": "RT-RESUME", "ranges": ["556-557", "562-563"], "trigger": "fake-spawn", "seam": "resume(maxChunks) 非法值 + AbortSignal", "expectedTest": "test/integration/replica-process.test.ts", "notes": "REPLICA_RESUME_INVALID / 取消。" },
+        { "category": "RT-STDERR-CAPTURE", "ranges": ["639", "646"], "trigger": "real-subprocess", "seam": "向已关闭 stdin 写、或让 child 触发 error 事件", "expectedTest": "test/integration/replica-transport-faults.test.ts（新建）", "notes": "child 'error' 与 stdin 'error'(EPIPE) 的 stderrTail 记录。" },
+        { "category": "RT-NODE-EXIT-PENDING", "ranges": ["678-681"], "trigger": "real-subprocess", "seam": "挂起请求期间 SIGKILL 子进程", "expectedTest": "test/integration/replica-process.test.ts（既有 kill 用例扩展）", "notes": "#failPending 对 REPLICA_NODE_EXITED 的遍历拒绝。" },
+        { "category": "RT-OVERSIZE-RESPONSE", "ranges": ["693-697", "704-707", "709-712"], "trigger": "fake-spawn", "seam": "maxResponseBytes 调小 + 伪 spawn stdout 推送超限/分片", "expectedTest": "test/integration/replica-transport-faults.test.ts（新建）", "notes": "无换行尾块超限、discarding 复位、完整行超限三种路径。" },
+        { "category": "RT-MALFORMED-LINE", "ranges": ["722-730"], "trigger": "fake-spawn", "seam": "stdout 推入非协议行", "expectedTest": "test/integration/replica-transport-faults.test.ts（新建）", "notes": "无法路由的行改为失败最老 pending。" },
+        { "category": "RT-TYPE-MISMATCH", "ranges": ["740-742"], "trigger": "fake-spawn", "seam": "响应 type 与 expectedType 不一致", "expectedTest": "test/integration/replica-transport-faults.test.ts（新建）", "notes": "REPLICA_RESPONSE_INVALID。" },
+        { "category": "RT-CANCEL", "ranges": ["763-764"], "trigger": "fake-spawn", "seam": "已 abort 的 AbortSignal", "expectedTest": "test/integration/replica-process.test.ts", "notes": "dispatch 前取消。" },
+        { "category": "RT-CHILD-ERROR", "ranges": ["781-783"], "trigger": "fake-spawn", "seam": "子进程返回 ok=false 错误帧", "expectedTest": "test/integration/replica-transport-faults.test.ts（新建）", "notes": "resolve 内 error 分支。" },
+        { "category": "RT-VALIDATE-THROW", "ranges": ["787-788"], "trigger": "fake-spawn", "seam": "响应通过 parse 但校验抛错", "expectedTest": "test/integration/replica-transport-faults.test.ts（新建）", "notes": "resolve 的 try/catch。" },
+        { "category": "RT-TIMEOUT", "ranges": ["799-801"], "trigger": "fake-spawn", "seam": "nodeTimeoutMs 调小 + 不响应", "expectedTest": "test/integration/replica-process.test.ts", "notes": "REPLICA_QUERY_TIMEOUT 定时器路径。" },
+        { "category": "RT-WRITE-FAIL", "ranges": ["820-824"], "trigger": "fake-spawn", "seam": "stdin.write 抛错", "expectedTest": "test/integration/replica-transport-faults.test.ts（新建）", "notes": "REPLICA_REQUEST_FAILED；同时覆盖 message()。" },
+        { "category": "RT-VALIDATE-DEFAULT", "ranges": ["839"], "trigger": "unreachable-defensive", "seam": "无（#validate 只接收 status/init/query/apply）", "expectedTest": "不需要（记为防御性死分支）", "notes": "默认分支不可达；如需 100% 需在文档标注而非堆测试。" },
+        { "category": "RT-SHUTDOWN-KILL", "ranges": ["848-849", "854-857", "859-862", "866-868"], "trigger": "real-subprocess", "seam": "workerPath 指向忽略 shutdown 的脚本；stopTimeoutMs 调小", "expectedTest": "test/integration/replica-transport-faults.test.ts（新建）", "notes": "write shutdown 失败兜底、SIGTERM 等待、SIGKILL 升级、最终 STOP_FAILED。" },
+        { "category": "RT-KILL-CLEANUP", "ranges": ["878-891", "899-905"], "trigger": "real-subprocess", "seam": "start 失败后 #kill 全程；safeKill 对已死进程抛错", "expectedTest": "test/integration/replica-transport-faults.test.ts（新建）", "notes": "#kill 的 SIGKILL 等待 + stdio 释放 + safeKill catch。" },
+        { "category": "RT-DIAGNOSTIC-GETTER", "ranges": ["895-896"], "trigger": "fake-spawn", "seam": "调用 stderrOf(handle)", "expectedTest": "test/integration/replica-transport-faults.test.ts（新建）", "notes": "公开诊断 getter 未被任何测试断言。" },
+        { "category": "RT-REMOTE-STORE-READS", "ranges": ["961", "965-968", "971-984", "987-999", "1002-1012", "1015-1016", "1030-1036"], "trigger": "fake-store", "seam": "RemoteReplicaStore 直接构造（read 回调）+ matchesQuery 过滤", "expectedTest": "test/unit/replica-remote-store.test.ts（新建）", "notes": "带 query 的 candidates、adjacency(ref)、evidence/status/provenance/snapshotIdentity 与四个匹配字段全未覆盖。" }
+      ]
+    },
+    {
+      "file": "src/memory/replica-worker.ts",
+      "ownerTask": "CV-02",
+      "title": "子进程副本协议入口/流循环",
+      "metrics": { "line": 88.54, "branch": 50.68, "functions": 88.89 },
+      "categories": [
+        { "category": "RW-VALIDATION-HELPER", "ranges": ["149-151"], "trigger": "stream-loop", "seam": "向 input 写入非法 init/apply/query", "expectedTest": "test/unit/replica-worker-protocol.test.ts（新建）", "notes": "fail() 未命中说明入站校验失败从未被触发。" },
+        { "category": "RW-INIT-SNAPSHOT-INVALID", "ranges": ["225-226"], "trigger": "stream-loop", "seam": "init snapshot 摘要字段非 string/null", "expectedTest": "test/unit/replica-worker-protocol.test.ts（新建）", "notes": "validateInit snapshot 分支。" },
+        { "category": "RW-APPLY-BOUNDS", "ranges": ["238-239", "242-243"], "trigger": "stream-loop", "seam": "events>1024 / projectScope 越界", "expectedTest": "test/unit/replica-worker-protocol.test.ts（新建）", "notes": "数组长度与 scope 校验。" },
+        { "category": "RW-QUERY-SCHEMA", "ranges": ["251-254"], "trigger": "stream-loop", "seam": "query 不满足 anchorprobe.request.v1", "expectedTest": "test/unit/replica-worker-protocol.test.ts（新建）", "notes": "含 issue detail 拼装。" },
+        { "category": "RW-PARSE-REQUEST", "ranges": ["264-265", "273-274", "283-284"], "trigger": "pure-function", "seam": "parseWorkerRequest 直接调用", "expectedTest": "test/unit/replica-worker-protocol.test.ts（新建）", "notes": "非法 JSON / 未知 type / payload 非对象。" },
+        { "category": "RW-PARSE-RESPONSE", "ranges": ["303-304", "309-310", "314-315", "321-322", "325"], "trigger": "pure-function", "seam": "parseWorkerResponse 直接调用", "expectedTest": "test/unit/replica-worker-protocol.test.ts（新建）", "notes": "父侧解析器五个拒绝分支，纯函数无需进程。" },
+        { "category": "RW-DOUBLE-INIT", "ranges": ["343-344"], "trigger": "stream-loop", "seam": "同一 session 两次 init", "expectedTest": "test/unit/replica-worker-protocol.test.ts（新建）", "notes": "REPLICA_ALREADY_INITIALIZED。" },
+        { "category": "RW-SCOPE-DENIED", "ranges": ["376-380"], "trigger": "stream-loop", "seam": "query 的 project_scope 与副本不一致", "expectedTest": "test/unit/replica-worker-protocol.test.ts（新建）", "notes": "SCOPE_DENIED。" },
+        { "category": "RW-STDOUT-WRITE-FAIL", "ranges": ["467-469"], "trigger": "stream-loop", "seam": "output stream 写抛错", "expectedTest": "test/unit/replica-worker-protocol.test.ts（新建）", "notes": "writeLine catch。" },
+        { "category": "RW-FATAL", "ranges": ["508-509"], "trigger": "stream-loop", "seam": "向 input 流 emit error / 触发 uncaughtException", "expectedTest": "test/unit/replica-worker-protocol.test.ts（新建）", "notes": "onUncaught -> terminate(1)；terminate 会 process.exit，测试用子进程隔离。" },
+        { "category": "RW-HANDLELINE-INVALID", "ranges": ["515-517"], "trigger": "stream-loop", "seam": "input 写入畸形行", "expectedTest": "test/unit/replica-worker-protocol.test.ts（新建）", "notes": "解析失败回错误帧。" },
+        { "category": "RW-UNSUPPORTED-TYPE", "ranges": ["541-542"], "trigger": "unreachable-defensive", "seam": "无（parseWorkerRequest 已把 type 限死在词汇表）", "expectedTest": "不需要（记为防御性死分支）", "notes": "default 分支逻辑不可达。" },
+        { "category": "RW-MESSAGE-TOO-LARGE", "ranges": ["550-557", "571-575", "582-585", "587-590"], "trigger": "stream-loop", "seam": "maxMessageBytes 调小 + 分片/整行超限", "expectedTest": "test/unit/replica-worker-protocol.test.ts（新建）", "notes": "tooLarge 回复、尾块超限、discarding 复位、整行超限。" },
+        { "category": "RW-HEARTBEAT-LOST", "ranges": ["608-613"], "trigger": "stream-loop", "seam": "heartbeatMs>0 且 lastActivity 停滞（注入短时钟/真实 250ms 轮询）", "expectedTest": "test/integration/replica-process.test.ts", "notes": "父心跳丢失退出；测试需容忍最小 250ms tick。" },
+        { "category": "RW-DIRECT-GUARD-FALSE", "ranges": ["629-630"], "trigger": "pure-function", "seam": "argv[1] 缺失时 invokedDirectly()", "expectedTest": "test/unit/replica-worker-protocol.test.ts（新建）", "notes": "仅 argv[1] 非字符串时可达。" }
+      ]
+    },
+    {
+      "file": "src/memory/tcp-transport.ts",
+      "ownerTask": "CV-03",
+      "title": "真实 TCP/TLS 副本传输（T-134）",
+      "metrics": { "line": 87.47, "branch": 72.89, "functions": 81.30 },
+      "categories": [
+        { "category": "TCP-CONFIG-NUMERIC", "ranges": ["164-165", "172-173", "446-447"], "trigger": "pure-function", "seam": "positiveInt/nonNegativeInt/decoder 构造直接调用", "expectedTest": "test/unit/tcp-frame-codec.test.ts（新建）", "notes": "配置数值非法分支。" },
+        { "category": "TCP-PAYLOAD-SCHEMA", "ranges": ["321-323", "329-332", "418-422"], "trigger": "pure-function", "seam": "encodeTcpReplicaFrame / parseTcp* 直接调用", "expectedTest": "test/unit/tcp-frame-codec.test.ts（新建）", "notes": "invalid()、parsePayload 严格模式拒绝、编码超帧。" },
+        { "category": "TCP-HA-VALIDATORS", "ranges": ["369-372", "375-378", "381-384", "387-390", "393-396", "399-402"], "trigger": "pure-function", "seam": "assertMwha* 直接调用非法负载", "expectedTest": "test/unit/tcp-frame-codec.test.ts（新建）", "notes": "六个冻结校验器只有成功路径被覆盖。" },
+        { "category": "TCP-DECODER-GETTER", "ranges": ["453-454"], "trigger": "pure-function", "seam": "bufferedBytes getter", "expectedTest": "test/unit/tcp-frame-codec.test.ts（新建）", "notes": "分片缓冲诊断。" },
+        { "category": "TCP-SERVER-CONFIG", "ranges": ["642-643", "645-646", "648-649", "652-653", "656-657", "674-675", "678-679"], "trigger": "real-socket", "seam": "TcpReplicaServer 构造参数非法", "expectedTest": "test/integration/tcp-transport.test.ts", "notes": "server options 全部拒绝分支。" },
+        { "category": "TCP-NONCE-BOUND", "ranges": ["712-715", "718-721"], "trigger": "real-socket", "seam": "maxPendingChallenges/maxUsedNonces 调小", "expectedTest": "test/integration/tcp-transport.test.ts（扩展 nonce 容量用例）", "notes": "重复键重插与最旧淘汰。" },
+        { "category": "TCP-LISTEN-LIFECYCLE", "ranges": ["765-766", "768-770", "787-791", "796-801", "812-819", "824-825"], "trigger": "real-socket", "seam": "close 后 listen、占用端口/非法 host 触发 bind 失败", "expectedTest": "test/integration/tcp-connection-lifecycle.test.ts（新建）", "notes": "重复 listen、closed、listener error、异步/同步 bind 失败、地址缺失。" },
+        { "category": "TCP-SERVER-CONNECTION", "ranges": ["881-885", "889", "894", "927"], "trigger": "real-socket", "seam": "客户端异常断连/空闲/handshake 不完成", "expectedTest": "test/integration/tcp-connection-lifecycle.test.ts（新建）", "notes": "socket error、idle timeout(event+touchIdle)、handshake timeout。" },
+        { "category": "TCP-AUTH-GATE", "ranges": ["947-949", "1010-1012"], "trigger": "real-socket", "seam": "未完成握手直接发 query/apply/status", "expectedTest": "test/redteam/tcp-transport-boundary.test.ts", "notes": "TCP_AUTH_REQUIRED 两处。" },
+        { "category": "TCP-SERVICE-ERROR", "ranges": ["956-958", "1060-1061", "1070-1076", "1088"], "trigger": "real-socket", "seam": "注入抛错/返回畸形结果/慢服务", "expectedTest": "test/integration/tcp-transport.test.ts", "notes": "handler catch、query candidates 校验、service throw 映射、request timeout。" },
+        { "category": "TCP-AUTHORIZE", "ranges": ["1107-1112", "1114"], "trigger": "real-socket", "seam": "authorize 回调 true/false/对象；无 policy/allow-list", "expectedTest": "test/redteam/tcp-transport-boundary.test.ts", "notes": "授权回调三分支 + fail-closed。" },
+        { "category": "TCP-WRITE-PATH", "ranges": ["1132-1137", "1156-1158", "1170-1171"], "trigger": "real-socket", "seam": "响应帧超限/连接已不可写", "expectedTest": "test/integration/tcp-connection-lifecycle.test.ts（新建）", "notes": "写编码失败、sendFailureThenDestroy 两处兜底。" },
+        { "category": "TCP-CLIENT-CONFIG", "ranges": ["1227-1228", "1230-1231", "1233-1234", "1236-1237", "1240-1241", "1244-1245"], "trigger": "real-socket", "seam": "TcpReplicaClient 构造参数非法", "expectedTest": "test/integration/tcp-transport.test.ts", "notes": "client options 六个拒绝分支。" },
+        { "category": "TCP-CLIENT-GETTERS", "ranges": ["1294-1295", "1298-1299"], "trigger": "real-socket", "seam": "isConnected/isClosed 断言", "expectedTest": "test/integration/tcp-connection-lifecycle.test.ts（新建）", "notes": "资源清理断言点。" },
+        { "category": "TCP-CONNECT-LIFECYCLE", "ranges": ["1305-1307", "1512-1515", "1518-1521", "1528-1533", "1536-1539"], "trigger": "real-socket", "seam": "并发 connect + abort、连接前断线、connect 超时", "expectedTest": "test/integration/tcp-connection-lifecycle.test.ts（新建）", "notes": "connect 取消/关闭/超时竞态。" },
+        { "category": "TCP-REQUEST-PATH", "ranges": ["1337-1338", "1340-1341", "1346-1347", "1354-1355", "1385-1389"], "trigger": "real-socket", "seam": "未连接即请求、hello/auth 直发、pending 上限、超大帧、写失败", "expectedTest": "test/integration/tcp-connection-lifecycle.test.ts（新建）", "notes": "五条请求前/中失败路径。" },
+        { "category": "TCP-RESPONSE-VALIDATE", "ranges": ["1400-1401", "1419-1420"], "trigger": "real-socket", "seam": "服务端返回缺 candidates/缺 applied", "expectedTest": "test/integration/tcp-transport.test.ts", "notes": "query/apply 结果校验。" },
+        { "category": "TCP-NODEQUERY", "ranges": ["1434-1436"], "trigger": "real-socket", "seam": "client.createNodeQuery() 并发起 query", "expectedTest": "test/integration/tcp-transport.test.ts", "notes": "适配函数未被使用。" },
+        { "category": "TCP-HANDSHAKE", "ranges": ["1550", "1561-1562", "1576-1577", "1583-1584", "1595-1596", "1604-1607"], "trigger": "real-socket", "seam": "假 server 不回 hello/回畸形/提前断线", "expectedTest": "test/redteam/tcp-transport-boundary.test.ts（扩展 HMAC/TLS 负例）", "notes": "握手超时、缺 serverNonce、socket 不可用、编码/写失败、内部请求超时。" },
+        { "category": "TCP-FRAMING-FATAL", "ranges": ["1616-1619", "1630-1632", "1644-1645"], "trigger": "real-socket", "seam": "对端发送坏帧/kind 不符/既非 success 也非 failure", "expectedTest": "test/redteam/tcp-transport-boundary.test.ts（扩展非法帧）", "notes": "客户端解码致命错误、响应 kind 错位、无法归类的帧。" }
+      ]
+    },
+    {
+      "file": "src/memory/leader-lease.ts",
+      "ownerTask": "CV-04",
+      "title": "多数派 leader 租约/ fencing 状态机",
+      "metrics": { "line": 88.15, "branch": 75.49, "functions": 80.72 },
+      "categories": [
+        { "category": "LL-TOPOLOGY-VALIDATION", "ranges": ["333-334", "342-343", "350-351", "355-356", "367-369", "374-375", "380-381", "383-384", "386-387", "389-390", "395-399", "481-482", "484-485", "489-490", "492-493"], "trigger": "in-memory-clock", "seam": "LeaderLeaseManager/createLeaderLeaseCluster 构造参数非法", "expectedTest": "test/unit/leader-lease.test.ts", "notes": "拓扑/ voter 通道/管理器构造/正整数/now 类型全部拒绝分支。" },
+        { "category": "LL-UNUSED-GETTERS", "ranges": ["513-514", "517-518", "521-522", "525-526", "592-597"], "trigger": "in-memory-clock", "seam": "读取 member_id/members/votingCount/quorumSize/transitions", "expectedTest": "test/unit/leader-lease.test.ts", "notes": "公开观测面未被断言（transitions 拷贝逻辑亦未命中）。" },
+        { "category": "LL-ELECTION-REJECTED-OUTCOME", "ranges": ["664-666"], "trigger": "fake-voter-rpc", "seam": "VoterRpc.requestVote 返回 rejected Promise", "expectedTest": "test/unit/leader-lease.test.ts（扩展）", "notes": "Promise.allSettled status=rejected -> unreachable 'unknown'。" },
+        { "category": "LL-VOTE-REFUSALS", "ranges": ["729-730", "732-733", "735-736"], "trigger": "fake-voter-rpc", "seam": "handleVoteRequest：自投票 / 旧 epoch / 旧 term", "expectedTest": "test/unit/leader-lease.test.ts", "notes": "同 term rival（742）已覆盖，这三条未覆盖。" },
+        { "category": "LL-RENEW-NOT-LEADER", "ranges": ["770-778"], "trigger": "fake-voter-rpc", "seam": "follower 调 renewLease", "expectedTest": "test/unit/leader-lease.test.ts", "notes": "NOT_LEADER。" },
+        { "category": "LL-LEASE-EXPIRED", "ranges": ["780-790"], "trigger": "in-memory-clock", "seam": "now() 推进越过 lease", "expectedTest": "test/unit/leader-lease.test.ts（既有过期用例可扩展）", "notes": "renewLease 立即降级。" },
+        { "category": "LL-NEWER-LEADER", "ranges": ["840-856"], "trigger": "fake-voter-rpc", "seam": "heartbeat 响应带回更新 (epoch,term)", "expectedTest": "test/unit/leader-lease.test.ts", "notes": "NEWER_LEADER 降级。" },
+        { "category": "LL-HEARTBEAT-STALE", "ranges": ["933"], "trigger": "fake-voter-rpc", "seam": "handleHeartbeat 收到更旧 term", "expectedTest": "test/unit/leader-lease.test.ts", "notes": "陈旧租约拒绝。" },
+        { "category": "LL-OBSERVE", "ranges": ["951-958", "977-978", "981-996"], "trigger": "fake-voter-rpc", "seam": "observeLease：unchanged / refreshed / adopted", "expectedTest": "test/unit/leader-lease.test.ts", "notes": "fence 允许后的三条动作路径全未覆盖。" },
+        { "category": "LL-FENCE-AHEAD", "ranges": ["1025-1026"], "trigger": "in-memory-clock", "seam": "assertCanCommit 写入 term 超前", "expectedTest": "test/unit/leader-lease.test.ts（既有 fencing 用例扩展）", "notes": "FENCE_REJECTED（term ahead）。" },
+        { "category": "LL-COMMIT-INDEX-INVALID", "ranges": ["1047-1048"], "trigger": "in-memory-clock", "seam": "commit_index<=0 或非安全整数", "expectedTest": "test/unit/leader-lease.test.ts", "notes": "HA_INPUT_INVALID。" },
+        { "category": "LL-REJOIN-RPC-FAIL", "ranges": ["1091-1092"], "trigger": "fake-voter-rpc", "seam": "rejoin 时 sendHeartbeat 抛错", "expectedTest": "test/integration/leader-lease.test.ts", "notes": "rejoin 收集响应的 catch 分支。" },
+        { "category": "LL-FETCH-INVALID", "ranges": ["1137-1138"], "trigger": "fake-voter-rpc", "seam": "fetchCommitted 返回非数组", "expectedTest": "test/integration/leader-lease.test.ts", "notes": "HA_INPUT_INVALID。" },
+        { "category": "LL-STATE-CALLBACK", "ranges": ["1192-1197"], "trigger": "in-memory-clock", "seam": "onStateChange 回调抛错", "expectedTest": "test/unit/leader-lease.test.ts（扩展）", "notes": "观测回调不得影响协议行为（吞异常）。" },
+        { "category": "LL-FAULT-VALIDATION", "ranges": ["1278-1279", "1282-1283", "1285-1286", "1295-1296", "1301-1305"], "trigger": "in-memory-clock", "seam": "InMemoryFaultController.partition/isolate/setDelay 非法输入", "expectedTest": "test/unit/leader-lease-faults.test.ts（新建）", "notes": "故障注入器参数校验；setDelay 有效路径也未命中。" },
+        { "category": "LL-FAULT-SNAPSHOT", "ranges": ["1325-1336"], "trigger": "in-memory-clock", "seam": "faults.snapshot()", "expectedTest": "test/unit/leader-lease-faults.test.ts（新建）", "notes": "快照排序输出未断言。" },
+        { "category": "LL-FAULT-DELAY", "ranges": ["1341-1344"], "trigger": "in-memory-clock", "seam": "latencyMs/delayMs>0", "expectedTest": "test/unit/leader-lease-faults.test.ts（新建）", "notes": "真实延时路径（需短延迟≤200ms）。" },
+        { "category": "LL-VOTER-GETTER", "ranges": ["1377-1378"], "trigger": "fake-voter-rpc", "seam": "读 InMemoryVoterRpc.voter_id", "expectedTest": "test/unit/leader-lease-faults.test.ts（新建）", "notes": "target_id getter 已覆盖，voter_id 未覆盖。" },
+        { "category": "LL-VOTER-UNREGISTERED", "ranges": ["1399-1400"], "trigger": "fake-voter-rpc", "seam": "resolveTarget 返回 undefined", "expectedTest": "test/unit/leader-lease-faults.test.ts（新建）", "notes": "QUORUM_NOT_REACHED（目标未注册）。" },
+        { "category": "LL-TCP-ADAPTER-UNTESTED", "ranges": ["1430", "1434-1437", "1440-1441", "1444-1445", "1448-1449", "1452-1453"], "trigger": "compile-time-seam", "seam": "TcpVoterRpcAdapter.send 注入", "expectedTest": "test/unit/leader-lease-tcp-adapter.test.ts（新建，可选）", "notes": "整个类零覆盖；源码注释已声明 T-139 才接线。建议要么补最小契约测试，要么在指标中显式登记为未验证 seam（不得伪装成已覆盖）。" }
+      ]
+    },
+    {
+      "file": "src/memory/ha-cluster.ts",
+      "ownerTask": "CV-04",
+      "title": "真实 TCP HA 集群封装（T-139）",
+      "metrics": { "line": 88.64, "branch": 72.90, "functions": 85.04 },
+      "categories": [
+        { "category": "HAC-SYNC-VALIDATION", "ranges": ["233-234", "236-237", "239-240", "270-272"], "trigger": "pure-function", "seam": "haSyncItemSchema superRefine + issueText", "expectedTest": "test/unit/ha-cluster-sync.test.ts（新建）", "notes": "同步项 commit_index/leader/零值自定义校验与错误文本。" },
+        { "category": "HAC-FRAME-DECODE", "ranges": ["304-306", "308-313", "321-323", "326-328"], "trigger": "pure-function", "seam": "HaFrameDecoder.push 直接驱动", "expectedTest": "test/unit/ha-cluster-sync.test.ts（新建）", "notes": "长度非正/超帧/坏 JSON/信封违规。" },
+        { "category": "HAC-SERVER-ADDRESS", "ranges": ["371-372"], "trigger": "real-socket", "seam": "listen 前后读 address", "expectedTest": "test/integration/ha-split-brain.test.ts", "notes": "未 listen 时 address=null 分支。" },
+        { "category": "HAC-SERVER-LISTEN", "ranges": ["385-387", "389-390", "395-398", "411-412", "416-418"], "trigger": "real-socket", "seam": "重复 listen/非 loopback/bind 失败/无地址", "expectedTest": "test/integration/ha-split-brain.test.ts（扩展启动失败）", "notes": "监听状态机五条失败路径。" },
+        { "category": "HAC-SERVER-CONNECTION", "ranges": ["451-453", "473-475"], "trigger": "real-socket", "seam": "server close 后仍有接入、data 到达已 drop 连接", "expectedTest": "test/integration/ha-split-brain.test.ts", "notes": "关闭竞态两处。" },
+        { "category": "HAC-SERVER-HANDLER", "ranges": ["487-492", "497-501", "506-507"], "trigger": "real-socket", "seam": "handler 抛错/回复写失败/drop", "expectedTest": "test/integration/ha-split-brain.test.ts", "notes": "错误应答与连接清理。" },
+        { "category": "HAC-CLIENT-STATE", "ranges": ["549-550", "554-555", "558-559", "580-581", "589-590"], "trigger": "real-socket", "seam": "closed 后 request/reset、目标不可用、socket 不可用、编码失败", "expectedTest": "test/integration/ha-split-brain.test.ts（扩展客户端负例）", "notes": "客户端五条前置失败。" },
+        { "category": "HAC-CLIENT-IO", "ranges": ["607-610", "616-617", "620-622", "626-630"], "trigger": "real-socket", "seam": "写失败/关闭时 send/target 变更/connect 包装", "expectedTest": "test/integration/ha-split-brain.test.ts", "notes": "HA TCP 客户端 I/O 失败路径。" },
+        { "category": "HAC-CONNECT", "ranges": ["641-643", "647-650", "659-662", "665-668"], "trigger": "real-socket", "seam": "非 loopback 目标、连接超时、socket error、close 抢跑", "expectedTest": "test/integration/tcp-connection-lifecycle.test.ts（新建，可共用）", "notes": "连接四失败路径。" },
+        { "category": "HAC-SOCKET-EVENTS", "ranges": ["681-682", "685-686"], "trigger": "real-socket", "seam": "连接后 error/close", "expectedTest": "test/integration/ha-split-brain.test.ts", "notes": "failPending + teardown。" },
+        { "category": "HAC-FRAME-ERROR", "ranges": ["698-701", "709", "715-717"], "trigger": "real-socket", "seam": "坏帧/失败帧/拒绝挂起请求", "expectedTest": "test/redteam/ha-split-brain-boundary.test.ts（扩展非法帧）", "notes": "解码错误、失败应答路由、failPending。" },
+        { "category": "HAC-CONFIG-POSITIVE", "ranges": ["735-736"], "trigger": "real-socket", "seam": "positiveInt 非法超时", "expectedTest": "test/integration/ha-split-brain.test.ts", "notes": "配置校验。" },
+        { "category": "HAC-VOTER-GETTER", "ranges": ["760-761"], "trigger": "real-socket", "seam": "读 TcpHaVoterRpc.voter_id", "expectedTest": "test/integration/ha-split-brain.test.ts", "notes": "target_id 已覆盖，voter_id 未覆盖。" },
+        { "category": "HAC-REPLICA-STATUS", "ranges": ["870-881"], "trigger": "real-socket", "seam": "经 replicaAddress 用 TcpReplicaClient 调 status", "expectedTest": "test/integration/ha-split-brain.test.ts（扩展 replica 服务冒烟）", "notes": "HaNode 内置 TcpReplicaService.status 从未被调用。" },
+        { "category": "HAC-UNSUPPORTED-KIND", "ranges": ["985"], "trigger": "real-socket", "seam": "向 HA 端口发送不在 HA_WIRE_KINDS 的 kind", "expectedTest": "test/redteam/ha-split-brain-boundary.test.ts", "notes": "默认分支；协议解码层已限制 kind，需畸形信封才可达。" },
+        { "category": "HAC-CLUSTER-VALIDATION", "ranges": ["1150-1151", "1154-1155"], "trigger": "real-socket", "seam": "memberIds 非法/host 非 loopback", "expectedTest": "test/redteam/ha-split-brain-boundary.test.ts", "notes": "HaCluster.start 参数校验。" },
+        { "category": "HAC-PROPOSE-VALIDATION", "ranges": ["1231-1232", "1243-1244"], "trigger": "real-socket", "seam": "writerId 越界/哈希不一致", "expectedTest": "test/redteam/ha-split-brain-boundary.test.ts", "notes": "propose 输入校验。" },
+        { "category": "HAC-PROPOSE-ACK", "ranges": ["1283-1284", "1286-1287", "1301"], "trigger": "real-socket", "seam": "伪造 ack_nonce/voter_id 或不 grant", "expectedTest": "test/redteam/ha-split-brain-boundary.test.ts（既有伪造多数派用例扩展）", "notes": "ack 完整性三路径。" },
+        { "category": "HAC-RIVAL-LEADER", "ranges": ["1405-1406"], "trigger": "real-socket", "seam": "assertNoRivalLeader 传他人 lease", "expectedTest": "test/redteam/ha-split-brain-boundary.test.ts", "notes": "leader_id 与 memberId 不一致。" },
+        { "category": "HAC-CLOSE-PARTIAL", "ranges": ["1554-1555", "1561-1562"], "trigger": "real-socket", "seam": "令某节点/代理 close 抛错", "expectedTest": "test/integration/ha-split-brain.test.ts", "notes": "best-effort 关闭吞错路径。" },
+        { "category": "HAC-AGGREGATION", "ranges": ["1590-1592"], "trigger": "real-socket", "seam": "构造≥2 条 adjudication 触发 sort comparator", "expectedTest": "test/integration/ha-split-brain.test.ts", "notes": "排序比较器未命中说明聚合结果始终≤1 条。" },
+        { "category": "HAC-ERROR-CODE", "ranges": ["1650-1652"], "trigger": "real-socket", "seam": "replicationFailures 含非 HaProtocolError", "expectedTest": "test/integration/ha-split-brain.test.ts", "notes": "errorCodeOf 的 UNKNOWN 兜底。" },
+        { "category": "HAC-ADJUDICATION", "ranges": ["1655-1657", "1672-1712"], "trigger": "real-socket", "seam": "rejoin 同步出同一 slot 的多分支且均 committed", "expectedTest": "test/redteam/ha-split-brain-boundary.test.ts（旧主恢复+分叉场景扩展）", "notes": "adjudicateNewestBranches 整段未执行；依赖 rejoin 带回了冲突分叉。" }
+      ]
+    },
+    {
+      "file": "src/memory/distributed-probe.ts",
+      "ownerTask": "CV-04",
+      "title": "异步分布式探针 scatter/gather/合并",
+      "metrics": { "line": 90.84, "branch": 79.18, "functions": 86.87 },
+      "categories": [
+        { "category": "DP-OPTIONS-INVALID", "ranges": ["355-356", "359-360", "363-364", "378-382", "384-385"], "trigger": "fake-node", "seam": "normalizeOptions/调用签名校验", "expectedTest": "test/unit/distributed-probe.test.ts", "notes": "mode/deadline/nodeTimeout/primaryCommitIndex/signal 非法。" },
+        { "category": "DP-FALLBACK-SNAPSHOT", "ranges": ["414-422"], "trigger": "fake-node", "seam": "无任何可用 snapshot 时", "expectedTest": "test/unit/distributed-probe.test.ts", "notes": "兜底快照构造。" },
+        { "category": "DP-EDGE-DEDUPE", "ranges": ["629-633", "635-637"], "trigger": "fake-node", "seam": "多节点返回重复边", "expectedTest": "test/unit/distributed-probe.test.ts（扩展 gather）", "notes": "去重命中分支与排序比较器。" },
+        { "category": "DP-MERGED-STORE", "ranges": ["688", "692-705", "708-720", "723-733", "736-737", "740-741"], "trigger": "fake-node", "seam": "MergedProbeStore 的 adjacency(ref)/evidence/status/provenance/snapshotIdentity/find", "expectedTest": "test/unit/distributed-probe.test.ts（扩展 store 读接口）", "notes": "合并存储读接口大面积未断言。" },
+        { "category": "DP-NODE-SNAPSHOT-FAIL", "ranges": ["768-769"], "trigger": "fake-node", "seam": "node.store.snapshot 抛错", "expectedTest": "test/redteam/distributed-probe-boundary.test.ts", "notes": "NODE_UNAVAILABLE。" },
+        { "category": "DP-NODE-DEADLINE", "ranges": ["795-796"], "trigger": "fake-node", "seam": "注入 now 使 deadline 已耗尽", "expectedTest": "test/unit/distributed-probe.test.ts", "notes": "dispatch 前 TIMEOUT。" },
+        { "category": "DP-NODE-CANCELLED", "ranges": ["798-799", "809-811", "822-823"], "trigger": "fake-node", "seam": "AbortSignal 前/中取消", "expectedTest": "test/unit/distributed-probe.test.ts", "notes": "取消三路径。" },
+        { "category": "DP-NODE-RESPONSE-INVALID", "ranges": ["862-863", "865-866", "869-870", "875-876"], "trigger": "fake-node", "seam": "畸形 candidates/edges/candidate/摘要重算失败", "expectedTest": "test/redteam/distributed-probe-boundary.test.ts", "notes": "伪造响应四类拒绝。" },
+        { "category": "DP-NODE-COMMIT-UNKNOWN", "ranges": ["893-894", "901-902"], "trigger": "fake-node", "seam": "replicaCommitIndex 抛错/所有来源无 commit_index", "expectedTest": "test/unit/distributed-probe.test.ts", "notes": "提交点未知。" },
+        { "category": "DP-NODE-UNSERVICEABLE", "ranges": ["908-909"], "trigger": "fake-node", "seam": "state=REVOKED/FAILED/SUSPECT/JOINING", "expectedTest": "test/redteam/distributed-probe-boundary.test.ts", "notes": "不可服务状态。" },
+        { "category": "DP-SCATTER-ABORT", "ranges": ["949-951"], "trigger": "fake-node", "seam": "scatter 期间 abort", "expectedTest": "test/unit/distributed-probe.test.ts", "notes": "abortPromise 立即/异步 resolve。" },
+        { "category": "DP-CONSISTENCY", "ranges": ["978-979"], "trigger": "fake-node", "seam": "retrieval_completeness=UNKNOWN 及其它非 COMPLETE", "expectedTest": "test/unit/distributed-probe.test.ts", "notes": "consistencyFromResponse 仅命中 CONSISTENT 分支。" },
+        { "category": "DP-LOCAL-ACCESS", "ranges": ["1146-1147", "1155-1156", "1164-1165", "1172-1173"], "trigger": "fake-node", "seam": "localStore 各读方法抛错", "expectedTest": "test/unit/distributed-probe.test.ts", "notes": "本地降级四个容错分支。" },
+        { "category": "DP-CALL-VALIDATION", "ranges": ["1259-1260", "1262-1263", "1266-1267"], "trigger": "fake-node", "seam": "对象重载签名参数非法", "expectedTest": "test/unit/distributed-probe.test.ts", "notes": "localStore/replicas 类型校验。" },
+        { "category": "DP-DEGRADE-PRIMARY-UNKNOWN", "ranges": ["1493-1494"], "trigger": "fake-node", "seam": "QUORUM 模式 primaryCommitIndex 缺失", "expectedTest": "test/unit/distributed-probe.test.ts（模式矩阵扩展）", "notes": "本地降级。" },
+        { "category": "DP-CANCELLED-ANSWER", "ranges": ["1540-1569"], "trigger": "fake-node", "seam": "scatter 完成后 signal 已 abort", "expectedTest": "test/unit/distributed-probe.test.ts", "notes": "整段 cancelled assembleAnswer 未覆盖。" },
+        { "category": "DP-TIMEOUT-FLAG", "ranges": ["1572-1575"], "trigger": "fake-node", "seam": "deadlineAt 已过且 stopReason=NONE", "expectedTest": "test/unit/distributed-probe.test.ts", "notes": "超时标记补齐。" },
+        { "category": "DP-DIGEST-FALLBACK", "ranges": ["1652-1653"], "trigger": "fake-node", "seam": "computeEvidenceDigestDetailed 抛错", "expectedTest": "test/unit/distributed-probe.test.ts（扩展）", "notes": "空指纹兜底摘要。" }
+      ]
+    }
+  ],
+  "seamContract": {
+    "deterministicSeams": [
+      { "kind": "injectable-clock", "where": ["src/memory/leader-lease.ts LeaderLeaseManagerOptions.now", "createLeaderLeaseCluster.now/nowForMember", "src/memory/ha-cluster.ts HaClusterOptions.now + advanceClock"], "useFor": ["租约过期", "续约", "墙钟回拨诊断"], "rule": "禁止真实 sleep 验证过期；用 now() 直接推进。" },
+      { "kind": "fake-voter-rpc", "where": ["leader-lease.ts VoterRpc", "InMemoryVoterRpc + InMemoryFaultController（partition/isolate/setDelay）"], "useFor": ["旧 epoch/错误 leader_id/多数派丢失/旧主恢复/重复提案/慢节点"], "rule": "优先确定性内存网格；latencyMs≤200ms，否则视为长 sleep。" },
+      { "kind": "fake-node", "where": ["distributed-probe.ts DistributedReplicaNode/store/query", "DistributedProbeOptions.now"], "useFor": ["慢节点/伪造摘要/混合版本/重复冲突/本地降级/取消"], "rule": "store.query 可控延迟/异常；摘要由 digestCandidates 重算比对。" },
+      { "kind": "pure-parser", "where": ["tcp-transport encode/decode/parse*/assertMwha*", "replica-worker parseWorkerRequest/parseWorkerResponse", "ha-cluster HaFrameDecoder"], "useFor": ["非法帧/超大帧/畸形负载"], "rule": "纯函数直接调用，不启 socket/进程。" },
+      { "kind": "worker-stream-loop", "where": ["replica-worker runReplicaWorker({input,output,errorOutput,heartbeatMs,maxMessageBytes})"], "useFor": ["错误帧/非法响应/超限/背压/心跳"], "rule": "用 PassThrough 流确定性驱动；terminate() 收尾；process.exit 路径放子进程隔离。" },
+      { "kind": "spawn-override", "where": ["replica-transport ReplicaStartOptions.spawn/workerPath/env"], "useFor": ["启动失败/异常退出/重启/停止竞态"], "rule": "能注入伪 spawn 的优先注入；必须真实子进程的用 workerPath 指向临时脚本。" },
+      { "kind": "real-socket", "where": ["tcp-transport TcpReplicaServer/Client", "ha-cluster HaTcpServer/Client", "tcp-fault-proxy"], "useFor": ["TLS/HMAC 失败/非 loopback 明文/断线/关闭竞态/端口复用"], "rule": "仅 127.0.0.1/::1、端口 0（ephemeral）；测试结束断言 activeConnectionCount===0 且端口可重绑。" },
+      { "kind": "real-subprocess", "where": ["ChildProcessReplicaTransport"], "useFor": ["子进程退出/pid 回收/Windows 竞态"], "rule": "有界轮询等待 exit，不上无限 sleep。" }
+    ],
+    "timingRules": {
+      "maxRealWaitMs": 200,
+      "prefer": "事件/回调/轮询循环，单次轮询步长≤20ms，总预算≤200ms（ Windows 进程回收单独放宽到 500ms 有界）",
+      "forbidden": "固定长 sleep（>200ms）、真实 5s/60s 默认超时、以墙钟等待代替注入时钟"
+    },
+    "cleanupAssertions": [
+      "stop 后 process.kill(pid,0) 抛 ESRCH（或等价的有界轮询确认进程消失）",
+      "transport/server/client.activeConnectionCount === 0",
+      "server.close() 后同 host:port 可重新 listen（端口可重绑）",
+      "close() 幂等：二次调用立即返回",
+      "无残留 listener：socket.listenerCount('data'/'exit'/'error') 符合预期"
+    ],
+    "windowsRaceRules": [
+      "exit 事件可能晚于 pid 回收：以有界轮询（步长≤20ms、上限 500ms）确认子进程消失，再断言清理",
+      "Windows 管道销毁可能延迟：stop 测试不得断言立即 EOF，而是断言最终释放 + 端口/句柄可回收",
+      "避免依赖 SIGKILL 语义差异：只断言进程不再存活，不断言退出码/信号值"
+    ]
+  },
+  "metricRules": {
+    "repo": "node --test --experimental-test-coverage --test-coverage-include='src/**/*.ts' \"test/**/*.test.ts\" 输出的 all files 行>=95.37%、分支>=83.54%、函数>=95.20%",
+    "modules": "transport/tcp/leader/ha/probe 行>=90 分支>=80；replica-worker 行>=90 分支>=70（剩余项如实报告）",
+    "noCheating": [
+      "不得 --test-coverage-exclude 排除源码",
+      "不得修改 src 添加 istanbul ignore/等效注释或改变统计口径",
+      "不得新增 skip/todo 或隐藏既有失败；既有 1 个 spike skip 必须保持可见",
+      "不得堆正常路径充数：每个未覆盖类别必须有对应异常断言",
+      "真实缺陷先修再计覆盖率"
+    ],
+    "stability": "关键测试连续 3 次通过；红队/竞态类测试需在重复运行下无偶发失败",
+    "defectPrecedence": "若测试暴露真实缺陷，先修缺陷再重跑基线"
+  },
+  "ownership": [
+    { "task": "CV-02", "srcFiles": ["src/memory/replica-transport.ts", "src/memory/replica-worker.ts"], "expectedTests": ["test/integration/replica-process.test.ts（扩展）", "test/integration/replica-transport-faults.test.ts（新建）", "test/unit/replica-worker-protocol.test.ts（新建）", "test/unit/replica-remote-store.test.ts（新建）"], "parallelConstraint": "只改 test/ 下 replica*/memory-audit 相关文件；不碰 tcp/leader/ha/probe 测试与源码。" },
+    { "task": "CV-03", "srcFiles": ["src/memory/tcp-transport.ts"], "expectedTests": ["test/integration/tcp-transport.test.ts（扩展）", "test/redteam/tcp-transport-boundary.test.ts（扩展）", "test/unit/tcp-frame-codec.test.ts（新建）", "test/integration/tcp-connection-lifecycle.test.ts（新建）"], "parallelConstraint": "只改 test/ 下 tcp-*；新建 ha-cluster 共用的连接生命周期文件需与 CV-04 事先约定文件名归属。" },
+    { "task": "CV-04", "srcFiles": ["src/memory/leader-lease.ts", "src/memory/ha-cluster.ts", "src/memory/distributed-probe.ts"], "expectedTests": ["test/unit/leader-lease.test.ts（扩展）", "test/integration/leader-lease.test.ts（扩展）", "test/unit/leader-lease-faults.test.ts（新建）", "test/integration/ha-split-brain.test.ts（扩展）", "test/redteam/ha-split-brain-boundary.test.ts（扩展）", "test/unit/distributed-probe.test.ts（扩展）", "test/redteam/distributed-probe-boundary.test.ts（扩展）"], "parallelConstraint": "只改 test/ 下 leader-lease/ha-split-brain/*probe*；与 CV-03 共享 TCP 连接竞态用例时先分工。" },
+    { "shared": "所有任务禁止编辑 docs/evidence/m17-coverage-baseline.{md,json}（CV-01 独占）；src/ 只读；全量覆盖率由 CV-07 统一复算。" }
+  ],
+  "preliminaryFindings": [
+    {
+      "id": "F-1",
+      "severity": "low",
+      "file": "src/memory/replica-transport.ts",
+      "lines": "670",
+      "claim": "#requireLive 的错误消息模板有一个多余的字面量 `}`：`...${...})`}; pending=...`，实际消息会出现 `)}; pending=0` 之类的多余花括号。",
+      "evidence": "sed -n '670p' 显示模板尾部 `${String(entry.exit.signal)})`}; pending=${...}`；`}` 在模板表达式之外。",
+      "impact": "仅诊断文本，不影响控制流；属初步线索，未在本任务修改。",
+      "suggestedOwner": "CV-02"
+    },
+    {
+      "id": "F-2",
+      "severity": "info",
+      "file": "src/memory/replica-worker.ts",
+      "lines": "540-542",
+      "claim": "handleLine 的 default 分支不可达：parseWorkerRequest 已把 type 限制在 replicaWorkerMessageTypes 内。",
+      "evidence": "parseWorkerRequest 对 type 做 includes 校验并失败返回，switch 只能拿到五个已知值。",
+      "impact": "防御性死分支；强行补测试需构造不可能输入。建议在基线标注为 accepted-defensive，而非堆测试。",
+      "suggestedOwner": "CV-02"
+    },
+    {
+      "id": "F-3",
+      "severity": "info",
+      "file": "src/memory/replica-transport.ts",
+      "lines": "838-839",
+      "claim": "#validate 的 default 分支不可达：调用方只传 status/init/query/apply。",
+      "evidence": "#request 的 requestType/responseType 来自固定枚举；#validate 仅在 resolve 内被调用。",
+      "impact": "防御性死分支。",
+      "suggestedOwner": "CV-02"
+    },
+    {
+      "id": "F-4",
+      "severity": "info",
+      "file": "src/memory/leader-lease.ts",
+      "lines": "1428-1454",
+      "claim": "TcpVoterRpcAdapter 整个类零覆盖，且源码注释声明 T-139 才接线；属未验证 seam。",
+      "evidence": "coverage 未覆盖 1430/1434-1437/1440-1441/1444-1445/1448-1449/1452-1453。",
+      "impact": "拉低 leader-lease 行/分支覆盖；不应伪装成已验证。建议补最小契约测试或在验收中显式登记为 untested-seam。",
+      "suggestedOwner": "CV-04"
+    },
+    {
+      "id": "F-5",
+      "severity": "info",
+      "file": "src/memory/ha-cluster.ts",
+      "lines": "1672-1712",
+      "claim": "adjudicateNewestBranches 的循环体从未执行；rejoin 测试未构造『同步回来的分叉且两条都 committed』。",
+      "evidence": "coverage 整段未覆盖，包含 isCommittedStatus。",
+      "impact": "旧主恢复冲突裁决路径是 M17 核心承诺之一，属真实测试缺口。",
+      "suggestedOwner": "CV-04"
+    },
+    {
+      "id": "F-6",
+      "severity": "info",
+      "file": "src/memory/replica-transport.ts",
+      "lines": "722-730",
+      "claim": "畸形行分支用 `[...entry.pending.entries()].find(...)` 反查 id，而已持有 oldest 引用，属冗余 O(n) 扫描。",
+      "evidence": "代码位置与 coverage 未覆盖；功能正确性未见问题。",
+      "impact": "性能/可读性线索，不是缺陷；如修改需 CV-02 评估。",
+      "suggestedOwner": "CV-02"
+    }
+  ],
+  "knownBoundaries": [
+    "本机为 Windows 10.0.19041 + Node v24.14.0；npm test/coverage 在 Git Bash 下运行。",
+    "Windows 上子进程 exit 事件与 pid 回收存在竞态，进程类断言必须有界轮询（≤500ms），不得固定 sleep。",
+    "TCP/TLS 仅验证 127.0.0.1/::1；物理跨机、生产 HA 故障切换、OS 级分区与可用性 SLA 不在范围内（TCP_TRANSPORT_UNVERIFIED_BOUNDARIES / MWHA_UNVERIFIED_CAPABILITIES）。",
+    "TLS 证书为测试自签；CI 若无 openssl/证书生成工具，相关用例应跳过并显式打印，不得静默。",
+    "全仓覆盖率基线会随后续 CV 任务变化；本文件数字仅为 2026-11-25 快照。"
+  ],
+  "verification": {
+    "tsc": { "command": "npx tsc -p tsconfig.json --noEmit", "expectedExit": 0 },
+    "checkDocs": { "command": "node scripts/check-docs.ts", "expectedExit": 0 },
+    "coverage": { "command": "node --test --experimental-test-coverage --test-coverage-include='src/**/*.ts' \"test/**/*.test.ts\"", "expectedExit": 0 }
+  }
+}

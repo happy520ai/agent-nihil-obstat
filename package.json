@@ -1,0 +1,77 @@
+{
+  "name": "agent-nihil-obstat",
+  "version": "0.1.0-alpha.0",
+  "description": "Evidence-bound task and release verdicts for agent work.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/happy520ai/agent-nihil-obstat.git"
+  },
+  "homepage": "https://github.com/happy520ai/agent-nihil-obstat#readme",
+  "bugs": {
+    "url": "https://github.com/happy520ai/agent-nihil-obstat/issues"
+  },
+  "keywords": [
+    "ai-agents",
+    "evidence",
+    "ledger",
+    "mcp",
+    "code-structure",
+    "typescript"
+  ],
+  "type": "module",
+  "engines": {
+    "node": ">=22.18"
+  },
+  "bin": {
+    "ano": "./dist/surface/cli.js"
+  },
+  "exports": {
+    ".": "./dist/index.js",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE",
+    "SECURITY.md",
+    "docs/limitations.md",
+    "docs/usage.md",
+    "docs/connect.md",
+    "docs/delivery-status.md",
+    "docs/generated/tools.md",
+    "docs/delivery.md",
+    "src/readiness/profiles/*.toml"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json && node scripts/copy-assets.ts",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "node scripts/run-tests.ts",
+    "coverage": "node scripts/m18-native-coverage.mjs",
+    "coverage:cli": "node --test --experimental-test-coverage --test-coverage-lines=90 --test-coverage-branches=80 --test-coverage-include=src/**/*.ts \"test/**/*.test.ts\"", 
+    "gen-docs": "node scripts/gen-docs.ts",
+    "check-docs": "node scripts/check-docs.ts",
+    "spikes": "node scripts/spikes/run.ts",
+    "smoke:pack": "node scripts/smoke-packed.ts",
+    "verify:zcode": "node scripts/verify-zcode-mcp.ts",
+    "verify:all": "node scripts/verify-all.ts",
+    "prepack": "npm run build"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.24.3",
+    "web-tree-sitter": "^0.25.10",
+    "zod": "^4.1.12",
+    "tree-sitter-wasms": "^0.1.13"
+  },
+  "devDependencies": {
+    "@types/node": "^24.10.1",
+    "typescript": "^5.9.3"
+  },
+  "mcp": {
+    "name": "ano",
+    "command": "node",
+    "args": [
+      "dist/surface/mcp.js"
+    ]
+  }
+}

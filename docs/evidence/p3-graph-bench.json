@@ -1,0 +1,207 @@
+{
+  "schema": "p3-graph-bench-v1",
+  "generatedAt": "2026-11-19T05:57:35.998Z",
+  "command": "node scripts/bench-graph.ts",
+  "environment": {
+    "node": "v24.14.0",
+    "platform": "win32",
+    "arch": "x64",
+    "release": "10.0.19041",
+    "cpuModel": "12th Gen Intel(R) Core(TM) i7-12700KF",
+    "cpuCount": 20,
+    "totalMemoryBytes": 34187595776
+  },
+  "corpus": {
+    "source": "copy of this repository: src/, test/, package.json, tsconfig.json",
+    "rootKind": "os.tmpdir()",
+    "files": 103,
+    "symbols": 1184,
+    "importEdges": 689,
+    "callEdges": 2375,
+    "supportedExtensions": [
+      ".ts",
+      ".tsx",
+      ".js",
+      ".jsx",
+      ".mjs",
+      ".cjs"
+    ],
+    "languageAcceptanceClaimed": false,
+    "note": "TS/JS grammars only. No per-language small/medium/large repository acceptance was run."
+  },
+  "builds": {
+    "first": {
+      "ms": 736.8801,
+      "report": {
+        "mode": "full",
+        "files": 103,
+        "parsed": 103,
+        "reused": 0,
+        "retained": 0,
+        "degraded": false
+      },
+      "memory": {
+        "rssDeltaBytes": 59944960,
+        "heapUsedDeltaBytes": 12747144,
+        "externalDeltaBytes": 34648304,
+        "rssBytes": 130641920,
+        "heapUsedBytes": 23694920
+      }
+    },
+    "incrementalUnchanged": {
+      "ms": 141.4296999999999,
+      "report": {
+        "mode": "incremental",
+        "files": 103,
+        "parsed": 0,
+        "reused": 103,
+        "retained": 0,
+        "degraded": false
+      },
+      "memory": {
+        "rssDeltaBytes": 25051136,
+        "heapUsedDeltaBytes": 25805568,
+        "externalDeltaBytes": 5062692,
+        "rssBytes": 155693056,
+        "heapUsedBytes": 49500488
+      }
+    },
+    "incrementalOneChangedFile": {
+      "ms": 131.21780000000012,
+      "report": {
+        "mode": "full",
+        "files": 103,
+        "parsed": 1,
+        "reused": 102,
+        "retained": 0,
+        "degraded": false
+      },
+      "changedFile": "src/structure/fresh.ts"
+    }
+  },
+  "queries": {
+    "impact": {
+      "iterations": 20,
+      "ms": [
+        0.2657000000001517,
+        0.07550000000014734,
+        0.06690000000003238,
+        0.06520000000000437,
+        0.08599999999978536,
+        0.0647999999998774,
+        0.06319999999982429,
+        0.061399999999821375,
+        0.0644999999999527,
+        0.06670000000008258,
+        0.0706000000000131,
+        0.06390000000010332,
+        0.06349999999997635,
+        0.06690000000003238,
+        0.0885000000000673,
+        0.036200000000008004,
+        0.03170000000000073,
+        0.03170000000000073,
+        0.029999999999972715,
+        0.026700000000118962
+      ],
+      "medianMs": 0.06464999999991505,
+      "resultSize": 40
+    },
+    "t2": {
+      "iterations": 20,
+      "ms": [
+        1.4269000000001597,
+        0.6572999999998501,
+        0.5957000000000789,
+        0.5682999999999083,
+        0.47119999999995343,
+        0.4395000000001801,
+        0.43460000000004584,
+        0.5013000000001284,
+        0.4068999999999505,
+        0.46499999999991815,
+        0.3041000000000622,
+        0.2518000000000029,
+        0.2898999999999887,
+        0.28700000000003456,
+        0.29369999999994434,
+        0.2817000000000007,
+        0.2775000000001455,
+        0.25720000000001164,
+        0.27289999999993597,
+        0.2741000000000895
+      ],
+      "medianMs": 0.35550000000000637,
+      "applicable": true,
+      "satisfied": true,
+      "affectedSymbols": 1,
+      "uncoveredSymbols": 0,
+      "resolvedCallEdges": 2359
+    },
+    "exploreSearch": {
+      "iterations": 10,
+      "ms": [
+        1.0152999999997974,
+        0.4995000000001255,
+        0.4632000000001426,
+        0.4112999999999829,
+        0.4438999999999851,
+        0.4696999999998752,
+        0.49510000000009313,
+        0.455600000000004,
+        0.44470000000001164,
+        0.4775999999999385
+      ],
+      "medianMs": 0.4664500000000089,
+      "totalMatches": 249,
+      "returned": 17,
+      "budget": {
+        "limitChars": 4000,
+        "usedChars": 3881,
+        "unit": "characters",
+        "semantics": "output-size",
+        "truncated": true
+      }
+    },
+    "explore": {
+      "ms": 10.868400000000065,
+      "totalMatches": 112,
+      "returned": 6,
+      "budget": {
+        "limitChars": 4000,
+        "usedChars": 3943,
+        "unit": "characters",
+        "semantics": "output-size",
+        "truncated": true
+      },
+      "freshness": {
+        "status": "fresh",
+        "stale": 0
+      },
+      "graphRevision": "11ca511510a65264033581f33ec82c9b5c62248bd0c1396dc56b9eff89416986"
+    }
+  },
+  "caveats": {
+    "edgeCounts": {
+      "value-confirmed": 268,
+      "type-only": 121,
+      "unknown": 300
+    },
+    "heuristicEdges": 1,
+    "unknownRatio": 0.43541364296081275,
+    "filesWithUnresolvableDynamicLoads": 0,
+    "dynamicLoadCount": 3,
+    "degradedReasons": [],
+    "callEdges": 2375,
+    "resolvedCallEdges": 2359,
+    "heuristicCallEdges": 16,
+    "typeOnlyCallSites": 0,
+    "unresolvedCallSites": 7359
+  },
+  "limitations": [
+    "Single local machine, single run; build timings are not statistically robust.",
+    "The corpus is this repository only (TS/JS); no other language or small/medium/large external repo acceptance.",
+    "Memory deltas are Node process RSS/heap observations without forced GC.",
+    "Incremental parsing is verified by BuildReport.parsed/reused on the copied corpus, not a multi-process concurrency benchmark."
+  ]
+}

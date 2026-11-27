@@ -1,0 +1,11 @@
+{
+  "synthetic": true,
+  "_comment": "Hand-authored synthetic P4 fixture. It does not represent any real client session file and contains no personal data.",
+  "format_version": "synthetic-v1",
+  "unit_id": "alpha-visible",
+  "session_id": "synthetic-session-alpha",
+  "title": "Synthetic alpha session",
+  "started_at": "2026-11-01T09:00:00.000Z",
+  "visibility": "visible",
+  "transcript": "transcript.jsonl"
+}

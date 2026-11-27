@@ -1,0 +1,337 @@
+{
+  "schema": "ano.node-matrix.v1",
+  "generatedAt": "2026-11-19T11:04:32.936Z",
+  "verdict": "passed",
+  "currentRuntime": "v24.14.0",
+  "targets": [
+    {
+      "id": "node-22",
+      "expected": ">=22.18 <23",
+      "status": "passed",
+      "nodePath": "D:/Temp/ano-node22-runtime-By60Pt/node-v22.18.0-win-x64/node.exe",
+      "nodeVersion": "v22.18.0",
+      "reason": null,
+      "durationMs": 9558.434899999998,
+      "selfhost": {
+        "schema": "ano.selfhost.v1",
+        "generatedAt": "2026-11-19T11:04:13.822Z",
+        "verdict": "passed",
+        "source": {
+          "root": "F:\\Agent Nihil Obstat",
+          "packageName": "agent-nihil-obstat",
+          "packageVersion": "0.1.0-alpha.0",
+          "nodeRuntime": "v24.14.0",
+          "targetNode": "D:\\Temp\\ano-node22-runtime-By60Pt\\node-v22.18.0-win-x64\\node.exe",
+          "targetNodeVersion": "v22.18.0",
+          "npmVersion": "11.9.0"
+        },
+        "checks": {
+          "build": {
+            "command": "npm run build",
+            "status": "passed",
+            "durationMs": 2519.3399
+          },
+          "pack": {
+            "stdout": "agent-nihil-obstat-0.1.0-alpha.0.tgz",
+            "status": "passed",
+            "durationMs": 772.1199999999999
+          },
+          "install": {
+            "installDir": "install",
+            "status": "passed",
+            "durationMs": 2465.948
+          },
+          "cliVersion": {
+            "version": "0.1.0-alpha.0",
+            "status": "passed",
+            "durationMs": 194.6805000000004
+          },
+          "graphRebuild": {
+            "symbols": 1,
+            "files": 2,
+            "freshness": {
+              "status": "fresh",
+              "stale": 0
+            },
+            "status": "passed",
+            "durationMs": 1304.2074999999995
+          },
+          "workspaceConfig": {
+            "tools": [
+              "brief",
+              "explore",
+              "recall",
+              "track",
+              "note",
+              "verify",
+              "audit"
+            ],
+            "phase": "P7",
+            "pid": 42048,
+            "command": "C:/Program Files/nodejs/node.exe",
+            "args": [
+              "F:/Agent Nihil Obstat/dist/surface/mcp.js"
+            ],
+            "status": "passed",
+            "durationMs": 335.78279999999995,
+            "config": ".zcode/config.json",
+            "rootRedirectedTo": "temp-project"
+          },
+          "tarballWorkspaceConfig": {
+            "tools": [
+              "brief",
+              "explore",
+              "recall",
+              "track",
+              "note",
+              "verify",
+              "audit"
+            ],
+            "config": ".zcode/config.json",
+            "status": "passed",
+            "durationMs": 7.739900000000489
+          },
+          "track": {
+            "taskId": "SELFHOST-T1",
+            "taskStatus": "in_progress",
+            "idemKey": "selfhost:track:T1",
+            "status": "passed",
+            "durationMs": 113.37540000000081
+          },
+          "brief": {
+            "phase": "P7",
+            "taskCount": 1,
+            "hasSelfHostTask": true,
+            "limitations": [
+              "track only supports task/create",
+              "recall reads only explicitly imported synthetic fixtures",
+              "MCP cannot approve releases or attestations",
+              "audit findings are local and hash-only; audit ledger events are not wired"
+            ],
+            "status": "passed",
+            "durationMs": 56.8171999999995
+          },
+          "explore": {
+            "total": 1,
+            "returned": 1,
+            "freshness": {
+              "status": "fresh",
+              "stale": 0
+            },
+            "status": "passed",
+            "durationMs": 31.25920000000042
+          },
+          "note": {
+            "evidence": "{\n  \"status\": \"recorded\",\n  \"duplicate\": false,\n  \"eventId\": \"01M7SQN83FY161Q42209PVVY67\",\n  \"note\": {\n    \"id\": \"9d4314bf2d859e2df9d422c6ba12da183f86e80e3ee9a9be163fee7f2b9cd0f1\",\n    \"kind\": \"session_summary\",\n    \"text\": \"self-host smoke note\",\n    \"createdAt\": \"2026-11-19T11:04:22.380Z\"\n  }\n}",
+            "status": "passed",
+            "durationMs": 37.65319999999883
+          },
+          "recall": {
+            "evidence": "{\n  \"status\": \"ok\",\n  \"untrusted\": true,\n  \"provenance\": {\n    \"kind\": \"ano-memory-recall\",\n    \"source\": \"synthetic-fixtures\",\n    \"historyDb\": \".ano/cache/history.db\",\n    \"syntheticRoot\": \".ano/memory/synthetic\",\n    \"providers\": [\n      \"synthetic-alpha\"\n    ],\n    \"generatedAt\": \"2026-11-19T11:04:22.471Z\"\n  },\n  \"degraded\": [],\n  \"summary\": {\n    \"configured\": true,\n    \"mode\": \"fts\",\n    \"total\": 2,\n    \"returned\": 2,\n    \"limit\": 20,\n    \"offset\": 0,\n    \"ftsAvailable\": true,\n    \"rebuilt\": false,\n    \"counts\": {\n      \"messages\": 4,\n      \"sessions\": 1,\n      \"units\": 1,\n      \"providers\": 1,\n      \"skippedArtifacts\": 0,\n      \"byVisibility\": {\n        \"visible\": 4,\n        \"inactive\": 0,\n        \"hidden\": 0\n      }\n    },\n    \"providers\": [\n      {\n        \"provider\": \"synthetic-alpha\",\n        \"marker\": \"synthetic-marker-v1\",\n        \"formatVersion\": \"synthetic-v1\",\n        \"status\": \"ok\",\n        \"error\": \"\",\n        \"indexedAt\": \"2026-11-19T11:04:22.469Z\",\n        \"units\": 1,\n        \"records\": 4,\n        \"skipped\": 0\n      }\n    ],\n    \"providerReports\": [\n      {\n        \"provider\": \"synthetic-alpha\",\n        \"status\": \"ok\",\n        \"marker\": \"synthetic-marker-v1\",\n        \"markerChanged\": false,\n        \"units\": 1,\n        \"records\": 4,\n        \"skipped\": 0,\n        \"reused\": 0,\n        \"cursorFallbacks\": 0,\n        \"fullReplays\": 1,\n        \"parseErrors\": 0,\n        \"removedUnits\": 0\n      }\n    ],\n    \"skippedArtifacts\": 0\n  },\n  \"hits\": [\n    {\n      \"id\": \"alpha-m2\",\n      \"provider\": \"synthetic-alpha\",\n      \"sessionId\": \"synthetic-session-alpha\",\n      \"sourcePath\": \"unit-visible/transcript.jsonl\",\n      \"line\": 2,\n      \"role\": \"assistant\",\n      \"timestamp\": \"2026-11-01T09:00:02.000Z\",\n      \"visibility\": \"visible\",\n      \"untrusted\": true,\n      \"provenance\": {\n        \"kind\": \"session-transcript\",\n        \"provider\": \"synthetic-alpha\",\n        \"sessionId\": \"synthetic-session-alpha\",\n        \"sourcePath\": \"unit-visible/transcript.jsonl\",\n    ",
+            "recallStatus": "ok",
+            "total": 2,
+            "mode": "fts",
+            "degraded": [],
+            "status": "passed",
+            "durationMs": 84.78269999999975
+          },
+          "cliNote": {
+            "evidence": "{\n  \"status\": \"duplicate\",\n  \"duplicate\": true,\n  \"eventId\": \"01M7SQN8DN4SVABCMVK1PH7GHW\",\n  \"note\": {\n    \"id\": \"9d4314bf2d859e2df9d422c6ba12da183f86e80e3ee9a9be163fee7f2b9cd0f1\",\n    \"kind\": \"session_summary\",\n    \"text\": \"self-host smoke note\",\n    \"createdAt\": \"2026-11-19T11:04:22.380Z\"\n  }\n}\n",
+            "status": "passed",
+            "durationMs": 243.48719999999958
+          },
+          "cliRecall": {
+            "evidence": "{\n  \"status\": \"ok\",\n  \"untrusted\": true,\n  \"provenance\": {\n    \"kind\": \"ano-memory-recall\",\n    \"source\": \"synthetic-fixtures\",\n    \"historyDb\": \".ano/cache/history.db\",\n    \"syntheticRoot\": \".ano/memory/synthetic\",\n    \"providers\": [\n      \"synthetic-alpha\"\n    ],\n    \"generatedAt\": \"2026-11-19T11:04:23.000Z\"\n  },\n  \"degraded\": [],\n  \"summary\": {\n    \"configured\": true,\n    \"mode\": \"fts\",\n    \"total\": 2,\n    \"returned\": 2,\n    \"limit\": 20,\n    \"offset\": 0,\n    \"ftsAvailable\": true,\n    \"rebuilt\": false,\n    \"counts\": {\n      \"messages\": 4,\n      \"sessions\": 1,\n      \"units\": 1,\n      \"providers\": 1,\n      \"skippedArtifacts\": 0,\n      \"byVisibility\": {\n        \"visible\": 4,\n        \"inactive\": 0,\n        \"hidden\": 0\n      }\n    },\n    \"providers\": [\n      {\n        \"provider\": \"synthetic-alpha\",\n        \"marker\": \"synthetic-marker-v1\",\n        \"formatVersion\": \"synthetic-v1\",\n        \"status\": \"ok\",\n        \"error\": \"\",\n        \"indexedAt\": \"2026-11-19T11:04:22.987Z\",\n        \"units\": 1,\n        \"records\": 4,\n        \"skipped\": 0\n      }\n    ],\n    \"providerReports\": [\n      {\n        \"provider\": \"synthetic-alpha\",\n        \"status\": \"ok\",\n        \"marker\": \"synthetic-marker-v1\",\n        \"markerChanged\": false,\n        \"units\": 1,\n        \"records\": 0,\n        \"skipped\": 0,\n        \"reused\": 1,\n        \"cursorFallbacks\": 0,\n        \"fullReplays\": 0,\n        \"parseErrors\": 0,\n        \"removedUnits\": 0\n      }\n    ],\n    \"skippedArtifacts\": 0\n  },\n  \"hits\": [\n    {\n      \"id\": \"alpha-m2\",\n      \"provider\": \"synthetic-alpha\",\n      \"sessionId\": \"synthetic-session-alpha\",\n      \"sourcePath\": \"unit-visible/transcript.jsonl\",\n      \"line\": 2,\n      \"role\": \"assistant\",\n      \"timestamp\": \"2026-11-01T09:00:02.000Z\",\n      \"visibility\": \"visible\",\n      \"untrusted\": true,\n      \"provenance\": {\n        \"kind\": \"session-transcript\",\n        \"provider\": \"synthetic-alpha\",\n        \"sessionId\": \"synthetic-session-alpha\",\n        \"sourcePath\": \"unit-visible/transcript.jsonl\",\n    ",
+            "recallStatus": "ok",
+            "total": 2,
+            "mode": "fts",
+            "degraded": [],
+            "exitCode": 0,
+            "status": "passed",
+            "durationMs": 282.8184000000001
+          }
+        },
+        "tarball": {
+          "name": "agent-nihil-obstat-0.1.0-alpha.0.tgz",
+          "bytes": 326372,
+          "sha256": "3c52625b8dc2399e49d19d6d85b741194aee3f7e97d015cad2209b6d1773bb66"
+        },
+        "workspaceRoot": "D:\\Temp\\ano-selfhost-lTHDYL\\project",
+        "tempRemoved": true,
+        "limitations": [
+          "recall is exercised only against an explicitly imported synthetic fixture; no real session data is read",
+          "the self-host project is synthetic and lives in os.tmpdir(); it does not represent a real client project",
+          "no npm publish or remote push is performed"
+        ]
+      }
+    },
+    {
+      "id": "node-24",
+      "expected": ">=24 <25",
+      "status": "passed",
+      "nodePath": "C:\\Program Files\\nodejs\\node.exe",
+      "nodeVersion": "v24.14.0",
+      "reason": null,
+      "durationMs": 9585.7773,
+      "selfhost": {
+        "schema": "ano.selfhost.v1",
+        "generatedAt": "2026-11-19T11:04:23.385Z",
+        "verdict": "passed",
+        "source": {
+          "root": "F:\\Agent Nihil Obstat",
+          "packageName": "agent-nihil-obstat",
+          "packageVersion": "0.1.0-alpha.0",
+          "nodeRuntime": "v24.14.0",
+          "targetNode": "C:\\Program Files\\nodejs\\node.exe",
+          "targetNodeVersion": "v24.14.0",
+          "npmVersion": "11.9.0"
+        },
+        "checks": {
+          "build": {
+            "command": "npm run build",
+            "status": "passed",
+            "durationMs": 2594.768899999999
+          },
+          "pack": {
+            "stdout": "agent-nihil-obstat-0.1.0-alpha.0.tgz",
+            "status": "passed",
+            "durationMs": 754.7651999999998
+          },
+          "install": {
+            "installDir": "install",
+            "status": "passed",
+            "durationMs": 2932.4797
+          },
+          "cliVersion": {
+            "version": "0.1.0-alpha.0",
+            "status": "passed",
+            "durationMs": 233.9447
+          },
+          "graphRebuild": {
+            "symbols": 1,
+            "files": 2,
+            "freshness": {
+              "status": "fresh",
+              "stale": 0
+            },
+            "status": "passed",
+            "durationMs": 844.1537000000026
+          },
+          "workspaceConfig": {
+            "tools": [
+              "brief",
+              "explore",
+              "recall",
+              "track",
+              "note",
+              "verify",
+              "audit"
+            ],
+            "phase": "P7",
+            "pid": 30776,
+            "command": "C:/Program Files/nodejs/node.exe",
+            "args": [
+              "F:/Agent Nihil Obstat/dist/surface/mcp.js"
+            ],
+            "status": "passed",
+            "durationMs": 313.6185000000005,
+            "config": ".zcode/config.json",
+            "rootRedirectedTo": "temp-project"
+          },
+          "tarballWorkspaceConfig": {
+            "tools": [
+              "brief",
+              "explore",
+              "recall",
+              "track",
+              "note",
+              "verify",
+              "audit"
+            ],
+            "config": ".zcode/config.json",
+            "status": "passed",
+            "durationMs": 4.954600000000937
+          },
+          "track": {
+            "taskId": "SELFHOST-T1",
+            "taskStatus": "in_progress",
+            "idemKey": "selfhost:track:T1",
+            "status": "passed",
+            "durationMs": 107.65059999999721
+          },
+          "brief": {
+            "phase": "P7",
+            "taskCount": 1,
+            "hasSelfHostTask": true,
+            "limitations": [
+              "track only supports task/create",
+              "recall reads only explicitly imported synthetic fixtures",
+              "MCP cannot approve releases or attestations",
+              "audit findings are local and hash-only; audit ledger events are not wired"
+            ],
+            "status": "passed",
+            "durationMs": 61.132799999999406
+          },
+          "explore": {
+            "total": 1,
+            "returned": 1,
+            "freshness": {
+              "status": "fresh",
+              "stale": 0
+            },
+            "status": "passed",
+            "durationMs": 42.64459999999963
+          },
+          "note": {
+            "evidence": "{\n  \"status\": \"recorded\",\n  \"duplicate\": false,\n  \"eventId\": \"01M7SQNHF1553QHQVF2TR70WGW\",\n  \"note\": {\n    \"id\": \"9d4314bf2d859e2df9d422c6ba12da183f86e80e3ee9a9be163fee7f2b9cd0f1\",\n    \"kind\": \"session_summary\",\n    \"text\": \"self-host smoke note\",\n    \"createdAt\": \"2026-11-19T11:04:31.966Z\"\n  }\n}",
+            "status": "passed",
+            "durationMs": 43.61620000000039
+          },
+          "recall": {
+            "evidence": "{\n  \"status\": \"ok\",\n  \"untrusted\": true,\n  \"provenance\": {\n    \"kind\": \"ano-memory-recall\",\n    \"source\": \"synthetic-fixtures\",\n    \"historyDb\": \".ano/cache/history.db\",\n    \"syntheticRoot\": \".ano/memory/synthetic\",\n    \"providers\": [\n      \"synthetic-alpha\"\n    ],\n    \"generatedAt\": \"2026-11-19T11:04:32.061Z\"\n  },\n  \"degraded\": [],\n  \"summary\": {\n    \"configured\": true,\n    \"mode\": \"fts\",\n    \"total\": 2,\n    \"returned\": 2,\n    \"limit\": 20,\n    \"offset\": 0,\n    \"ftsAvailable\": true,\n    \"rebuilt\": false,\n    \"counts\": {\n      \"messages\": 4,\n      \"sessions\": 1,\n      \"units\": 1,\n      \"providers\": 1,\n      \"skippedArtifacts\": 0,\n      \"byVisibility\": {\n        \"visible\": 4,\n        \"inactive\": 0,\n        \"hidden\": 0\n      }\n    },\n    \"providers\": [\n      {\n        \"provider\": \"synthetic-alpha\",\n        \"marker\": \"synthetic-marker-v1\",\n        \"formatVersion\": \"synthetic-v1\",\n        \"status\": \"ok\",\n        \"error\": \"\",\n        \"indexedAt\": \"2026-11-19T11:04:32.059Z\",\n        \"units\": 1,\n        \"records\": 4,\n        \"skipped\": 0\n      }\n    ],\n    \"providerReports\": [\n      {\n        \"provider\": \"synthetic-alpha\",\n        \"status\": \"ok\",\n        \"marker\": \"synthetic-marker-v1\",\n        \"markerChanged\": false,\n        \"units\": 1,\n        \"records\": 4,\n        \"skipped\": 0,\n        \"reused\": 0,\n        \"cursorFallbacks\": 0,\n        \"fullReplays\": 1,\n        \"parseErrors\": 0,\n        \"removedUnits\": 0\n      }\n    ],\n    \"skippedArtifacts\": 0\n  },\n  \"hits\": [\n    {\n      \"id\": \"alpha-m2\",\n      \"provider\": \"synthetic-alpha\",\n      \"sessionId\": \"synthetic-session-alpha\",\n      \"sourcePath\": \"unit-visible/transcript.jsonl\",\n      \"line\": 2,\n      \"role\": \"assistant\",\n      \"timestamp\": \"2026-11-01T09:00:02.000Z\",\n      \"visibility\": \"visible\",\n      \"untrusted\": true,\n      \"provenance\": {\n        \"kind\": \"session-transcript\",\n        \"provider\": \"synthetic-alpha\",\n        \"sessionId\": \"synthetic-session-alpha\",\n        \"sourcePath\": \"unit-visible/transcript.jsonl\",\n    ",
+            "recallStatus": "ok",
+            "total": 2,
+            "mode": "fts",
+            "degraded": [],
+            "status": "passed",
+            "durationMs": 87.83819999999832
+          },
+          "cliNote": {
+            "evidence": "{\n  \"status\": \"duplicate\",\n  \"duplicate\": true,\n  \"eventId\": \"01M7SQNHSC9N2N86XMSRA0H14Q\",\n  \"note\": {\n    \"id\": \"9d4314bf2d859e2df9d422c6ba12da183f86e80e3ee9a9be163fee7f2b9cd0f1\",\n    \"kind\": \"session_summary\",\n    \"text\": \"self-host smoke note\",\n    \"createdAt\": \"2026-11-19T11:04:31.966Z\"\n  }\n}\n",
+            "status": "passed",
+            "durationMs": 244.03589999999895
+          },
+          "cliRecall": {
+            "evidence": "{\n  \"status\": \"ok\",\n  \"untrusted\": true,\n  \"provenance\": {\n    \"kind\": \"ano-memory-recall\",\n    \"source\": \"synthetic-fixtures\",\n    \"historyDb\": \".ano/cache/history.db\",\n    \"syntheticRoot\": \".ano/memory/synthetic\",\n    \"providers\": [\n      \"synthetic-alpha\"\n    ],\n    \"generatedAt\": \"2026-11-19T11:04:32.583Z\"\n  },\n  \"degraded\": [],\n  \"summary\": {\n    \"configured\": true,\n    \"mode\": \"fts\",\n    \"total\": 2,\n    \"returned\": 2,\n    \"limit\": 20,\n    \"offset\": 0,\n    \"ftsAvailable\": true,\n    \"rebuilt\": false,\n    \"counts\": {\n      \"messages\": 4,\n      \"sessions\": 1,\n      \"units\": 1,\n      \"providers\": 1,\n      \"skippedArtifacts\": 0,\n      \"byVisibility\": {\n        \"visible\": 4,\n        \"inactive\": 0,\n        \"hidden\": 0\n      }\n    },\n    \"providers\": [\n      {\n        \"provider\": \"synthetic-alpha\",\n        \"marker\": \"synthetic-marker-v1\",\n        \"formatVersion\": \"synthetic-v1\",\n        \"status\": \"ok\",\n        \"error\": \"\",\n        \"indexedAt\": \"2026-11-19T11:04:32.572Z\",\n        \"units\": 1,\n        \"records\": 4,\n        \"skipped\": 0\n      }\n    ],\n    \"providerReports\": [\n      {\n        \"provider\": \"synthetic-alpha\",\n        \"status\": \"ok\",\n        \"marker\": \"synthetic-marker-v1\",\n        \"markerChanged\": false,\n        \"units\": 1,\n        \"records\": 0,\n        \"skipped\": 0,\n        \"reused\": 1,\n        \"cursorFallbacks\": 0,\n        \"fullReplays\": 0,\n        \"parseErrors\": 0,\n        \"removedUnits\": 0\n      }\n    ],\n    \"skippedArtifacts\": 0\n  },\n  \"hits\": [\n    {\n      \"id\": \"alpha-m2\",\n      \"provider\": \"synthetic-alpha\",\n      \"sessionId\": \"synthetic-session-alpha\",\n      \"sourcePath\": \"unit-visible/transcript.jsonl\",\n      \"line\": 2,\n      \"role\": \"assistant\",\n      \"timestamp\": \"2026-11-01T09:00:02.000Z\",\n      \"visibility\": \"visible\",\n      \"untrusted\": true,\n      \"provenance\": {\n        \"kind\": \"session-transcript\",\n        \"provider\": \"synthetic-alpha\",\n        \"sessionId\": \"synthetic-session-alpha\",\n        \"sourcePath\": \"unit-visible/transcript.jsonl\",\n    ",
+            "recallStatus": "ok",
+            "total": 2,
+            "mode": "fts",
+            "degraded": [],
+            "exitCode": 0,
+            "status": "passed",
+            "durationMs": 277.09730000000127
+          }
+        },
+        "tarball": {
+          "name": "agent-nihil-obstat-0.1.0-alpha.0.tgz",
+          "bytes": 326372,
+          "sha256": "3c52625b8dc2399e49d19d6d85b741194aee3f7e97d015cad2209b6d1773bb66"
+        },
+        "workspaceRoot": "D:\\Temp\\ano-selfhost-YsR9Og\\project",
+        "tempRemoved": true,
+        "limitations": [
+          "recall is exercised only against an explicitly imported synthetic fixture; no real session data is read",
+          "the self-host project is synthetic and lives in os.tmpdir(); it does not represent a real client project",
+          "no npm publish or remote push is performed"
+        ]
+      }
+    }
+  ],
+  "missing": [],
+  "limitations": [
+    "matrix measures installed tarball behavior only; it is not a full test suite or quality matrix",
+    "note/recall are exercised by the self-host run; recall reads only an explicitly imported synthetic fixture, never real sessions",
+    "timings are wall-clock measurements from this machine and this run; they are not performance claims",
+    "the self-host project is synthetic and isolated under os.tmpdir(); no real session data is read"
+  ]
+}

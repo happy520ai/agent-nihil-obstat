@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "milestone": "M15",
+  "description": "Single-writer distributed read replicas with asynchronous probe retrieval, consistency verification, real local multi-process workers and explicit remote boundaries.",
+  "tasks": {
+    "T-123": { "depends_on": [] },
+    "T-124": { "depends_on": ["T-123"] },
+    "T-125": { "depends_on": ["T-124"] },
+    "T-126": { "depends_on": ["T-124", "T-125"] },
+    "T-127": { "depends_on": ["T-126"] },
+    "T-128": { "depends_on": ["T-124", "T-126"] },
+    "T-129": { "depends_on": ["T-123", "T-126"] },
+    "T-130": { "depends_on": ["T-127", "T-128", "T-129"] },
+    "T-131": { "depends_on": ["T-127", "T-130"] },
+    "T-132": { "depends_on": ["T-131"], "gate": "phase-distributed-probe", "mutex_group": "m15-final-integration" }
+  }
+}

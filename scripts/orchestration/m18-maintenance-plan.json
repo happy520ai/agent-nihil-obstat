@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "milestone": "M18",
+  "description": "Maintenance-only resource correctness: bounded concurrency, early quorum completion, worker cancellation propagation and resource-watermark acceptance. No new feature milestone.",
+  "tasks": {
+    "T-157": { "depends_on": [] },
+    "T-158": { "depends_on": [] },
+    "T-159": { "depends_on": ["T-157", "T-158"] },
+    "T-160": { "depends_on": ["T-159"], "gate": "phase-resource-maintenance", "mutex_group": "m18-maintenance-integration" }
+  }
+}

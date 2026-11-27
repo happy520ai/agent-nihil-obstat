@@ -1,0 +1,4 @@
+{"v":1,"type":"message","id":"alpha-partial-m1","role":"user","ts":"2026-11-01T04:00:01.000Z","text":"有效合成记录：回滚事务与幂等检查。","files":["src/ledger/replay.ts"],"symbols":["src/ledger/replay.ts::replayLedger"]}
+{"v":99,"type":"message","id":"alpha-partial-future","role":"user","ts":"2026-11-01T04:00:02.000Z","text":"未来版本记录必须按行跳过。"}
+not-json-at-all
+{"v":1,"type":"message","id":"alpha-partial-m2","role":"assistant","ts":"2026-11-01T04:00:03.000Z","text":"另一条有效合成记录：数据库连接池恢复。"}

@@ -1,0 +1,485 @@
+{
+  "task": "T-162",
+  "generatedAt": "2026-11-26T02:57:07.609Z",
+  "verdict": "GATE-PASS (mechanism verified; Q2 PermissionRequest sample missing in headless, owner ack required; T-163 not started)",
+  "spec": "docs/m19-m22-implementation-spec.md T-162; docs/adr/ADR-013-personal-project-brain.md §2/§9",
+  "redaction": "按 src/clients/redact.ts 的 CLIENT_ENTRY_SAFE_KEYS / CLIENT_ENTRY_SECRET_CONTAINERS 执行；env 仅保留白名单非秘密键；prompt/响应正文/transcript 路径一律不记录",
+  "environment": {
+    "hostApp": "ZCode Desktop 4.0.0.10870 (D:/zcode/ZCode.exe)",
+    "headlessCli": "zcode.cjs 0.18.0 (D:/zcode/resources/glm/zcode.cjs)",
+    "node": "v24.14.0",
+    "git": "2.56.1.windows.1",
+    "os": "win32 10.0.19041 x64",
+    "isolatedProject": "os.tmpdir()/ano-s8-work/项目 with spaces（真实 Git 仓库，中文+空格路径；HEAD eb5dd0e）",
+    "isolatedHome": "os.tmpdir()/ano-s8-work/isolated-home（仅本测试 HOME；未改真实用户配置）",
+    "probeScript": "os.tmpdir()/ano-s8-work/scripts/hook-probe.cjs（process hook，参数数组，无 stdin 拼接）",
+    "timeWindow": "2026-11-26T02:39:00Z ~ 2026-11-26T02:56:00Z",
+    "source": "真实 ZCode 宿主执行；非合成样本；样本来自隔离项目的 hook 进程 stdin"
+  },
+  "limitations": [
+    "项目级 .zcode/config.json 的 hooks 受 workspace trust 门禁；实测中被 config.project_hooks.pending_trust 拦截，故所有生效实测使用隔离 HOME 的用户级 config.json。",
+    "PermissionRequest 事件被宿主调用（日志 hook.run.failed outcome=cancelled）但因无头模式无交互授权，其 hook 子进程未启动，缺少 stdin 样本。",
+    "transcript_path 字段按 ADR-013 §2.5 未读取；模型上下文注入证据取自宿主 model-io rollout（仅结构片段），非 transcript。",
+    "给出的是隔离一次性会话 ID；不代表真实项目配置在用户默认 HOME 下的 trust 状态。"
+  ],
+  "q1": {
+    "question": "配置位置与合并",
+    "status": "可用",
+    "evidence": "用户级 <HOME>/.zcode/cli/config.json 顶层 hooks.events.<Event> + hooks.enabled:true 真实触发；项目级 <repo>/.zcode/config.json 同样结构被 workspace trust 拦截（日志 config.project_hooks.pending_trust，configScope=project）。两处同时存在时用户钩子照常执行。宿主代码（zcode.cjs）Confirm：C4e 七事件枚举；wle/iA 路径解析；R4e 从 <HOME>/.zcode/security/workspace-hook-trust-v1.json 读取持久信任。",
+    "source": "isolated-home/.zcode/cli/log/zcode-2026-11-26.jsonl; 项目 worktree log; D:zcode\resourcesglmzcode.cjs",
+    "at": "2026-11-26T02:40:09Z"
+  },
+  "q2": {
+    "question": "7 事件 stdin 字段",
+    "status": "可用（6 份样本；PermissionRequest 仅主机日志）",
+    "fieldsNote": "所有样本均同时含驼峰与 snake_case 两套字段；核心字段：session_id/sessionId、cwd、hook_event_name、timestamp；工具事件含 tool_name/toolName、tool_input/toolInput、tool_use_id；Stop 含 stop_hook_active/stopHookActive、responsePreview、toolCallCount；SessionStart 含 source=startup。",
+    "samples": {
+      "USER-SessionStart": {
+        "observedAt": "2026-11-26T02:45:23.261Z",
+        "node": "v24.14.0",
+        "hookCwd": "D:\\Temp\\ano-s8-work\\项目 with spaces",
+        "stdin": {
+          "cwd": "D:\\Temp\\ano-s8-work\\项目 with spaces",
+          "hookEventName": "SessionStart",
+          "mode": "yolo",
+          "model": "coding-hub/pool/hy4flash-free",
+          "sessionId": "sess_c349a90a-20f7-432b-a532-53219e0e87d3",
+          "source": "startup",
+          "timestamp": "2026-11-26T02:45:23.154Z",
+          "traceId": "55802e67-7b95-4f9a-b5a9-8054f64a902b",
+          "turnId": "turn_32e7b324-1190-4d66-8cd2-f5138c7abcfd",
+          "hook_event_name": "SessionStart",
+          "permission_mode": "yolo",
+          "session_id": "sess_c349a90a-20f7-432b-a532-53219e0e87d3"
+        }
+      },
+      "USER-UserPromptSubmit": {
+        "observedAt": "2026-11-26T02:45:23.372Z",
+        "node": "v24.14.0",
+        "hookCwd": "D:\\Temp\\ano-s8-work\\项目 with spaces",
+        "stdin": {
+          "cwd": "D:\\Temp\\ano-s8-work\\项目 with spaces",
+          "hookEventName": "UserPromptSubmit",
+          "mode": "yolo",
+          "prompt": "[redacted]",
+          "sessionId": "sess_c349a90a-20f7-432b-a532-53219e0e87d3",
+          "timestamp": "2026-11-26T02:45:23.281Z",
+          "traceId": "55802e67-7b95-4f9a-b5a9-8054f64a902b",
+          "turnId": "turn_32e7b324-1190-4d66-8cd2-f5138c7abcfd",
+          "hook_event_name": "UserPromptSubmit",
+          "permission_mode": "yolo",
+          "session_id": "sess_c349a90a-20f7-432b-a532-53219e0e87d3"
+        }
+      },
+      "USER-Stop": {
+        "observedAt": "2026-11-26T02:45:29.891Z",
+        "node": "v24.14.0",
+        "hookCwd": "D:\\Temp\\ano-s8-work\\项目 with spaces",
+        "stdin": {
+          "cwd": "D:\\Temp\\ano-s8-work\\项目 with spaces",
+          "hookEventName": "Stop",
+          "mode": "yolo",
+          "responsePreview": "[redacted]",
+          "responseText": "[redacted]",
+          "sessionId": "sess_c349a90a-20f7-432b-a532-53219e0e87d3",
+          "stopHookActive": false,
+          "timestamp": "2026-11-26T02:45:29.809Z",
+          "toolCallCount": 0,
+          "traceId": "55802e67-7b95-4f9a-b5a9-8054f64a902b",
+          "turnId": "turn_32e7b324-1190-4d66-8cd2-f5138c7abcfd",
+          "hook_event_name": "Stop",
+          "permission_mode": "yolo",
+          "session_id": "sess_c349a90a-20f7-432b-a532-53219e0e87d3",
+          "last_assistant_message": "[redacted]",
+          "stop_hook_active": false
+        }
+      },
+      "USER-PreToolUse": {
+        "observedAt": "2026-11-26T02:45:59.189Z",
+        "node": "v24.14.0",
+        "hookCwd": "D:\\Temp\\ano-s8-work\\项目 with spaces",
+        "stdin": {
+          "cwd": "D:\\Temp\\ano-s8-work\\项目 with spaces",
+          "hookEventName": "PreToolUse",
+          "mode": "yolo",
+          "riskLevel": "high",
+          "sessionId": "sess_9dfbb5e8-3cf4-494b-a344-869ec59f523b",
+          "sideEffectScope": "system",
+          "timestamp": "2026-11-26T02:45:59.123Z",
+          "toolCallId": "chatcmpl-tool-af4922f2c8ee6818",
+          "toolInput": {
+            "command": "find \"D:/Temp/ano-s8-work/项目 with spaces\" -name \"src.ts\" -not -path \"*/node_modules/*\" 2>/dev/null",
+            "description": "Locate src.ts file in project"
+          },
+          "toolName": "Bash",
+          "traceId": "bd9f16dd-f06a-43a7-80ff-d431f62cdfb9",
+          "turnId": "turn_2cca420c-7a0a-4849-8ab0-7c15d6209c08",
+          "hook_event_name": "PreToolUse",
+          "permission_mode": "yolo",
+          "session_id": "sess_9dfbb5e8-3cf4-494b-a344-869ec59f523b",
+          "tool_name": "Bash",
+          "tool_input": {
+            "command": "find \"D:/Temp/ano-s8-work/项目 with spaces\" -name \"src.ts\" -not -path \"*/node_modules/*\" 2>/dev/null",
+            "description": "Locate src.ts file in project"
+          },
+          "tool_use_id": "chatcmpl-tool-af4922f2c8ee6818"
+        }
+      },
+      "USER-PostToolUse": {
+        "observedAt": "2026-11-26T02:46:00.755Z",
+        "node": "v24.14.0",
+        "hookCwd": "D:\\Temp\\ano-s8-work\\项目 with spaces",
+        "stdin": {
+          "cwd": "D:\\Temp\\ano-s8-work\\项目 with spaces",
+          "hookEventName": "PostToolUse",
+          "mode": "yolo",
+          "sessionId": "sess_9dfbb5e8-3cf4-494b-a344-869ec59f523b",
+          "timestamp": "2026-11-26T02:46:00.672Z",
+          "toolCallId": "chatcmpl-tool-af4922f2c8ee6818",
+          "toolInput": {
+            "command": "find \"D:/Temp/ano-s8-work/项目 with spaces\" -name \"src.ts\" -not -path \"*/node_modules/*\" 2>/dev/null",
+            "description": "Locate src.ts file in project"
+          },
+          "toolName": "Bash",
+          "toolResponse": "[redacted]",
+          "toolResultPreview": "{\"stdout\":\"D:/Temp/ano-s8-work/项目 with spaces/src.ts\\n\",\"stderr\":\"\",\"interrupted\":false,\"isImage\":false,\"noOutputExpected\":false,\"status\":\"completed\",\"exitCode\":0,\"timedOut\":false,\"cancelled\":false,\"stdoutTruncated\":false,\"stderrTruncated\":false,\"stdoutBytes\":46,\"stderrBytes\":0}",
+          "traceId": "bd9f16dd-f06a-43a7-80ff-d431f62cdfb9",
+          "turnId": "turn_2cca420c-7a0a-4849-8ab0-7c15d6209c08",
+          "hook_event_name": "PostToolUse",
+          "permission_mode": "yolo",
+          "session_id": "sess_9dfbb5e8-3cf4-494b-a344-869ec59f523b",
+          "tool_name": "Bash",
+          "tool_input": {
+            "command": "find \"D:/Temp/ano-s8-work/项目 with spaces\" -name \"src.ts\" -not -path \"*/node_modules/*\" 2>/dev/null",
+            "description": "Locate src.ts file in project"
+          },
+          "tool_use_id": "chatcmpl-tool-af4922f2c8ee6818",
+          "tool_response": "[redacted]"
+        }
+      },
+      "USER-PostToolUseFailure": {
+        "observedAt": "2026-11-26T02:54:51.113Z",
+        "node": "v24.14.0",
+        "hookCwd": "D:\\Temp\\ano-s8-work\\项目 with spaces",
+        "stdin": {
+          "cwd": "D:\\Temp\\ano-s8-work\\项目 with spaces",
+          "error": "[redacted]",
+          "hookEventName": "PostToolUseFailure",
+          "isInterrupt": false,
+          "mode": "yolo",
+          "sessionId": "sess_a0282f3d-861a-4bc0-a005-d389d92b174d",
+          "timestamp": "2026-11-26T02:54:51.059Z",
+          "toolCallId": "chatcmpl-tool-8cb9a37c04aa797f",
+          "toolInput": {
+            "file_path": "D:\\Temp\\ano-s8-work\\项目 with spaces\\zz-no-such-file.ts"
+          },
+          "toolName": "Read",
+          "traceId": "8ec2c7d1-bb21-4903-9bd2-abac95fb81c3",
+          "turnId": "turn_a93d7e09-2f50-4d25-adfc-8509175a560e",
+          "hook_event_name": "PostToolUseFailure",
+          "permission_mode": "yolo",
+          "session_id": "sess_a0282f3d-861a-4bc0-a005-d389d92b174d",
+          "tool_name": "Read",
+          "tool_input": {
+            "file_path": "D:\\Temp\\ano-s8-work\\项目 with spaces\\zz-no-such-file.ts"
+          },
+          "tool_use_id": "chatcmpl-tool-8cb9a37c04aa797f",
+          "error_details": "[redacted]",
+          "is_interrupt": false
+        }
+      }
+    },
+    "permissionRequest": "宿主日志显示 hook.run.failed (PermissionRequest, outcome=cancelled)，无子进程 stdin 样本",
+    "source": "isolated hook stdin JSONL (脱敏) + isolated host log",
+    "at": "2026-11-26T02:45:23Z ~ 02:55:41Z"
+  },
+  "q3": {
+    "question": "内置编辑/写入工具名与 shell 工具名",
+    "status": "可用",
+    "observedToolNames": [
+      "Bash",
+      "Read",
+      "Write",
+      "Edit",
+      "Agent",
+      "AskUserQuestion",
+      "TaskOutput",
+      "TaskStop",
+      "Skill",
+      "WebFetch",
+      "TodoRead",
+      "TodoWrite"
+    ],
+    "writeToolNames": [
+      "Write",
+      "Edit"
+    ],
+    "shellToolName": "Bash",
+    "editToolPathFields": [
+      "file_path"
+    ],
+    "notes": "Write 的 tool_input: file_path, content；Edit 的 tool_input: file_path, old_string, new_string, replace_all；Bash 的 tool_input: command, description。全量工具名来自宿主 model-io rollout 的 toolNames 列表（真实会话），路径字段来自已捕获 stdin。",
+    "source": "isolated hook stdin + model-io rollout",
+    "at": "2026-11-26T02:46:50Z"
+  },
+  "q4": {
+    "question": "PreToolUse deny/ask 输出格式与模型侧表现",
+    "status": "可用",
+    "outputFormat": "顶层 JSON：{\"hookSpecificOutput\":{\"hookEventName\":\"PreToolUse\",\"permissionDecision\":\"deny\"|\"ask\"|\"allow\",\"permissionDecisionReason\":\"...\"}}（宿主 schema jBs/O5r 确认）",
+    "denyResult": "Read 工具被拦截：deny 后无 PostToolUse 事件；模型最终回答包含 deny 理由文本（S8-TEST-DENY from isolated probe）",
+    "askResult": "模型收到权限提示 \"ZCode requested permissions to use Read, but you haven't granted it yet\"，未读取文件",
+    "hostSchema": "zcode.cjs: O5r 顶层键、jBs 逐事件 hookSpecificOutput；exitCode 2 = deny（dja 函数）",
+    "source": "run-q4deny2.out, run-q4ask.out, isolated host log hook.run.allowed/denied",
+    "at": "2026-11-26T02:48:45Z / 02:55:41Z"
+  },
+  "q5": {
+    "question": "SessionStart additionalContext 注入与长度",
+    "status": "可用",
+    "result": "是。钩子 stdout {\"hookSpecificOutput\":{\"hookEventName\":\"SessionStart\",\"additionalContext\":\"...\"}} 的 marker 出现在宿主 model-io rollout 的 <system-reminder>SessionStart hook additional context:</system-reminder>，且模型能准确复述该 marker。",
+    "format": "注入体 \"<system-reminder>\nSessionStart hook additional context: \n#1\n<text>\n</system-reminder>\"",
+    "cap": "宿主代码 Kmc/Yai/Hmc/Gmc：单条注入经 Yai(..., Gmc=24e3) 截断（24000 字符）；同事件多条 additionalContext 编号 #1..；SessionStart 注入在进入对话时去重（Gai 判断相同锚点）。",
+    "source": "model-io rollout (host), zcode.cjs",
+    "at": "2026-11-26T02:50:47Z"
+  },
+  "q6": {
+    "question": "Stop 继续格式、计数与标志",
+    "status": "可用",
+    "workingFormat": "{\"decision\":\"block\",\"reason\":\"...\",\"systemMessage\":\"...\"}（或 hookSpecificOutput.Stop.additionalContext）；仅 {\"continue\":true,\"reason\":\"...\"} 不会触发继续（宿主 Kai 要求 additionalContexts.length>0）。",
+    "count": "实测单次会话 Stop 子进程调用 4 次：第 1 次 stop_hook_active=false，之后 3 次 true；第三次继续后不再继续（宿主常量 Hmc=3 上限；等于 3 次继续/4 次 stop）。",
+    "continuingFlag": "stdin.stop_hook_active / stopHookActive 在继续后的调用中为 true",
+    "modelEvidence": "model-io rollout 含 \"Stop hook additional context: #1 请补充... #2 S8-TEST-CONTINUE-BLOCK\"，模型据此继续。",
+    "source": "hook stdin JSONL, model-io rollout, zcode.cjs",
+    "at": "2026-11-26T02:51:59Z ~ 02:52:13Z"
+  },
+  "q7": {
+    "question": "超时/非零退出/非 JSON stdout",
+    "status": "可用",
+    "timeout": {
+      "setup": "process timeoutMs=3000, hook sleepMs=8000",
+      "result": "hook.run.failed outcome=timed_out durationMs=3002，会话继续，钩子输出未注入",
+      "at": "2026-11-26T02:52:37Z"
+    },
+    "nonzero": {
+      "setup": "exitCode=7 + stderr",
+      "result": "hook.run.failed outcome=failed，会话继续，stderr 记录在日志 preview",
+      "at": "2026-11-26T02:53:35Z"
+    },
+    "nonJson": {
+      "setup": "stdout 为纯文本（marker S8-NONJSON...）",
+      "result": "宿主 uja() 静默忽略（不以 { 开头直接 return），无失败日志，marker 未进入模型上下文，会话继续",
+      "at": "2026-11-26T02:54:00Z"
+    },
+    "strictSchema": "合法 JSON 但含未知字段/错误事件名时抛 \"Hook stdout failed HookJSONOutput schema validation\"（zcode.cjs uja）",
+    "source": "isolated host log + model-io rollout + zcode.cjs",
+    "at": "2026-11-26T02:52:37Z ~ 02:54:00Z"
+  },
+  "q8": {
+    "question": "钩子 cwd/env/中文空格路径",
+    "status": "可用",
+    "cwd": "钩子进程 cwd = D:Tempano-s8-work项目 with spaces（与 stdin.cwd 一致）",
+    "env": "宿主注入 ZCODE_PROJECT_DIR / CLAUDE_PROJECT_DIR / ZCODE_SESSION_ID / CLAUDE_SESSION_ID（值仅保留非秘密白名单，详见 stdinSamples 之外的 envView）；其余 env 只记 key 数量（93）不记录值",
+    "chineseSpacePath": "中文+空格路径在 command/args/stdin 中均正确传递，无编码/转义失败",
+    "source": "isolated hook stdin JSONL（探针记录 process.cwd/白名单 env）",
+    "at": "2026-11-26T02:45:23Z"
+  },
+  "gate": {
+    "q1": true,
+    "q2": "6/7-with-permissionrequest-exception",
+    "q4": true,
+    "q5": true,
+    "decision": "PASS-WITH-Q2-PERMISSIONREQUEST-EXCEPTION",
+    "downgrade": false,
+    "stopM19": false,
+    "t163_started": false,
+    "owner_ack_required": true
+  },
+  "evidence": {
+    "stdinSamples": {
+      "USER-SessionStart": {
+        "observedAt": "2026-11-26T02:45:23.261Z",
+        "node": "v24.14.0",
+        "hookCwd": "D:\\Temp\\ano-s8-work\\项目 with spaces",
+        "stdin": {
+          "cwd": "D:\\Temp\\ano-s8-work\\项目 with spaces",
+          "hookEventName": "SessionStart",
+          "mode": "yolo",
+          "model": "coding-hub/pool/hy4flash-free",
+          "sessionId": "sess_c349a90a-20f7-432b-a532-53219e0e87d3",
+          "source": "startup",
+          "timestamp": "2026-11-26T02:45:23.154Z",
+          "traceId": "55802e67-7b95-4f9a-b5a9-8054f64a902b",
+          "turnId": "turn_32e7b324-1190-4d66-8cd2-f5138c7abcfd",
+          "hook_event_name": "SessionStart",
+          "permission_mode": "yolo",
+          "session_id": "sess_c349a90a-20f7-432b-a532-53219e0e87d3"
+        }
+      },
+      "USER-UserPromptSubmit": {
+        "observedAt": "2026-11-26T02:45:23.372Z",
+        "node": "v24.14.0",
+        "hookCwd": "D:\\Temp\\ano-s8-work\\项目 with spaces",
+        "stdin": {
+          "cwd": "D:\\Temp\\ano-s8-work\\项目 with spaces",
+          "hookEventName": "UserPromptSubmit",
+          "mode": "yolo",
+          "prompt": "[redacted]",
+          "sessionId": "sess_c349a90a-20f7-432b-a532-53219e0e87d3",
+          "timestamp": "2026-11-26T02:45:23.281Z",
+          "traceId": "55802e67-7b95-4f9a-b5a9-8054f64a902b",
+          "turnId": "turn_32e7b324-1190-4d66-8cd2-f5138c7abcfd",
+          "hook_event_name": "UserPromptSubmit",
+          "permission_mode": "yolo",
+          "session_id": "sess_c349a90a-20f7-432b-a532-53219e0e87d3"
+        }
+      },
+      "USER-Stop": {
+        "observedAt": "2026-11-26T02:45:29.891Z",
+        "node": "v24.14.0",
+        "hookCwd": "D:\\Temp\\ano-s8-work\\项目 with spaces",
+        "stdin": {
+          "cwd": "D:\\Temp\\ano-s8-work\\项目 with spaces",
+          "hookEventName": "Stop",
+          "mode": "yolo",
+          "responsePreview": "[redacted]",
+          "responseText": "[redacted]",
+          "sessionId": "sess_c349a90a-20f7-432b-a532-53219e0e87d3",
+          "stopHookActive": false,
+          "timestamp": "2026-11-26T02:45:29.809Z",
+          "toolCallCount": 0,
+          "traceId": "55802e67-7b95-4f9a-b5a9-8054f64a902b",
+          "turnId": "turn_32e7b324-1190-4d66-8cd2-f5138c7abcfd",
+          "hook_event_name": "Stop",
+          "permission_mode": "yolo",
+          "session_id": "sess_c349a90a-20f7-432b-a532-53219e0e87d3",
+          "last_assistant_message": "[redacted]",
+          "stop_hook_active": false
+        }
+      },
+      "USER-PreToolUse": {
+        "observedAt": "2026-11-26T02:45:59.189Z",
+        "node": "v24.14.0",
+        "hookCwd": "D:\\Temp\\ano-s8-work\\项目 with spaces",
+        "stdin": {
+          "cwd": "D:\\Temp\\ano-s8-work\\项目 with spaces",
+          "hookEventName": "PreToolUse",
+          "mode": "yolo",
+          "riskLevel": "high",
+          "sessionId": "sess_9dfbb5e8-3cf4-494b-a344-869ec59f523b",
+          "sideEffectScope": "system",
+          "timestamp": "2026-11-26T02:45:59.123Z",
+          "toolCallId": "chatcmpl-tool-af4922f2c8ee6818",
+          "toolInput": {
+            "command": "find \"D:/Temp/ano-s8-work/项目 with spaces\" -name \"src.ts\" -not -path \"*/node_modules/*\" 2>/dev/null",
+            "description": "Locate src.ts file in project"
+          },
+          "toolName": "Bash",
+          "traceId": "bd9f16dd-f06a-43a7-80ff-d431f62cdfb9",
+          "turnId": "turn_2cca420c-7a0a-4849-8ab0-7c15d6209c08",
+          "hook_event_name": "PreToolUse",
+          "permission_mode": "yolo",
+          "session_id": "sess_9dfbb5e8-3cf4-494b-a344-869ec59f523b",
+          "tool_name": "Bash",
+          "tool_input": {
+            "command": "find \"D:/Temp/ano-s8-work/项目 with spaces\" -name \"src.ts\" -not -path \"*/node_modules/*\" 2>/dev/null",
+            "description": "Locate src.ts file in project"
+          },
+          "tool_use_id": "chatcmpl-tool-af4922f2c8ee6818"
+        }
+      },
+      "USER-PostToolUse": {
+        "observedAt": "2026-11-26T02:46:00.755Z",
+        "node": "v24.14.0",
+        "hookCwd": "D:\\Temp\\ano-s8-work\\项目 with spaces",
+        "stdin": {
+          "cwd": "D:\\Temp\\ano-s8-work\\项目 with spaces",
+          "hookEventName": "PostToolUse",
+          "mode": "yolo",
+          "sessionId": "sess_9dfbb5e8-3cf4-494b-a344-869ec59f523b",
+          "timestamp": "2026-11-26T02:46:00.672Z",
+          "toolCallId": "chatcmpl-tool-af4922f2c8ee6818",
+          "toolInput": {
+            "command": "find \"D:/Temp/ano-s8-work/项目 with spaces\" -name \"src.ts\" -not -path \"*/node_modules/*\" 2>/dev/null",
+            "description": "Locate src.ts file in project"
+          },
+          "toolName": "Bash",
+          "toolResponse": "[redacted]",
+          "toolResultPreview": "{\"stdout\":\"D:/Temp/ano-s8-work/项目 with spaces/src.ts\\n\",\"stderr\":\"\",\"interrupted\":false,\"isImage\":false,\"noOutputExpected\":false,\"status\":\"completed\",\"exitCode\":0,\"timedOut\":false,\"cancelled\":false,\"stdoutTruncated\":false,\"stderrTruncated\":false,\"stdoutBytes\":46,\"stderrBytes\":0}",
+          "traceId": "bd9f16dd-f06a-43a7-80ff-d431f62cdfb9",
+          "turnId": "turn_2cca420c-7a0a-4849-8ab0-7c15d6209c08",
+          "hook_event_name": "PostToolUse",
+          "permission_mode": "yolo",
+          "session_id": "sess_9dfbb5e8-3cf4-494b-a344-869ec59f523b",
+          "tool_name": "Bash",
+          "tool_input": {
+            "command": "find \"D:/Temp/ano-s8-work/项目 with spaces\" -name \"src.ts\" -not -path \"*/node_modules/*\" 2>/dev/null",
+            "description": "Locate src.ts file in project"
+          },
+          "tool_use_id": "chatcmpl-tool-af4922f2c8ee6818",
+          "tool_response": "[redacted]"
+        }
+      },
+      "USER-PostToolUseFailure": {
+        "observedAt": "2026-11-26T02:54:51.113Z",
+        "node": "v24.14.0",
+        "hookCwd": "D:\\Temp\\ano-s8-work\\项目 with spaces",
+        "stdin": {
+          "cwd": "D:\\Temp\\ano-s8-work\\项目 with spaces",
+          "error": "[redacted]",
+          "hookEventName": "PostToolUseFailure",
+          "isInterrupt": false,
+          "mode": "yolo",
+          "sessionId": "sess_a0282f3d-861a-4bc0-a005-d389d92b174d",
+          "timestamp": "2026-11-26T02:54:51.059Z",
+          "toolCallId": "chatcmpl-tool-8cb9a37c04aa797f",
+          "toolInput": {
+            "file_path": "D:\\Temp\\ano-s8-work\\项目 with spaces\\zz-no-such-file.ts"
+          },
+          "toolName": "Read",
+          "traceId": "8ec2c7d1-bb21-4903-9bd2-abac95fb81c3",
+          "turnId": "turn_a93d7e09-2f50-4d25-adfc-8509175a560e",
+          "hook_event_name": "PostToolUseFailure",
+          "permission_mode": "yolo",
+          "session_id": "sess_a0282f3d-861a-4bc0-a005-d389d92b174d",
+          "tool_name": "Read",
+          "tool_input": {
+            "file_path": "D:\\Temp\\ano-s8-work\\项目 with spaces\\zz-no-such-file.ts"
+          },
+          "tool_use_id": "chatcmpl-tool-8cb9a37c04aa797f",
+          "error_details": "[redacted]",
+          "is_interrupt": false
+        }
+      }
+    },
+    "envView": {
+      "keyCount": 93,
+      "env": {
+        "redacted": true
+      }
+    },
+    "invocationCount": 73
+  },
+  "q2_exception": {
+    "event": "PermissionRequest",
+    "status": "no-child-process-in-headless",
+    "coverage": "6/7 events have real stdin samples",
+    "reason": "headless permission flow cancels before the hook subprocess starts",
+    "owner_ack_required": true
+  },
+  "controller_review": {
+    "at": "2026-11-26T03:10:00Z",
+    "method": "independent isolated HOME with copied cli/db+plugins state, fixed probe, real CLI sessions; no credentials copied, real configs untouched",
+    "reproduced": [
+      "SessionStart/UserPromptSubmit/Stop stdin",
+      "Q5 SessionStart marker echoed by model",
+      "Q4 PreToolUse deny blocked Read with no PostToolUse"
+    ],
+    "q2_permission_request_attempts": [
+      "guarded mode + Bash",
+      "guarded mode + Write"
+    ],
+    "q2_coverage": "6/7",
+    "t163_started": false,
+    "real_user_config_mtime": "2026-11-19T20:48:07+08:00",
+    "ano_config_mtime": "2026-11-19T19:33:42+08:00"
+  }
+}

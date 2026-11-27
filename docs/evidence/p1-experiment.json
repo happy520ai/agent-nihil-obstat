@@ -1,0 +1,529 @@
+{
+  "generatedAt": "2026-11-21T01:25:12.778Z",
+  "node": "v24.14.0",
+  "sourceFingerprint": "575aa3dc2e7424d7128c39ea40b06f195be8f063b6e6d67c70e7772fb86059fc",
+  "sourceFiles": 5517,
+  "scenarios": {
+    "coverageGap": {
+      "taskId": "P1-COVERAGE",
+      "status": "blocked",
+      "level": "T0",
+      "evidenceId": "4d5803ef-e09b-4bda-b4a8-dc12e366706a",
+      "sourceFingerprint": "c3189f052ea41856e989a93d9a50912651fdb0db25480bfd396c10b4e901fca7",
+      "graphRevision": "09781de4b3fd66701e4871f48e7bd01f020fe24bfe8ad2a70a39cf7e2471eb49",
+      "freshness": {
+        "status": "fresh",
+        "stale": 0
+      },
+      "blastRadius": {
+        "impacted": [
+          "src/a.ts",
+          "src/b.ts",
+          "src/c.ts",
+          "test/b.test.ts"
+        ],
+        "covered": [
+          "src/a.ts",
+          "src/b.ts",
+          "test/b.test.ts"
+        ],
+        "uncovered": [
+          "src/c.ts"
+        ],
+        "advisory": []
+      },
+      "policy": {
+        "minimum": "T1",
+        "unknown": "strict"
+      },
+      "caveats": {
+        "edgeCounts": {
+          "value-confirmed": 3,
+          "type-only": 0,
+          "unknown": 2
+        },
+        "heuristicEdges": 0,
+        "unknownRatio": 0.4,
+        "filesWithUnresolvableDynamicLoads": 0,
+        "dynamicLoadCount": 0,
+        "degradedReasons": [],
+        "callEdges": 3,
+        "resolvedCallEdges": 3,
+        "heuristicCallEdges": 0,
+        "typeOnlyCallSites": 0,
+        "unresolvedCallSites": 2
+      },
+      "reasons": [
+        "Files lack value-confirmed test reachability: src/c.ts"
+      ]
+    },
+    "covered": {
+      "taskId": "P1-COVERED",
+      "status": "done",
+      "level": "T1",
+      "evidenceId": "f59eac92-5945-4637-abe9-ae5df7280144",
+      "sourceFingerprint": "b8c24e6001cc6d0dd65d0442877243d22e770e22ecdb25870f557f220def27fb",
+      "graphRevision": "124dd940209c440fce14f3a43c616a951216f1b4023c76bcadeb2748e77bb5f1",
+      "freshness": {
+        "status": "fresh",
+        "stale": 0
+      },
+      "blastRadius": {
+        "impacted": [
+          "src/a.ts",
+          "src/b.ts",
+          "src/c.ts",
+          "test/b.test.ts",
+          "test/c.test.ts"
+        ],
+        "covered": [
+          "src/a.ts",
+          "src/b.ts",
+          "src/c.ts",
+          "test/b.test.ts",
+          "test/c.test.ts"
+        ],
+        "uncovered": [],
+        "advisory": []
+      },
+      "policy": {
+        "minimum": "T1",
+        "unknown": "strict"
+      },
+      "caveats": {
+        "edgeCounts": {
+          "value-confirmed": 4,
+          "type-only": 0,
+          "unknown": 4
+        },
+        "heuristicEdges": 0,
+        "unknownRatio": 0.5,
+        "filesWithUnresolvableDynamicLoads": 0,
+        "dynamicLoadCount": 0,
+        "degradedReasons": [],
+        "callEdges": 4,
+        "resolvedCallEdges": 4,
+        "heuristicCallEdges": 0,
+        "typeOnlyCallSites": 0,
+        "unresolvedCallSites": 4
+      },
+      "reasons": []
+    },
+    "stale": {
+      "taskId": "STALE",
+      "status": "blocked",
+      "level": "none",
+      "evidenceId": "a581e5ba-4f3a-42d0-9393-14ff3b4295b8",
+      "sourceFingerprint": "a75df1205184abcb471e0d81c932c86d0b6ba497a7e1f3089f967df3bcfcf24d",
+      "graphRevision": "68217d87d3ba37e0ba70f5feac143fbfb56d4803817b08614e4a8d674cd1fa58",
+      "freshness": {
+        "status": "stale",
+        "stale": 1
+      },
+      "blastRadius": {
+        "impacted": [
+          "src/a.ts",
+          "src/b.ts",
+          "src/c.ts",
+          "test/b.test.ts",
+          "test/c.test.ts"
+        ],
+        "covered": [
+          "src/a.ts",
+          "src/b.ts",
+          "src/c.ts",
+          "test/b.test.ts",
+          "test/c.test.ts"
+        ],
+        "uncovered": [],
+        "advisory": []
+      },
+      "policy": {
+        "minimum": "T1",
+        "unknown": "strict"
+      },
+      "caveats": {
+        "edgeCounts": {
+          "value-confirmed": 4,
+          "type-only": 0,
+          "unknown": 4
+        },
+        "heuristicEdges": 0,
+        "unknownRatio": 0.5,
+        "filesWithUnresolvableDynamicLoads": 0,
+        "dynamicLoadCount": 0,
+        "degradedReasons": [],
+        "callEdges": 4,
+        "resolvedCallEdges": 4,
+        "heuristicCallEdges": 0,
+        "typeOnlyCallSites": 0,
+        "unresolvedCallSites": 4
+      },
+      "reasons": [
+        "The latest execution failed, timed out, or reported skipped/cancelled/todo work.",
+        "Graph is stale; a stale/degraded graph cannot support completion."
+      ]
+    },
+    "barrel": {
+      "impact": [
+        "src/a.ts",
+        "src/index.ts",
+        "src/user-consumer.ts"
+      ],
+      "verdict": {
+        "taskId": "BARREL",
+        "status": "blocked",
+        "level": "none",
+        "sourceFingerprint": "96b48a0ad12b8beac0c3d55f6299b48d308b79cb04a18902e47d6e606c7af551",
+        "graphRevision": "c1366fdc8e2801c8a86db931a5b49df62e6e1a68133f40654e815fddd92c5744",
+        "freshness": {
+          "status": "fresh",
+          "stale": 0
+        },
+        "blastRadius": {
+          "impacted": [
+            "src/a.ts",
+            "src/index.ts",
+            "src/user-consumer.ts"
+          ],
+          "covered": [],
+          "uncovered": [
+            "src/a.ts",
+            "src/index.ts",
+            "src/user-consumer.ts"
+          ],
+          "advisory": []
+        },
+        "policy": {
+          "minimum": "T1",
+          "unknown": "strict"
+        },
+        "caveats": {
+          "edgeCounts": {
+            "value-confirmed": 5,
+            "type-only": 2,
+            "unknown": 2
+          },
+          "heuristicEdges": 0,
+          "unknownRatio": 0.2222222222222222,
+          "filesWithUnresolvableDynamicLoads": 0,
+          "dynamicLoadCount": 0,
+          "degradedReasons": [],
+          "callEdges": 0,
+          "resolvedCallEdges": 0,
+          "heuristicCallEdges": 0,
+          "typeOnlyCallSites": 0,
+          "unresolvedCallSites": 2
+        },
+        "reasons": [
+          "No execution evidence was recorded.",
+          "Files lack value-confirmed test reachability: src/a.ts, src/index.ts, src/user-consumer.ts"
+        ]
+      },
+      "edges": [
+        {
+          "from": "src/b-consumer.ts",
+          "to": "src/b.ts",
+          "kind": "value-confirmed",
+          "provenance": "resolved",
+          "importedNames": [
+            "b"
+          ]
+        },
+        {
+          "from": "src/index.ts",
+          "to": "src/a.ts",
+          "kind": "type-only",
+          "provenance": "resolved",
+          "importedNames": [
+            "User"
+          ]
+        },
+        {
+          "from": "src/index.ts",
+          "to": "src/a.ts",
+          "kind": "value-confirmed",
+          "provenance": "resolved",
+          "importedNames": [
+            "a"
+          ]
+        },
+        {
+          "from": "src/index.ts",
+          "to": "src/b.ts",
+          "kind": "value-confirmed",
+          "provenance": "resolved",
+          "importedNames": [
+            "b"
+          ]
+        },
+        {
+          "from": "src/index.ts",
+          "to": "src/c.ts",
+          "kind": "value-confirmed",
+          "provenance": "resolved",
+          "importedNames": [
+            "c"
+          ]
+        },
+        {
+          "from": "src/user-consumer.ts",
+          "to": "src/a.ts",
+          "kind": "type-only",
+          "provenance": "resolved",
+          "importedNames": [
+            "User"
+          ]
+        },
+        {
+          "from": "test/b.test.ts",
+          "to": "node:assert/strict",
+          "kind": "unknown",
+          "provenance": "parsed",
+          "importedNames": [
+            "default"
+          ],
+          "label": "unresolved"
+        },
+        {
+          "from": "test/b.test.ts",
+          "to": "node:test",
+          "kind": "unknown",
+          "provenance": "parsed",
+          "importedNames": [
+            "default"
+          ],
+          "label": "unresolved"
+        },
+        {
+          "from": "test/b.test.ts",
+          "to": "src/b.ts",
+          "kind": "value-confirmed",
+          "provenance": "resolved",
+          "importedNames": [
+            "b"
+          ]
+        }
+      ]
+    }
+  },
+  "failures": [],
+  "realProject": {
+    "candidate": "D:/DevTools/pm-mcp",
+    "selected": true,
+    "files": 74,
+    "sampleSize": 37,
+    "stride": 2,
+    "distributions": [
+      {
+        "file": "src/acceptance-evaluator.ts",
+        "resolved": 9,
+        "full": 10
+      },
+      {
+        "file": "src/acceptance-report.ts",
+        "resolved": 10,
+        "full": 11
+      },
+      {
+        "file": "src/agents-md.ts",
+        "resolved": 54,
+        "full": 55
+      },
+      {
+        "file": "src/audit.ts",
+        "resolved": 56,
+        "full": 57
+      },
+      {
+        "file": "src/caller-workspace.ts",
+        "resolved": 23,
+        "full": 24
+      },
+      {
+        "file": "src/dashboard.ts",
+        "resolved": 52,
+        "full": 53
+      },
+      {
+        "file": "src/duplicates.ts",
+        "resolved": 6,
+        "full": 7
+      },
+      {
+        "file": "src/governance-audit.ts",
+        "resolved": 7,
+        "full": 8
+      },
+      {
+        "file": "src/governance-tools.ts",
+        "resolved": 4,
+        "full": 5
+      },
+      {
+        "file": "src/idempotency-gc.ts",
+        "resolved": 25,
+        "full": 26
+      },
+      {
+        "file": "src/index-db.ts",
+        "resolved": 68,
+        "full": 69
+      },
+      {
+        "file": "src/index.ts",
+        "resolved": 1,
+        "full": 2
+      },
+      {
+        "file": "src/knowledge-tools.ts",
+        "resolved": 5,
+        "full": 6
+      },
+      {
+        "file": "src/language-dependencies.ts",
+        "resolved": 44,
+        "full": 99
+      },
+      {
+        "file": "src/orchestrator-state.ts",
+        "resolved": 54,
+        "full": 55
+      },
+      {
+        "file": "src/orchestrator.ts",
+        "resolved": 53,
+        "full": 54
+      },
+      {
+        "file": "src/paths.ts",
+        "resolved": 109,
+        "full": 116
+      },
+      {
+        "file": "src/portfolio.ts",
+        "resolved": 7,
+        "full": 8
+      },
+      {
+        "file": "src/project-fingerprint.ts",
+        "resolved": 63,
+        "full": 64
+      },
+      {
+        "file": "src/prompts.ts",
+        "resolved": 2,
+        "full": 3
+      },
+      {
+        "file": "src/qoder-launch.ts",
+        "resolved": 2,
+        "full": 3
+      },
+      {
+        "file": "src/quality-report.ts",
+        "resolved": 55,
+        "full": 56
+      },
+      {
+        "file": "src/registry.ts",
+        "resolved": 54,
+        "full": 55
+      },
+      {
+        "file": "src/roadmap.ts",
+        "resolved": 59,
+        "full": 60
+      },
+      {
+        "file": "src/scan.ts",
+        "resolved": 67,
+        "full": 68
+      },
+      {
+        "file": "src/security.ts",
+        "resolved": 10,
+        "full": 11
+      },
+      {
+        "file": "src/semantic-evidence.ts",
+        "resolved": 14,
+        "full": 20
+      },
+      {
+        "file": "src/semantic-graph.ts",
+        "resolved": 10,
+        "full": 11
+      },
+      {
+        "file": "src/session-log.ts",
+        "resolved": 9,
+        "full": 10
+      },
+      {
+        "file": "src/setup.ts",
+        "resolved": 5,
+        "full": 6
+      },
+      {
+        "file": "src/sync-types.ts",
+        "resolved": 1,
+        "full": 5
+      },
+      {
+        "file": "src/task-evidence.ts",
+        "resolved": 8,
+        "full": 9
+      },
+      {
+        "file": "src/task-tools.ts",
+        "resolved": 7,
+        "full": 8
+      },
+      {
+        "file": "src/tools.ts",
+        "resolved": 2,
+        "full": 3
+      },
+      {
+        "file": "src/typescript-semantic.ts",
+        "resolved": 14,
+        "full": 17
+      },
+      {
+        "file": "src/usage-log.ts",
+        "resolved": 107,
+        "full": 114
+      },
+      {
+        "file": "src/watcher-coordinator.ts",
+        "resolved": 69,
+        "full": 70
+      }
+    ],
+    "median": 17,
+    "p90": 70,
+    "caveats": {
+      "edgeCounts": {
+        "value-confirmed": 479,
+        "type-only": 62,
+        "unknown": 523
+      },
+      "heuristicEdges": 15,
+      "unknownRatio": 0.49154135338345867,
+      "filesWithUnresolvableDynamicLoads": 0,
+      "dynamicLoadCount": 11,
+      "degradedReasons": [],
+      "callEdges": 4070,
+      "resolvedCallEdges": 4008,
+      "heuristicCallEdges": 62,
+      "typeOnlyCallSites": 0,
+      "unresolvedCallSites": 13353
+    },
+    "freshness": {
+      "status": "fresh",
+      "stale": 0
+    }
+  },
+  "verdict": "synthetic-pass-real-project-measured"
+}

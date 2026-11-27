@@ -1,0 +1,45 @@
+schema = 1
+id = "A"
+name = "Library / SDK / npm package"
+kind = "library"
+status = "defined"
+schema_hash = "c859bd49ec86db0bf0f3316b21bc2ff357be01d47376b371b00f88cfda340ef1"
+notes = "Defined only. Not validated by a real library project; see docs/readiness/profile-a.md."
+
+[requirements."a.breaking-change-notes"]
+title = "Breaking changes include migration notes"
+scope = "A"
+evidence = "machine_or_attested"
+freshness_days = 90
+kinds = ["artifact_scan", "docs_check"]
+
+[requirements."a.public-api-semver"]
+title = "Public API changes agree with semantic versioning"
+scope = "A"
+evidence = "machine"
+freshness_days = 30
+check = "a.public-api-semver"
+kinds = ["api_diff"]
+
+[requirements."a.runtime-matrix"]
+title = "Tests pass on the lowest and highest supported runtime versions"
+scope = "A"
+evidence = "machine"
+freshness_days = 30
+kinds = ["ci_run"]
+
+[requirements."a.tarball-allowlist"]
+title = "Published tarball contents match the declared allowlist"
+scope = "A"
+evidence = "machine"
+freshness_days = 7
+check = "a.tarball-allowlist"
+kinds = ["artifact_scan"]
+
+[requirements."a.types-exports"]
+title = "Type declarations and export map match the package contents"
+scope = "A"
+evidence = "machine"
+freshness_days = 7
+check = "a.types-exports"
+kinds = ["artifact_scan", "docs_check"]

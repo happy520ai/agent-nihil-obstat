@@ -1,0 +1,30 @@
+{
+  "schema": "ano.zcode-integration.v1",
+  "generatedAt": "2026-11-27T12:36:33.746Z",
+  "configPath": "F:\\Agent Nihil Obstat\\.zcode\\config.json",
+  "configSha256": "a377fcf65dd2922cf018dfcde50392aa2b8dc029189701bef145d1977bf50601",
+  "workspaceAnoDeclared": false,
+  "registrationScope": "user",
+  "anoRegistrationCount": 1,
+  "effectiveConfigPath": "<user-home>/.zcode/cli/config.json",
+  "effectiveServerSha256": "7ffc3224927dcb1ccb55927b67ba4e6387211195b0856a8cf19a114f17bf0baa",
+  "serverPid": 29120,
+  "node": "v24.14.0",
+  "platform": "win32",
+  "arch": "x64",
+  "initialized": true,
+  "tools": [
+    "brief",
+    "explore",
+    "recall",
+    "track",
+    "note",
+    "verify",
+    "audit"
+  ],
+  "briefPhase": "P7",
+  "root": "F:\\Agent Nihil Obstat",
+  "scope": "user",
+  "verified": "configured-stdio-command",
+  "clientRestartRequired": true
+}

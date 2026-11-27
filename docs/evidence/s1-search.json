@@ -1,0 +1,3505 @@
+{
+  "schema": "ano-s1-search-evidence/v1",
+  "spike": "S1",
+  "segment": "mechanism",
+  "generatedAt": "2026-11-18T13:05:47.985Z",
+  "command": "node \"F:\\Agent Nihil Obstat\\scripts\\spikes\\s1-search.mjs\" --out \"F:/Agent Nihil Obstat/docs/evidence/s1-search.json\"",
+  "inputs": "synthetic-strings-only",
+  "privacy": {
+    "realSessionSampling": false,
+    "realSessionFilesRead": false,
+    "note": "G3 未授权真实会话采样；本文件不含任何真实会话内容，也不含排序/召回结论。"
+  },
+  "environment": {
+    "node": "v24.14.0",
+    "platform": "win32",
+    "arch": "x64",
+    "v8": "13.6.233.17-node.41",
+    "modules": "137",
+    "icu": "78.2",
+    "unicode": "17.0",
+    "cldr": "48.0",
+    "tz": "2025c",
+    "sqlite": "3.51.2",
+    "icuSmall": false,
+    "execPath": "C:\\Program Files\\nodejs\\node.exe",
+    "cwd": "F:\\Agent Nihil Obstat",
+    "scriptPath": "F:\\Agent Nihil Obstat\\scripts\\spikes\\s1-search.mjs",
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "F:\\Agent Nihil Obstat\\scripts\\spikes\\s1-search.mjs"
+    ]
+  },
+  "runtimeWarnings": [
+    {
+      "name": "ExperimentalWarning",
+      "message": "SQLite is an experimental feature and might change at any time"
+    }
+  ],
+  "segmenter": {
+    "available": true,
+    "constructor": "Intl.Segmenter",
+    "locale": "zh",
+    "granularity": "word",
+    "samples": [
+      {
+        "input": "租约",
+        "codepoints": 2,
+        "utf16Length": 2,
+        "segments": [
+          {
+            "segment": "租约",
+            "isWordLike": true
+          }
+        ]
+      },
+      {
+        "input": "账本",
+        "codepoints": 2,
+        "utf16Length": 2,
+        "segments": [
+          {
+            "segment": "账本",
+            "isWordLike": true
+          }
+        ]
+      },
+      {
+        "input": "数据库",
+        "codepoints": 3,
+        "utf16Length": 3,
+        "segments": [
+          {
+            "segment": "数据",
+            "isWordLike": true
+          },
+          {
+            "segment": "库",
+            "isWordLike": true
+          }
+        ]
+      },
+      {
+        "input": "数据库连接池",
+        "codepoints": 6,
+        "utf16Length": 6,
+        "segments": [
+          {
+            "segment": "数据",
+            "isWordLike": true
+          },
+          {
+            "segment": "库",
+            "isWordLike": true
+          },
+          {
+            "segment": "连接",
+            "isWordLike": true
+          },
+          {
+            "segment": "池",
+            "isWordLike": true
+          }
+        ]
+      },
+      {
+        "input": "幂等",
+        "codepoints": 2,
+        "utf16Length": 2,
+        "segments": [
+          {
+            "segment": "幂",
+            "isWordLike": true
+          },
+          {
+            "segment": "等",
+            "isWordLike": true
+          }
+        ]
+      },
+      {
+        "input": "死锁",
+        "codepoints": 2,
+        "utf16Length": 2,
+        "segments": [
+          {
+            "segment": "死",
+            "isWordLike": true
+          },
+          {
+            "segment": "锁",
+            "isWordLike": true
+          }
+        ]
+      },
+      {
+        "input": "回滚",
+        "codepoints": 2,
+        "utf16Length": 2,
+        "segments": [
+          {
+            "segment": "回",
+            "isWordLike": true
+          },
+          {
+            "segment": "滚",
+            "isWordLike": true
+          }
+        ]
+      },
+      {
+        "input": "调用",
+        "codepoints": 2,
+        "utf16Length": 2,
+        "segments": [
+          {
+            "segment": "调",
+            "isWordLike": true
+          },
+          {
+            "segment": "用",
+            "isWordLike": true
+          }
+        ]
+      },
+      {
+        "input": "调用refreshToken函数",
+        "codepoints": 16,
+        "utf16Length": 16,
+        "segments": [
+          {
+            "segment": "调",
+            "isWordLike": true
+          },
+          {
+            "segment": "用",
+            "isWordLike": true
+          },
+          {
+            "segment": "refreshToken",
+            "isWordLike": true
+          },
+          {
+            "segment": "函数",
+            "isWordLike": true
+          }
+        ]
+      },
+      {
+        "input": "调用 refreshToken 函数",
+        "codepoints": 18,
+        "utf16Length": 18,
+        "segments": [
+          {
+            "segment": "调",
+            "isWordLike": true
+          },
+          {
+            "segment": "用",
+            "isWordLike": true
+          },
+          {
+            "segment": " ",
+            "isWordLike": false
+          },
+          {
+            "segment": "refreshToken",
+            "isWordLike": true
+          },
+          {
+            "segment": " ",
+            "isWordLike": false
+          },
+          {
+            "segment": "函数",
+            "isWordLike": true
+          }
+        ]
+      },
+      {
+        "input": "refreshToken",
+        "codepoints": 12,
+        "utf16Length": 12,
+        "segments": [
+          {
+            "segment": "refreshToken",
+            "isWordLike": true
+          }
+        ]
+      },
+      {
+        "input": "refresh_token",
+        "codepoints": 13,
+        "utf16Length": 13,
+        "segments": [
+          {
+            "segment": "refresh_token",
+            "isWordLike": true
+          }
+        ]
+      },
+      {
+        "input": "XMLHttpRequest",
+        "codepoints": 14,
+        "utf16Length": 14,
+        "segments": [
+          {
+            "segment": "XMLHttpRequest",
+            "isWordLike": true
+          }
+        ]
+      },
+      {
+        "input": "parseHTMLString",
+        "codepoints": 15,
+        "utf16Length": 15,
+        "segments": [
+          {
+            "segment": "parseHTMLString",
+            "isWordLike": true
+          }
+        ]
+      },
+      {
+        "input": "utf8Decode",
+        "codepoints": 10,
+        "utf16Length": 10,
+        "segments": [
+          {
+            "segment": "utf8Decode",
+            "isWordLike": true
+          }
+        ]
+      },
+      {
+        "input": "base64",
+        "codepoints": 6,
+        "utf16Length": 6,
+        "segments": [
+          {
+            "segment": "base64",
+            "isWordLike": true
+          }
+        ]
+      },
+      {
+        "input": "kebab-case",
+        "codepoints": 10,
+        "utf16Length": 10,
+        "segments": [
+          {
+            "segment": "kebab",
+            "isWordLike": true
+          },
+          {
+            "segment": "-",
+            "isWordLike": false
+          },
+          {
+            "segment": "case",
+            "isWordLike": true
+          }
+        ]
+      },
+      {
+        "input": "a.b.c",
+        "codepoints": 5,
+        "utf16Length": 5,
+        "segments": [
+          {
+            "segment": "a.b.c",
+            "isWordLike": true
+          }
+        ]
+      },
+      {
+        "input": "𠮷野家",
+        "codepoints": 3,
+        "utf16Length": 4,
+        "segments": [
+          {
+            "segment": "𠮷",
+            "isWordLike": true
+          },
+          {
+            "segment": "野家",
+            "isWordLike": true
+          }
+        ]
+      },
+      {
+        "input": "修复死锁后回滚事务并更新租约状态",
+        "codepoints": 16,
+        "utf16Length": 16,
+        "segments": [
+          {
+            "segment": "修复",
+            "isWordLike": true
+          },
+          {
+            "segment": "死",
+            "isWordLike": true
+          },
+          {
+            "segment": "锁",
+            "isWordLike": true
+          },
+          {
+            "segment": "后",
+            "isWordLike": true
+          },
+          {
+            "segment": "回",
+            "isWordLike": true
+          },
+          {
+            "segment": "滚",
+            "isWordLike": true
+          },
+          {
+            "segment": "事务",
+            "isWordLike": true
+          },
+          {
+            "segment": "并",
+            "isWordLike": true
+          },
+          {
+            "segment": "更新",
+            "isWordLike": true
+          },
+          {
+            "segment": "租约",
+            "isWordLike": true
+          },
+          {
+            "segment": "状态",
+            "isWordLike": true
+          }
+        ]
+      },
+      {
+        "input": "rental lease 租约",
+        "codepoints": 15,
+        "utf16Length": 15,
+        "segments": [
+          {
+            "segment": "rental",
+            "isWordLike": true
+          },
+          {
+            "segment": " ",
+            "isWordLike": false
+          },
+          {
+            "segment": "lease",
+            "isWordLike": true
+          },
+          {
+            "segment": " ",
+            "isWordLike": false
+          },
+          {
+            "segment": "租约",
+            "isWordLike": true
+          }
+        ]
+      }
+    ],
+    "crossLocale": {
+      "input": "调用refreshToken函数修复死锁回滚事务",
+      "results": [
+        {
+          "locale": "zh",
+          "segments": [
+            "调",
+            "用",
+            "refreshToken",
+            "函数",
+            "修复",
+            "死",
+            "锁",
+            "回",
+            "滚",
+            "事务"
+          ]
+        },
+        {
+          "locale": "zh-Hans",
+          "segments": [
+            "调",
+            "用",
+            "refreshToken",
+            "函数",
+            "修复",
+            "死",
+            "锁",
+            "回",
+            "滚",
+            "事务"
+          ]
+        },
+        {
+          "locale": "zh-Hant",
+          "segments": [
+            "调",
+            "用",
+            "refreshToken",
+            "函数",
+            "修复",
+            "死",
+            "锁",
+            "回",
+            "滚",
+            "事务"
+          ]
+        },
+        {
+          "locale": "en",
+          "segments": [
+            "调",
+            "用",
+            "refreshToken",
+            "函数",
+            "修复",
+            "死",
+            "锁",
+            "回",
+            "滚",
+            "事务"
+          ]
+        }
+      ]
+    },
+    "graphemeVsCodepoint": [
+      {
+        "input": "租",
+        "codepoints": 1,
+        "utf16Units": 1
+      },
+      {
+        "input": "𠮷",
+        "codepoints": 1,
+        "utf16Units": 2
+      },
+      {
+        "input": "𠮷野家",
+        "codepoints": 3,
+        "utf16Units": 4
+      }
+    ]
+  },
+  "identifierSplitting": {
+    "version": "ano-s1-identifier-split-v1",
+    "icuDependent": false,
+    "ruleSummary": "分隔符（_ - . $ 及其余非字母数字）一律断开；字母↔数字两个方向都拆；小写→大写拆；连续大写缩写结束处拆（XML|Http、HTML|String）；子词统一小写、去重、保留顺序；原词由调用方保留。",
+    "cases": [
+      {
+        "input": "XMLHttpRequest",
+        "expected": [
+          "xml",
+          "http",
+          "request"
+        ],
+        "actual": [
+          "xml",
+          "http",
+          "request"
+        ],
+        "pass": true,
+        "expanded": [
+          "XMLHttpRequest",
+          "xml",
+          "http",
+          "request"
+        ]
+      },
+      {
+        "input": "parseHTMLString",
+        "expected": [
+          "parse",
+          "html",
+          "string"
+        ],
+        "actual": [
+          "parse",
+          "html",
+          "string"
+        ],
+        "pass": true,
+        "expanded": [
+          "parseHTMLString",
+          "parse",
+          "html",
+          "string"
+        ]
+      },
+      {
+        "input": "utf8Decode",
+        "expected": [
+          "utf",
+          "8",
+          "decode"
+        ],
+        "actual": [
+          "utf",
+          "8",
+          "decode"
+        ],
+        "pass": true,
+        "expanded": [
+          "utf8Decode",
+          "utf",
+          "8",
+          "decode"
+        ]
+      },
+      {
+        "input": "base64",
+        "expected": [
+          "base",
+          "64"
+        ],
+        "actual": [
+          "base",
+          "64"
+        ],
+        "pass": true,
+        "expanded": [
+          "base64",
+          "base",
+          "64"
+        ]
+      },
+      {
+        "input": "refresh_token",
+        "expected": [
+          "refresh",
+          "token"
+        ],
+        "actual": [
+          "refresh",
+          "token"
+        ],
+        "pass": true,
+        "expanded": [
+          "refresh_token",
+          "refresh",
+          "token"
+        ]
+      },
+      {
+        "input": "kebab-case",
+        "expected": [
+          "kebab",
+          "case"
+        ],
+        "actual": [
+          "kebab",
+          "case"
+        ],
+        "pass": true,
+        "expanded": [
+          "kebab-case",
+          "kebab",
+          "case"
+        ]
+      },
+      {
+        "input": "a.b.c",
+        "expected": [
+          "a",
+          "b",
+          "c"
+        ],
+        "actual": [
+          "a",
+          "b",
+          "c"
+        ],
+        "pass": true,
+        "expanded": [
+          "a.b.c",
+          "a",
+          "b",
+          "c"
+        ]
+      }
+    ],
+    "extra": [
+      "refreshToken",
+      "HTTPServer",
+      "OAuth2Token",
+      "$scope",
+      "a1b2",
+      "A",
+      "",
+      "调用refreshToken函数"
+    ],
+    "determinism": [
+      {
+        "input": "refreshToken",
+        "first": [
+          "refresh",
+          "token"
+        ],
+        "second": [
+          "refresh",
+          "token"
+        ],
+        "expanded": [
+          "refreshToken",
+          "refresh",
+          "token"
+        ]
+      },
+      {
+        "input": "HTTPServer",
+        "first": [
+          "http",
+          "server"
+        ],
+        "second": [
+          "http",
+          "server"
+        ],
+        "expanded": [
+          "HTTPServer",
+          "http",
+          "server"
+        ]
+      },
+      {
+        "input": "OAuth2Token",
+        "first": [
+          "o",
+          "auth",
+          "2",
+          "token"
+        ],
+        "second": [
+          "o",
+          "auth",
+          "2",
+          "token"
+        ],
+        "expanded": [
+          "OAuth2Token",
+          "o",
+          "auth",
+          "2",
+          "token"
+        ]
+      },
+      {
+        "input": "$scope",
+        "first": [
+          "scope"
+        ],
+        "second": [
+          "scope"
+        ],
+        "expanded": [
+          "$scope",
+          "scope"
+        ]
+      },
+      {
+        "input": "a1b2",
+        "first": [
+          "a",
+          "1",
+          "b",
+          "2"
+        ],
+        "second": [
+          "a",
+          "1",
+          "b",
+          "2"
+        ],
+        "expanded": [
+          "a1b2",
+          "a",
+          "1",
+          "b",
+          "2"
+        ]
+      },
+      {
+        "input": "A",
+        "first": [
+          "a"
+        ],
+        "second": [
+          "a"
+        ],
+        "expanded": [
+          "A"
+        ]
+      },
+      {
+        "input": "",
+        "first": [],
+        "second": [],
+        "expanded": [
+          ""
+        ]
+      },
+      {
+        "input": "调用refreshToken函数",
+        "first": [
+          "refresh",
+          "token"
+        ],
+        "second": [
+          "refresh",
+          "token"
+        ],
+        "expanded": [
+          "调用refreshToken函数",
+          "refresh",
+          "token"
+        ]
+      }
+    ],
+    "mixedPipeline": {
+      "input": "调用refreshToken函数",
+      "segments": [
+        {
+          "segment": "调",
+          "isWordLike": true
+        },
+        {
+          "segment": "用",
+          "isWordLike": true
+        },
+        {
+          "segment": "refreshToken",
+          "isWordLike": true
+        },
+        {
+          "segment": "函数",
+          "isWordLike": true
+        }
+      ],
+      "tokensBPlus": [
+        "调",
+        "用",
+        "refreshToken",
+        "refresh",
+        "token",
+        "函数"
+      ],
+      "indexTextBPlus": "调 用 refreshToken refresh token 函数"
+    }
+  },
+  "sqlite": {
+    "loaded": true,
+    "sqliteVersion": "3.51.2",
+    "versionNumber": "2026-01-09 17:27:48 b270f8339eb13b504d0b2ba154ebca966b7dde08e40c3ed7d559749818cb2075",
+    "compileOptions": [
+      "ATOMIC_INTRINSICS=1",
+      "COMPILER=clang-19.1.5",
+      "DEFAULT_AUTOVACUUM",
+      "DEFAULT_CACHE_SIZE=-2000",
+      "DEFAULT_FILE_FORMAT=4",
+      "DEFAULT_JOURNAL_SIZE_LIMIT=-1",
+      "DEFAULT_MEMSTATUS=0",
+      "DEFAULT_MMAP_SIZE=0",
+      "DEFAULT_PAGE_SIZE=4096",
+      "DEFAULT_PCACHE_INITSZ=20",
+      "DEFAULT_RECURSIVE_TRIGGERS",
+      "DEFAULT_SECTOR_SIZE=4096",
+      "DEFAULT_SYNCHRONOUS=2",
+      "DEFAULT_WAL_AUTOCHECKPOINT=1000",
+      "DEFAULT_WAL_SYNCHRONOUS=2",
+      "DEFAULT_WORKER_THREADS=0",
+      "DIRECT_OVERFLOW_READ",
+      "ENABLE_COLUMN_METADATA",
+      "ENABLE_DBSTAT_VTAB",
+      "ENABLE_FTS3",
+      "ENABLE_FTS3_PARENTHESIS",
+      "ENABLE_FTS5",
+      "ENABLE_GEOPOLY",
+      "ENABLE_MATH_FUNCTIONS",
+      "ENABLE_PREUPDATE_HOOK",
+      "ENABLE_RBU",
+      "ENABLE_RTREE",
+      "ENABLE_SESSION",
+      "MALLOC_SOFT_LIMIT=1024",
+      "MAX_ATTACHED=10",
+      "MAX_COLUMN=2000",
+      "MAX_COMPOUND_SELECT=500",
+      "MAX_DEFAULT_PAGE_SIZE=8192",
+      "MAX_EXPR_DEPTH=1000",
+      "MAX_FUNCTION_ARG=1000",
+      "MAX_LENGTH=1000000000",
+      "MAX_LIKE_PATTERN_LENGTH=50000",
+      "MAX_MMAP_SIZE=0x7fff0000",
+      "MAX_PAGE_COUNT=0xfffffffe",
+      "MAX_PAGE_SIZE=65536",
+      "MAX_SQL_LENGTH=1000000000",
+      "MAX_TRIGGER_DEPTH=1000",
+      "MAX_VARIABLE_NUMBER=32766",
+      "MAX_VDBE_OP=250000000",
+      "MAX_WORKER_THREADS=8",
+      "MUTEX_W32",
+      "SYSTEM_MALLOC",
+      "TEMP_STORE=1",
+      "THREADSAFE=1"
+    ],
+    "ftsOptions": [
+      "ENABLE_FTS3",
+      "ENABLE_FTS3_PARENTHESIS",
+      "ENABLE_FTS5"
+    ],
+    "create": {
+      "plainFts5": {
+        "ok": true
+      },
+      "trigram": {
+        "ok": true
+      },
+      "trigramCaseSensitive": {
+        "ok": true
+      }
+    },
+    "tables": {
+      "t_plain": "普通 B-tree 表（LIKE 真值基线）",
+      "t_u61": "fts5(tokenize='unicode61')，插入原始未切分文本",
+      "t_tri": "fts5(tokenize='trigram')，插入原始文本",
+      "t_tri_cs": "fts5(tokenize='trigram case_sensitive 1')"
+    },
+    "rowCounts": {
+      "t_plain": 8,
+      "t_u61": 8,
+      "t_tri": 8,
+      "t_tri_cs": 8
+    },
+    "matrix": [
+      {
+        "label": "1cp-BMP",
+        "query": "租",
+        "codepointLen": 1,
+        "utf16Length": 1,
+        "groundTruthRowCount": 1,
+        "match": {
+          "label": "MATCH:1cp-BMP",
+          "sql": "SELECT rowid FROM t_tri WHERE body MATCH ?",
+          "params": [
+            "租"
+          ],
+          "rowCount": 0,
+          "rowids": [],
+          "rows": [],
+          "error": null
+        },
+        "like": {
+          "label": "LIKE:1cp-BMP",
+          "sql": "SELECT rowid FROM t_tri WHERE body LIKE ?",
+          "params": [
+            "%租%"
+          ],
+          "rowCount": 1,
+          "rowids": [
+            1
+          ],
+          "rows": [
+            {
+              "rowid": 1
+            }
+          ],
+          "error": null
+        }
+      },
+      {
+        "label": "1cp-nonBMP",
+        "query": "𠮷",
+        "codepointLen": 1,
+        "utf16Length": 2,
+        "groundTruthRowCount": 1,
+        "match": {
+          "label": "MATCH:1cp-nonBMP",
+          "sql": "SELECT rowid FROM t_tri WHERE body MATCH ?",
+          "params": [
+            "𠮷"
+          ],
+          "rowCount": 0,
+          "rowids": [],
+          "rows": [],
+          "error": null
+        },
+        "like": {
+          "label": "LIKE:1cp-nonBMP",
+          "sql": "SELECT rowid FROM t_tri WHERE body LIKE ?",
+          "params": [
+            "%𠮷%"
+          ],
+          "rowCount": 1,
+          "rowids": [
+            4
+          ],
+          "rows": [
+            {
+              "rowid": 4
+            }
+          ],
+          "error": null
+        }
+      },
+      {
+        "label": "1cp-ascii",
+        "query": "t",
+        "codepointLen": 1,
+        "utf16Length": 1,
+        "groundTruthRowCount": 3,
+        "match": {
+          "label": "MATCH:1cp-ascii",
+          "sql": "SELECT rowid FROM t_tri WHERE body MATCH ?",
+          "params": [
+            "t"
+          ],
+          "rowCount": 0,
+          "rowids": [],
+          "rows": [],
+          "error": null
+        },
+        "like": {
+          "label": "LIKE:1cp-ascii",
+          "sql": "SELECT rowid FROM t_tri WHERE body LIKE ?",
+          "params": [
+            "%t%"
+          ],
+          "rowCount": 3,
+          "rowids": [
+            3,
+            6,
+            8
+          ],
+          "rows": [
+            {
+              "rowid": 3
+            },
+            {
+              "rowid": 6
+            },
+            {
+              "rowid": 8
+            }
+          ],
+          "error": null
+        }
+      },
+      {
+        "label": "2cp-BMP",
+        "query": "租约",
+        "codepointLen": 2,
+        "utf16Length": 2,
+        "groundTruthRowCount": 1,
+        "match": {
+          "label": "MATCH:2cp-BMP",
+          "sql": "SELECT rowid FROM t_tri WHERE body MATCH ?",
+          "params": [
+            "租约"
+          ],
+          "rowCount": 0,
+          "rowids": [],
+          "rows": [],
+          "error": null
+        },
+        "like": {
+          "label": "LIKE:2cp-BMP",
+          "sql": "SELECT rowid FROM t_tri WHERE body LIKE ?",
+          "params": [
+            "%租约%"
+          ],
+          "rowCount": 1,
+          "rowids": [
+            1
+          ],
+          "rows": [
+            {
+              "rowid": 1
+            }
+          ],
+          "error": null
+        }
+      },
+      {
+        "label": "2cp-BMP-2",
+        "query": "调用",
+        "codepointLen": 2,
+        "utf16Length": 2,
+        "groundTruthRowCount": 1,
+        "match": {
+          "label": "MATCH:2cp-BMP-2",
+          "sql": "SELECT rowid FROM t_tri WHERE body MATCH ?",
+          "params": [
+            "调用"
+          ],
+          "rowCount": 0,
+          "rowids": [],
+          "rows": [],
+          "error": null
+        },
+        "like": {
+          "label": "LIKE:2cp-BMP-2",
+          "sql": "SELECT rowid FROM t_tri WHERE body LIKE ?",
+          "params": [
+            "%调用%"
+          ],
+          "rowCount": 1,
+          "rowids": [
+            3
+          ],
+          "rows": [
+            {
+              "rowid": 3
+            }
+          ],
+          "error": null
+        }
+      },
+      {
+        "label": "2cp-BMP-3",
+        "query": "函数",
+        "codepointLen": 2,
+        "utf16Length": 2,
+        "groundTruthRowCount": 1,
+        "match": {
+          "label": "MATCH:2cp-BMP-3",
+          "sql": "SELECT rowid FROM t_tri WHERE body MATCH ?",
+          "params": [
+            "函数"
+          ],
+          "rowCount": 0,
+          "rowids": [],
+          "rows": [],
+          "error": null
+        },
+        "like": {
+          "label": "LIKE:2cp-BMP-3",
+          "sql": "SELECT rowid FROM t_tri WHERE body LIKE ?",
+          "params": [
+            "%函数%"
+          ],
+          "rowCount": 1,
+          "rowids": [
+            3
+          ],
+          "rows": [
+            {
+              "rowid": 3
+            }
+          ],
+          "error": null
+        }
+      },
+      {
+        "label": "2cp-ascii",
+        "query": "to",
+        "codepointLen": 2,
+        "utf16Length": 2,
+        "groundTruthRowCount": 3,
+        "match": {
+          "label": "MATCH:2cp-ascii",
+          "sql": "SELECT rowid FROM t_tri WHERE body MATCH ?",
+          "params": [
+            "to"
+          ],
+          "rowCount": 0,
+          "rowids": [],
+          "rows": [],
+          "error": null
+        },
+        "like": {
+          "label": "LIKE:2cp-ascii",
+          "sql": "SELECT rowid FROM t_tri WHERE body LIKE ?",
+          "params": [
+            "%to%"
+          ],
+          "rowCount": 3,
+          "rowids": [
+            3,
+            6,
+            8
+          ],
+          "rows": [
+            {
+              "rowid": 3
+            },
+            {
+              "rowid": 6
+            },
+            {
+              "rowid": 8
+            }
+          ],
+          "error": null
+        }
+      },
+      {
+        "label": "2cp-nonBMP",
+        "query": "𠮷野",
+        "codepointLen": 2,
+        "utf16Length": 3,
+        "groundTruthRowCount": 1,
+        "match": {
+          "label": "MATCH:2cp-nonBMP",
+          "sql": "SELECT rowid FROM t_tri WHERE body MATCH ?",
+          "params": [
+            "𠮷野"
+          ],
+          "rowCount": 0,
+          "rowids": [],
+          "rows": [],
+          "error": null
+        },
+        "like": {
+          "label": "LIKE:2cp-nonBMP",
+          "sql": "SELECT rowid FROM t_tri WHERE body LIKE ?",
+          "params": [
+            "%𠮷野%"
+          ],
+          "rowCount": 1,
+          "rowids": [
+            4
+          ],
+          "rows": [
+            {
+              "rowid": 4
+            }
+          ],
+          "error": null
+        }
+      },
+      {
+        "label": "3cp-BMP",
+        "query": "租约到",
+        "codepointLen": 3,
+        "utf16Length": 3,
+        "groundTruthRowCount": 1,
+        "match": {
+          "label": "MATCH:3cp-BMP",
+          "sql": "SELECT rowid FROM t_tri WHERE body MATCH ?",
+          "params": [
+            "租约到"
+          ],
+          "rowCount": 1,
+          "rowids": [
+            1
+          ],
+          "rows": [
+            {
+              "rowid": 1
+            }
+          ],
+          "error": null
+        },
+        "like": {
+          "label": "LIKE:3cp-BMP",
+          "sql": "SELECT rowid FROM t_tri WHERE body LIKE ?",
+          "params": [
+            "%租约到%"
+          ],
+          "rowCount": 1,
+          "rowids": [
+            1
+          ],
+          "rows": [
+            {
+              "rowid": 1
+            }
+          ],
+          "error": null
+        }
+      },
+      {
+        "label": "3cp-word",
+        "query": "数据库",
+        "codepointLen": 3,
+        "utf16Length": 3,
+        "groundTruthRowCount": 1,
+        "match": {
+          "label": "MATCH:3cp-word",
+          "sql": "SELECT rowid FROM t_tri WHERE body MATCH ?",
+          "params": [
+            "数据库"
+          ],
+          "rowCount": 1,
+          "rowids": [
+            2
+          ],
+          "rows": [
+            {
+              "rowid": 2
+            }
+          ],
+          "error": null
+        },
+        "like": {
+          "label": "LIKE:3cp-word",
+          "sql": "SELECT rowid FROM t_tri WHERE body LIKE ?",
+          "params": [
+            "%数据库%"
+          ],
+          "rowCount": 1,
+          "rowids": [
+            2
+          ],
+          "rows": [
+            {
+              "rowid": 2
+            }
+          ],
+          "error": null
+        }
+      },
+      {
+        "label": "3cp-nonBMP",
+        "query": "𠮷野家",
+        "codepointLen": 3,
+        "utf16Length": 4,
+        "groundTruthRowCount": 1,
+        "match": {
+          "label": "MATCH:3cp-nonBMP",
+          "sql": "SELECT rowid FROM t_tri WHERE body MATCH ?",
+          "params": [
+            "𠮷野家"
+          ],
+          "rowCount": 1,
+          "rowids": [
+            4
+          ],
+          "rows": [
+            {
+              "rowid": 4
+            }
+          ],
+          "error": null
+        },
+        "like": {
+          "label": "LIKE:3cp-nonBMP",
+          "sql": "SELECT rowid FROM t_tri WHERE body LIKE ?",
+          "params": [
+            "%𠮷野家%"
+          ],
+          "rowCount": 1,
+          "rowids": [
+            4
+          ],
+          "rows": [
+            {
+              "rowid": 4
+            }
+          ],
+          "error": null
+        }
+      },
+      {
+        "label": "3cp-ascii",
+        "query": "tok",
+        "codepointLen": 3,
+        "utf16Length": 3,
+        "groundTruthRowCount": 3,
+        "match": {
+          "label": "MATCH:3cp-ascii",
+          "sql": "SELECT rowid FROM t_tri WHERE body MATCH ?",
+          "params": [
+            "tok"
+          ],
+          "rowCount": 3,
+          "rowids": [
+            3,
+            6,
+            8
+          ],
+          "rows": [
+            {
+              "rowid": 3
+            },
+            {
+              "rowid": 6
+            },
+            {
+              "rowid": 8
+            }
+          ],
+          "error": null
+        },
+        "like": {
+          "label": "LIKE:3cp-ascii",
+          "sql": "SELECT rowid FROM t_tri WHERE body LIKE ?",
+          "params": [
+            "%tok%"
+          ],
+          "rowCount": 3,
+          "rowids": [
+            3,
+            6,
+            8
+          ],
+          "rows": [
+            {
+              "rowid": 3
+            },
+            {
+              "rowid": 6
+            },
+            {
+              "rowid": 8
+            }
+          ],
+          "error": null
+        }
+      },
+      {
+        "label": "3cp-ascii-2",
+        "query": "oke",
+        "codepointLen": 3,
+        "utf16Length": 3,
+        "groundTruthRowCount": 3,
+        "match": {
+          "label": "MATCH:3cp-ascii-2",
+          "sql": "SELECT rowid FROM t_tri WHERE body MATCH ?",
+          "params": [
+            "oke"
+          ],
+          "rowCount": 3,
+          "rowids": [
+            3,
+            6,
+            8
+          ],
+          "rows": [
+            {
+              "rowid": 3
+            },
+            {
+              "rowid": 6
+            },
+            {
+              "rowid": 8
+            }
+          ],
+          "error": null
+        },
+        "like": {
+          "label": "LIKE:3cp-ascii-2",
+          "sql": "SELECT rowid FROM t_tri WHERE body LIKE ?",
+          "params": [
+            "%oke%"
+          ],
+          "rowCount": 3,
+          "rowids": [
+            3,
+            6,
+            8
+          ],
+          "rows": [
+            {
+              "rowid": 3
+            },
+            {
+              "rowid": 6
+            },
+            {
+              "rowid": 8
+            }
+          ],
+          "error": null
+        }
+      },
+      {
+        "label": "long-ascii",
+        "query": "refresh",
+        "codepointLen": 7,
+        "utf16Length": 7,
+        "groundTruthRowCount": 2,
+        "match": {
+          "label": "MATCH:long-ascii",
+          "sql": "SELECT rowid FROM t_tri WHERE body MATCH ?",
+          "params": [
+            "refresh"
+          ],
+          "rowCount": 2,
+          "rowids": [
+            3,
+            6
+          ],
+          "rows": [
+            {
+              "rowid": 3
+            },
+            {
+              "rowid": 6
+            }
+          ],
+          "error": null
+        },
+        "like": {
+          "label": "LIKE:long-ascii",
+          "sql": "SELECT rowid FROM t_tri WHERE body LIKE ?",
+          "params": [
+            "%refresh%"
+          ],
+          "rowCount": 2,
+          "rowids": [
+            3,
+            6
+          ],
+          "rows": [
+            {
+              "rowid": 3
+            },
+            {
+              "rowid": 6
+            }
+          ],
+          "error": null
+        }
+      },
+      {
+        "label": "long-ident",
+        "query": "refreshToken",
+        "codepointLen": 12,
+        "utf16Length": 12,
+        "groundTruthRowCount": 2,
+        "match": {
+          "label": "MATCH:long-ident",
+          "sql": "SELECT rowid FROM t_tri WHERE body MATCH ?",
+          "params": [
+            "refreshToken"
+          ],
+          "rowCount": 2,
+          "rowids": [
+            3,
+            6
+          ],
+          "rows": [
+            {
+              "rowid": 3
+            },
+            {
+              "rowid": 6
+            }
+          ],
+          "error": null
+        },
+        "like": {
+          "label": "LIKE:long-ident",
+          "sql": "SELECT rowid FROM t_tri WHERE body LIKE ?",
+          "params": [
+            "%refreshToken%"
+          ],
+          "rowCount": 2,
+          "rowids": [
+            3,
+            6
+          ],
+          "rows": [
+            {
+              "rowid": 3
+            },
+            {
+              "rowid": 6
+            }
+          ],
+          "error": null
+        }
+      }
+    ],
+    "unicode61Raw": [
+      {
+        "query": "租约",
+        "match": {
+          "label": "u61-MATCH:租约",
+          "sql": "SELECT rowid FROM t_u61 WHERE body MATCH ?",
+          "params": [
+            "租约"
+          ],
+          "rowCount": 0,
+          "rowids": [],
+          "rows": [],
+          "error": null
+        },
+        "like": {
+          "label": "u61-LIKE:租约",
+          "sql": "SELECT rowid FROM t_u61 WHERE body LIKE ?",
+          "params": [
+            "%租约%"
+          ],
+          "rowCount": 1,
+          "rowids": [
+            1
+          ],
+          "rows": [
+            {
+              "rowid": 1
+            }
+          ],
+          "error": null
+        }
+      },
+      {
+        "query": "调用",
+        "match": {
+          "label": "u61-MATCH:调用",
+          "sql": "SELECT rowid FROM t_u61 WHERE body MATCH ?",
+          "params": [
+            "调用"
+          ],
+          "rowCount": 0,
+          "rowids": [],
+          "rows": [],
+          "error": null
+        },
+        "like": {
+          "label": "u61-LIKE:调用",
+          "sql": "SELECT rowid FROM t_u61 WHERE body LIKE ?",
+          "params": [
+            "%调用%"
+          ],
+          "rowCount": 1,
+          "rowids": [
+            3
+          ],
+          "rows": [
+            {
+              "rowid": 3
+            }
+          ],
+          "error": null
+        }
+      },
+      {
+        "query": "token",
+        "match": {
+          "label": "u61-MATCH:token",
+          "sql": "SELECT rowid FROM t_u61 WHERE body MATCH ?",
+          "params": [
+            "token"
+          ],
+          "rowCount": 1,
+          "rowids": [
+            8
+          ],
+          "rows": [
+            {
+              "rowid": 8
+            }
+          ],
+          "error": null
+        },
+        "like": {
+          "label": "u61-LIKE:token",
+          "sql": "SELECT rowid FROM t_u61 WHERE body LIKE ?",
+          "params": [
+            "%token%"
+          ],
+          "rowCount": 3,
+          "rowids": [
+            3,
+            6,
+            8
+          ],
+          "rows": [
+            {
+              "rowid": 3
+            },
+            {
+              "rowid": 6
+            },
+            {
+              "rowid": 8
+            }
+          ],
+          "error": null
+        }
+      },
+      {
+        "query": "refreshtoken",
+        "match": {
+          "label": "u61-MATCH:refreshtoken",
+          "sql": "SELECT rowid FROM t_u61 WHERE body MATCH ?",
+          "params": [
+            "refreshtoken"
+          ],
+          "rowCount": 0,
+          "rowids": [],
+          "rows": [],
+          "error": null
+        },
+        "like": {
+          "label": "u61-LIKE:refreshtoken",
+          "sql": "SELECT rowid FROM t_u61 WHERE body LIKE ?",
+          "params": [
+            "%refreshtoken%"
+          ],
+          "rowCount": 2,
+          "rowids": [
+            3,
+            6
+          ],
+          "rows": [
+            {
+              "rowid": 3
+            },
+            {
+              "rowid": 6
+            }
+          ],
+          "error": null
+        }
+      },
+      {
+        "query": "REFRESH",
+        "match": {
+          "label": "u61-MATCH:REFRESH",
+          "sql": "SELECT rowid FROM t_u61 WHERE body MATCH ?",
+          "params": [
+            "REFRESH"
+          ],
+          "rowCount": 0,
+          "rowids": [],
+          "rows": [],
+          "error": null
+        },
+        "like": {
+          "label": "u61-LIKE:REFRESH",
+          "sql": "SELECT rowid FROM t_u61 WHERE body LIKE ?",
+          "params": [
+            "%REFRESH%"
+          ],
+          "rowCount": 2,
+          "rowids": [
+            3,
+            6
+          ],
+          "rows": [
+            {
+              "rowid": 3
+            },
+            {
+              "rowid": 6
+            }
+          ],
+          "error": null
+        }
+      },
+      {
+        "query": "𠮷野家",
+        "match": {
+          "label": "u61-MATCH:𠮷野家",
+          "sql": "SELECT rowid FROM t_u61 WHERE body MATCH ?",
+          "params": [
+            "𠮷野家"
+          ],
+          "rowCount": 0,
+          "rowids": [],
+          "rows": [],
+          "error": null
+        },
+        "like": {
+          "label": "u61-LIKE:𠮷野家",
+          "sql": "SELECT rowid FROM t_u61 WHERE body LIKE ?",
+          "params": [
+            "%𠮷野家%"
+          ],
+          "rowCount": 1,
+          "rowids": [
+            4
+          ],
+          "rows": [
+            {
+              "rowid": 4
+            }
+          ],
+          "error": null
+        }
+      },
+      {
+        "query": "𠮷野家套餐",
+        "match": {
+          "label": "u61-MATCH:𠮷野家套餐",
+          "sql": "SELECT rowid FROM t_u61 WHERE body MATCH ?",
+          "params": [
+            "𠮷野家套餐"
+          ],
+          "rowCount": 1,
+          "rowids": [
+            4
+          ],
+          "rows": [
+            {
+              "rowid": 4
+            }
+          ],
+          "error": null
+        },
+        "like": {
+          "label": "u61-LIKE:𠮷野家套餐",
+          "sql": "SELECT rowid FROM t_u61 WHERE body LIKE ?",
+          "params": [
+            "%𠮷野家套餐%"
+          ],
+          "rowCount": 1,
+          "rowids": [
+            4
+          ],
+          "rows": [
+            {
+              "rowid": 4
+            }
+          ],
+          "error": null
+        }
+      },
+      {
+        "query": "调用refreshToken函数更新令牌",
+        "match": {
+          "label": "u61-MATCH:调用refreshToken函数更新令牌",
+          "sql": "SELECT rowid FROM t_u61 WHERE body MATCH ?",
+          "params": [
+            "调用refreshToken函数更新令牌"
+          ],
+          "rowCount": 1,
+          "rowids": [
+            3
+          ],
+          "rows": [
+            {
+              "rowid": 3
+            }
+          ],
+          "error": null
+        },
+        "like": {
+          "label": "u61-LIKE:调用refreshToken函数更新令牌",
+          "sql": "SELECT rowid FROM t_u61 WHERE body LIKE ?",
+          "params": [
+            "%调用refreshToken函数更新令牌%"
+          ],
+          "rowCount": 1,
+          "rowids": [
+            3
+          ],
+          "rows": [
+            {
+              "rowid": 3
+            }
+          ],
+          "error": null
+        }
+      }
+    ],
+    "eqp": [
+      {
+        "label": "tri-LIKE-1cp",
+        "sql": "SELECT rowid FROM t_tri WHERE body LIKE ?",
+        "params": [
+          "%租%"
+        ],
+        "detail": "SCAN t_tri VIRTUAL TABLE INDEX 0:L0"
+      },
+      {
+        "label": "tri-LIKE-2cp",
+        "sql": "SELECT rowid FROM t_tri WHERE body LIKE ?",
+        "params": [
+          "%租约%"
+        ],
+        "detail": "SCAN t_tri VIRTUAL TABLE INDEX 0:L0"
+      },
+      {
+        "label": "tri-LIKE-3cp",
+        "sql": "SELECT rowid FROM t_tri WHERE body LIKE ?",
+        "params": [
+          "%租约到%"
+        ],
+        "detail": "SCAN t_tri VIRTUAL TABLE INDEX 0:L0"
+      },
+      {
+        "label": "tri-LIKE-ascii3",
+        "sql": "SELECT rowid FROM t_tri WHERE body LIKE ?",
+        "params": [
+          "%tok%"
+        ],
+        "detail": "SCAN t_tri VIRTUAL TABLE INDEX 0:L0"
+      },
+      {
+        "label": "tri-LIKE-nonBMP3",
+        "sql": "SELECT rowid FROM t_tri WHERE body LIKE ?",
+        "params": [
+          "%𠮷野家%"
+        ],
+        "detail": "SCAN t_tri VIRTUAL TABLE INDEX 0:L0"
+      },
+      {
+        "label": "tri-MATCH-3cp",
+        "sql": "SELECT rowid FROM t_tri WHERE body MATCH ?",
+        "params": [
+          "租约到"
+        ],
+        "detail": "SCAN t_tri VIRTUAL TABLE INDEX 0:M0"
+      },
+      {
+        "label": "tri-MATCH-1cp",
+        "sql": "SELECT rowid FROM t_tri WHERE body MATCH ?",
+        "params": [
+          "租"
+        ],
+        "detail": "SCAN t_tri VIRTUAL TABLE INDEX 0:M0"
+      },
+      {
+        "label": "u61-LIKE-2cp",
+        "sql": "SELECT rowid FROM t_u61 WHERE body LIKE ?",
+        "params": [
+          "%租约%"
+        ],
+        "detail": "SCAN t_u61 VIRTUAL TABLE INDEX 0:"
+      },
+      {
+        "label": "u61-MATCH-refreshtoken",
+        "sql": "SELECT rowid FROM t_u61 WHERE body MATCH ?",
+        "params": [
+          "refreshtoken"
+        ],
+        "detail": "SCAN t_u61 VIRTUAL TABLE INDEX 0:M0"
+      },
+      {
+        "label": "plain-LIKE-1cp",
+        "sql": "SELECT rowid FROM t_plain WHERE body LIKE ?",
+        "params": [
+          "%租%"
+        ],
+        "detail": "SCAN t_plain"
+      },
+      {
+        "label": "plain-LIKE-3cp",
+        "sql": "SELECT rowid FROM t_plain WHERE body LIKE ?",
+        "params": [
+          "%租约到%"
+        ],
+        "detail": "SCAN t_plain"
+      },
+      {
+        "label": "tri-LIKE-escape-literal",
+        "sql": "SELECT rowid FROM t_tri WHERE body LIKE ? ESCAPE ?",
+        "params": [
+          "%\\_100%",
+          "\\"
+        ],
+        "detail": "SCAN t_tri VIRTUAL TABLE INDEX 0:"
+      },
+      {
+        "label": "tri_cs-LIKE-upper",
+        "sql": "SELECT rowid FROM t_tri_cs WHERE body LIKE ?",
+        "params": [
+          "%REFRESH%"
+        ],
+        "detail": "SCAN t_tri_cs VIRTUAL TABLE INDEX 0:"
+      },
+      {
+        "label": "tri_cs-LIKE-lower",
+        "sql": "SELECT rowid FROM t_tri_cs WHERE body LIKE ?",
+        "params": [
+          "%refresh%"
+        ],
+        "detail": "SCAN t_tri_cs VIRTUAL TABLE INDEX 0:"
+      }
+    ],
+    "escape": [
+      {
+        "label": "wildcard-underscore-no-escape",
+        "pattern": "%a_b%",
+        "escaped": false,
+        "escapeChar": null,
+        "rowCount": 1,
+        "groundTruthRowCount": 1,
+        "eqpDetail": "SCAN t_tri VIRTUAL TABLE INDEX 0:L0",
+        "error": null
+      },
+      {
+        "label": "literal-underscore-escaped",
+        "pattern": "%a\\_b%",
+        "escaped": true,
+        "escapeChar": "\\",
+        "rowCount": 0,
+        "groundTruthRowCount": 0,
+        "eqpDetail": "SCAN t_tri VIRTUAL TABLE INDEX 0:",
+        "error": null
+      },
+      {
+        "label": "literal-percent-escaped",
+        "pattern": "%100\\%%",
+        "escaped": true,
+        "escapeChar": "\\",
+        "rowCount": 1,
+        "groundTruthRowCount": 1,
+        "eqpDetail": "SCAN t_tri VIRTUAL TABLE INDEX 0:",
+        "error": null
+      },
+      {
+        "label": "literal-underscore-100-escaped",
+        "pattern": "%\\_100%",
+        "escaped": true,
+        "escapeChar": "\\",
+        "rowCount": 1,
+        "groundTruthRowCount": 1,
+        "eqpDetail": "SCAN t_tri VIRTUAL TABLE INDEX 0:",
+        "error": null
+      }
+    ],
+    "caseSensitivity": [
+      {
+        "table": "t_tri",
+        "op": "MATCH",
+        "query": "refresh",
+        "label": "t_tri-MATCH-refresh",
+        "sql": "SELECT rowid FROM t_tri WHERE body MATCH ?",
+        "params": [
+          "refresh"
+        ],
+        "rowCount": 2,
+        "rowids": [
+          3,
+          6
+        ],
+        "rows": [
+          {
+            "rowid": 3
+          },
+          {
+            "rowid": 6
+          }
+        ],
+        "error": null
+      },
+      {
+        "table": "t_tri",
+        "op": "MATCH",
+        "query": "REFRESH",
+        "label": "t_tri-MATCH-REFRESH",
+        "sql": "SELECT rowid FROM t_tri WHERE body MATCH ?",
+        "params": [
+          "REFRESH"
+        ],
+        "rowCount": 2,
+        "rowids": [
+          3,
+          6
+        ],
+        "rows": [
+          {
+            "rowid": 3
+          },
+          {
+            "rowid": 6
+          }
+        ],
+        "error": null
+      },
+      {
+        "table": "t_tri",
+        "op": "MATCH",
+        "query": "Refresh",
+        "label": "t_tri-MATCH-Refresh",
+        "sql": "SELECT rowid FROM t_tri WHERE body MATCH ?",
+        "params": [
+          "Refresh"
+        ],
+        "rowCount": 2,
+        "rowids": [
+          3,
+          6
+        ],
+        "rows": [
+          {
+            "rowid": 3
+          },
+          {
+            "rowid": 6
+          }
+        ],
+        "error": null
+      },
+      {
+        "table": "t_tri",
+        "op": "MATCH",
+        "query": "token",
+        "label": "t_tri-MATCH-token",
+        "sql": "SELECT rowid FROM t_tri WHERE body MATCH ?",
+        "params": [
+          "token"
+        ],
+        "rowCount": 3,
+        "rowids": [
+          3,
+          6,
+          8
+        ],
+        "rows": [
+          {
+            "rowid": 3
+          },
+          {
+            "rowid": 6
+          },
+          {
+            "rowid": 8
+          }
+        ],
+        "error": null
+      },
+      {
+        "table": "t_tri",
+        "op": "MATCH",
+        "query": "Token",
+        "label": "t_tri-MATCH-Token",
+        "sql": "SELECT rowid FROM t_tri WHERE body MATCH ?",
+        "params": [
+          "Token"
+        ],
+        "rowCount": 3,
+        "rowids": [
+          3,
+          6,
+          8
+        ],
+        "rows": [
+          {
+            "rowid": 3
+          },
+          {
+            "rowid": 6
+          },
+          {
+            "rowid": 8
+          }
+        ],
+        "error": null
+      },
+      {
+        "table": "t_tri",
+        "op": "LIKE",
+        "query": "refresh",
+        "label": "t_tri-LIKE-refresh",
+        "sql": "SELECT rowid FROM t_tri WHERE body LIKE ?",
+        "params": [
+          "%refresh%"
+        ],
+        "rowCount": 2,
+        "rowids": [
+          3,
+          6
+        ],
+        "rows": [
+          {
+            "rowid": 3
+          },
+          {
+            "rowid": 6
+          }
+        ],
+        "error": null
+      },
+      {
+        "table": "t_tri",
+        "op": "LIKE",
+        "query": "REFRESH",
+        "label": "t_tri-LIKE-REFRESH",
+        "sql": "SELECT rowid FROM t_tri WHERE body LIKE ?",
+        "params": [
+          "%REFRESH%"
+        ],
+        "rowCount": 2,
+        "rowids": [
+          3,
+          6
+        ],
+        "rows": [
+          {
+            "rowid": 3
+          },
+          {
+            "rowid": 6
+          }
+        ],
+        "error": null
+      },
+      {
+        "table": "t_tri",
+        "op": "LIKE",
+        "query": "Refresh",
+        "label": "t_tri-LIKE-Refresh",
+        "sql": "SELECT rowid FROM t_tri WHERE body LIKE ?",
+        "params": [
+          "%Refresh%"
+        ],
+        "rowCount": 2,
+        "rowids": [
+          3,
+          6
+        ],
+        "rows": [
+          {
+            "rowid": 3
+          },
+          {
+            "rowid": 6
+          }
+        ],
+        "error": null
+      },
+      {
+        "table": "t_tri_cs",
+        "op": "MATCH",
+        "query": "refresh",
+        "label": "t_tri_cs-MATCH-refresh",
+        "sql": "SELECT rowid FROM t_tri_cs WHERE body MATCH ?",
+        "params": [
+          "refresh"
+        ],
+        "rowCount": 1,
+        "rowids": [
+          3
+        ],
+        "rows": [
+          {
+            "rowid": 3
+          }
+        ],
+        "error": null
+      },
+      {
+        "table": "t_tri_cs",
+        "op": "MATCH",
+        "query": "REFRESH",
+        "label": "t_tri_cs-MATCH-REFRESH",
+        "sql": "SELECT rowid FROM t_tri_cs WHERE body MATCH ?",
+        "params": [
+          "REFRESH"
+        ],
+        "rowCount": 0,
+        "rowids": [],
+        "rows": [],
+        "error": null
+      },
+      {
+        "table": "t_tri_cs",
+        "op": "MATCH",
+        "query": "Refresh",
+        "label": "t_tri_cs-MATCH-Refresh",
+        "sql": "SELECT rowid FROM t_tri_cs WHERE body MATCH ?",
+        "params": [
+          "Refresh"
+        ],
+        "rowCount": 1,
+        "rowids": [
+          6
+        ],
+        "rows": [
+          {
+            "rowid": 6
+          }
+        ],
+        "error": null
+      },
+      {
+        "table": "t_tri_cs",
+        "op": "MATCH",
+        "query": "token",
+        "label": "t_tri_cs-MATCH-token",
+        "sql": "SELECT rowid FROM t_tri_cs WHERE body MATCH ?",
+        "params": [
+          "token"
+        ],
+        "rowCount": 1,
+        "rowids": [
+          8
+        ],
+        "rows": [
+          {
+            "rowid": 8
+          }
+        ],
+        "error": null
+      },
+      {
+        "table": "t_tri_cs",
+        "op": "MATCH",
+        "query": "Token",
+        "label": "t_tri_cs-MATCH-Token",
+        "sql": "SELECT rowid FROM t_tri_cs WHERE body MATCH ?",
+        "params": [
+          "Token"
+        ],
+        "rowCount": 2,
+        "rowids": [
+          3,
+          6
+        ],
+        "rows": [
+          {
+            "rowid": 3
+          },
+          {
+            "rowid": 6
+          }
+        ],
+        "error": null
+      },
+      {
+        "table": "t_tri_cs",
+        "op": "LIKE",
+        "query": "refresh",
+        "label": "t_tri_cs-LIKE-refresh",
+        "sql": "SELECT rowid FROM t_tri_cs WHERE body LIKE ?",
+        "params": [
+          "%refresh%"
+        ],
+        "rowCount": 2,
+        "rowids": [
+          3,
+          6
+        ],
+        "rows": [
+          {
+            "rowid": 3
+          },
+          {
+            "rowid": 6
+          }
+        ],
+        "error": null
+      },
+      {
+        "table": "t_tri_cs",
+        "op": "LIKE",
+        "query": "REFRESH",
+        "label": "t_tri_cs-LIKE-REFRESH",
+        "sql": "SELECT rowid FROM t_tri_cs WHERE body LIKE ?",
+        "params": [
+          "%REFRESH%"
+        ],
+        "rowCount": 2,
+        "rowids": [
+          3,
+          6
+        ],
+        "rows": [
+          {
+            "rowid": 3
+          },
+          {
+            "rowid": 6
+          }
+        ],
+        "error": null
+      },
+      {
+        "table": "t_tri_cs",
+        "op": "LIKE",
+        "query": "Refresh",
+        "label": "t_tri_cs-LIKE-Refresh",
+        "sql": "SELECT rowid FROM t_tri_cs WHERE body LIKE ?",
+        "params": [
+          "%Refresh%"
+        ],
+        "rowCount": 2,
+        "rowids": [
+          3,
+          6
+        ],
+        "rows": [
+          {
+            "rowid": 3
+          },
+          {
+            "rowid": 6
+          }
+        ],
+        "error": null
+      },
+      {
+        "table": "t_plain",
+        "op": "plain-LIKE-default",
+        "query": "%refresh%",
+        "label": "plain-LIKE-default",
+        "sql": "SELECT rowid FROM t_plain WHERE body LIKE ?",
+        "params": [
+          "%refresh%"
+        ],
+        "rowCount": 2,
+        "rowids": [
+          3,
+          6
+        ],
+        "rows": [
+          {
+            "rowid": 3
+          },
+          {
+            "rowid": 6
+          }
+        ],
+        "error": null
+      },
+      {
+        "table": "t_plain",
+        "op": "plain-LIKE-default-upper",
+        "query": "%REFRESH%",
+        "label": "plain-LIKE-default-upper",
+        "sql": "SELECT rowid FROM t_plain WHERE body LIKE ?",
+        "params": [
+          "%REFRESH%"
+        ],
+        "rowCount": 2,
+        "rowids": [
+          3,
+          6
+        ],
+        "rows": [
+          {
+            "rowid": 3
+          },
+          {
+            "rowid": 6
+          }
+        ],
+        "error": null
+      },
+      {
+        "table": "t_plain",
+        "op": "plain-LIKE-binary",
+        "query": "%refresh%",
+        "label": "plain-LIKE-binary",
+        "sql": "SELECT rowid FROM t_plain WHERE body COLLATE BINARY LIKE ?",
+        "params": [
+          "%refresh%"
+        ],
+        "rowCount": 2,
+        "rowids": [
+          3,
+          6
+        ],
+        "rows": [
+          {
+            "rowid": 3
+          },
+          {
+            "rowid": 6
+          }
+        ],
+        "error": null
+      },
+      {
+        "table": "t_plain",
+        "op": "plain-LIKE-binary-upper",
+        "query": "%REFRESH%",
+        "label": "plain-LIKE-binary-upper",
+        "sql": "SELECT rowid FROM t_plain WHERE body COLLATE BINARY LIKE ?",
+        "params": [
+          "%REFRESH%"
+        ],
+        "rowCount": 2,
+        "rowids": [
+          3,
+          6
+        ],
+        "rows": [
+          {
+            "rowid": 3
+          },
+          {
+            "rowid": 6
+          }
+        ],
+        "error": null
+      },
+      {
+        "table": "t_tri_cs",
+        "op": "LIKE",
+        "query": "REFRESH",
+        "label": "tri_cs-LIKE-upper",
+        "sql": "SELECT rowid FROM t_tri_cs WHERE body LIKE ?",
+        "params": [
+          "%REFRESH%"
+        ],
+        "rowCount": 2,
+        "rowids": [
+          3,
+          6
+        ],
+        "rows": [
+          {
+            "rowid": 3
+          },
+          {
+            "rowid": 6
+          }
+        ],
+        "error": null
+      },
+      {
+        "table": "t_tri_cs",
+        "op": "LIKE",
+        "query": "refresh",
+        "label": "tri_cs-LIKE-lower",
+        "sql": "SELECT rowid FROM t_tri_cs WHERE body LIKE ?",
+        "params": [
+          "%refresh%"
+        ],
+        "rowCount": 2,
+        "rowids": [
+          3,
+          6
+        ],
+        "rows": [
+          {
+            "rowid": 3
+          },
+          {
+            "rowid": 6
+          }
+        ],
+        "error": null
+      }
+    ],
+    "codepointLengths": [
+      {
+        "input": "租",
+        "jsCodepoints": 1,
+        "jsUtf16Units": 1,
+        "sqliteChars": 1,
+        "sqliteUtf8Bytes": 3
+      },
+      {
+        "input": "租约",
+        "jsCodepoints": 2,
+        "jsUtf16Units": 2,
+        "sqliteChars": 2,
+        "sqliteUtf8Bytes": 6
+      },
+      {
+        "input": "𠮷",
+        "jsCodepoints": 1,
+        "jsUtf16Units": 2,
+        "sqliteChars": 1,
+        "sqliteUtf8Bytes": 4
+      },
+      {
+        "input": "𠮷野",
+        "jsCodepoints": 2,
+        "jsUtf16Units": 3,
+        "sqliteChars": 2,
+        "sqliteUtf8Bytes": 7
+      },
+      {
+        "input": "𠮷野家",
+        "jsCodepoints": 3,
+        "jsUtf16Units": 4,
+        "sqliteChars": 3,
+        "sqliteUtf8Bytes": 10
+      },
+      {
+        "input": "👍",
+        "jsCodepoints": 1,
+        "jsUtf16Units": 2,
+        "sqliteChars": 1,
+        "sqliteUtf8Bytes": 4
+      },
+      {
+        "input": "👨‍👩‍👧",
+        "jsCodepoints": 5,
+        "jsUtf16Units": 8,
+        "sqliteChars": 5,
+        "sqliteUtf8Bytes": 18
+      }
+    ],
+    "matchSyntax": [
+      {
+        "label": "percent-raw",
+        "sql": "SELECT rowid FROM t_tri WHERE body MATCH ?",
+        "params": [
+          "100%"
+        ],
+        "rowCount": null,
+        "rowids": null,
+        "rows": null,
+        "error": "fts5: syntax error near \"%\"",
+        "query": "100%"
+      },
+      {
+        "label": "percent-quoted",
+        "sql": "SELECT rowid FROM t_tri WHERE body MATCH ?",
+        "params": [
+          "\"100%\""
+        ],
+        "rowCount": 1,
+        "rowids": [
+          5
+        ],
+        "rows": [
+          {
+            "rowid": 5
+          }
+        ],
+        "error": null,
+        "query": "\"100%\""
+      },
+      {
+        "label": "underscore",
+        "sql": "SELECT rowid FROM t_tri WHERE body MATCH ?",
+        "params": [
+          "a_b"
+        ],
+        "rowCount": 0,
+        "rowids": [],
+        "rows": [],
+        "error": null,
+        "query": "a_b"
+      },
+      {
+        "label": "prefix-3cp",
+        "sql": "SELECT rowid FROM t_tri WHERE body MATCH ?",
+        "params": [
+          "租约*"
+        ],
+        "rowCount": 0,
+        "rowids": [],
+        "rows": [],
+        "error": null,
+        "query": "租约*"
+      },
+      {
+        "label": "prefix-2cp",
+        "sql": "SELECT rowid FROM t_tri WHERE body MATCH ?",
+        "params": [
+          "租*"
+        ],
+        "rowCount": 0,
+        "rowids": [],
+        "rows": [],
+        "error": null,
+        "query": "租*"
+      },
+      {
+        "label": "prefix-ascii",
+        "sql": "SELECT rowid FROM t_tri WHERE body MATCH ?",
+        "params": [
+          "tok*"
+        ],
+        "rowCount": 3,
+        "rowids": [
+          3,
+          6,
+          8
+        ],
+        "rows": [
+          {
+            "rowid": 3
+          },
+          {
+            "rowid": 6
+          },
+          {
+            "rowid": 8
+          }
+        ],
+        "error": null,
+        "query": "tok*"
+      },
+      {
+        "label": "prefix-ascii-long",
+        "sql": "SELECT rowid FROM t_tri WHERE body MATCH ?",
+        "params": [
+          "refresh*"
+        ],
+        "rowCount": 2,
+        "rowids": [
+          3,
+          6
+        ],
+        "rows": [
+          {
+            "rowid": 3
+          },
+          {
+            "rowid": 6
+          }
+        ],
+        "error": null,
+        "query": "refresh*"
+      },
+      {
+        "label": "prefix-cjk-3cp",
+        "sql": "SELECT rowid FROM t_tri WHERE body MATCH ?",
+        "params": [
+          "数据*"
+        ],
+        "rowCount": 0,
+        "rowids": [],
+        "rows": [],
+        "error": null,
+        "query": "数据*"
+      },
+      {
+        "label": "prefix-cjk-3cp-full",
+        "sql": "SELECT rowid FROM t_tri WHERE body MATCH ?",
+        "params": [
+          "数据库*"
+        ],
+        "rowCount": 1,
+        "rowids": [
+          2
+        ],
+        "rows": [
+          {
+            "rowid": 2
+          }
+        ],
+        "error": null,
+        "query": "数据库*"
+      },
+      {
+        "label": "prefix-cjk-run",
+        "sql": "SELECT rowid FROM t_tri WHERE body MATCH ?",
+        "params": [
+          "租约到*"
+        ],
+        "rowCount": 1,
+        "rowids": [
+          1
+        ],
+        "rows": [
+          {
+            "rowid": 1
+          }
+        ],
+        "error": null,
+        "query": "租约到*"
+      },
+      {
+        "label": "prefix-ascii-token",
+        "sql": "SELECT rowid FROM t_tri WHERE body MATCH ?",
+        "params": [
+          "token*"
+        ],
+        "rowCount": 3,
+        "rowids": [
+          3,
+          6,
+          8
+        ],
+        "rows": [
+          {
+            "rowid": 3
+          },
+          {
+            "rowid": 6
+          },
+          {
+            "rowid": 8
+          }
+        ],
+        "error": null,
+        "query": "token*"
+      }
+    ],
+    "planSimulation": {
+      "tableRows": [
+        {
+          "rowid": 1,
+          "original": "租约到期提醒",
+          "bIndexText": "租约 到期 提醒",
+          "bPlusIndexText": "租约 到期 提醒"
+        },
+        {
+          "rowid": 2,
+          "original": "数据库连接池",
+          "bIndexText": "数据 库 连接 池",
+          "bPlusIndexText": "数据 库 连接 池"
+        },
+        {
+          "rowid": 3,
+          "original": "调用refreshToken函数更新令牌",
+          "bIndexText": "调 用 refreshToken 函数 更新 令牌",
+          "bPlusIndexText": "调 用 refreshToken refresh token 函数 更新 令牌"
+        },
+        {
+          "rowid": 4,
+          "original": "修复死锁后回滚事务并更新租约状态",
+          "bIndexText": "修复 死 锁 后 回 滚 事务 并 更新 租约 状态",
+          "bPlusIndexText": "修复 死 锁 后 回 滚 事务 并 更新 租约 状态"
+        }
+      ],
+      "queries": [
+        {
+          "query": "token",
+          "queryTokens": [
+            "token"
+          ],
+          "b": {
+            "label": "B:token",
+            "sql": "SELECT rowid FROM t_b WHERE body MATCH ?",
+            "params": [
+              "token"
+            ],
+            "rowCount": 0,
+            "rowids": [],
+            "rows": [],
+            "error": null
+          },
+          "bplus": {
+            "label": "B+:token",
+            "sql": "SELECT rowid FROM t_bplus WHERE body MATCH ?",
+            "params": [
+              "token"
+            ],
+            "rowCount": 1,
+            "rowids": [
+              3
+            ],
+            "rows": [
+              {
+                "rowid": 3
+              }
+            ],
+            "error": null
+          },
+          "bPhrase": null
+        },
+        {
+          "query": "refresh",
+          "queryTokens": [
+            "refresh"
+          ],
+          "b": {
+            "label": "B:refresh",
+            "sql": "SELECT rowid FROM t_b WHERE body MATCH ?",
+            "params": [
+              "refresh"
+            ],
+            "rowCount": 0,
+            "rowids": [],
+            "rows": [],
+            "error": null
+          },
+          "bplus": {
+            "label": "B+:refresh",
+            "sql": "SELECT rowid FROM t_bplus WHERE body MATCH ?",
+            "params": [
+              "refresh"
+            ],
+            "rowCount": 1,
+            "rowids": [
+              3
+            ],
+            "rows": [
+              {
+                "rowid": 3
+              }
+            ],
+            "error": null
+          },
+          "bPhrase": null
+        },
+        {
+          "query": "refreshtoken",
+          "queryTokens": [
+            "refreshtoken"
+          ],
+          "b": {
+            "label": "B:refreshtoken",
+            "sql": "SELECT rowid FROM t_b WHERE body MATCH ?",
+            "params": [
+              "refreshtoken"
+            ],
+            "rowCount": 1,
+            "rowids": [
+              3
+            ],
+            "rows": [
+              {
+                "rowid": 3
+              }
+            ],
+            "error": null
+          },
+          "bplus": {
+            "label": "B+:refreshtoken",
+            "sql": "SELECT rowid FROM t_bplus WHERE body MATCH ?",
+            "params": [
+              "refreshtoken"
+            ],
+            "rowCount": 1,
+            "rowids": [
+              3
+            ],
+            "rows": [
+              {
+                "rowid": 3
+              }
+            ],
+            "error": null
+          },
+          "bPhrase": null
+        },
+        {
+          "query": "租约",
+          "queryTokens": [
+            "租约"
+          ],
+          "b": {
+            "label": "B:租约",
+            "sql": "SELECT rowid FROM t_b WHERE body MATCH ?",
+            "params": [
+              "租约"
+            ],
+            "rowCount": 2,
+            "rowids": [
+              1,
+              4
+            ],
+            "rows": [
+              {
+                "rowid": 1
+              },
+              {
+                "rowid": 4
+              }
+            ],
+            "error": null
+          },
+          "bplus": {
+            "label": "B+:租约",
+            "sql": "SELECT rowid FROM t_bplus WHERE body MATCH ?",
+            "params": [
+              "租约"
+            ],
+            "rowCount": 2,
+            "rowids": [
+              1,
+              4
+            ],
+            "rows": [
+              {
+                "rowid": 1
+              },
+              {
+                "rowid": 4
+              }
+            ],
+            "error": null
+          },
+          "bPhrase": null
+        },
+        {
+          "query": "死锁",
+          "queryTokens": [
+            "死",
+            "锁"
+          ],
+          "b": {
+            "label": "B:死锁",
+            "sql": "SELECT rowid FROM t_b WHERE body MATCH ?",
+            "params": [
+              "死 锁"
+            ],
+            "rowCount": 1,
+            "rowids": [
+              4
+            ],
+            "rows": [
+              {
+                "rowid": 4
+              }
+            ],
+            "error": null
+          },
+          "bplus": {
+            "label": "B+:死锁",
+            "sql": "SELECT rowid FROM t_bplus WHERE body MATCH ?",
+            "params": [
+              "死 锁"
+            ],
+            "rowCount": 1,
+            "rowids": [
+              4
+            ],
+            "rows": [
+              {
+                "rowid": 4
+              }
+            ],
+            "error": null
+          },
+          "bPhrase": {
+            "label": "B-phrase:死锁",
+            "sql": "SELECT rowid FROM t_b WHERE body MATCH ?",
+            "params": [
+              "\"死 锁\""
+            ],
+            "rowCount": 1,
+            "rowids": [
+              4
+            ],
+            "rows": [
+              {
+                "rowid": 4
+              }
+            ],
+            "error": null
+          }
+        },
+        {
+          "query": "数据库",
+          "queryTokens": [
+            "数据",
+            "库"
+          ],
+          "b": {
+            "label": "B:数据库",
+            "sql": "SELECT rowid FROM t_b WHERE body MATCH ?",
+            "params": [
+              "数据 库"
+            ],
+            "rowCount": 1,
+            "rowids": [
+              2
+            ],
+            "rows": [
+              {
+                "rowid": 2
+              }
+            ],
+            "error": null
+          },
+          "bplus": {
+            "label": "B+:数据库",
+            "sql": "SELECT rowid FROM t_bplus WHERE body MATCH ?",
+            "params": [
+              "数据 库"
+            ],
+            "rowCount": 1,
+            "rowids": [
+              2
+            ],
+            "rows": [
+              {
+                "rowid": 2
+              }
+            ],
+            "error": null
+          },
+          "bPhrase": {
+            "label": "B-phrase:数据库",
+            "sql": "SELECT rowid FROM t_b WHERE body MATCH ?",
+            "params": [
+              "\"数据 库\""
+            ],
+            "rowCount": 1,
+            "rowids": [
+              2
+            ],
+            "rows": [
+              {
+                "rowid": 2
+              }
+            ],
+            "error": null
+          }
+        },
+        {
+          "query": "调用",
+          "queryTokens": [
+            "调",
+            "用"
+          ],
+          "b": {
+            "label": "B:调用",
+            "sql": "SELECT rowid FROM t_b WHERE body MATCH ?",
+            "params": [
+              "调 用"
+            ],
+            "rowCount": 1,
+            "rowids": [
+              3
+            ],
+            "rows": [
+              {
+                "rowid": 3
+              }
+            ],
+            "error": null
+          },
+          "bplus": {
+            "label": "B+:调用",
+            "sql": "SELECT rowid FROM t_bplus WHERE body MATCH ?",
+            "params": [
+              "调 用"
+            ],
+            "rowCount": 1,
+            "rowids": [
+              3
+            ],
+            "rows": [
+              {
+                "rowid": 3
+              }
+            ],
+            "error": null
+          },
+          "bPhrase": {
+            "label": "B-phrase:调用",
+            "sql": "SELECT rowid FROM t_b WHERE body MATCH ?",
+            "params": [
+              "\"调 用\""
+            ],
+            "rowCount": 1,
+            "rowids": [
+              3
+            ],
+            "rows": [
+              {
+                "rowid": 3
+              }
+            ],
+            "error": null
+          }
+        },
+        {
+          "query": "回滚",
+          "queryTokens": [
+            "回",
+            "滚"
+          ],
+          "b": {
+            "label": "B:回滚",
+            "sql": "SELECT rowid FROM t_b WHERE body MATCH ?",
+            "params": [
+              "回 滚"
+            ],
+            "rowCount": 1,
+            "rowids": [
+              4
+            ],
+            "rows": [
+              {
+                "rowid": 4
+              }
+            ],
+            "error": null
+          },
+          "bplus": {
+            "label": "B+:回滚",
+            "sql": "SELECT rowid FROM t_bplus WHERE body MATCH ?",
+            "params": [
+              "回 滚"
+            ],
+            "rowCount": 1,
+            "rowids": [
+              4
+            ],
+            "rows": [
+              {
+                "rowid": 4
+              }
+            ],
+            "error": null
+          },
+          "bPhrase": {
+            "label": "B-phrase:回滚",
+            "sql": "SELECT rowid FROM t_b WHERE body MATCH ?",
+            "params": [
+              "\"回 滚\""
+            ],
+            "rowCount": 1,
+            "rowids": [
+              4
+            ],
+            "rows": [
+              {
+                "rowid": 4
+              }
+            ],
+            "error": null
+          }
+        }
+      ]
+    },
+    "adjacency": [
+      {
+        "label": "and-semantics",
+        "sql": "SELECT rowid FROM t_adj WHERE body MATCH ?",
+        "params": [
+          "死 锁"
+        ],
+        "rowCount": 3,
+        "rowids": [
+          1,
+          2,
+          3
+        ],
+        "rows": [
+          "修 复 死 锁 后 回 滚 事 务 并 更 新 租 约 状 态",
+          "死 亡 事 故 与 锁 定 无 关",
+          "锁 定 之 后 死 亡"
+        ],
+        "error": null,
+        "matchQuery": "死 锁"
+      },
+      {
+        "label": "phrase-adjacent",
+        "sql": "SELECT rowid FROM t_adj WHERE body MATCH ?",
+        "params": [
+          "\"死 锁\""
+        ],
+        "rowCount": 1,
+        "rowids": [
+          1
+        ],
+        "rows": [
+          "修 复 死 锁 后 回 滚 事 务 并 更 新 租 约 状 态",
+          "死 亡 事 故 与 锁 定 无 关",
+          "锁 定 之 后 死 亡"
+        ],
+        "error": null,
+        "matchQuery": "\"死 锁\""
+      }
+    ],
+    "snippets": [
+      {
+        "label": "tri-MATCH-snippet",
+        "sql": "SELECT snippet(t_tri, 0, '[', ']', '…', 10) AS s FROM t_tri WHERE t_tri MATCH ?",
+        "params": [
+          "数据库"
+        ],
+        "rowCount": 1,
+        "rowids": [
+          null
+        ],
+        "rows": [
+          {
+            "s": "[数据库]连接池"
+          }
+        ],
+        "error": null
+      },
+      {
+        "label": "tri-LIKE-snippet",
+        "sql": "SELECT snippet(t_tri, 0, '[', ']', '…', 10) AS s FROM t_tri WHERE body LIKE ?",
+        "params": [
+          "%数据库%"
+        ],
+        "rowCount": 1,
+        "rowids": [
+          null
+        ],
+        "rows": [
+          {
+            "s": "[数据库]连接池"
+          }
+        ],
+        "error": null
+      },
+      {
+        "label": "b-segmented-MATCH-snippet",
+        "sql": "SELECT snippet(t_b, 0, '[', ']', '…', 10) AS s FROM t_b WHERE t_b MATCH ?",
+        "params": [
+          "租约"
+        ],
+        "rowCount": 2,
+        "rowids": [
+          null,
+          null
+        ],
+        "rows": [
+          {
+            "s": "[租约] 到期 提醒"
+          },
+          {
+            "s": "修复 死 锁 后 回 滚 事务 并 更新 [租约]…"
+          }
+        ],
+        "error": null
+      }
+    ],
+    "bm25": {
+      "tableDef": "fts5(word, gram)：word=Segmenter 词列，gram=CJK 2-gram 列，uni-gram 权重可调",
+      "rows": [
+        {
+          "rowid": 1,
+          "word": "租约 到期 提醒",
+          "gram": "租约 约到 到期 期提 提醒"
+        },
+        {
+          "rowid": 2,
+          "word": "账本 与 租约",
+          "gram": "账本 本与 与租 租约"
+        },
+        {
+          "rowid": 3,
+          "word": "幂 等 性 检查",
+          "gram": "幂等 等性 性检 检查"
+        }
+      ],
+      "query": "租约",
+      "runs": [
+        {
+          "weights": [
+            4,
+            1
+          ],
+          "sql": "SELECT rowid, bm25(t_c, ?, ?) AS score FROM t_c WHERE t_c MATCH ? ORDER BY score",
+          "rows": [
+            {
+              "rowid": 2,
+              "score": -0.0000017968749999999998
+            },
+            {
+              "rowid": 1,
+              "score": -0.0000017630662020905924
+            }
+          ]
+        },
+        {
+          "weights": [
+            1,
+            4
+          ],
+          "sql": "SELECT rowid, bm25(t_c, ?, ?) AS score FROM t_c WHERE t_c MATCH ? ORDER BY score",
+          "rows": [
+            {
+              "rowid": 2,
+              "score": -0.0000017968749999999998
+            },
+            {
+              "rowid": 1,
+              "score": -0.0000017630662020905924
+            }
+          ]
+        }
+      ],
+      "note": "仅验证 bm25 多列加权 API 可用与数值有限；3 行合成数据不构成任何方案排序结论。"
+    },
+    "errors": [
+      {
+        "label": "MATCH-SYNTAX:percent-raw",
+        "message": "fts5: syntax error near \"%\""
+      }
+    ],
+    "bigramSubstring": {
+      "note": "gram 列为 CJK-only 2-gram；refreshToken 内部子串不在该列，验证架构 §6.1 \"CJK-only 2-gram 仍漏 refreshToken 内子串\"。",
+      "rows": {
+        "租约": 2,
+        "租": 0,
+        "token": 0
+      }
+    }
+  },
+  "summary": {
+    "environment": {
+      "node": "v24.14.0",
+      "icu": "78.2",
+      "unicode": "17.0",
+      "cldr": "48.0",
+      "sqlite": "3.51.2"
+    },
+    "fts5Available": true,
+    "trigramAvailable": true,
+    "trigramCaseSensitiveAvailable": true,
+    "segmenterAvailable": true,
+    "silentZeroMatch": [
+      {
+        "query": "租",
+        "codepoints": 1,
+        "match": 0,
+        "groundTruth": 1
+      },
+      {
+        "query": "𠮷",
+        "codepoints": 1,
+        "match": 0,
+        "groundTruth": 1
+      },
+      {
+        "query": "t",
+        "codepoints": 1,
+        "match": 0,
+        "groundTruth": 3
+      },
+      {
+        "query": "租约",
+        "codepoints": 2,
+        "match": 0,
+        "groundTruth": 1
+      },
+      {
+        "query": "调用",
+        "codepoints": 2,
+        "match": 0,
+        "groundTruth": 1
+      },
+      {
+        "query": "函数",
+        "codepoints": 2,
+        "match": 0,
+        "groundTruth": 1
+      },
+      {
+        "query": "to",
+        "codepoints": 2,
+        "match": 0,
+        "groundTruth": 3
+      },
+      {
+        "query": "𠮷野",
+        "codepoints": 2,
+        "match": 0,
+        "groundTruth": 1
+      }
+    ],
+    "matchEqualsGroundTruth": [
+      {
+        "query": "租",
+        "codepoints": 1,
+        "match": 0,
+        "like": 1,
+        "groundTruth": 1,
+        "equal": false
+      },
+      {
+        "query": "𠮷",
+        "codepoints": 1,
+        "match": 0,
+        "like": 1,
+        "groundTruth": 1,
+        "equal": false
+      },
+      {
+        "query": "t",
+        "codepoints": 1,
+        "match": 0,
+        "like": 3,
+        "groundTruth": 3,
+        "equal": false
+      },
+      {
+        "query": "租约",
+        "codepoints": 2,
+        "match": 0,
+        "like": 1,
+        "groundTruth": 1,
+        "equal": false
+      },
+      {
+        "query": "调用",
+        "codepoints": 2,
+        "match": 0,
+        "like": 1,
+        "groundTruth": 1,
+        "equal": false
+      },
+      {
+        "query": "函数",
+        "codepoints": 2,
+        "match": 0,
+        "like": 1,
+        "groundTruth": 1,
+        "equal": false
+      },
+      {
+        "query": "to",
+        "codepoints": 2,
+        "match": 0,
+        "like": 3,
+        "groundTruth": 3,
+        "equal": false
+      },
+      {
+        "query": "𠮷野",
+        "codepoints": 2,
+        "match": 0,
+        "like": 1,
+        "groundTruth": 1,
+        "equal": false
+      },
+      {
+        "query": "租约到",
+        "codepoints": 3,
+        "match": 1,
+        "like": 1,
+        "groundTruth": 1,
+        "equal": true
+      },
+      {
+        "query": "数据库",
+        "codepoints": 3,
+        "match": 1,
+        "like": 1,
+        "groundTruth": 1,
+        "equal": true
+      },
+      {
+        "query": "𠮷野家",
+        "codepoints": 3,
+        "match": 1,
+        "like": 1,
+        "groundTruth": 1,
+        "equal": true
+      },
+      {
+        "query": "tok",
+        "codepoints": 3,
+        "match": 3,
+        "like": 3,
+        "groundTruth": 3,
+        "equal": true
+      },
+      {
+        "query": "oke",
+        "codepoints": 3,
+        "match": 3,
+        "like": 3,
+        "groundTruth": 3,
+        "equal": true
+      },
+      {
+        "query": "refresh",
+        "codepoints": 7,
+        "match": 2,
+        "like": 2,
+        "groundTruth": 2,
+        "equal": true
+      },
+      {
+        "query": "refreshToken",
+        "codepoints": 12,
+        "match": 2,
+        "like": 2,
+        "groundTruth": 2,
+        "equal": true
+      }
+    ],
+    "lengthRoutingNeeded": true,
+    "segmenterWordLevelZh": {
+      "租约": 1,
+      "账本": 1,
+      "数据库": 2,
+      "死锁": 2,
+      "回滚": 2,
+      "幂等": 2,
+      "调用refreshToken函数": 4
+    },
+    "segmenterKeepsIdentifierWhole": {
+      "refreshToken": 1,
+      "refresh_token": 1,
+      "XMLHttpRequest": 1
+    },
+    "splitterMandatedCasesPass": true,
+    "splitterVersion": "ano-s1-identifier-split-v1"
+  }
+}

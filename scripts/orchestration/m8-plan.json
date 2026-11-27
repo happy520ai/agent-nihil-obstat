@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "milestone": "M8",
+  "description": "Derived scheduling metadata. PM-mcp remains authoritative for task state and verification; no task file is edited by this scheduler.",
+  "tasks": {
+    "T-038": { "depends_on": [], "session_id": "sess_b76db431-9cc2-4ae9-96a7-292f293b3ec4" },
+    "T-039": { "depends_on": [], "session_id": "sess_42435ee0-e627-4d6b-b615-547d2de20061" },
+    "T-040": { "depends_on": [], "session_id": "sess_8d0fd203-5f24-44ae-9f69-7380dfe0d0b2" },
+    "T-041": { "depends_on": [], "session_id": "sess_1f9e4db6-a7ac-43d2-8da6-6dc2be646f31" },
+    "T-042": { "depends_on": ["T-038", "T-039", "T-040", "T-041"], "gate": "phase-p0", "mutex_group": "p0-integration", "session_id": "sess_ce793d91-0037-425d-989b-ce407a9f0511" },
+    "T-043": { "depends_on": ["T-042"], "gate": "phase-p0", "session_id": "sess_06df6211-7452-4292-b3eb-be12df705e1e" },
+    "T-044": { "depends_on": ["T-043"], "session_id": "sess_1d4f457a-56dd-4a7d-8f11-ae30825af43d" },
+    "T-045": { "depends_on": ["T-043"], "session_id": "sess_5454b104-012b-4848-8d58-4bf41b43149f" },
+    "T-046": { "depends_on": ["T-044", "T-045"], "session_id": "sess_f3ddef9f-9aa8-4629-b39d-a5c8b08d9b16" },
+    "T-047": { "depends_on": ["T-046"], "gate": "phase-p1", "mutex_group": "p1-integration", "session_id": "sess_769b38a3-e92b-4776-99df-0bb4c56e0b2b" },
+    "T-048": { "depends_on": ["T-047"], "gate": "phase-p1" },
+    "T-049": { "depends_on": ["T-047"], "gate": "phase-p1", "session_id": "sess_769b38a3-e92b-4776-99df-0bb4c56e0b2b" },
+    "T-050": { "depends_on": ["T-048", "T-049"] },
+    "T-051": { "depends_on": ["T-048", "T-049"] },
+    "T-052": { "depends_on": ["T-050", "T-051"], "gate": "phase-p2", "mutex_group": "p2-integration" },
+    "T-053": { "depends_on": ["T-052"], "gate": "phase-p2" },
+    "T-054": { "depends_on": ["T-052"], "gate": "phase-p2" },
+    "T-055": { "depends_on": ["T-052"], "gate": "phase-p2" },
+    "T-056": { "depends_on": ["T-053", "T-054", "T-055"], "gate": "phase-p3", "mutex_group": "p3-integration" },
+    "T-057": { "depends_on": ["T-056"], "gate": "phase-p3" },
+    "T-058": { "depends_on": ["T-056"], "gate": "phase-p3" },
+    "T-059": { "depends_on": ["T-057"] },
+    "T-060": { "depends_on": ["T-058", "T-059"] },
+    "T-061": { "depends_on": ["T-060"], "gate": "phase-p4", "mutex_group": "p4-integration" }
+  }
+}

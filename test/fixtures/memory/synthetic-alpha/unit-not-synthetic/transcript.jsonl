@@ -1,0 +1,1 @@
+{"v":1,"type":"message","id":"alpha-not-synthetic-m1","role":"user","ts":"2026-11-01T05:00:01.000Z","text":"This synthetic placeholder must never be indexed because synthetic=false."}

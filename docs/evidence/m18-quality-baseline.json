@@ -1,0 +1,4036 @@
+{
+  "schemaVersion": 1,
+  "task": "T-150 / QF-01",
+  "title": "M18 最终质量基线与停止扩展契约（冻结版）",
+  "errata": {
+    "status": "historical-only-not-final-acceptance",
+    "pathParser": "文本coverage树层级误解析，部分structure文件误挂extractors、surface文件误挂connect-ui。不是源码迁移；files/residualRanking及相关逐路径结论不可作为当前分派依据。原始spec/TAP全文和历史all-files百分比保留。",
+    "nativeCounters": "Node test:coverage事件提供原始分子分母。后续以scripts/m18-coverage-reporter.mjs导出的summary.files绝对path与covered/total计数为准，不再反推文本百分比。",
+    "sourceInventory": "T153原生基线仅162文件，而磁盘src有166个.ts；遗漏src/index.ts、src/memory/index.ts、src/memory/types.ts、src/readiness/test-seams.ts。已补行为测试，最终报告必须与磁盘全集核对。",
+    "intermediateRun": {
+      "artifact": ".pm/m18-t153-baseline-native.json",
+      "exitCode": 0,
+      "tests": 1743,
+      "passed": 1742,
+      "failed": 0,
+      "skipped": 1,
+      "files": 162,
+      "lines": { "covered": 74281, "total": 77610 },
+      "branches": { "covered": 16700, "total": 19669 },
+      "functions": { "covered": 4174, "total": 4373 },
+      "finalAcceptance": false,
+      "note": "后续源码和测试已变；不得将此运行当最终源码匹配证明。"
+    },
+    "detail": "docs/evidence/final-quality-scope.md T153复核勘误"
+  },
+  "generatedAt": "2026-11-25",
+  "repo": "F:/Agent Nihil Obstat",
+  "runtime": {
+    "node": "v24.14.0",
+    "platform": "win32 10.0.19041 x64",
+    "shell": "Git Bash"
+  },
+  "authority": {
+    "command": "npm run coverage",
+    "equivalentCommand": "node --test --experimental-test-coverage --test-coverage-lines=90 --test-coverage-branches=80 --test-coverage-include=src/**/*.ts \"test/**/*.test.ts\"",
+    "rawArtifact": "docs/evidence/m18-coverage-raw.txt",
+    "exitCode": 0,
+    "elapsedSec": 69,
+    "reporter": "spec (内置)",
+    "note": "主控保证运行时无其他全量测试；本命令未使用 --test-coverage-exclude，未修改统计范围。"
+  },
+  "structuredCrossCheck": {
+    "command": "node --test --experimental-test-coverage --test-coverage-lines=90 --test-coverage-branches=80 --test-coverage-include='src/**/*.ts' --test-reporter=tap \"test/**/*.test.ts\"",
+    "artifact": "docs/evidence/m18-coverage-tap.txt",
+    "exitCode": 0,
+    "elapsedSec": 65,
+    "purpose": "原生 TAP coverage report（机器可解析）交叉核对；不修改统计范围。",
+    "specTotals": {
+      "line": 95.63,
+      "branch": 84.53,
+      "functions": 95.36
+    },
+    "tapTotals": {
+      "line": 95.62,
+      "branch": 84.53,
+      "functions": 95.36
+    },
+    "runToRunDiffFiles": [
+      {
+        "path": "src/audit/findings.ts",
+        "spec": {
+          "line": 99.05,
+          "branch": 92.19,
+          "functions": 100
+        },
+        "tap": {
+          "line": 97.62,
+          "branch": 90.77,
+          "functions": 100
+        }
+      },
+      {
+        "path": "src/audit/governance.ts",
+        "spec": {
+          "line": 100,
+          "branch": 93.98,
+          "functions": 87.5
+        },
+        "tap": {
+          "line": 100,
+          "branch": 95.12,
+          "functions": 87.5
+        }
+      },
+      {
+        "path": "src/connect/takeover.ts",
+        "spec": {
+          "line": 95.62,
+          "branch": 80.11,
+          "functions": 97.78
+        },
+        "tap": {
+          "line": 95.44,
+          "branch": 79.68,
+          "functions": 97.78
+        }
+      },
+      {
+        "path": "src/core/lock.ts",
+        "spec": {
+          "line": 100,
+          "branch": 84.38,
+          "functions": 100
+        },
+        "tap": {
+          "line": 100,
+          "branch": 85.29,
+          "functions": 100
+        }
+      },
+      {
+        "path": "src/memory/anchor.ts",
+        "spec": {
+          "line": 100,
+          "branch": 100,
+          "functions": 100
+        },
+        "tap": {
+          "line": 100,
+          "branch": 97.87,
+          "functions": 100
+        }
+      },
+      {
+        "path": "src/memory/distributed-probe.ts",
+        "spec": {
+          "line": 93.07,
+          "branch": 94.81,
+          "functions": 84.48
+        },
+        "tap": {
+          "line": 93.07,
+          "branch": 94.48,
+          "functions": 84.48
+        }
+      },
+      {
+        "path": "src/memory/ha-protocol.ts",
+        "spec": {
+          "line": 96.69,
+          "branch": 89.53,
+          "functions": 98.36
+        },
+        "tap": {
+          "line": 96.88,
+          "branch": 89.88,
+          "functions": 98.36
+        }
+      },
+      {
+        "path": "src/memory/multi-writer.ts",
+        "spec": {
+          "line": 96.2,
+          "branch": 89.17,
+          "functions": 93.94
+        },
+        "tap": {
+          "line": 96.2,
+          "branch": 88.61,
+          "functions": 93.94
+        }
+      },
+      {
+        "path": "src/memory/probe-merge.ts",
+        "spec": {
+          "line": 100,
+          "branch": 87.31,
+          "functions": 97.56
+        },
+        "tap": {
+          "line": 100,
+          "branch": 86.67,
+          "functions": 97.56
+        }
+      },
+      {
+        "path": "src/memory/replication.ts",
+        "spec": {
+          "line": 96.15,
+          "branch": 84.08,
+          "functions": 96.55
+        },
+        "tap": {
+          "line": 96.15,
+          "branch": 84.5,
+          "functions": 96.55
+        }
+      },
+      {
+        "path": "src/structure/barrel.ts",
+        "spec": {
+          "line": 97.92,
+          "branch": 92.86,
+          "functions": 100
+        },
+        "tap": {
+          "line": 97.92,
+          "branch": 91.23,
+          "functions": 100
+        }
+      },
+      {
+        "path": "src/surface/cli.ts",
+        "spec": {
+          "line": 90.3,
+          "branch": 86.93,
+          "functions": 87.5
+        },
+        "tap": {
+          "line": 90.12,
+          "branch": 86.53,
+          "functions": 87.5
+        }
+      },
+      {
+        "path": "src/surface/connect-ui/tool-catalog.ts",
+        "spec": {
+          "line": 98.62,
+          "branch": 92.13,
+          "functions": 100
+        },
+        "tap": {
+          "line": 99.31,
+          "branch": 95.9,
+          "functions": 100
+        }
+      }
+    ]
+  },
+  "scope": {
+    "include": "src/**/*.ts",
+    "exclude": [],
+    "countedSourceFiles": 162,
+    "denominatorNote": "逐文件行分母由 uncovered lines/(1-line%) 估算；分支/函数原始分母未由 Node 文本报告给出，security/four-module 声明必须以 T-151/T-152 发布的原始分母为准。"
+  },
+  "testRun": {
+    "tests": 1649,
+    "pass": 1648,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 1,
+    "todo": 0,
+    "durationMs": 57600.1193,
+    "realSkip": {
+      "test": "busy and permission failures map to explicit degraded statuses",
+      "file": "test/unit/fingerprint.test.ts:143",
+      "reason": "filesystem does not enforce read permission in this environment",
+      "kind": "conditional environment skip（打印可见，非静默）"
+    },
+    "spikeSkipOutsideCoverage": "scripts/run-tests.ts 在 scripts/node_modules 缺失时显式 SKIP spike 测试；不属于 npm run coverage 的 1649 测试。"
+  },
+  "targets": {
+    "fourPureModules": {
+      "line": 100,
+      "branch": 100,
+      "functions": 100,
+      "modules": [
+        "src/memory/tcp-frame-codec.ts",
+        "src/memory/probe-merge.ts",
+        "src/memory/leader-state.ts",
+        "src/memory/logical-clock.ts"
+      ]
+    },
+    "securityCritical": {
+      "rule": "下列枚举域内所有分支 100%（含正反向）；须由 T-152 发布逐分支原始分母与矩阵，禁止以易覆盖子集替代"
+    },
+    "repo": {
+      "line": 97,
+      "branch": 88,
+      "functions": 97
+    }
+  },
+  "currentBaseline": {
+    "allFiles": {
+      "line": 95.63,
+      "branch": 84.53,
+      "functions": 95.36
+    },
+    "sumUncoveredLines": 3394,
+    "estimatedTotalLines": 77666,
+    "linesToCoverFor97Percent": 1065,
+    "filesBelowRepoTarget": 105,
+    "filesTotal": 162,
+    "note": "交叉运行出现 13 个文件的行/分支百分比抖动（逐指标绝对差最大 3.77pp，位于 surface/connect-ui/tool-catalog.ts 的分支项；不等于全仓波动），说明覆盖率并非完全确定；三轮验收必须每轮独立达标，不得平均。"
+  },
+  "files": [
+    {
+      "path": "src/audit/deps.ts",
+      "line": 94.25,
+      "branch": 89.06,
+      "functions": 85.71,
+      "uncoveredLines": "50-58 60",
+      "uncoveredLineCount": 10,
+      "estimatedTotalLines": 174,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/audit/drift.ts",
+      "line": 100,
+      "branch": 98.08,
+      "functions": 100,
+      "uncoveredLines": "",
+      "uncoveredLineCount": 0,
+      "estimatedTotalLines": null,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/audit/events.ts",
+      "line": 84.72,
+      "branch": 100,
+      "functions": 88.89,
+      "uncoveredLines": "42-52",
+      "uncoveredLineCount": 11,
+      "estimatedTotalLines": 72,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/audit/findings.ts",
+      "line": 99.05,
+      "branch": 92.19,
+      "functions": 100,
+      "uncoveredLines": "52-53",
+      "uncoveredLineCount": 2,
+      "estimatedTotalLines": 211,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/audit/governance.ts",
+      "line": 100,
+      "branch": 93.98,
+      "functions": 87.5,
+      "uncoveredLines": "",
+      "uncoveredLineCount": 0,
+      "estimatedTotalLines": null,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/audit/index.ts",
+      "line": 98.99,
+      "branch": 98.51,
+      "functions": 85.71,
+      "uncoveredLines": "197-198",
+      "uncoveredLineCount": 2,
+      "estimatedTotalLines": 198,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/audit/license.ts",
+      "line": 100,
+      "branch": 97.76,
+      "functions": 100,
+      "uncoveredLines": "",
+      "uncoveredLineCount": 0,
+      "estimatedTotalLines": null,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/audit/security.ts",
+      "line": 98.75,
+      "branch": 85,
+      "functions": 85.71,
+      "uncoveredLines": "122-123",
+      "uncoveredLineCount": 2,
+      "estimatedTotalLines": 160,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/audit/types.ts",
+      "line": 100,
+      "branch": 100,
+      "functions": 100,
+      "uncoveredLines": "",
+      "uncoveredLineCount": 0,
+      "estimatedTotalLines": null,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/audit/util.ts",
+      "line": 91.22,
+      "branch": 85.71,
+      "functions": 94.44,
+      "uncoveredLines": "56-58 91-93 98-104",
+      "uncoveredLineCount": 13,
+      "estimatedTotalLines": 148,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/clients/amazon-q.ts",
+      "line": 93.32,
+      "branch": 72.67,
+      "functions": 88.24,
+      "uncoveredLines": "145-147 169-175 186-192 269-271 306-323 590 602-603 625 659-661 730-731 809-810 816-817 828-829 843-845 856-857",
+      "uncoveredLineCount": 58,
+      "estimatedTotalLines": 868,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/clients/antigravity.ts",
+      "line": 92.22,
+      "branch": 67.97,
+      "functions": 94.44,
+      "uncoveredLines": "116-122 148 157 159 162-166 183-185 312-313 321-323 325-327 329-331 399-411 648 659-660 701-702 705-706 708-709 736-737 740-741 751-753 764-765",
+      "uncoveredLineCount": 60,
+      "estimatedTotalLines": 771,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/clients/capabilities.ts",
+      "line": 99.39,
+      "branch": 92.59,
+      "functions": 96.43,
+      "uncoveredLines": "644-646 685-686",
+      "uncoveredLineCount": 5,
+      "estimatedTotalLines": 820,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/clients/claude-code.ts",
+      "line": 93.06,
+      "branch": 83.17,
+      "functions": 97.92,
+      "uncoveredLines": "192 250-258 287-290 325-329 331-332 348-349 365 380-384 388-400 455-457 462-463 482-489 817-819 897-903",
+      "uncoveredLineCount": 65,
+      "estimatedTotalLines": 937,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/clients/cline.ts",
+      "line": 95.67,
+      "branch": 74.86,
+      "functions": 93.48,
+      "uncoveredLines": "151-152 173-175 179-187 193 202 205-208 252-253 290-293 309-310 431-432 748-749 768-769 796-797",
+      "uncoveredLineCount": 36,
+      "estimatedTotalLines": 831,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/clients/codebuddy.ts",
+      "line": 93.94,
+      "branch": 71.58,
+      "functions": 97.44,
+      "uncoveredLines": "117-118 145 154 156 159-162 179-181 325-326 334-336 338-340 401-402 461-473 719 730-731 772-773 776-777 779-780 807-808 822-824 835-836",
+      "uncoveredLineCount": 51,
+      "estimatedTotalLines": 842,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/clients/codegeex.ts",
+      "line": 100,
+      "branch": 100,
+      "functions": 100,
+      "uncoveredLines": "",
+      "uncoveredLineCount": 0,
+      "estimatedTotalLines": null,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/clients/codex.ts",
+      "line": 92.43,
+      "branch": 76.07,
+      "functions": 97.78,
+      "uncoveredLines": "207 256-264 293-296 316-317 325 327-331 375-386 413-415 419-421 426-427 446-453 784-786 838-844 862-863 872-878",
+      "uncoveredLineCount": 69,
+      "estimatedTotalLines": 911,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/clients/comate.ts",
+      "line": 92.41,
+      "branch": 73.91,
+      "functions": 88.24,
+      "uncoveredLines": "131-133 159-160 172-178 254-256 295-296 570 582-583 605 612-628 639-641 784-785 791-792 802-813 818-822 831-832",
+      "uncoveredLineCount": 64,
+      "estimatedTotalLines": 843,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/clients/config.ts",
+      "line": 90.73,
+      "branch": 77.65,
+      "functions": 100,
+      "uncoveredLines": "241-242 280-281 290-295 297-298 328-329 348-349 352-353 366-367 369-370 373-374 406-407 409-410 438-439 441-442 453-454 512-514 545-547 567-569 609-610 613 648-649 678-689 737-738 829-830 891-892 951-952 955-956 992-993 995-997 1038-1040 1044-1045 1062-1063 1083-1084 1104-1117 1124-1125 1137-1138 1142-1143 1158-1159 1174-1175 1262-1263 1270-1271 1346-1347 1362-1363 1365-1374 1394-1395 1400-1401",
+      "uncoveredLineCount": 130,
+      "estimatedTotalLines": 1402,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/clients/cursor.ts",
+      "line": 95.58,
+      "branch": 75,
+      "functions": 97.44,
+      "uncoveredLines": "118-119 146 155 157 160-163 180-182 309-310 318-320 322-324 326-328 698-700 715 768-769 772-773 775-776 803-804 831-832",
+      "uncoveredLineCount": 37,
+      "estimatedTotalLines": 837,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/clients/deepseek-harness.ts",
+      "line": 92.35,
+      "branch": 80,
+      "functions": 89.74,
+      "uncoveredLines": "136-138 150-152 243-251 292-295 331-342 415-435 725-726 813-819 823-824",
+      "uncoveredLineCount": 63,
+      "estimatedTotalLines": 824,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/clients/doctor.ts",
+      "line": 93.26,
+      "branch": 75.79,
+      "functions": 90,
+      "uncoveredLines": "577-578 610 612 615-618 624-629 745-751 770-771 782-785 804-806 808-809 815-819 822-826 842-843 845-847 853-854 901 949 956 963 975 1024-1028 1047-1048 1057-1058 1097-1098 1105-1106 1112-1113 1227 1229-1242 1249 1279 1308 1310-1311 1448-1463 1528-1529 1531-1532 1638-1639",
+      "uncoveredLineCount": 111,
+      "estimatedTotalLines": 1647,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/clients/github-copilot.ts",
+      "line": 96.26,
+      "branch": 77.72,
+      "functions": 97.62,
+      "uncoveredLines": "138-139 166 175 177 182 200-202 339-340 427-438 777 834-835 838-839 841-842 873-874 901-902",
+      "uncoveredLineCount": 34,
+      "estimatedTotalLines": 909,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/clients/hermes-agent.ts",
+      "line": 93.85,
+      "branch": 78.5,
+      "functions": 94.44,
+      "uncoveredLines": "105-107 109-111 133-134 150-152 206-214 229-233 235-236 278-287",
+      "uncoveredLineCount": 37,
+      "estimatedTotalLines": 602,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/clients/install.ts",
+      "line": 98,
+      "branch": 88.24,
+      "functions": 100,
+      "uncoveredLines": "107-108 399 467-473",
+      "uncoveredLineCount": 10,
+      "estimatedTotalLines": 500,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/clients/jetbrains-ai.ts",
+      "line": 100,
+      "branch": 92.86,
+      "functions": 100,
+      "uncoveredLines": "",
+      "uncoveredLineCount": 0,
+      "estimatedTotalLines": null,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/clients/kilo-code.ts",
+      "line": 95.46,
+      "branch": 76.79,
+      "functions": 96.15,
+      "uncoveredLines": "172-174 192 207 210-213 244-248 314-315 339-347 363-364 446-448 861-862 864-865 884-885 888-889 899-901 912-913",
+      "uncoveredLineCount": 43,
+      "estimatedTotalLines": 947,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/clients/openclaw.ts",
+      "line": 93.12,
+      "branch": 70.67,
+      "functions": 95.12,
+      "uncoveredLines": "142-144 162 171 174-177 221-222 246-254 270-271 315-317 324-326 395-407 664-665 668-669 679-681 692-693",
+      "uncoveredLineCount": 50,
+      "estimatedTotalLines": 727,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/clients/opencode.ts",
+      "line": 95.17,
+      "branch": 75.15,
+      "functions": 97.37,
+      "uncoveredLines": "113-114 134-135 141 153 156-160 176-178 302-303 311-313 315-317 324-326 657-659 684 737-738 742-743 745-746 773-774 801-802",
+      "uncoveredLineCount": 39,
+      "estimatedTotalLines": 807,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/clients/qoder.ts",
+      "line": 97.78,
+      "branch": 85.85,
+      "functions": 90.63,
+      "uncoveredLines": "113-114 199-207",
+      "uncoveredLineCount": 11,
+      "estimatedTotalLines": 495,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/clients/redact.ts",
+      "line": 96.3,
+      "branch": 87.5,
+      "functions": 100,
+      "uncoveredLines": "39-40",
+      "uncoveredLineCount": 2,
+      "estimatedTotalLines": 54,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/clients/registry.ts",
+      "line": 100,
+      "branch": 100,
+      "functions": 100,
+      "uncoveredLines": "",
+      "uncoveredLineCount": 0,
+      "estimatedTotalLines": null,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/clients/replit-agent.ts",
+      "line": 100,
+      "branch": 95.24,
+      "functions": 100,
+      "uncoveredLines": "",
+      "uncoveredLineCount": 0,
+      "estimatedTotalLines": null,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/clients/scope.ts",
+      "line": 100,
+      "branch": 100,
+      "functions": 100,
+      "uncoveredLines": "",
+      "uncoveredLineCount": 0,
+      "estimatedTotalLines": null,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/clients/tabnine.ts",
+      "line": 99.64,
+      "branch": 92.31,
+      "functions": 87.5,
+      "uncoveredLines": "278",
+      "uncoveredLineCount": 1,
+      "estimatedTotalLines": 278,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/clients/tongyi-lingma.ts",
+      "line": 91.59,
+      "branch": 73.72,
+      "functions": 86,
+      "uncoveredLines": "157-159 173-179 190-196 272-274 308-310 576 588-589 611 618-634 645-647 717-718 797-798 804-805 815-826 831-835 844-845",
+      "uncoveredLineCount": 72,
+      "estimatedTotalLines": 856,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/clients/trae.ts",
+      "line": 93.64,
+      "branch": 71.43,
+      "functions": 97.14,
+      "uncoveredLines": "127 136 138 141-144 161-163 244-245 256-258 260-262 264-266 331-343 584 595-596 641-642 644-645 672-673 700-701",
+      "uncoveredLineCount": 45,
+      "estimatedTotalLines": 708,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/clients/types.ts",
+      "line": 99.38,
+      "branch": 100,
+      "functions": 50,
+      "uncoveredLines": "127-128 131-132",
+      "uncoveredLineCount": 4,
+      "estimatedTotalLines": 645,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/clients/unknown.ts",
+      "line": 96.24,
+      "branch": 78,
+      "functions": 100,
+      "uncoveredLines": "161-162 299-301 311-312 324 326-327 331 337 349 355-356 358-359 475",
+      "uncoveredLineCount": 18,
+      "estimatedTotalLines": 479,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/clients/zed.ts",
+      "line": 93.47,
+      "branch": 66.92,
+      "functions": 94.74,
+      "uncoveredLines": "89-90 139 141 144-147 164-166 267-268 278-280 384-396 605 616-617 662-663 669-670 672-673 700-701 704-705 715-717 728-729 733",
+      "uncoveredLineCount": 48,
+      "estimatedTotalLines": 735,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/connect/active.ts",
+      "line": 87.88,
+      "branch": 71.43,
+      "functions": 100,
+      "uncoveredLines": "73-74 77-78 86-87 89-90 92-93 96-97",
+      "uncoveredLineCount": 12,
+      "estimatedTotalLines": 99,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/connect/adapter.ts",
+      "line": 90.3,
+      "branch": 70.49,
+      "functions": 93.75,
+      "uncoveredLines": "108-109 114-115 124-125 135-136 147-148 160-161 163-164 167-168 184-185 190-191 215-216 218-219 259-260 297-299",
+      "uncoveredLineCount": 29,
+      "estimatedTotalLines": 299,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/connect/backup.ts",
+      "line": 95.41,
+      "branch": 76.67,
+      "functions": 100,
+      "uncoveredLines": "94-95 130-132 153-154 162-163",
+      "uncoveredLineCount": 9,
+      "estimatedTotalLines": 196,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/connect/canonical.ts",
+      "line": 89.13,
+      "branch": 92.86,
+      "functions": 83.33,
+      "uncoveredLines": "42-46",
+      "uncoveredLineCount": 5,
+      "estimatedTotalLines": 46,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/connect/capabilities.ts",
+      "line": 98.97,
+      "branch": 93.33,
+      "functions": 100,
+      "uncoveredLines": "25-26",
+      "uncoveredLineCount": 2,
+      "estimatedTotalLines": 194,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/connect/changes.ts",
+      "line": 100,
+      "branch": 100,
+      "functions": 100,
+      "uncoveredLines": "",
+      "uncoveredLineCount": 0,
+      "estimatedTotalLines": null,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/connect/cutover.ts",
+      "line": 96.55,
+      "branch": 66.67,
+      "functions": 100,
+      "uncoveredLines": "29-30",
+      "uncoveredLineCount": 2,
+      "estimatedTotalLines": 58,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/connect/engine.ts",
+      "line": 98.49,
+      "branch": 91.51,
+      "functions": 100,
+      "uncoveredLines": "169-170 172-173 178-180",
+      "uncoveredLineCount": 7,
+      "estimatedTotalLines": 464,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/connect/errors.ts",
+      "line": 100,
+      "branch": 100,
+      "functions": 100,
+      "uncoveredLines": "",
+      "uncoveredLineCount": 0,
+      "estimatedTotalLines": null,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/connect/export.ts",
+      "line": 100,
+      "branch": 76.92,
+      "functions": 100,
+      "uncoveredLines": "",
+      "uncoveredLineCount": 0,
+      "estimatedTotalLines": null,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/connect/handoff.ts",
+      "line": 95.28,
+      "branch": 75.61,
+      "functions": 100,
+      "uncoveredLines": "35 59-60 110-111 116",
+      "uncoveredLineCount": 6,
+      "estimatedTotalLines": 127,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/connect/index.ts",
+      "line": 100,
+      "branch": 100,
+      "functions": 100,
+      "uncoveredLines": "",
+      "uncoveredLineCount": 0,
+      "estimatedTotalLines": null,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/connect/managed-instructions.ts",
+      "line": 94.55,
+      "branch": 78.95,
+      "functions": 100,
+      "uncoveredLines": "165-166 192-193 196-197 201-202 205-206 209-210 244-245 249-250 260-261 273-274 276-277 300-301 319-320 372",
+      "uncoveredLineCount": 27,
+      "estimatedTotalLines": 495,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/connect/paths.ts",
+      "line": 91.94,
+      "branch": 75,
+      "functions": 100,
+      "uncoveredLines": "26-27 70-71 90-91 96-97 121-122",
+      "uncoveredLineCount": 10,
+      "estimatedTotalLines": 124,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/connect/read.ts",
+      "line": 100,
+      "branch": 77.78,
+      "functions": 100,
+      "uncoveredLines": "",
+      "uncoveredLineCount": 0,
+      "estimatedTotalLines": null,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/connect/recall.ts",
+      "line": 100,
+      "branch": 95,
+      "functions": 100,
+      "uncoveredLines": "",
+      "uncoveredLineCount": 0,
+      "estimatedTotalLines": null,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/connect/records.ts",
+      "line": 89.25,
+      "branch": 80.17,
+      "functions": 87.1,
+      "uncoveredLines": "50-51 60-62 68 119-120 122-123 249-254 260 269-287",
+      "uncoveredLineCount": 36,
+      "estimatedTotalLines": 335,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/connect/status.ts",
+      "line": 100,
+      "branch": 78.57,
+      "functions": 100,
+      "uncoveredLines": "",
+      "uncoveredLineCount": 0,
+      "estimatedTotalLines": null,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/connect/store.ts",
+      "line": 87.71,
+      "branch": 70.93,
+      "functions": 100,
+      "uncoveredLines": "17-18 102-103 115-116 120-121 128-129 143-145 154-155 169-170 172-173 188-189 201-202 208-209 215-216 218-219 222-223 225-226 262-263 265-266 308-309 323-324 338-339",
+      "uncoveredLineCount": 43,
+      "estimatedTotalLines": 350,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/connect/takeover-policy.ts",
+      "line": 99.53,
+      "branch": 97.18,
+      "functions": 96.88,
+      "uncoveredLines": "243-244",
+      "uncoveredLineCount": 2,
+      "estimatedTotalLines": 426,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/connect/takeover-store.ts",
+      "line": 97.24,
+      "branch": 93.02,
+      "functions": 100,
+      "uncoveredLines": "81-82 208-209 211-212 217-218 265-266 285-286 439-440",
+      "uncoveredLineCount": 14,
+      "estimatedTotalLines": 507,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/connect/takeover.ts",
+      "line": 95.62,
+      "branch": 80.11,
+      "functions": 97.78,
+      "uncoveredLines": "305-307 318-319 323-324 334-335 419-421 537-538 566-567 626-627 649-650 655-656 681-682 755-756 810-820 850 866-867 994-995 1022-1023 1052-1053 1055-1056",
+      "uncoveredLineCount": 48,
+      "estimatedTotalLines": 1096,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/connect/types.ts",
+      "line": 100,
+      "branch": 100,
+      "functions": 100,
+      "uncoveredLines": "",
+      "uncoveredLineCount": 0,
+      "estimatedTotalLines": null,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/connect/watch.ts",
+      "line": 91.11,
+      "branch": 66.67,
+      "functions": 100,
+      "uncoveredLines": "145-152 194-196 250-251 253 266-267 279-280 297 332-333 380-382 411-413 425-428 430-438",
+      "uncoveredLineCount": 40,
+      "estimatedTotalLines": 450,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/core/fingerprint.ts",
+      "line": 91.24,
+      "branch": 90.91,
+      "functions": 100,
+      "uncoveredLines": "118-119 171-173 179-181 208-209 255-265 355-357 362-370 372-374",
+      "uncoveredLineCount": 36,
+      "estimatedTotalLines": 411,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/core/git.ts",
+      "line": 78.57,
+      "branch": 100,
+      "functions": 50,
+      "uncoveredLines": "34-42",
+      "uncoveredLineCount": 9,
+      "estimatedTotalLines": 42,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/core/hlc.ts",
+      "line": 96.15,
+      "branch": 94.74,
+      "functions": 85.71,
+      "uncoveredLines": "23",
+      "uncoveredLineCount": 1,
+      "estimatedTotalLines": 26,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/core/lock.ts",
+      "line": 100,
+      "branch": 84.38,
+      "functions": 100,
+      "uncoveredLines": "",
+      "uncoveredLineCount": 0,
+      "estimatedTotalLines": null,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/core/paths.ts",
+      "line": 100,
+      "branch": 100,
+      "functions": 100,
+      "uncoveredLines": "",
+      "uncoveredLineCount": 0,
+      "estimatedTotalLines": null,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/core/project-scan.ts",
+      "line": 97.1,
+      "branch": 92.71,
+      "functions": 95.45,
+      "uncoveredLines": "142-143 161-162 212-214 222-225 359-361 388-389 397-398 411-412 427-428 475-476 578 622",
+      "uncoveredLineCount": 26,
+      "estimatedTotalLines": 897,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/core/ulid.ts",
+      "line": 100,
+      "branch": 90.91,
+      "functions": 100,
+      "uncoveredLines": "",
+      "uncoveredLineCount": 0,
+      "estimatedTotalLines": null,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/gate/blast.ts",
+      "line": 100,
+      "branch": 93.48,
+      "functions": 100,
+      "uncoveredLines": "",
+      "uncoveredLineCount": 0,
+      "estimatedTotalLines": null,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/gate/evidence.ts",
+      "line": 97.69,
+      "branch": 93.48,
+      "functions": 92.31,
+      "uncoveredLines": "84-86",
+      "uncoveredLineCount": 3,
+      "estimatedTotalLines": 130,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/gate/policy.ts",
+      "line": 100,
+      "branch": 100,
+      "functions": 100,
+      "uncoveredLines": "",
+      "uncoveredLineCount": 0,
+      "estimatedTotalLines": null,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/gate/types.ts",
+      "line": 100,
+      "branch": 100,
+      "functions": 100,
+      "uncoveredLines": "",
+      "uncoveredLineCount": 0,
+      "estimatedTotalLines": null,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/gate/verdict.ts",
+      "line": 100,
+      "branch": 98.31,
+      "functions": 100,
+      "uncoveredLines": "",
+      "uncoveredLineCount": 0,
+      "estimatedTotalLines": null,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/gate/verify.ts",
+      "line": 100,
+      "branch": 81.15,
+      "functions": 93.94,
+      "uncoveredLines": "",
+      "uncoveredLineCount": 0,
+      "estimatedTotalLines": null,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/ledger/append.ts",
+      "line": 91.28,
+      "branch": 80.49,
+      "functions": 91.67,
+      "uncoveredLines": "69-75 99-100 113-114 136-139",
+      "uncoveredLineCount": 15,
+      "estimatedTotalLines": 172,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/ledger/event.ts",
+      "line": 100,
+      "branch": 100,
+      "functions": 100,
+      "uncoveredLines": "",
+      "uncoveredLineCount": 0,
+      "estimatedTotalLines": null,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/ledger/lease.ts",
+      "line": 96.27,
+      "branch": 79.17,
+      "functions": 88.24,
+      "uncoveredLines": "67-68 74-75 82-83",
+      "uncoveredLineCount": 6,
+      "estimatedTotalLines": 161,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/ledger/ledger.ts",
+      "line": 96.55,
+      "branch": 82.73,
+      "functions": 92.22,
+      "uncoveredLines": "48-54 130-131 142-143 162 679-680 740-741 745-746 781-782 789-790 801-802 883-886 939-942 1032-1035",
+      "uncoveredLineCount": 36,
+      "estimatedTotalLines": 1043,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/ledger/migrate.ts",
+      "line": 98.85,
+      "branch": 89.24,
+      "functions": 100,
+      "uncoveredLines": "283-284 304-306 460-461",
+      "uncoveredLineCount": 7,
+      "estimatedTotalLines": 609,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/ledger/payloads.ts",
+      "line": 99.49,
+      "branch": 92,
+      "functions": 100,
+      "uncoveredLines": "134-135",
+      "uncoveredLineCount": 2,
+      "estimatedTotalLines": 392,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/ledger/replay.ts",
+      "line": 100,
+      "branch": 95.12,
+      "functions": 100,
+      "uncoveredLines": "",
+      "uncoveredLineCount": 0,
+      "estimatedTotalLines": null,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/ledger/segment.ts",
+      "line": 94.68,
+      "branch": 88.24,
+      "functions": 100,
+      "uncoveredLines": "55-56 72-74",
+      "uncoveredLineCount": 5,
+      "estimatedTotalLines": 94,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/ledger/views.ts",
+      "line": 99.44,
+      "branch": 94.95,
+      "functions": 100,
+      "uncoveredLines": "652-653 768 837-838 861-862",
+      "uncoveredLineCount": 7,
+      "estimatedTotalLines": 1250,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/memory/adapter.ts",
+      "line": 99.05,
+      "branch": 97.47,
+      "functions": 100,
+      "uncoveredLines": "101-103",
+      "uncoveredLineCount": 3,
+      "estimatedTotalLines": 316,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/memory/anchor.ts",
+      "line": 100,
+      "branch": 100,
+      "functions": 100,
+      "uncoveredLines": "",
+      "uncoveredLineCount": 0,
+      "estimatedTotalLines": null,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/memory/brief.ts",
+      "line": 100,
+      "branch": 96.55,
+      "functions": 100,
+      "uncoveredLines": "",
+      "uncoveredLineCount": 0,
+      "estimatedTotalLines": null,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/memory/cluster-consistency.ts",
+      "line": 98.09,
+      "branch": 89.29,
+      "functions": 92.31,
+      "uncoveredLines": "286-287 334-335 397-398 401 413-414",
+      "uncoveredLineCount": 9,
+      "estimatedTotalLines": 471,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/memory/cluster-policy.ts",
+      "line": 92.27,
+      "branch": 81.73,
+      "functions": 97.1,
+      "uncoveredLines": "208-209 229-230 236-237 239-240 319-320 377-378 440-448 465 618-626 650-658 668-676 755-756 758-762 794-795 845-846 852-853 860-869 910-911 921-922 978-979 992-993 1043-1044 1135-1136 1140 1148-1149 1151-1152 1163",
+      "uncoveredLineCount": 90,
+      "estimatedTotalLines": 1164,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/memory/compat.ts",
+      "line": 100,
+      "branch": 100,
+      "functions": 100,
+      "uncoveredLines": "",
+      "uncoveredLineCount": 0,
+      "estimatedTotalLines": null,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/memory/consumer.ts",
+      "line": 93.23,
+      "branch": 82.29,
+      "functions": 96,
+      "uncoveredLines": "538-539 549-550 563-570 576-577 595-596 643-644 654-655 669-670 695-697 699-701 739-740 743-744 747-748 750-751 753-754 768-769 785-786 795-796 804-805 807-808 810-811 813-814 816-817 850-853",
+      "uncoveredLineCount": 58,
+      "estimatedTotalLines": 857,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/memory/context-verify.ts",
+      "line": 98.79,
+      "branch": 92.03,
+      "functions": 100,
+      "uncoveredLines": "210-211 216-217 412 458-459 491-492",
+      "uncoveredLineCount": 9,
+      "estimatedTotalLines": 744,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/memory/cursor.ts",
+      "line": 100,
+      "branch": 83.33,
+      "functions": 100,
+      "uncoveredLines": "",
+      "uncoveredLineCount": 0,
+      "estimatedTotalLines": null,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/memory/distributed-probe.ts",
+      "line": 93.07,
+      "branch": 94.81,
+      "functions": 84.48,
+      "uncoveredLines": "423 427-440 443-455 458-468 471-472 475-476 544-546 557-558 684-686 1088-1117",
+      "uncoveredLineCount": 81,
+      "estimatedTotalLines": 1169,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/memory/ha-cluster.ts",
+      "line": 97.97,
+      "branch": 86.95,
+      "functions": 97.66,
+      "uncoveredLines": "416-418 451-453 506-507 580-581 607-610 616-617 647-650 665-668 760-761 985 1243-1244 1554-1555 1561-1562 1650-1651",
+      "uncoveredLineCount": 35,
+      "estimatedTotalLines": 1724,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/memory/ha-protocol.ts",
+      "line": 96.69,
+      "branch": 89.53,
+      "functions": 98.36,
+      "uncoveredLines": "375-376 380-381 384-385 389-390 404 416-417 443-444 448-449 552-553 585-586 592-593 626-627 728-729 747-748 794-795 918-919 985-986 994-996",
+      "uncoveredLineCount": 36,
+      "estimatedTotalLines": 1088,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/memory/ingest.ts",
+      "line": 97.14,
+      "branch": 92.86,
+      "functions": 100,
+      "uncoveredLines": "145-149",
+      "uncoveredLineCount": 5,
+      "estimatedTotalLines": 175,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/memory/leader-lease.ts",
+      "line": 100,
+      "branch": 93.87,
+      "functions": 98.7,
+      "uncoveredLines": "",
+      "uncoveredLineCount": 0,
+      "estimatedTotalLines": null,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/memory/leader-state.ts",
+      "line": 100,
+      "branch": 96.23,
+      "functions": 100,
+      "uncoveredLines": "",
+      "uncoveredLineCount": 0,
+      "estimatedTotalLines": null,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/memory/logical-clock.ts",
+      "line": 96.22,
+      "branch": 91.8,
+      "functions": 90.91,
+      "uncoveredLines": "132-133 138-139 171-172 179-180 191-192 195-196 277-278",
+      "uncoveredLineCount": 14,
+      "estimatedTotalLines": 370,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/memory/multi-writer.ts",
+      "line": 96.2,
+      "branch": 89.17,
+      "functions": 93.94,
+      "uncoveredLines": "293-294 408-409 513-514 524-525 618-619 623-624 627-628 631-632 661-667 759-760 772-777",
+      "uncoveredLineCount": 31,
+      "estimatedTotalLines": 816,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/memory/note.ts",
+      "line": 100,
+      "branch": 94.68,
+      "functions": 100,
+      "uncoveredLines": "",
+      "uncoveredLineCount": 0,
+      "estimatedTotalLines": null,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/memory/probe-contract.ts",
+      "line": 100,
+      "branch": 100,
+      "functions": 100,
+      "uncoveredLines": "",
+      "uncoveredLineCount": 0,
+      "estimatedTotalLines": null,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/memory/probe-manifest.ts",
+      "line": 96.76,
+      "branch": 89.87,
+      "functions": 100,
+      "uncoveredLines": "232-233 365-366 495-496 535-536 664-665 688-695 711-712 735-736 746-747 771-772 774-775",
+      "uncoveredLineCount": 28,
+      "estimatedTotalLines": 864,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/memory/probe-merge.ts",
+      "line": 100,
+      "branch": 87.31,
+      "functions": 97.56,
+      "uncoveredLines": "",
+      "uncoveredLineCount": 0,
+      "estimatedTotalLines": null,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/memory/probe-store-bitchain.ts",
+      "line": 92.06,
+      "branch": 66.44,
+      "functions": 94.94,
+      "uncoveredLines": "339-340 346-347 380-381 384-385 427-428 593-594 623-624 626-627 634-635 643 649-650 658 667-668 675-676 681-682 688-689 696-697 700-701 713-714 743-744 746-747 751-752 754-755 772-773 775-776 781-782 786-787 798-799 810-811 836-837 839-840 855-856 888-889 892-893 909-910 920-921 923-924 928-929 935-936 939-940 942-943 949-950 953-954 959-960 983-984 1121-1122 1129-1130 1183 1194-1195",
+      "uncoveredLineCount": 95,
+      "estimatedTotalLines": 1196,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/memory/probe-store.ts",
+      "line": 97.8,
+      "branch": 76.43,
+      "functions": 96.72,
+      "uncoveredLines": "251-252 330-332 377-379 443-444 496-498 620-622",
+      "uncoveredLineCount": 16,
+      "estimatedTotalLines": 727,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/memory/probe.ts",
+      "line": 96.99,
+      "branch": 91.7,
+      "functions": 90.48,
+      "uncoveredLines": "178-179 256-257 587-595 606-608 647-650",
+      "uncoveredLineCount": 20,
+      "estimatedTotalLines": 664,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/memory/relation-classifier.ts",
+      "line": 98.3,
+      "branch": 82.18,
+      "functions": 100,
+      "uncoveredLines": "232-234 425-426 428-429 502-503 512-513 520-521 531-532 881-882",
+      "uncoveredLineCount": 17,
+      "estimatedTotalLines": 1000,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/memory/replica-transport.ts",
+      "line": 98.97,
+      "branch": 91.25,
+      "functions": 97.18,
+      "uncoveredLines": "807-809 865 885-888 892-894",
+      "uncoveredLineCount": 11,
+      "estimatedTotalLines": 1068,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/memory/replica-worker.ts",
+      "line": 99.38,
+      "branch": 88.83,
+      "functions": 100,
+      "uncoveredLines": "238-239 541-542",
+      "uncoveredLineCount": 4,
+      "estimatedTotalLines": 645,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/memory/replica.ts",
+      "line": 93.68,
+      "branch": 85.71,
+      "functions": 100,
+      "uncoveredLines": "122-123 125-126 128-129 132-133 260-261 364-365 407-408 413-414 417-418 421-426 448-450 452-454",
+      "uncoveredLineCount": 30,
+      "estimatedTotalLines": 475,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/memory/replication.ts",
+      "line": 96.15,
+      "branch": 84.08,
+      "functions": 96.55,
+      "uncoveredLines": "171-176 250-251 490-491 493-494 572-573 621-622 625-626 628-629 631-632 637-638 640-641",
+      "uncoveredLineCount": 26,
+      "estimatedTotalLines": 675,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/memory/state.ts",
+      "line": 100,
+      "branch": 91.94,
+      "functions": 100,
+      "uncoveredLines": "",
+      "uncoveredLineCount": 0,
+      "estimatedTotalLines": null,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/memory/store.ts",
+      "line": 93.99,
+      "branch": 86.34,
+      "functions": 92.86,
+      "uncoveredLines": "259-261 371-372 402-403 475-485 489-490 534-536 542-543 554-555 591-600 612-622 628-631 644-646 811-814",
+      "uncoveredLineCount": 59,
+      "estimatedTotalLines": 982,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/memory/tcp-connection.ts",
+      "line": 100,
+      "branch": 93.33,
+      "functions": 100,
+      "uncoveredLines": "",
+      "uncoveredLineCount": 0,
+      "estimatedTotalLines": null,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/memory/tcp-fault-proxy.ts",
+      "line": 88.94,
+      "branch": 79.82,
+      "functions": 86.36,
+      "uncoveredLines": "108-110 235-239 246-250 256-257 264-266 268-269 284-288 296-300 304-308 312-316 323-327 383-387 416-417 419-420 429-430 546-551 553-561 716-717 720-721 724-725 730-737 750-751 755-757 764-766 798 801 806-808 819-823 960-962 989-991 998-1001 1006-1008",
+      "uncoveredLineCount": 116,
+      "estimatedTotalLines": 1049,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/memory/tcp-frame-codec.ts",
+      "line": 100,
+      "branch": 97.44,
+      "functions": 100,
+      "uncoveredLines": "",
+      "uncoveredLineCount": 0,
+      "estimatedTotalLines": null,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/memory/tcp-transport.ts",
+      "line": 96.96,
+      "branch": 90.39,
+      "functions": 97.17,
+      "uncoveredLines": "487-490 587-594 599-600 785-787 889 1135-1137 1254-1257 1260-1263 1270-1275 1278-1281 1318-1319 1340-1342",
+      "uncoveredLineCount": 44,
+      "estimatedTotalLines": 1447,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/memory/tokenizer.ts",
+      "line": 91.35,
+      "branch": 87.69,
+      "functions": 95,
+      "uncoveredLines": "84-85 105-118 182-183",
+      "uncoveredLineCount": 18,
+      "estimatedTotalLines": 208,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/readiness/approve.ts",
+      "line": 93.75,
+      "branch": 59.09,
+      "functions": 100,
+      "uncoveredLines": "36-37 43-44 77-78",
+      "uncoveredLineCount": 6,
+      "estimatedTotalLines": 96,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/readiness/attestation.ts",
+      "line": 83.38,
+      "branch": 79.22,
+      "functions": 100,
+      "uncoveredLines": "124-125 127-128 138-139 144-145 171-173 183-185 187-189 192-194 196-198 200-202 206-208 249-251 305-307 309-310 313-330",
+      "uncoveredLineCount": 55,
+      "estimatedTotalLines": 331,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/readiness/baseline.ts",
+      "line": 95.65,
+      "branch": 70.55,
+      "functions": 90.91,
+      "uncoveredLines": "345-346 404-405 414-415 450-451 458-459 486-489 511 598-600 615-618 621-624 634-636",
+      "uncoveredLineCount": 29,
+      "estimatedTotalLines": 667,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/readiness/checks.ts",
+      "line": 92.57,
+      "branch": 72.73,
+      "functions": 97.44,
+      "uncoveredLines": "149-150 214-215 246-247 258-260 262-264 290-292 297-298 319-320 339-351 399-400 404-406 453-455",
+      "uncoveredLineCount": 40,
+      "estimatedTotalLines": 538,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/readiness/errors.ts",
+      "line": 100,
+      "branch": 100,
+      "functions": 100,
+      "uncoveredLines": "",
+      "uncoveredLineCount": 0,
+      "estimatedTotalLines": null,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/readiness/evidence.ts",
+      "line": 92.22,
+      "branch": 84.21,
+      "functions": 93.33,
+      "uncoveredLines": "56-57 70-71 105-106 132-133 221-223 225-227 237-239 255-257",
+      "uncoveredLineCount": 20,
+      "estimatedTotalLines": 257,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/readiness/hash.ts",
+      "line": 100,
+      "branch": 100,
+      "functions": 100,
+      "uncoveredLines": "",
+      "uncoveredLineCount": 0,
+      "estimatedTotalLines": null,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/readiness/index.ts",
+      "line": 100,
+      "branch": 100,
+      "functions": 100,
+      "uncoveredLines": "",
+      "uncoveredLineCount": 0,
+      "estimatedTotalLines": null,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/readiness/profile.ts",
+      "line": 97.58,
+      "branch": 94.15,
+      "functions": 100,
+      "uncoveredLines": "234-235 247-248 309-310 389-390 396-397",
+      "uncoveredLineCount": 10,
+      "estimatedTotalLines": 413,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/readiness/release.ts",
+      "line": 96.15,
+      "branch": 89.58,
+      "functions": 93.55,
+      "uncoveredLines": "46-47 49-50 55-56 99-106",
+      "uncoveredLineCount": 14,
+      "estimatedTotalLines": 364,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/readiness/toml.ts",
+      "line": 82.27,
+      "branch": 73.33,
+      "functions": 100,
+      "uncoveredLines": "21-23 25-27 32-34 54-56 58-60 65-67 94-96 105-108 174-175 203-214",
+      "uncoveredLineCount": 39,
+      "estimatedTotalLines": 220,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/readiness/tty.ts",
+      "line": 100,
+      "branch": 100,
+      "functions": 100,
+      "uncoveredLines": "",
+      "uncoveredLineCount": 0,
+      "estimatedTotalLines": null,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/readiness/types.ts",
+      "line": 100,
+      "branch": 100,
+      "functions": 100,
+      "uncoveredLines": "",
+      "uncoveredLineCount": 0,
+      "estimatedTotalLines": null,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/structure/analysis.ts",
+      "line": 98.76,
+      "branch": 90.52,
+      "functions": 91.58,
+      "uncoveredLines": "40-44 53 399 1269-1271 1295-1301",
+      "uncoveredLineCount": 17,
+      "estimatedTotalLines": 1371,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/structure/barrel.ts",
+      "line": 97.92,
+      "branch": 92.86,
+      "functions": 100,
+      "uncoveredLines": "37 96-97",
+      "uncoveredLineCount": 3,
+      "estimatedTotalLines": 144,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/structure/explore.ts",
+      "line": 100,
+      "branch": 92.36,
+      "functions": 100,
+      "uncoveredLines": "",
+      "uncoveredLineCount": 0,
+      "estimatedTotalLines": null,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/structure/extractor.ts",
+      "line": 95.85,
+      "branch": 92.47,
+      "functions": 92.31,
+      "uncoveredLines": "155-160 463 684-695 700-714",
+      "uncoveredLineCount": 34,
+      "estimatedTotalLines": 819,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/structure/extractors/ts.ts",
+      "line": 94.27,
+      "branch": 85.42,
+      "functions": 92.59,
+      "uncoveredLines": "202-205 355-357 389-397 417-427 479-489 491-497 500-507 597-600 630-631 797 805 896-898 910-918 1000-1002 1065-1067 1070",
+      "uncoveredLineCount": 80,
+      "estimatedTotalLines": 1396,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/structure/extractors/fresh.ts",
+      "line": 95.98,
+      "branch": 90.32,
+      "functions": 82.61,
+      "uncoveredLines": "94-95 117-118 161 163-169 347-348",
+      "uncoveredLineCount": 14,
+      "estimatedTotalLines": 348,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/structure/extractors/imports.ts",
+      "line": 85.71,
+      "branch": 81.17,
+      "functions": 96.15,
+      "uncoveredLines": "58-63 65-70 87-90 92-95 112-113 199-204 211-227 238-239 262-263 278-279 287-288 320",
+      "uncoveredLineCount": 54,
+      "estimatedTotalLines": 378,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/structure/extractors/risk.ts",
+      "line": 95.49,
+      "branch": 88.66,
+      "functions": 97.37,
+      "uncoveredLines": "341-343 377-383 430-436 438-444 482-488 584-585",
+      "uncoveredLineCount": 33,
+      "estimatedTotalLines": 732,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/structure/extractors/store.ts",
+      "line": 96.43,
+      "branch": 85.84,
+      "functions": 98.15,
+      "uncoveredLines": "476-481 597-604 639-640 655-661 748-750 753-757",
+      "uncoveredLineCount": 31,
+      "estimatedTotalLines": 868,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/structure/extractors/t2.ts",
+      "line": 100,
+      "branch": 89.74,
+      "functions": 94.44,
+      "uncoveredLines": "",
+      "uncoveredLineCount": 0,
+      "estimatedTotalLines": null,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/structure/extractors/types.ts",
+      "line": 100,
+      "branch": 100,
+      "functions": 100,
+      "uncoveredLines": "",
+      "uncoveredLineCount": 0,
+      "estimatedTotalLines": null,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/surface/anchor-probe.ts",
+      "line": 89.09,
+      "branch": 73.33,
+      "functions": 86.84,
+      "uncoveredLines": "152-154 160-161 204-211 247-249 293-294 322-324 396-404 466-472 503-504 575-601 608-609 636 667-668 672-673 703-712 722-723",
+      "uncoveredLineCount": 85,
+      "estimatedTotalLines": 779,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/surface/cli.ts",
+      "line": 90.3,
+      "branch": 86.93,
+      "functions": 87.5,
+      "uncoveredLines": "159 171-181 321-333 335-347 356-357 378 380-382 433-434 469-470 529-542 646-647 668-673 865-866 926-927 939-940 959-960 964-965 980-993 1035-1036 1038-1043 1081 1090-1092",
+      "uncoveredLineCount": 106,
+      "estimatedTotalLines": 1093,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/surface/connect-ui.ts",
+      "line": 100,
+      "branch": 100,
+      "functions": 100,
+      "uncoveredLines": "",
+      "uncoveredLineCount": 0,
+      "estimatedTotalLines": null,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/surface/connect-ui/http.ts",
+      "line": 88.13,
+      "branch": 77.23,
+      "functions": 86.67,
+      "uncoveredLines": "85-89 104-105 112-113 119-120 145-147 153-154 255-257 268-282 289-290 323-325 330-332 340-342",
+      "uncoveredLineCount": 45,
+      "estimatedTotalLines": 379,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/surface/connect-ui/policy.ts",
+      "line": 97.78,
+      "branch": 93.75,
+      "functions": 88.89,
+      "uncoveredLines": "55-56",
+      "uncoveredLineCount": 2,
+      "estimatedTotalLines": 90,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/surface/connect-ui/render.ts",
+      "line": 97.9,
+      "branch": 86.75,
+      "functions": 100,
+      "uncoveredLines": "279-284",
+      "uncoveredLineCount": 6,
+      "estimatedTotalLines": 286,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/surface/connect-ui/server.ts",
+      "line": 93.67,
+      "branch": 86.67,
+      "functions": 77.78,
+      "uncoveredLines": "43-45 51-52",
+      "uncoveredLineCount": 5,
+      "estimatedTotalLines": 79,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/surface/connect-ui/doctor.ts",
+      "line": 99.45,
+      "branch": 90.8,
+      "functions": 100,
+      "uncoveredLines": "112",
+      "uncoveredLineCount": 1,
+      "estimatedTotalLines": 182,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/surface/connect-ui/export.ts",
+      "line": 96.05,
+      "branch": 100,
+      "functions": 50,
+      "uncoveredLines": "53-55",
+      "uncoveredLineCount": 3,
+      "estimatedTotalLines": 76,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/surface/connect-ui/mcp.ts",
+      "line": 97.5,
+      "branch": 93.55,
+      "functions": 100,
+      "uncoveredLines": "30-31 33-34",
+      "uncoveredLineCount": 4,
+      "estimatedTotalLines": 160,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/surface/connect-ui/memory.ts",
+      "line": 96.13,
+      "branch": 82.59,
+      "functions": 94.83,
+      "uncoveredLines": "390 392 533-534 602-603 655-657 668-669 720-721 787-788 854-855 858-859 861-862 864-865 867-868 913-914 918-919 950-951 987-988 1033-1034 1096-1097 1128-1133 1152-1153",
+      "uncoveredLineCount": 45,
+      "estimatedTotalLines": 1163,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/surface/connect-ui/readiness.ts",
+      "line": 97.82,
+      "branch": 84.62,
+      "functions": 96.67,
+      "uncoveredLines": "185-186 199-200 219-220 232-233 430-431",
+      "uncoveredLineCount": 10,
+      "estimatedTotalLines": 459,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/surface/connect-ui/service.ts",
+      "line": 95.31,
+      "branch": 71.91,
+      "functions": 96.39,
+      "uncoveredLines": "122-125 144-148 392-403 696-697 787-788 813-814 893-905 908-911 966-967 984-985 1015-1016 1046-1047 1071-1072 1096-1102 1169-1170 1345-1346 1374-1376 1398-1400 1449-1451 1778 1804-1805 1859-1861 1881-1882 1920-1922 1927-1928 1942-1943 1964-1965 1976-1977",
+      "uncoveredLineCount": 93,
+      "estimatedTotalLines": 1983,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/surface/connect-ui/tool-catalog.ts",
+      "line": 98.62,
+      "branch": 92.13,
+      "functions": 100,
+      "uncoveredLines": "233-234 275-276",
+      "uncoveredLineCount": 4,
+      "estimatedTotalLines": 290,
+      "estimatedUncoveredBranchPoints": null
+    },
+    {
+      "path": "src/surface/connect-ui/ui.ts",
+      "line": 98.04,
+      "branch": 93.22,
+      "functions": 94.44,
+      "uncoveredLines": "133-135",
+      "uncoveredLineCount": 3,
+      "estimatedTotalLines": 153,
+      "estimatedUncoveredBranchPoints": null
+    }
+  ],
+  "fourPureModuleGaps": [
+    {
+      "module": "tcp-frame-codec",
+      "path": "src/memory/tcp-frame-codec.ts",
+      "current": {
+        "line": 100,
+        "branch": 97.44,
+        "functions": 100
+      },
+      "target": {
+        "line": 100,
+        "branch": 100,
+        "functions": 100
+      },
+      "gap": {
+        "line": 0,
+        "branch": 2.56,
+        "functions": 0
+      },
+      "measuredUncoveredLines": [],
+      "gapItems": [
+        {
+          "id": "TFBC-B1",
+          "location": "src/memory/tcp-frame-codec.ts:176-177",
+          "semantics": "invalid(messageText, cause?) 的 cause 缺省/提供两分支",
+          "existingTest": "test/unit/tcp-frame-codec.test.ts（parsePayload 全部经 parseTcp*Payload，不传 cause）",
+          "gap": "cause !== undefined 分支未被执行；需补带 cause 的解析失败用例并断言 cause 透传。"
+        },
+        {
+          "id": "TFBC-B2",
+          "location": "src/memory/tcp-frame-codec.ts:185",
+          "semantics": "parsePayload 中 issue===undefined 回退文案分支",
+          "existingTest": "同上",
+          "gap": "zod 失败必有 issue，issue===undefined 侧不可达或未触发；需证明该回退不会吞掉真实 schema 违规（构造 safeParse 成功/失败边界）。"
+        },
+        {
+          "id": "TFBC-B3",
+          "location": "src/memory/tcp-frame-codec.ts:297",
+          "semantics": "decoder envelope 失败时 issue===undefined 回退分支",
+          "existingTest": "test/unit/tcp-frame-codec.test.ts:154-177",
+          "gap": "同 B2；需覆盖 union 解析失败且 issues 为空的路径或登记为防御性死分支并给出调用方证据。"
+        }
+      ],
+      "note": "行/函数已 100%；缺口集中在上述条件分支方向。行覆盖率不等于分支覆盖率，T-151 需发布逐分支分母与矩阵。"
+    },
+    {
+      "module": "probe-merge",
+      "path": "src/memory/probe-merge.ts",
+      "current": {
+        "line": 100,
+        "branch": 87.31,
+        "functions": 97.56
+      },
+      "target": {
+        "line": 100,
+        "branch": 100,
+        "functions": 100
+      },
+      "gap": {
+        "line": 0,
+        "branch": 12.69,
+        "functions": 2.44
+      },
+      "measuredUncoveredLines": [],
+      "gapItems": [
+        {
+          "id": "PM-B1",
+          "location": "src/memory/probe-merge.ts:169-175",
+          "semantics": "gatherCandidates 去重：existing 命中且 sources 含/不含当前 source 两分支",
+          "existingTest": "test/unit/distributed-probe.test.ts:399-457",
+          "gap": "跨副本重复来源合并方向需逐项断言（含同 source 重复与异 source 合并）。"
+        },
+        {
+          "id": "PM-B2",
+          "location": "src/memory/probe-merge.ts:191-201",
+          "semantics": "byPair 指纹聚合 existing 命中/未命中及 sources 合并",
+          "existingTest": "test/unit/distributed-probe.test.ts:399-427",
+          "gap": "需覆盖同 record_ref/content_hash 多 status/fact_key 的指纹聚合与排序并列。"
+        },
+        {
+          "id": "PM-B3",
+          "location": "src/memory/probe-merge.ts:216-249",
+          "semantics": "conflict 判定 hashes.length>1 与 statuses.length>1 独立两分支",
+          "existingTest": "distributed-probe.test.ts:427-498",
+          "gap": "需同时构造“仅 hash 冲突”“仅 status 冲突”“两者同时”三种输入并核对 conflict_id 顺序。"
+        },
+        {
+          "id": "PM-B4",
+          "location": "src/memory/probe-merge.ts:269-297",
+          "semantics": "commitConflicts 的 commits.length>1 / epochs.length>1 两分支",
+          "existingTest": "distributed-probe.test.ts:458-528",
+          "gap": "需分别触发 commit 分歧与 cluster_epoch 分歧并验证冲突合并顺序。"
+        },
+        {
+          "id": "PM-B5",
+          "location": "src/memory/probe-merge.ts:306-314",
+          "semantics": "dedupeEdges 命中跳过与排序比较器 4 段 tie-break",
+          "existingTest": "distributed-probe.test.ts:846-878",
+          "gap": "需覆盖重复边与 from/to/kind/provenance 全并列的确定性排序。"
+        },
+        {
+          "id": "PM-B6",
+          "location": "src/memory/probe-merge.ts:323,558",
+          "semantics": "digestCandidates/digestOrEmpty 中 fact_key===null 的条件展开两分支",
+          "existingTest": "distributed-probe.test.ts 多个用例",
+          "gap": "需覆盖 null 与非 null fact_key 的摘要输入形状差异并断言摘要稳定。"
+        },
+        {
+          "id": "PM-B7",
+          "location": "src/memory/probe-merge.ts:329-334",
+          "semantics": "matchesEntryQuery 四个提前返回与最终 true",
+          "existingTest": "由 distributed-probe 查询路径间接覆盖",
+          "gap": "作为纯函数需逐字段正反向用例（fact_key/task_id/file/symbol 各匹配与不匹配）。"
+        },
+        {
+          "id": "PM-B8",
+          "location": "src/memory/probe-merge.ts:341-345",
+          "semantics": "consistencyFromResponse 四分支",
+          "existingTest": "间接覆盖",
+          "gap": "FAILED / COMPLETE / UNKNOWN / PARTIAL 四输入需显式矩阵。"
+        },
+        {
+          "id": "PM-B9",
+          "location": "src/memory/probe-merge.ts:378-438",
+          "semantics": "assembleAnswer 的 requested===0、partialFlag 六个 OR、outcome 四联三元、三个可选展开",
+          "existingTest": "distributed-probe.test.ts 多模式用例",
+          "gap": "需逐个构造使每个 OR 项单独为真/假，并覆盖 commitIndex/primaryCommitIndex/degradationReason 缺省与存在。"
+        },
+        {
+          "id": "PM-B10",
+          "location": "src/memory/probe-merge.ts:440-496",
+          "semantics": "nodeReports 的 NOT_QUERIED/OK/failed 三分支及 usedIds 命中",
+          "existingTest": "distributed-probe.test.ts:703-737",
+          "gap": "需覆盖未查询节点、成功节点 used=true/false、失败节点 detail/latency。"
+        },
+        {
+          "id": "PM-B11",
+          "location": "src/memory/probe-merge.ts:497-527",
+          "semantics": "cancelledResponse 的 snapshot??fallback、required??[]、requirements_origin 三元",
+          "existingTest": "distributed-probe.test.ts:343-398",
+          "gap": "需覆盖传入 null snapshot、空/非空 required_facts。"
+        },
+        {
+          "id": "PM-B12",
+          "location": "src/memory/probe-merge.ts:533-566",
+          "semantics": "safeFingerprints 首次插入与 digestOrEmpty 的 try/catch 回退",
+          "existingTest": "distributed-probe.test.ts",
+          "gap": "digestOrEmpty catch 需构造会抛错的指纹输入（当前未见触发）；否则登记防御分支。"
+        },
+        {
+          "id": "PM-B13",
+          "location": "src/memory/probe-merge.ts:573-604",
+          "semantics": "injectDistributedConflicts 空冲突、known 命中跳过、record_ref=null+nodes 空/非空、fact_key 三级回退、additions 为空、unresolved 去重、SUFFICIENT→INSUFFICIENT",
+          "existingTest": "distributed-probe.test.ts:500-528",
+          "gap": "安全关键：每个分支需正反向断言，尤其 SUFFICIENT 不得在有未解决冲突时保留。"
+        }
+      ],
+      "functionGap": "functions 97.56% 表明至少一个函数/回调从未执行；T-151 需用 coverage 报告定位具体函数名后补测或证明其为不可达回调。"
+    },
+    {
+      "module": "leader-state",
+      "path": "src/memory/leader-state.ts",
+      "current": {
+        "line": 100,
+        "branch": 96.23,
+        "functions": 100
+      },
+      "target": {
+        "line": 100,
+        "branch": 100,
+        "functions": 100
+      },
+      "gap": {
+        "line": 0,
+        "branch": 3.77,
+        "functions": 0
+      },
+      "measuredUncoveredLines": [],
+      "gapItems": [
+        {
+          "id": "LS-B1",
+          "location": "src/memory/leader-state.ts:35-39",
+          "semantics": "parseOrThrow 中 issue===undefined 的 path/text 两处回退",
+          "existingTest": "test/unit/leader-lease.test.ts（经 leader-lease 校验间接触发）",
+          "gap": "zod 失败通常有 issue；需证明回退分支行为或登记防御。"
+        },
+        {
+          "id": "LS-B2",
+          "location": "src/memory/leader-state.ts:44-49",
+          "semantics": "positiveInt 的 value===undefined 回退与非法拒绝两分支",
+          "existingTest": "ha-cluster/leader-lease 配置用例",
+          "gap": "需直接对 leader-state re-export 的 positiveInt 或经 LeaderLeaseManager 覆盖默认值与非法值。"
+        },
+        {
+          "id": "LS-B3",
+          "location": "src/memory/leader-state.ts:62-83",
+          "semantics": "validateTopology 的数组/空、member schema 失败、duplicate member、catch 中 HaProtocolError 再抛与非 HaProtocolError 包装",
+          "existingTest": "test/unit/leader-lease.test.ts:563-630",
+          "gap": "需逐分支断言错误码 TOPOLOGY_INVALID 与消息；尤其 catch 的 instanceof 两侧。"
+        },
+        {
+          "id": "LS-B4",
+          "location": "src/memory/leader-state.ts:86-114",
+          "semantics": "validateVoters 的 six 个校验分支（非数组/null/self/非投票成员/重复/数量不符）",
+          "existingTest": "leader-lease.test.ts:563-630",
+          "gap": "需确认六分支全部命中；当前 96.23% 提示至少一个方向缺失。"
+        },
+        {
+          "id": "LS-B5",
+          "location": "src/memory/leader-state.ts:121-128",
+          "semantics": "compareDeclarations/compareCommitRecords 的等值 tie 与 hash 大小两分支",
+          "existingTest": "leader-lease.test.ts:325-347",
+          "gap": "需覆盖 epoch/term 相同且 leader_id 相同（返回 0）与 ledger_event_hash 相等（compareCommitRecords 返回 1）的并列输入。"
+        },
+        {
+          "id": "LS-B6",
+          "location": "src/memory/leader-state.ts:144-151",
+          "semantics": "assertSingleLeader conflicts.length>0 抛 SPLIT_BRAIN",
+          "existingTest": "leader-lease.test.ts:325-347; ha-protocol.test.ts:194-235",
+          "gap": "正反向已覆盖；剩余缺口应在 B1-B5，需逐分支分母确认。"
+        }
+      ]
+    },
+    {
+      "module": "logical-clock",
+      "path": "src/memory/logical-clock.ts",
+      "current": {
+        "line": 96.22,
+        "branch": 91.8,
+        "functions": 90.91
+      },
+      "target": {
+        "line": 100,
+        "branch": 100,
+        "functions": 100
+      },
+      "gap": {
+        "line": 3.78,
+        "branch": 8.2,
+        "functions": 9.09
+      },
+      "measuredUncoveredLines": [
+        "132-133",
+        "138-139",
+        "171-172",
+        "179-180",
+        "191-192",
+        "195-196",
+        "277-278"
+      ],
+      "gapItems": [
+        {
+          "id": "LC-L1",
+          "location": "src/memory/logical-clock.ts:132-133",
+          "semantics": "parseRemoteSnapshot 拒绝 null/非对象/数组",
+          "existingTest": "test/unit/logical-clock.test.ts:356-364（只测 physical=Infinity）",
+          "gap": "远端快照类型守卫完全未触发；补 observe(null)/observe([])/observe(42) 并断言 HA_INPUT_INVALID。"
+        },
+        {
+          "id": "LC-L2",
+          "location": "src/memory/logical-clock.ts:138-139",
+          "semantics": "remote.nodeId 非字符串或空串拒绝",
+          "existingTest": "logical-clock.test.ts 无",
+          "gap": "补 nodeId 缺失/空/非字符串反例。"
+        },
+        {
+          "id": "LC-L3",
+          "location": "src/memory/logical-clock.ts:171-172",
+          "semantics": "构造参数 options 为 null/非对象/数组拒绝",
+          "existingTest": "logical-clock.test.ts:356-364 未覆盖",
+          "gap": "补 new LogicalClockService(null as never) 等反例。"
+        },
+        {
+          "id": "LC-L4",
+          "location": "src/memory/logical-clock.ts:179-180",
+          "semantics": "epoch 为负拒绝",
+          "existingTest": "logical-clock.test.ts 未覆盖负 epoch",
+          "gap": "补 epoch=-1 断言 HA_INPUT_INVALID。"
+        },
+        {
+          "id": "LC-L5",
+          "location": "src/memory/logical-clock.ts:191-192,195-196",
+          "semantics": "nodeId/epoch getter",
+          "existingTest": "现有用例未读取这两个 getter",
+          "gap": "补 getter 读取并断言与构造值一致（policy/snapshot 已覆盖）。"
+        },
+        {
+          "id": "LC-L6",
+          "location": "src/memory/logical-clock.ts:277-278",
+          "semantics": "#incrementLogical 在 logical 达到 MAX_SAFE_INTEGER 时抛错",
+          "existingTest": "无",
+          "gap": "需注入 now 序列使 logical 逼近上限或直接构造；若不可达需给出不变量证明并登记防御分支。"
+        }
+      ],
+      "note": "行/分支/函数三指标均有缺口；除上列未覆盖行外，tick/observe 的条件方向与 diagnose/diagnostics 的副本语义需逐分支矩阵确认。"
+    }
+  ],
+  "securityCriticalBranches": [
+    {
+      "domain": "quorum（多数派）",
+      "modules": [
+        {
+          "location": "src/memory/ha-protocol.ts:519-528,548-566",
+          "branch": "quorumSize=floor(N/2)+1；isQuorum 多数通过/少数拒绝；assertQuorum 少数抛 QUORUM_NOT_REACHED",
+          "coverage": {
+            "path": "src/memory/ha-protocol.ts",
+            "line": 96.69,
+            "branch": 89.53,
+            "functions": 98.36,
+            "uncoveredLines": "375-376 380-381 384-385 389-390 404 416-417 443-444 448-449 552-553 585-586 592-593 626-627 728-729 747-748 794-795 918-919 985-986 994-996",
+            "uncoveredLineCount": 36,
+            "estimatedTotalLines": 1088,
+            "estimatedUncoveredBranchPoints": null
+          },
+          "tests": "test/unit/ha-protocol.test.ts:131-160",
+          "gap": "已覆盖；未覆盖行 552-553 为 votes 越界输入校验，需补 QUORUM_INPUT_INVALID 反例。"
+        },
+        {
+          "location": "src/memory/ha-protocol.ts:575-598",
+          "branch": "evaluatePartitions：分区数组/尺寸非法校验；2-2 无提交派；commit/block 分类排序",
+          "coverage": {
+            "path": "src/memory/ha-protocol.ts",
+            "line": 96.69,
+            "branch": 89.53,
+            "functions": 98.36,
+            "uncoveredLines": "375-376 380-381 384-385 389-390 404 416-417 443-444 448-449 552-553 585-586 592-593 626-627 728-729 747-748 794-795 918-919 985-986 994-996",
+            "uncoveredLineCount": 36,
+            "estimatedTotalLines": 1088,
+            "estimatedUncoveredBranchPoints": null
+          },
+          "tests": "ha-protocol.test.ts:143-160",
+          "gap": "未覆盖行 585-586（partitionSizes 非数组）、592-593（分区尺寸非法）需补。"
+        },
+        {
+          "location": "src/memory/distributed-probe.ts:920,1039-1082",
+          "branch": "QUORUM 分组、>=ceil((N+1)/2) 才采纳、不足额显式降级 COMMITTED/LOCAL",
+          "coverage": {
+            "path": "src/memory/distributed-probe.ts",
+            "line": 93.07,
+            "branch": 94.81,
+            "functions": 84.48,
+            "uncoveredLines": "423 427-440 443-455 458-468 471-472 475-476 544-546 557-558 684-686 1088-1117",
+            "uncoveredLineCount": 81,
+            "estimatedTotalLines": 1169,
+            "estimatedUncoveredBranchPoints": null
+          },
+          "tests": "test/unit/distributed-probe.test.ts:567-590,455-497,1058-1075",
+          "gap": "主路径已覆盖；需补“恰好等于阈值”“多组同 commit 不同 digest”“best.commitIndex<primary”边界。"
+        },
+        {
+          "location": "src/memory/cluster-consistency.ts:395-414",
+          "branch": "QUORUM 判定：mode、primary 未知、quorum_size 非法、count<size、digests 空/多于一、commit>primary",
+          "coverage": {
+            "path": "src/memory/cluster-consistency.ts",
+            "line": 98.09,
+            "branch": 89.29,
+            "functions": 92.31,
+            "uncoveredLines": "286-287 334-335 397-398 401 413-414",
+            "uncoveredLineCount": 9,
+            "estimatedTotalLines": 471,
+            "estimatedUncoveredBranchPoints": null
+          },
+          "tests": "test/unit/cluster-consistency.test.ts:385-496",
+          "gap": "实测未覆盖 397-398（primary 未知）、401（size 非法）、413-414（commit>primary）——必须补反例，属安全不变量。"
+        },
+        {
+          "location": "src/memory/leader-lease.ts:660-780",
+          "branch": "续约需心跳多数派；低于多数立即退位",
+          "coverage": {
+            "path": "src/memory/leader-lease.ts",
+            "line": 100,
+            "branch": 93.87,
+            "functions": 98.7,
+            "uncoveredLines": "",
+            "uncoveredLineCount": 0,
+            "estimatedTotalLines": null,
+            "estimatedUncoveredBranchPoints": null
+          },
+          "tests": "leader-lease.test.ts:419-465,772-785",
+          "gap": "行 100%，但需按分支分母确认“自计一票 + 远程 ack 组合”的全部分支。"
+        },
+        {
+          "location": "src/memory/ha-cluster.ts:1270-1335",
+          "branch": "propose 收集投票，低于 quorum 抛 QUORUM_NOT_REACHED；proposer 自加一票",
+          "coverage": {
+            "path": "src/memory/ha-cluster.ts",
+            "line": 97.97,
+            "branch": 86.95,
+            "functions": 97.66,
+            "uncoveredLines": "416-418 451-453 506-507 580-581 607-610 616-617 647-650 665-668 760-761 985 1243-1244 1554-1555 1561-1562 1650-1651",
+            "uncoveredLineCount": 35,
+            "estimatedTotalLines": 1724,
+            "estimatedUncoveredBranchPoints": null
+          },
+          "tests": "test/integration/ha-split-brain.test.ts; redteam/ha-split-brain-boundary.test.ts",
+          "gap": "未覆盖 1243-1244 见 fencing；其余需分母核对。"
+        }
+      ]
+    },
+    {
+      "domain": "epoch（纪元单调）",
+      "modules": [
+        {
+          "location": "src/memory/leader-lease.ts:623-629",
+          "branch": "候选 epoch 回退当前 epoch 拒绝；term 回退拒绝",
+          "coverage": {
+            "path": "src/memory/leader-lease.ts",
+            "line": 100,
+            "branch": 93.87,
+            "functions": 98.7,
+            "uncoveredLines": "",
+            "uncoveredLineCount": 0,
+            "estimatedTotalLines": null,
+            "estimatedUncoveredBranchPoints": null
+          },
+          "tests": "leader-lease.test.ts:285-323,678-705",
+          "gap": "已覆盖；分支分母待确认。"
+        },
+        {
+          "location": "src/memory/multi-writer.ts:754-767",
+          "branch": "#assertFence：leader 非空时 evaluateFence；leader 空且 epoch<maxEpoch 抛 FENCE_EPOCH_ROLLBACK",
+          "coverage": {
+            "path": "src/memory/multi-writer.ts",
+            "line": 96.2,
+            "branch": 89.17,
+            "functions": 93.94,
+            "uncoveredLines": "293-294 408-409 513-514 524-525 618-619 623-624 627-628 631-632 661-667 759-760 772-777",
+            "uncoveredLineCount": 31,
+            "estimatedTotalLines": 816,
+            "estimatedUncoveredBranchPoints": null
+          },
+          "tests": "multi-writer.test.ts:323-353",
+          "gap": "实测未覆盖 759-760（epoch 回滚拒绝）——必须补反例。"
+        },
+        {
+          "location": "src/memory/distributed-probe.ts:516-526,563-574",
+          "branch": "握手 epoch 不匹配 CLUSTER_EPOCH_MISMATCH；响应 epoch 覆盖声明后再校验",
+          "coverage": {
+            "path": "src/memory/distributed-probe.ts",
+            "line": 93.07,
+            "branch": 94.81,
+            "functions": 84.48,
+            "uncoveredLines": "423 427-440 443-455 458-468 471-472 475-476 544-546 557-558 684-686 1088-1117",
+            "uncoveredLineCount": 81,
+            "estimatedTotalLines": 1169,
+            "estimatedUncoveredBranchPoints": null
+          },
+          "tests": "redteam/distributed-probe-boundary.test.ts; replica-chaos.test.ts; unit/memory-probe-contract.test.ts",
+          "gap": "已覆盖；需保留“先握手后应答”的双向反例。"
+        },
+        {
+          "location": "src/memory/probe-merge.ts:283-297",
+          "branch": "commitConflicts：cluster_epoch 分歧生成未解决冲突",
+          "coverage": {
+            "path": "src/memory/probe-merge.ts",
+            "line": 100,
+            "branch": 87.31,
+            "functions": 97.56,
+            "uncoveredLines": "",
+            "uncoveredLineCount": 0,
+            "estimatedTotalLines": null,
+            "estimatedUncoveredBranchPoints": null
+          },
+          "tests": "distributed-probe.test.ts:458-476",
+          "gap": "已覆盖；补多 epoch 混合与单 epoch 对照。"
+        },
+        {
+          "location": "src/memory/ha-cluster.ts:1256-1264",
+          "branch": "write epoch/term 超前持有租约时 FENCE_REJECTED",
+          "coverage": {
+            "path": "src/memory/ha-cluster.ts",
+            "line": 97.97,
+            "branch": 86.95,
+            "functions": 97.66,
+            "uncoveredLines": "416-418 451-453 506-507 580-581 607-610 616-617 647-650 665-668 760-761 985 1243-1244 1554-1555 1561-1562 1650-1651",
+            "uncoveredLineCount": 35,
+            "estimatedTotalLines": 1724,
+            "estimatedUncoveredBranchPoints": null
+          },
+          "tests": "ha-split-brain-boundary.test.ts",
+          "gap": "未覆盖 1243-1244（无租约提议）与 1257-1264 方向需补。"
+        }
+      ]
+    },
+    {
+      "domain": "fencing（任期防旧主）",
+      "modules": [
+        {
+          "location": "src/memory/ha-protocol.ts:620-640",
+          "branch": "evaluateFence：非法租约 FENCE_INVALID；未知 epoch FENCE_UNKNOWN_EPOCH；stale term/epoch 拒绝",
+          "coverage": {
+            "path": "src/memory/ha-protocol.ts",
+            "line": 96.69,
+            "branch": 89.53,
+            "functions": 98.36,
+            "uncoveredLines": "375-376 380-381 384-385 389-390 404 416-417 443-444 448-449 552-553 585-586 592-593 626-627 728-729 747-748 794-795 918-919 985-986 994-996",
+            "uncoveredLineCount": 36,
+            "estimatedTotalLines": 1088,
+            "estimatedUncoveredBranchPoints": null
+          },
+          "tests": "ha-protocol.test.ts:181-220",
+          "gap": "实测未覆盖 626-627（knownEpochs 不含 candidate epoch）——补反例。"
+        },
+        {
+          "location": "src/memory/leader-lease.ts:620-646",
+          "branch": "handleVoteRequest：自投票幂等、旧 epoch/旧 term 拒绝、同 term 对手拒绝、更新 term/epoch",
+          "coverage": {
+            "path": "src/memory/leader-lease.ts",
+            "line": 100,
+            "branch": 93.87,
+            "functions": 98.7,
+            "uncoveredLines": "",
+            "uncoveredLineCount": 0,
+            "estimatedTotalLines": null,
+            "estimatedUncoveredBranchPoints": null
+          },
+          "tests": "leader-lease.test.ts:678-705,285-323",
+          "gap": "行 100%，分支方向需矩阵确认。"
+        },
+        {
+          "location": "src/memory/leader-state.ts:121-151",
+          "branch": "compareDeclarations 排序键与 assertSingleLeader SPLIT_BRAIN",
+          "coverage": {
+            "path": "src/memory/leader-state.ts",
+            "line": 100,
+            "branch": 96.23,
+            "functions": 100,
+            "uncoveredLines": "",
+            "uncoveredLineCount": 0,
+            "estimatedTotalLines": null,
+            "estimatedUncoveredBranchPoints": null
+          },
+          "tests": "leader-lease.test.ts:325-347; ha-protocol.test.ts:194-235",
+          "gap": "tie 分支需补（见 LS-B5）。"
+        },
+        {
+          "location": "src/memory/multi-writer.ts:614-640,765-767",
+          "branch": "adjudicate 校验已提交分支/branch_id 派生/identity 匹配/selected 属于保留分支；#advanceFence 只在允许时替换租约",
+          "coverage": {
+            "path": "src/memory/multi-writer.ts",
+            "line": 96.2,
+            "branch": 89.17,
+            "functions": 93.94,
+            "uncoveredLines": "293-294 408-409 513-514 524-525 618-619 623-624 627-628 631-632 661-667 759-760 772-777",
+            "uncoveredLineCount": 31,
+            "estimatedTotalLines": 816,
+            "estimatedUncoveredBranchPoints": null
+          },
+          "tests": "multi-writer.test.ts:295-353",
+          "gap": "实测未覆盖 618-619（无已提交分支）、623-624（branch_id 不匹配）、627-628（identity 不匹配）、631-632（selected 不在保留集）——全部为安全反例，必须补。"
+        },
+        {
+          "location": "src/memory/ha-cluster.ts:1248,1256-1264,1397-1409",
+          "branch": "无租约不得 propose；epoch/term 超前拒绝；同 (epoch,term) 对手声明拒绝",
+          "coverage": {
+            "path": "src/memory/ha-cluster.ts",
+            "line": 97.97,
+            "branch": 86.95,
+            "functions": 97.66,
+            "uncoveredLines": "416-418 451-453 506-507 580-581 607-610 616-617 647-650 665-668 760-761 985 1243-1244 1554-1555 1561-1562 1650-1651",
+            "uncoveredLineCount": 35,
+            "estimatedTotalLines": 1724,
+            "estimatedUncoveredBranchPoints": null
+          },
+          "tests": "ha-split-brain-boundary.test.ts",
+          "gap": "未覆盖 1243-1244、1405-1406（rival leader）需补。"
+        }
+      ]
+    },
+    {
+      "domain": "scope / 跨项目访问",
+      "modules": [
+        {
+          "location": "src/memory/distributed-probe.ts:507-515",
+          "branch": "scope 路由在任何查询前；外来 scope 副本直接 SCOPE_DENIED 且不查询",
+          "coverage": {
+            "path": "src/memory/distributed-probe.ts",
+            "line": 93.07,
+            "branch": 94.81,
+            "functions": 84.48,
+            "uncoveredLines": "423 427-440 443-455 458-468 471-472 475-476 544-546 557-558 684-686 1088-1117",
+            "uncoveredLineCount": 81,
+            "estimatedTotalLines": 1169,
+            "estimatedUncoveredBranchPoints": null
+          },
+          "tests": "distributed-probe.test.ts:678-702",
+          "gap": "已覆盖正向/反向；需补 snapshot.cluster 与 snapshot.project_scope 两个 fallback 来源。"
+        },
+        {
+          "location": "src/memory/probe-manifest.ts:552-574,776-783",
+          "branch": "freeze 时 cluster.project_scope 必须匹配请求/snapshot；read 时 root/scope 不符返回 cross_scope",
+          "coverage": {
+            "path": "src/memory/probe-manifest.ts",
+            "line": 96.76,
+            "branch": 89.87,
+            "functions": 100,
+            "uncoveredLines": "232-233 365-366 495-496 535-536 664-665 688-695 711-712 735-736 746-747 771-772 774-775",
+            "uncoveredLineCount": 28,
+            "estimatedTotalLines": 864,
+            "estimatedUncoveredBranchPoints": null
+          },
+          "tests": "probe-manifest.test.ts:478-575; cli.test.ts",
+          "gap": "实测未覆盖 771-772,774-775（cross_scope 相关分支）——补读路径反例。"
+        },
+        {
+          "location": "src/memory/context-verify.ts:557-572",
+          "branch": "draft project_scope 与 manifest 不符、重采样 snapshot scope 不符均违规",
+          "coverage": {
+            "path": "src/memory/context-verify.ts",
+            "line": 98.79,
+            "branch": 92.03,
+            "functions": 100,
+            "uncoveredLines": "210-211 216-217 412 458-459 491-492",
+            "uncoveredLineCount": 9,
+            "estimatedTotalLines": 744,
+            "estimatedUncoveredBranchPoints": null
+          },
+          "tests": "context-verify.test.ts:204-216,351-379",
+          "gap": "行 98.79；未覆盖 458-459,491-492 需归因并补。"
+        },
+        {
+          "location": "src/memory/consumer.ts:804-817",
+          "branch": "active manifest scope 与 response snapshot scope 必须一致，否则不得视为同一上下文",
+          "coverage": {
+            "path": "src/memory/consumer.ts",
+            "line": 93.23,
+            "branch": 82.29,
+            "functions": 96,
+            "uncoveredLines": "538-539 549-550 563-570 576-577 595-596 643-644 654-655 669-670 695-697 699-701 739-740 743-744 747-748 750-751 753-754 768-769 785-786 795-796 804-805 807-808 810-811 813-814 816-817 850-853",
+            "uncoveredLineCount": 58,
+            "estimatedTotalLines": 857,
+            "estimatedUncoveredBranchPoints": null
+          },
+          "tests": "unit/memory-consumer.test.ts; integration/memory-revision.test.ts",
+          "gap": "实测 804-817 整段未覆盖——跨 scope 消费路径缺口，需补。"
+        },
+        {
+          "location": "src/memory/cluster-policy.ts:300-360",
+          "branch": "authorize：replica 撤销优先于 scope；projectScope 不在 allowedScopes 拒绝；无策略/allow-list 时 fail-closed",
+          "coverage": {
+            "path": "src/memory/cluster-policy.ts",
+            "line": 92.27,
+            "branch": 81.73,
+            "functions": 97.1,
+            "uncoveredLines": "208-209 229-230 236-237 239-240 319-320 377-378 440-448 465 618-626 650-658 668-676 755-756 758-762 794-795 845-846 852-853 860-869 910-911 921-922 978-979 992-993 1043-1044 1135-1136 1140 1148-1149 1151-1152 1163",
+            "uncoveredLineCount": 90,
+            "estimatedTotalLines": 1164,
+            "estimatedUncoveredBranchPoints": null
+          },
+          "tests": "cluster-policy.test.ts:143-194",
+          "gap": "实测 319-320,377-378 未覆盖；需核对是否授权分支。"
+        },
+        {
+          "location": "src/memory/tcp-frame-codec.ts:151,163",
+          "branch": "apply/status 的 projectScope 可选有界字段",
+          "coverage": {
+            "path": "src/memory/tcp-frame-codec.ts",
+            "line": 100,
+            "branch": 97.44,
+            "functions": 100,
+            "uncoveredLines": "",
+            "uncoveredLineCount": 0,
+            "estimatedTotalLines": null,
+            "estimatedUncoveredBranchPoints": null
+          },
+          "tests": "tcp-frame-codec.test.ts",
+          "gap": "schema 可选字段两方向需断言。"
+        },
+        {
+          "location": "src/memory/replica-worker.ts:376-380",
+          "branch": "RW-SCOPE-DENIED：apply 事件 scope 越权拒绝",
+          "coverage": {
+            "path": "src/memory/replica-worker.ts",
+            "line": 99.38,
+            "branch": 88.83,
+            "functions": 100,
+            "uncoveredLines": "238-239 541-542",
+            "uncoveredLineCount": 4,
+            "estimatedTotalLines": 645,
+            "estimatedUncoveredBranchPoints": null
+          },
+          "tests": "test/unit/replica-worker-protocol.test.ts",
+          "gap": "未覆盖 238-239 当前为数组边界；scope 拒绝分支已在 M17 覆盖，需复核。"
+        }
+      ]
+    },
+    {
+      "domain": "伪造证据 / 摘要重算",
+      "modules": [
+        {
+          "location": "src/memory/distributed-probe.ts:606-643",
+          "branch": "候选摘要必须由 digestCandidates 重算；declared digest 不符 VIEW_DIGEST_MISMATCH；commit_index 未知拒绝；REVOKED/FAILED/SUSPECT/JOINING 不可服务",
+          "coverage": {
+            "path": "src/memory/distributed-probe.ts",
+            "line": 93.07,
+            "branch": 94.81,
+            "functions": 84.48,
+            "uncoveredLines": "423 427-440 443-455 458-468 471-472 475-476 544-546 557-558 684-686 1088-1117",
+            "uncoveredLineCount": 81,
+            "estimatedTotalLines": 1169,
+            "estimatedUncoveredBranchPoints": null
+          },
+          "tests": "distributed-probe.test.ts:550-566,967-1008; boundary.test.ts",
+          "gap": "已覆盖；未覆盖 684-686 属 scatterNodes 预取消，见下。"
+        },
+        {
+          "location": "src/memory/probe-merge.ts:573-604",
+          "branch": "injectDistributedConflicts：未解决冲突不得让 coverage_gate 保持 SUFFICIENT",
+          "coverage": {
+            "path": "src/memory/probe-merge.ts",
+            "line": 100,
+            "branch": 87.31,
+            "functions": 97.56,
+            "uncoveredLines": "",
+            "uncoveredLineCount": 0,
+            "estimatedTotalLines": null,
+            "estimatedUncoveredBranchPoints": null
+          },
+          "tests": "distributed-probe.test.ts:500-528",
+          "gap": "安全关键分支逐条补（PM-B13）。"
+        },
+        {
+          "location": "src/memory/ha-protocol.ts:1013-1031",
+          "branch": "gateEvidenceIssue/assertGateBoundary：committed 必须 evidence_id+produces_gate_evidence；uncommitted/conflicted 不得携带",
+          "coverage": {
+            "path": "src/memory/ha-protocol.ts",
+            "line": 96.69,
+            "branch": 89.53,
+            "functions": 98.36,
+            "uncoveredLines": "375-376 380-381 384-385 389-390 404 416-417 443-444 448-449 552-553 585-586 592-593 626-627 728-729 747-748 794-795 918-919 985-986 994-996",
+            "uncoveredLineCount": 36,
+            "estimatedTotalLines": 1088,
+            "estimatedUncoveredBranchPoints": null
+          },
+          "tests": "ha-protocol.test.ts:457-484; multi-writer.test.ts:354-392",
+          "gap": "行 96.69；需按投影状态四态补全正反例。"
+        },
+        {
+          "location": "src/memory/multi-writer.ts:370-390,520-528",
+          "branch": "投影状态结构校验 + PROJECTION_GATE_FORBIDDEN；append 的 commitIndex 非负整数与 status 推导",
+          "coverage": {
+            "path": "src/memory/multi-writer.ts",
+            "line": 96.2,
+            "branch": 89.17,
+            "functions": 93.94,
+            "uncoveredLines": "293-294 408-409 513-514 524-525 618-619 623-624 627-628 631-632 661-667 759-760 772-777",
+            "uncoveredLineCount": 31,
+            "estimatedTotalLines": 816,
+            "estimatedUncoveredBranchPoints": null
+          },
+          "tests": "multi-writer.test.ts:354-392;119-150",
+          "gap": "实测未覆盖 408-409,513-514,524-525——补结构非法与 commitIndex 非法反例。"
+        },
+        {
+          "location": "src/memory/cluster-consistency.ts:286-287",
+          "branch": "answer.metadata.mode/requested_mode 非法时 TypeError fail-fast",
+          "coverage": {
+            "path": "src/memory/cluster-consistency.ts",
+            "line": 98.09,
+            "branch": 89.29,
+            "functions": 92.31,
+            "uncoveredLines": "286-287 334-335 397-398 401 413-414",
+            "uncoveredLineCount": 9,
+            "estimatedTotalLines": 471,
+            "estimatedUncoveredBranchPoints": null
+          },
+          "tests": "cluster-consistency.test.ts:662-668",
+          "gap": "实测 286-287 未覆盖——补畸形 mode 反例。"
+        }
+      ]
+    },
+    {
+      "domain": "未提交分支 / 历史证据不得进入当前 Gate",
+      "modules": [
+        {
+          "location": "src/memory/ha-protocol.ts:57-58,1013-1031",
+          "branch": "MWHA_UNCOMMITTED_COMMIT_INDEX=0；gateEvidenceIssue 拒绝非 committed 状态携带 evidence_id/Gate 证据",
+          "coverage": {
+            "path": "src/memory/ha-protocol.ts",
+            "line": 96.69,
+            "branch": 89.53,
+            "functions": 98.36,
+            "uncoveredLines": "375-376 380-381 384-385 389-390 404 416-417 443-444 448-449 552-553 585-586 592-593 626-627 728-729 747-748 794-795 918-919 985-986 994-996",
+            "uncoveredLineCount": 36,
+            "estimatedTotalLines": 1088,
+            "estimatedUncoveredBranchPoints": null
+          },
+          "tests": "ha-protocol.test.ts:457-484; multi-writer.test.ts:354",
+          "gap": "安全不变量主路径已覆盖；逐状态分母待补。"
+        },
+        {
+          "location": "src/memory/multi-writer.ts:370-390",
+          "branch": "uncommitted/conflicted 状态 evidence_id=null、produces_gate_evidence=false",
+          "coverage": {
+            "path": "src/memory/multi-writer.ts",
+            "line": 96.2,
+            "branch": 89.17,
+            "functions": 93.94,
+            "uncoveredLines": "293-294 408-409 513-514 524-525 618-619 623-624 627-628 631-632 661-667 759-760 772-777",
+            "uncoveredLineCount": 31,
+            "estimatedTotalLines": 816,
+            "estimatedUncoveredBranchPoints": null
+          },
+          "tests": "multi-writer.test.ts:354-392",
+          "gap": "见 408-409 结构校验未覆盖。"
+        },
+        {
+          "location": "src/memory/cluster-consistency.ts:325-329,354-369",
+          "branch": "非 AS_OF 请求产出 historical 证据 HISTORICAL_NOT_EXECUTABLE；currentExecution 拒绝 historical/stale；AS_OF 必须标记 historical",
+          "coverage": {
+            "path": "src/memory/cluster-consistency.ts",
+            "line": 98.09,
+            "branch": 89.29,
+            "functions": 92.31,
+            "uncoveredLines": "286-287 334-335 397-398 401 413-414",
+            "uncoveredLineCount": 9,
+            "estimatedTotalLines": 471,
+            "estimatedUncoveredBranchPoints": null
+          },
+          "tests": "cluster-consistency.test.ts:285-306,628-660",
+          "gap": "实测 334-335 未覆盖（currentExecution 组合）——必须补。"
+        },
+        {
+          "location": "src/memory/distributed-probe.ts:1088-1117",
+          "branch": "取消应答整段：CANCELLED 且 consistency UNKNOWN、不得采纳迟到的节点结果",
+          "coverage": {
+            "path": "src/memory/distributed-probe.ts",
+            "line": 93.07,
+            "branch": 94.81,
+            "functions": 84.48,
+            "uncoveredLines": "423 427-440 443-455 458-468 471-472 475-476 544-546 557-558 684-686 1088-1117",
+            "uncoveredLineCount": 81,
+            "estimatedTotalLines": 1169,
+            "estimatedUncoveredBranchPoints": null
+          },
+          "tests": "distributed-probe.test.ts:343-398,905-966",
+          "gap": "实测 1088-1117 未覆盖（取消应答组装），需补并断言不得进入当前证据链。"
+        },
+        {
+          "location": "src/gate/verify.ts:221-233; src/gate/evidence.ts:84-86",
+          "branch": "图 freshness：stale/degraded 不得支持完成；证据记录计数与 skip 语义",
+          "coverage": {
+            "verify": {
+              "path": "src/gate/verify.ts",
+              "line": 100,
+              "branch": 81.15,
+              "functions": 93.94,
+              "uncoveredLines": "",
+              "uncoveredLineCount": 0,
+              "estimatedTotalLines": null,
+              "estimatedUncoveredBranchPoints": null
+            },
+            "evidence": {
+              "path": "src/gate/evidence.ts",
+              "line": 97.69,
+              "branch": 93.48,
+              "functions": 92.31,
+              "uncoveredLines": "84-86",
+              "uncoveredLineCount": 3,
+              "estimatedTotalLines": 130,
+              "estimatedUncoveredBranchPoints": null
+            }
+          },
+          "tests": "test/redteam/verify-hardening.test.ts; verify-evidence.test.ts; gate-complete helper",
+          "gap": "verify.ts 行 100% 但分支 81.15，需逐分支补；evidence.ts:84-86 补。"
+        }
+      ]
+    },
+    {
+      "domain": "秘密路径 / 脱敏",
+      "modules": [
+        {
+          "location": "src/core/project-scan.ts:257,320-322",
+          "branch": "SECRET_DIRECTORY_SEGMENTS 始终排除，include 不得重新纳入；followLinks 也不跟随 secret",
+          "coverage": {
+            "path": "src/core/project-scan.ts",
+            "line": 97.1,
+            "branch": 92.71,
+            "functions": 95.45,
+            "uncoveredLines": "142-143 161-162 212-214 222-225 359-361 388-389 397-398 411-412 427-428 475-476 578 622",
+            "uncoveredLineCount": 26,
+            "estimatedTotalLines": 897,
+            "estimatedUncoveredBranchPoints": null
+          },
+          "tests": "redteam/project-scan-boundary.test.ts:353-441,757-804; unit/project-scan.test.ts",
+          "gap": "主路径已覆盖；未覆盖 142-143,161-162,212-214 等需归因（可能为平台/缓存分支）。"
+        },
+        {
+          "location": "src/clients/redact.ts:37-53",
+          "branch": "redactClientConfigEntry 白名单复制并标记 redacted；敏感字段名捕获",
+          "coverage": {
+            "path": "src/clients/redact.ts",
+            "line": 96.3,
+            "branch": 87.5,
+            "functions": 100,
+            "uncoveredLines": "39-40",
+            "uncoveredLineCount": 2,
+            "estimatedTotalLines": 54,
+            "estimatedUncoveredBranchPoints": null
+          },
+          "tests": "client-* 测试; test/unit/client-config.test.ts",
+          "gap": "实测 39-40 未覆盖（非对象/数组输入分支），补反例。"
+        },
+        {
+          "location": "src/clients/config.ts",
+          "branch": "客户端配置的 secret 字段处理与校验",
+          "coverage": {
+            "path": "src/clients/config.ts",
+            "line": 90.73,
+            "branch": 77.65,
+            "functions": 100,
+            "uncoveredLines": "241-242 280-281 290-295 297-298 328-329 348-349 352-353 366-367 369-370 373-374 406-407 409-410 438-439 441-442 453-454 512-514 545-547 567-569 609-610 613 648-649 678-689 737-738 829-830 891-892 951-952 955-956 992-993 995-997 1038-1040 1044-1045 1062-1063 1083-1084 1104-1117 1124-1125 1137-1138 1142-1143 1158-1159 1174-1175 1262-1263 1270-1271 1346-1347 1362-1363 1365-1374 1394-1395 1400-1401",
+            "uncoveredLineCount": 130,
+            "estimatedTotalLines": 1402,
+            "estimatedUncoveredBranchPoints": null
+          },
+          "tests": "client-config.test.ts",
+          "gap": "130 行未覆盖，为全仓最大绝对缺口；T-153 需优先分派。"
+        }
+      ]
+    },
+    {
+      "domain": "认证 / 授权（传输层）",
+      "modules": [
+        {
+          "location": "src/memory/tcp-transport.ts:785-787,881-889",
+          "branch": "未握手连接 dispatch 直接 TCP_AUTH_REQUIRED；无 cluster policy/allow-list 时 fail-closed REPLICA_NOT_AUTHORIZED",
+          "coverage": {
+            "path": "src/memory/tcp-transport.ts",
+            "line": 96.96,
+            "branch": 90.39,
+            "functions": 97.17,
+            "uncoveredLines": "487-490 587-594 599-600 785-787 889 1135-1137 1254-1257 1260-1263 1270-1275 1278-1281 1318-1319 1340-1342",
+            "uncoveredLineCount": 44,
+            "estimatedTotalLines": 1447,
+            "estimatedUncoveredBranchPoints": null
+          },
+          "tests": "redteam/tcp-transport-boundary.test.ts; unit/tcp-frame-codec.test.ts",
+          "gap": "实测 785-787 与 889 未覆盖——两个安全分支必须补。"
+        },
+        {
+          "location": "src/memory/ha-cluster.ts:1248-1264,1397-1409",
+          "branch": "只有持租约者可 propose；写 epoch/term 超前沿持租约拒绝；同 (epoch,term) 对手拒绝",
+          "coverage": {
+            "path": "src/memory/ha-cluster.ts",
+            "line": 97.97,
+            "branch": 86.95,
+            "functions": 97.66,
+            "uncoveredLines": "416-418 451-453 506-507 580-581 607-610 616-617 647-650 665-668 760-761 985 1243-1244 1554-1555 1561-1562 1650-1651",
+            "uncoveredLineCount": 35,
+            "estimatedTotalLines": 1724,
+            "estimatedUncoveredBranchPoints": null
+          },
+          "tests": "ha-split-brain-boundary.test.ts",
+          "gap": "1243-1244 未覆盖需补。"
+        },
+        {
+          "location": "src/memory/tcp-frame-codec.ts:123-129",
+          "branch": "auth payload 严格 schema（nodeId/nonce/serverNonce/signature）",
+          "coverage": {
+            "path": "src/memory/tcp-frame-codec.ts",
+            "line": 100,
+            "branch": 97.44,
+            "functions": 100,
+            "uncoveredLines": "",
+            "uncoveredLineCount": 0,
+            "estimatedTotalLines": null,
+            "estimatedUncoveredBranchPoints": null
+          },
+          "tests": "tcp-frame-codec.test.ts:102-124",
+          "gap": "畸形输入已覆盖；signature 校验值本身在传输层，需保持正反向。"
+        }
+      ]
+    }
+  ],
+  "residualRanking": [
+    {
+      "path": "src/clients/config.ts",
+      "line": 90.73,
+      "branch": 77.65,
+      "functions": 100,
+      "uncoveredLineCount": 130,
+      "estimatedTotalLines": 1402,
+      "uncoveredLines": "241-242 280-281 290-295 297-298 328-329 348-349 352-353 366-367 369-370 373-374 406-407 409-410 438-439 441-442 453-454 512-514 545-547 567-569 609-610 613 648-649 678-689 737-738 829-830 891-892 951-952 955-956 992-993 995-997 1038-1040 1044-1045 1062-1063 1083-1084 1104-1117 1124-1125 1137-1138 1142-1143 1158-1159 1174-1175 1262-1263 1270-1271 1346-1347 1362-1363 1365-1374 1394-1395 1400-1401"
+    },
+    {
+      "path": "src/memory/tcp-fault-proxy.ts",
+      "line": 88.94,
+      "branch": 79.82,
+      "functions": 86.36,
+      "uncoveredLineCount": 116,
+      "estimatedTotalLines": 1049,
+      "uncoveredLines": "108-110 235-239 246-250 256-257 264-266 268-269 284-288 296-300 304-308 312-316 323-327 383-387 416-417 419-420 429-430 546-551 553-561 716-717 720-721 724-725 730-737 750-751 755-757 764-766 798 801 806-808 819-823 960-962 989-991 998-1001 1006-1008"
+    },
+    {
+      "path": "src/clients/doctor.ts",
+      "line": 93.26,
+      "branch": 75.79,
+      "functions": 90,
+      "uncoveredLineCount": 111,
+      "estimatedTotalLines": 1647,
+      "uncoveredLines": "577-578 610 612 615-618 624-629 745-751 770-771 782-785 804-806 808-809 815-819 822-826 842-843 845-847 853-854 901 949 956 963 975 1024-1028 1047-1048 1057-1058 1097-1098 1105-1106 1112-1113 1227 1229-1242 1249 1279 1308 1310-1311 1448-1463 1528-1529 1531-1532 1638-1639"
+    },
+    {
+      "path": "src/surface/cli.ts",
+      "line": 90.3,
+      "branch": 86.93,
+      "functions": 87.5,
+      "uncoveredLineCount": 106,
+      "estimatedTotalLines": 1093,
+      "uncoveredLines": "159 171-181 321-333 335-347 356-357 378 380-382 433-434 469-470 529-542 646-647 668-673 865-866 926-927 939-940 959-960 964-965 980-993 1035-1036 1038-1043 1081 1090-1092"
+    },
+    {
+      "path": "src/memory/probe-store-bitchain.ts",
+      "line": 92.06,
+      "branch": 66.44,
+      "functions": 94.94,
+      "uncoveredLineCount": 95,
+      "estimatedTotalLines": 1196,
+      "uncoveredLines": "339-340 346-347 380-381 384-385 427-428 593-594 623-624 626-627 634-635 643 649-650 658 667-668 675-676 681-682 688-689 696-697 700-701 713-714 743-744 746-747 751-752 754-755 772-773 775-776 781-782 786-787 798-799 810-811 836-837 839-840 855-856 888-889 892-893 909-910 920-921 923-924 928-929 935-936 939-940 942-943 949-950 953-954 959-960 983-984 1121-1122 1129-1130 1183 1194-1195"
+    },
+    {
+      "path": "src/surface/connect-ui/service.ts",
+      "line": 95.31,
+      "branch": 71.91,
+      "functions": 96.39,
+      "uncoveredLineCount": 93,
+      "estimatedTotalLines": 1983,
+      "uncoveredLines": "122-125 144-148 392-403 696-697 787-788 813-814 893-905 908-911 966-967 984-985 1015-1016 1046-1047 1071-1072 1096-1102 1169-1170 1345-1346 1374-1376 1398-1400 1449-1451 1778 1804-1805 1859-1861 1881-1882 1920-1922 1927-1928 1942-1943 1964-1965 1976-1977"
+    },
+    {
+      "path": "src/memory/cluster-policy.ts",
+      "line": 92.27,
+      "branch": 81.73,
+      "functions": 97.1,
+      "uncoveredLineCount": 90,
+      "estimatedTotalLines": 1164,
+      "uncoveredLines": "208-209 229-230 236-237 239-240 319-320 377-378 440-448 465 618-626 650-658 668-676 755-756 758-762 794-795 845-846 852-853 860-869 910-911 921-922 978-979 992-993 1043-1044 1135-1136 1140 1148-1149 1151-1152 1163"
+    },
+    {
+      "path": "src/surface/anchor-probe.ts",
+      "line": 89.09,
+      "branch": 73.33,
+      "functions": 86.84,
+      "uncoveredLineCount": 85,
+      "estimatedTotalLines": 779,
+      "uncoveredLines": "152-154 160-161 204-211 247-249 293-294 322-324 396-404 466-472 503-504 575-601 608-609 636 667-668 672-673 703-712 722-723"
+    },
+    {
+      "path": "src/memory/distributed-probe.ts",
+      "line": 93.07,
+      "branch": 94.81,
+      "functions": 84.48,
+      "uncoveredLineCount": 81,
+      "estimatedTotalLines": 1169,
+      "uncoveredLines": "423 427-440 443-455 458-468 471-472 475-476 544-546 557-558 684-686 1088-1117"
+    },
+    {
+      "path": "src/structure/extractors/ts.ts",
+      "line": 94.27,
+      "branch": 85.42,
+      "functions": 92.59,
+      "uncoveredLineCount": 80,
+      "estimatedTotalLines": 1396,
+      "uncoveredLines": "202-205 355-357 389-397 417-427 479-489 491-497 500-507 597-600 630-631 797 805 896-898 910-918 1000-1002 1065-1067 1070"
+    },
+    {
+      "path": "src/clients/tongyi-lingma.ts",
+      "line": 91.59,
+      "branch": 73.72,
+      "functions": 86,
+      "uncoveredLineCount": 72,
+      "estimatedTotalLines": 856,
+      "uncoveredLines": "157-159 173-179 190-196 272-274 308-310 576 588-589 611 618-634 645-647 717-718 797-798 804-805 815-826 831-835 844-845"
+    },
+    {
+      "path": "src/clients/codex.ts",
+      "line": 92.43,
+      "branch": 76.07,
+      "functions": 97.78,
+      "uncoveredLineCount": 69,
+      "estimatedTotalLines": 911,
+      "uncoveredLines": "207 256-264 293-296 316-317 325 327-331 375-386 413-415 419-421 426-427 446-453 784-786 838-844 862-863 872-878"
+    },
+    {
+      "path": "src/clients/claude-code.ts",
+      "line": 93.06,
+      "branch": 83.17,
+      "functions": 97.92,
+      "uncoveredLineCount": 65,
+      "estimatedTotalLines": 937,
+      "uncoveredLines": "192 250-258 287-290 325-329 331-332 348-349 365 380-384 388-400 455-457 462-463 482-489 817-819 897-903"
+    },
+    {
+      "path": "src/clients/comate.ts",
+      "line": 92.41,
+      "branch": 73.91,
+      "functions": 88.24,
+      "uncoveredLineCount": 64,
+      "estimatedTotalLines": 843,
+      "uncoveredLines": "131-133 159-160 172-178 254-256 295-296 570 582-583 605 612-628 639-641 784-785 791-792 802-813 818-822 831-832"
+    },
+    {
+      "path": "src/clients/deepseek-harness.ts",
+      "line": 92.35,
+      "branch": 80,
+      "functions": 89.74,
+      "uncoveredLineCount": 63,
+      "estimatedTotalLines": 824,
+      "uncoveredLines": "136-138 150-152 243-251 292-295 331-342 415-435 725-726 813-819 823-824"
+    },
+    {
+      "path": "src/clients/antigravity.ts",
+      "line": 92.22,
+      "branch": 67.97,
+      "functions": 94.44,
+      "uncoveredLineCount": 60,
+      "estimatedTotalLines": 771,
+      "uncoveredLines": "116-122 148 157 159 162-166 183-185 312-313 321-323 325-327 329-331 399-411 648 659-660 701-702 705-706 708-709 736-737 740-741 751-753 764-765"
+    },
+    {
+      "path": "src/memory/store.ts",
+      "line": 93.99,
+      "branch": 86.34,
+      "functions": 92.86,
+      "uncoveredLineCount": 59,
+      "estimatedTotalLines": 982,
+      "uncoveredLines": "259-261 371-372 402-403 475-485 489-490 534-536 542-543 554-555 591-600 612-622 628-631 644-646 811-814"
+    },
+    {
+      "path": "src/clients/amazon-q.ts",
+      "line": 93.32,
+      "branch": 72.67,
+      "functions": 88.24,
+      "uncoveredLineCount": 58,
+      "estimatedTotalLines": 868,
+      "uncoveredLines": "145-147 169-175 186-192 269-271 306-323 590 602-603 625 659-661 730-731 809-810 816-817 828-829 843-845 856-857"
+    },
+    {
+      "path": "src/memory/consumer.ts",
+      "line": 93.23,
+      "branch": 82.29,
+      "functions": 96,
+      "uncoveredLineCount": 58,
+      "estimatedTotalLines": 857,
+      "uncoveredLines": "538-539 549-550 563-570 576-577 595-596 643-644 654-655 669-670 695-697 699-701 739-740 743-744 747-748 750-751 753-754 768-769 785-786 795-796 804-805 807-808 810-811 813-814 816-817 850-853"
+    },
+    {
+      "path": "src/readiness/attestation.ts",
+      "line": 83.38,
+      "branch": 79.22,
+      "functions": 100,
+      "uncoveredLineCount": 55,
+      "estimatedTotalLines": 331,
+      "uncoveredLines": "124-125 127-128 138-139 144-145 171-173 183-185 187-189 192-194 196-198 200-202 206-208 249-251 305-307 309-310 313-330"
+    },
+    {
+      "path": "src/structure/extractors/imports.ts",
+      "line": 85.71,
+      "branch": 81.17,
+      "functions": 96.15,
+      "uncoveredLineCount": 54,
+      "estimatedTotalLines": 378,
+      "uncoveredLines": "58-63 65-70 87-90 92-95 112-113 199-204 211-227 238-239 262-263 278-279 287-288 320"
+    },
+    {
+      "path": "src/clients/codebuddy.ts",
+      "line": 93.94,
+      "branch": 71.58,
+      "functions": 97.44,
+      "uncoveredLineCount": 51,
+      "estimatedTotalLines": 842,
+      "uncoveredLines": "117-118 145 154 156 159-162 179-181 325-326 334-336 338-340 401-402 461-473 719 730-731 772-773 776-777 779-780 807-808 822-824 835-836"
+    },
+    {
+      "path": "src/clients/openclaw.ts",
+      "line": 93.12,
+      "branch": 70.67,
+      "functions": 95.12,
+      "uncoveredLineCount": 50,
+      "estimatedTotalLines": 727,
+      "uncoveredLines": "142-144 162 171 174-177 221-222 246-254 270-271 315-317 324-326 395-407 664-665 668-669 679-681 692-693"
+    },
+    {
+      "path": "src/clients/zed.ts",
+      "line": 93.47,
+      "branch": 66.92,
+      "functions": 94.74,
+      "uncoveredLineCount": 48,
+      "estimatedTotalLines": 735,
+      "uncoveredLines": "89-90 139 141 144-147 164-166 267-268 278-280 384-396 605 616-617 662-663 669-670 672-673 700-701 704-705 715-717 728-729 733"
+    },
+    {
+      "path": "src/connect/takeover.ts",
+      "line": 95.62,
+      "branch": 80.11,
+      "functions": 97.78,
+      "uncoveredLineCount": 48,
+      "estimatedTotalLines": 1096,
+      "uncoveredLines": "305-307 318-319 323-324 334-335 419-421 537-538 566-567 626-627 649-650 655-656 681-682 755-756 810-820 850 866-867 994-995 1022-1023 1052-1053 1055-1056"
+    },
+    {
+      "path": "src/clients/trae.ts",
+      "line": 93.64,
+      "branch": 71.43,
+      "functions": 97.14,
+      "uncoveredLineCount": 45,
+      "estimatedTotalLines": 708,
+      "uncoveredLines": "127 136 138 141-144 161-163 244-245 256-258 260-262 264-266 331-343 584 595-596 641-642 644-645 672-673 700-701"
+    },
+    {
+      "path": "src/surface/connect-ui/http.ts",
+      "line": 88.13,
+      "branch": 77.23,
+      "functions": 86.67,
+      "uncoveredLineCount": 45,
+      "estimatedTotalLines": 379,
+      "uncoveredLines": "85-89 104-105 112-113 119-120 145-147 153-154 255-257 268-282 289-290 323-325 330-332 340-342"
+    },
+    {
+      "path": "src/surface/connect-ui/memory.ts",
+      "line": 96.13,
+      "branch": 82.59,
+      "functions": 94.83,
+      "uncoveredLineCount": 45,
+      "estimatedTotalLines": 1163,
+      "uncoveredLines": "390 392 533-534 602-603 655-657 668-669 720-721 787-788 854-855 858-859 861-862 864-865 867-868 913-914 918-919 950-951 987-988 1033-1034 1096-1097 1128-1133 1152-1153"
+    },
+    {
+      "path": "src/memory/tcp-transport.ts",
+      "line": 96.96,
+      "branch": 90.39,
+      "functions": 97.17,
+      "uncoveredLineCount": 44,
+      "estimatedTotalLines": 1447,
+      "uncoveredLines": "487-490 587-594 599-600 785-787 889 1135-1137 1254-1257 1260-1263 1270-1275 1278-1281 1318-1319 1340-1342"
+    },
+    {
+      "path": "src/clients/kilo-code.ts",
+      "line": 95.46,
+      "branch": 76.79,
+      "functions": 96.15,
+      "uncoveredLineCount": 43,
+      "estimatedTotalLines": 947,
+      "uncoveredLines": "172-174 192 207 210-213 244-248 314-315 339-347 363-364 446-448 861-862 864-865 884-885 888-889 899-901 912-913"
+    },
+    {
+      "path": "src/connect/store.ts",
+      "line": 87.71,
+      "branch": 70.93,
+      "functions": 100,
+      "uncoveredLineCount": 43,
+      "estimatedTotalLines": 350,
+      "uncoveredLines": "17-18 102-103 115-116 120-121 128-129 143-145 154-155 169-170 172-173 188-189 201-202 208-209 215-216 218-219 222-223 225-226 262-263 265-266 308-309 323-324 338-339"
+    },
+    {
+      "path": "src/connect/watch.ts",
+      "line": 91.11,
+      "branch": 66.67,
+      "functions": 100,
+      "uncoveredLineCount": 40,
+      "estimatedTotalLines": 450,
+      "uncoveredLines": "145-152 194-196 250-251 253 266-267 279-280 297 332-333 380-382 411-413 425-428 430-438"
+    },
+    {
+      "path": "src/readiness/checks.ts",
+      "line": 92.57,
+      "branch": 72.73,
+      "functions": 97.44,
+      "uncoveredLineCount": 40,
+      "estimatedTotalLines": 538,
+      "uncoveredLines": "149-150 214-215 246-247 258-260 262-264 290-292 297-298 319-320 339-351 399-400 404-406 453-455"
+    },
+    {
+      "path": "src/clients/opencode.ts",
+      "line": 95.17,
+      "branch": 75.15,
+      "functions": 97.37,
+      "uncoveredLineCount": 39,
+      "estimatedTotalLines": 807,
+      "uncoveredLines": "113-114 134-135 141 153 156-160 176-178 302-303 311-313 315-317 324-326 657-659 684 737-738 742-743 745-746 773-774 801-802"
+    },
+    {
+      "path": "src/readiness/toml.ts",
+      "line": 82.27,
+      "branch": 73.33,
+      "functions": 100,
+      "uncoveredLineCount": 39,
+      "estimatedTotalLines": 220,
+      "uncoveredLines": "21-23 25-27 32-34 54-56 58-60 65-67 94-96 105-108 174-175 203-214"
+    },
+    {
+      "path": "src/clients/cursor.ts",
+      "line": 95.58,
+      "branch": 75,
+      "functions": 97.44,
+      "uncoveredLineCount": 37,
+      "estimatedTotalLines": 837,
+      "uncoveredLines": "118-119 146 155 157 160-163 180-182 309-310 318-320 322-324 326-328 698-700 715 768-769 772-773 775-776 803-804 831-832"
+    },
+    {
+      "path": "src/clients/hermes-agent.ts",
+      "line": 93.85,
+      "branch": 78.5,
+      "functions": 94.44,
+      "uncoveredLineCount": 37,
+      "estimatedTotalLines": 602,
+      "uncoveredLines": "105-107 109-111 133-134 150-152 206-214 229-233 235-236 278-287"
+    },
+    {
+      "path": "src/clients/cline.ts",
+      "line": 95.67,
+      "branch": 74.86,
+      "functions": 93.48,
+      "uncoveredLineCount": 36,
+      "estimatedTotalLines": 831,
+      "uncoveredLines": "151-152 173-175 179-187 193 202 205-208 252-253 290-293 309-310 431-432 748-749 768-769 796-797"
+    },
+    {
+      "path": "src/connect/records.ts",
+      "line": 89.25,
+      "branch": 80.17,
+      "functions": 87.1,
+      "uncoveredLineCount": 36,
+      "estimatedTotalLines": 335,
+      "uncoveredLines": "50-51 60-62 68 119-120 122-123 249-254 260 269-287"
+    },
+    {
+      "path": "src/core/fingerprint.ts",
+      "line": 91.24,
+      "branch": 90.91,
+      "functions": 100,
+      "uncoveredLineCount": 36,
+      "estimatedTotalLines": 411,
+      "uncoveredLines": "118-119 171-173 179-181 208-209 255-265 355-357 362-370 372-374"
+    },
+    {
+      "path": "src/ledger/ledger.ts",
+      "line": 96.55,
+      "branch": 82.73,
+      "functions": 92.22,
+      "uncoveredLineCount": 36,
+      "estimatedTotalLines": 1043,
+      "uncoveredLines": "48-54 130-131 142-143 162 679-680 740-741 745-746 781-782 789-790 801-802 883-886 939-942 1032-1035"
+    },
+    {
+      "path": "src/memory/ha-protocol.ts",
+      "line": 96.69,
+      "branch": 89.53,
+      "functions": 98.36,
+      "uncoveredLineCount": 36,
+      "estimatedTotalLines": 1088,
+      "uncoveredLines": "375-376 380-381 384-385 389-390 404 416-417 443-444 448-449 552-553 585-586 592-593 626-627 728-729 747-748 794-795 918-919 985-986 994-996"
+    },
+    {
+      "path": "src/memory/ha-cluster.ts",
+      "line": 97.97,
+      "branch": 86.95,
+      "functions": 97.66,
+      "uncoveredLineCount": 35,
+      "estimatedTotalLines": 1724,
+      "uncoveredLines": "416-418 451-453 506-507 580-581 607-610 616-617 647-650 665-668 760-761 985 1243-1244 1554-1555 1561-1562 1650-1651"
+    },
+    {
+      "path": "src/clients/github-copilot.ts",
+      "line": 96.26,
+      "branch": 77.72,
+      "functions": 97.62,
+      "uncoveredLineCount": 34,
+      "estimatedTotalLines": 909,
+      "uncoveredLines": "138-139 166 175 177 182 200-202 339-340 427-438 777 834-835 838-839 841-842 873-874 901-902"
+    },
+    {
+      "path": "src/structure/extractor.ts",
+      "line": 95.85,
+      "branch": 92.47,
+      "functions": 92.31,
+      "uncoveredLineCount": 34,
+      "estimatedTotalLines": 819,
+      "uncoveredLines": "155-160 463 684-695 700-714"
+    },
+    {
+      "path": "src/structure/extractors/risk.ts",
+      "line": 95.49,
+      "branch": 88.66,
+      "functions": 97.37,
+      "uncoveredLineCount": 33,
+      "estimatedTotalLines": 732,
+      "uncoveredLines": "341-343 377-383 430-436 438-444 482-488 584-585"
+    },
+    {
+      "path": "src/memory/multi-writer.ts",
+      "line": 96.2,
+      "branch": 89.17,
+      "functions": 93.94,
+      "uncoveredLineCount": 31,
+      "estimatedTotalLines": 816,
+      "uncoveredLines": "293-294 408-409 513-514 524-525 618-619 623-624 627-628 631-632 661-667 759-760 772-777"
+    },
+    {
+      "path": "src/structure/extractors/store.ts",
+      "line": 96.43,
+      "branch": 85.84,
+      "functions": 98.15,
+      "uncoveredLineCount": 31,
+      "estimatedTotalLines": 868,
+      "uncoveredLines": "476-481 597-604 639-640 655-661 748-750 753-757"
+    },
+    {
+      "path": "src/memory/replica.ts",
+      "line": 93.68,
+      "branch": 85.71,
+      "functions": 100,
+      "uncoveredLineCount": 30,
+      "estimatedTotalLines": 475,
+      "uncoveredLines": "122-123 125-126 128-129 132-133 260-261 364-365 407-408 413-414 417-418 421-426 448-450 452-454"
+    },
+    {
+      "path": "src/connect/adapter.ts",
+      "line": 90.3,
+      "branch": 70.49,
+      "functions": 93.75,
+      "uncoveredLineCount": 29,
+      "estimatedTotalLines": 299,
+      "uncoveredLines": "108-109 114-115 124-125 135-136 147-148 160-161 163-164 167-168 184-185 190-191 215-216 218-219 259-260 297-299"
+    },
+    {
+      "path": "src/readiness/baseline.ts",
+      "line": 95.65,
+      "branch": 70.55,
+      "functions": 90.91,
+      "uncoveredLineCount": 29,
+      "estimatedTotalLines": 667,
+      "uncoveredLines": "345-346 404-405 414-415 450-451 458-459 486-489 511 598-600 615-618 621-624 634-636"
+    },
+    {
+      "path": "src/memory/probe-manifest.ts",
+      "line": 96.76,
+      "branch": 89.87,
+      "functions": 100,
+      "uncoveredLineCount": 28,
+      "estimatedTotalLines": 864,
+      "uncoveredLines": "232-233 365-366 495-496 535-536 664-665 688-695 711-712 735-736 746-747 771-772 774-775"
+    },
+    {
+      "path": "src/connect/managed-instructions.ts",
+      "line": 94.55,
+      "branch": 78.95,
+      "functions": 100,
+      "uncoveredLineCount": 27,
+      "estimatedTotalLines": 495,
+      "uncoveredLines": "165-166 192-193 196-197 201-202 205-206 209-210 244-245 249-250 260-261 273-274 276-277 300-301 319-320 372"
+    },
+    {
+      "path": "src/core/project-scan.ts",
+      "line": 97.1,
+      "branch": 92.71,
+      "functions": 95.45,
+      "uncoveredLineCount": 26,
+      "estimatedTotalLines": 897,
+      "uncoveredLines": "142-143 161-162 212-214 222-225 359-361 388-389 397-398 411-412 427-428 475-476 578 622"
+    },
+    {
+      "path": "src/memory/replication.ts",
+      "line": 96.15,
+      "branch": 84.08,
+      "functions": 96.55,
+      "uncoveredLineCount": 26,
+      "estimatedTotalLines": 675,
+      "uncoveredLines": "171-176 250-251 490-491 493-494 572-573 621-622 625-626 628-629 631-632 637-638 640-641"
+    },
+    {
+      "path": "src/memory/probe.ts",
+      "line": 96.99,
+      "branch": 91.7,
+      "functions": 90.48,
+      "uncoveredLineCount": 20,
+      "estimatedTotalLines": 664,
+      "uncoveredLines": "178-179 256-257 587-595 606-608 647-650"
+    },
+    {
+      "path": "src/readiness/evidence.ts",
+      "line": 92.22,
+      "branch": 84.21,
+      "functions": 93.33,
+      "uncoveredLineCount": 20,
+      "estimatedTotalLines": 257,
+      "uncoveredLines": "56-57 70-71 105-106 132-133 221-223 225-227 237-239 255-257"
+    },
+    {
+      "path": "src/clients/unknown.ts",
+      "line": 96.24,
+      "branch": 78,
+      "functions": 100,
+      "uncoveredLineCount": 18,
+      "estimatedTotalLines": 479,
+      "uncoveredLines": "161-162 299-301 311-312 324 326-327 331 337 349 355-356 358-359 475"
+    },
+    {
+      "path": "src/memory/tokenizer.ts",
+      "line": 91.35,
+      "branch": 87.69,
+      "functions": 95,
+      "uncoveredLineCount": 18,
+      "estimatedTotalLines": 208,
+      "uncoveredLines": "84-85 105-118 182-183"
+    },
+    {
+      "path": "src/memory/relation-classifier.ts",
+      "line": 98.3,
+      "branch": 82.18,
+      "functions": 100,
+      "uncoveredLineCount": 17,
+      "estimatedTotalLines": 1000,
+      "uncoveredLines": "232-234 425-426 428-429 502-503 512-513 520-521 531-532 881-882"
+    },
+    {
+      "path": "src/structure/analysis.ts",
+      "line": 98.76,
+      "branch": 90.52,
+      "functions": 91.58,
+      "uncoveredLineCount": 17,
+      "estimatedTotalLines": 1371,
+      "uncoveredLines": "40-44 53 399 1269-1271 1295-1301"
+    },
+    {
+      "path": "src/memory/probe-store.ts",
+      "line": 97.8,
+      "branch": 76.43,
+      "functions": 96.72,
+      "uncoveredLineCount": 16,
+      "estimatedTotalLines": 727,
+      "uncoveredLines": "251-252 330-332 377-379 443-444 496-498 620-622"
+    },
+    {
+      "path": "src/ledger/append.ts",
+      "line": 91.28,
+      "branch": 80.49,
+      "functions": 91.67,
+      "uncoveredLineCount": 15,
+      "estimatedTotalLines": 172,
+      "uncoveredLines": "69-75 99-100 113-114 136-139"
+    },
+    {
+      "path": "src/memory/logical-clock.ts",
+      "line": 96.22,
+      "branch": 91.8,
+      "functions": 90.91,
+      "uncoveredLineCount": 14,
+      "estimatedTotalLines": 370,
+      "uncoveredLines": "132-133 138-139 171-172 179-180 191-192 195-196 277-278"
+    },
+    {
+      "path": "src/readiness/release.ts",
+      "line": 96.15,
+      "branch": 89.58,
+      "functions": 93.55,
+      "uncoveredLineCount": 14,
+      "estimatedTotalLines": 364,
+      "uncoveredLines": "46-47 49-50 55-56 99-106"
+    },
+    {
+      "path": "src/structure/extractors/fresh.ts",
+      "line": 95.98,
+      "branch": 90.32,
+      "functions": 82.61,
+      "uncoveredLineCount": 14,
+      "estimatedTotalLines": 348,
+      "uncoveredLines": "94-95 117-118 161 163-169 347-348"
+    },
+    {
+      "path": "src/audit/util.ts",
+      "line": 91.22,
+      "branch": 85.71,
+      "functions": 94.44,
+      "uncoveredLineCount": 13,
+      "estimatedTotalLines": 148,
+      "uncoveredLines": "56-58 91-93 98-104"
+    },
+    {
+      "path": "src/connect/active.ts",
+      "line": 87.88,
+      "branch": 71.43,
+      "functions": 100,
+      "uncoveredLineCount": 12,
+      "estimatedTotalLines": 99,
+      "uncoveredLines": "73-74 77-78 86-87 89-90 92-93 96-97"
+    },
+    {
+      "path": "src/audit/events.ts",
+      "line": 84.72,
+      "branch": 100,
+      "functions": 88.89,
+      "uncoveredLineCount": 11,
+      "estimatedTotalLines": 72,
+      "uncoveredLines": "42-52"
+    },
+    {
+      "path": "src/clients/qoder.ts",
+      "line": 97.78,
+      "branch": 85.85,
+      "functions": 90.63,
+      "uncoveredLineCount": 11,
+      "estimatedTotalLines": 495,
+      "uncoveredLines": "113-114 199-207"
+    },
+    {
+      "path": "src/audit/deps.ts",
+      "line": 94.25,
+      "branch": 89.06,
+      "functions": 85.71,
+      "uncoveredLineCount": 10,
+      "estimatedTotalLines": 174,
+      "uncoveredLines": "50-58 60"
+    },
+    {
+      "path": "src/connect/paths.ts",
+      "line": 91.94,
+      "branch": 75,
+      "functions": 100,
+      "uncoveredLineCount": 10,
+      "estimatedTotalLines": 124,
+      "uncoveredLines": "26-27 70-71 90-91 96-97 121-122"
+    },
+    {
+      "path": "src/surface/connect-ui/readiness.ts",
+      "line": 97.82,
+      "branch": 84.62,
+      "functions": 96.67,
+      "uncoveredLineCount": 10,
+      "estimatedTotalLines": 459,
+      "uncoveredLines": "185-186 199-200 219-220 232-233 430-431"
+    },
+    {
+      "path": "src/connect/backup.ts",
+      "line": 95.41,
+      "branch": 76.67,
+      "functions": 100,
+      "uncoveredLineCount": 9,
+      "estimatedTotalLines": 196,
+      "uncoveredLines": "94-95 130-132 153-154 162-163"
+    },
+    {
+      "path": "src/core/git.ts",
+      "line": 78.57,
+      "branch": 100,
+      "functions": 50,
+      "uncoveredLineCount": 9,
+      "estimatedTotalLines": 42,
+      "uncoveredLines": "34-42"
+    },
+    {
+      "path": "src/memory/cluster-consistency.ts",
+      "line": 98.09,
+      "branch": 89.29,
+      "functions": 92.31,
+      "uncoveredLineCount": 9,
+      "estimatedTotalLines": 471,
+      "uncoveredLines": "286-287 334-335 397-398 401 413-414"
+    },
+    {
+      "path": "src/connect/handoff.ts",
+      "line": 95.28,
+      "branch": 75.61,
+      "functions": 100,
+      "uncoveredLineCount": 6,
+      "estimatedTotalLines": 127,
+      "uncoveredLines": "35 59-60 110-111 116"
+    },
+    {
+      "path": "src/ledger/lease.ts",
+      "line": 96.27,
+      "branch": 79.17,
+      "functions": 88.24,
+      "uncoveredLineCount": 6,
+      "estimatedTotalLines": 161,
+      "uncoveredLines": "67-68 74-75 82-83"
+    },
+    {
+      "path": "src/readiness/approve.ts",
+      "line": 93.75,
+      "branch": 59.09,
+      "functions": 100,
+      "uncoveredLineCount": 6,
+      "estimatedTotalLines": 96,
+      "uncoveredLines": "36-37 43-44 77-78"
+    },
+    {
+      "path": "src/surface/connect-ui/render.ts",
+      "line": 97.9,
+      "branch": 86.75,
+      "functions": 100,
+      "uncoveredLineCount": 6,
+      "estimatedTotalLines": 286,
+      "uncoveredLines": "279-284"
+    },
+    {
+      "path": "src/clients/capabilities.ts",
+      "line": 99.39,
+      "branch": 92.59,
+      "functions": 96.43,
+      "uncoveredLineCount": 5,
+      "estimatedTotalLines": 820,
+      "uncoveredLines": "644-646 685-686"
+    },
+    {
+      "path": "src/connect/canonical.ts",
+      "line": 89.13,
+      "branch": 92.86,
+      "functions": 83.33,
+      "uncoveredLineCount": 5,
+      "estimatedTotalLines": 46,
+      "uncoveredLines": "42-46"
+    },
+    {
+      "path": "src/ledger/segment.ts",
+      "line": 94.68,
+      "branch": 88.24,
+      "functions": 100,
+      "uncoveredLineCount": 5,
+      "estimatedTotalLines": 94,
+      "uncoveredLines": "55-56 72-74"
+    },
+    {
+      "path": "src/surface/connect-ui/server.ts",
+      "line": 93.67,
+      "branch": 86.67,
+      "functions": 77.78,
+      "uncoveredLineCount": 5,
+      "estimatedTotalLines": 79,
+      "uncoveredLines": "43-45 51-52"
+    },
+    {
+      "path": "src/clients/types.ts",
+      "line": 99.38,
+      "branch": 100,
+      "functions": 50,
+      "uncoveredLineCount": 4,
+      "estimatedTotalLines": 645,
+      "uncoveredLines": "127-128 131-132"
+    },
+    {
+      "path": "src/gate/evidence.ts",
+      "line": 97.69,
+      "branch": 93.48,
+      "functions": 92.31,
+      "uncoveredLineCount": 3,
+      "estimatedTotalLines": 130,
+      "uncoveredLines": "84-86"
+    },
+    {
+      "path": "src/surface/connect-ui/export.ts",
+      "line": 96.05,
+      "branch": 100,
+      "functions": 50,
+      "uncoveredLineCount": 3,
+      "estimatedTotalLines": 76,
+      "uncoveredLines": "53-55"
+    },
+    {
+      "path": "src/surface/connect-ui/ui.ts",
+      "line": 98.04,
+      "branch": 93.22,
+      "functions": 94.44,
+      "uncoveredLineCount": 3,
+      "estimatedTotalLines": 153,
+      "uncoveredLines": "133-135"
+    },
+    {
+      "path": "src/audit/index.ts",
+      "line": 98.99,
+      "branch": 98.51,
+      "functions": 85.71,
+      "uncoveredLineCount": 2,
+      "estimatedTotalLines": 198,
+      "uncoveredLines": "197-198"
+    },
+    {
+      "path": "src/audit/security.ts",
+      "line": 98.75,
+      "branch": 85,
+      "functions": 85.71,
+      "uncoveredLineCount": 2,
+      "estimatedTotalLines": 160,
+      "uncoveredLines": "122-123"
+    },
+    {
+      "path": "src/clients/redact.ts",
+      "line": 96.3,
+      "branch": 87.5,
+      "functions": 100,
+      "uncoveredLineCount": 2,
+      "estimatedTotalLines": 54,
+      "uncoveredLines": "39-40"
+    },
+    {
+      "path": "src/connect/cutover.ts",
+      "line": 96.55,
+      "branch": 66.67,
+      "functions": 100,
+      "uncoveredLineCount": 2,
+      "estimatedTotalLines": 58,
+      "uncoveredLines": "29-30"
+    },
+    {
+      "path": "src/connect/takeover-policy.ts",
+      "line": 99.53,
+      "branch": 97.18,
+      "functions": 96.88,
+      "uncoveredLineCount": 2,
+      "estimatedTotalLines": 426,
+      "uncoveredLines": "243-244"
+    },
+    {
+      "path": "src/surface/connect-ui/policy.ts",
+      "line": 97.78,
+      "branch": 93.75,
+      "functions": 88.89,
+      "uncoveredLineCount": 2,
+      "estimatedTotalLines": 90,
+      "uncoveredLines": "55-56"
+    },
+    {
+      "path": "src/clients/tabnine.ts",
+      "line": 99.64,
+      "branch": 92.31,
+      "functions": 87.5,
+      "uncoveredLineCount": 1,
+      "estimatedTotalLines": 278,
+      "uncoveredLines": "278"
+    },
+    {
+      "path": "src/core/hlc.ts",
+      "line": 96.15,
+      "branch": 94.74,
+      "functions": 85.71,
+      "uncoveredLineCount": 1,
+      "estimatedTotalLines": 26,
+      "uncoveredLines": "23"
+    },
+    {
+      "path": "src/audit/governance.ts",
+      "line": 100,
+      "branch": 93.98,
+      "functions": 87.5,
+      "uncoveredLineCount": 0,
+      "estimatedTotalLines": null,
+      "uncoveredLines": ""
+    },
+    {
+      "path": "src/connect/export.ts",
+      "line": 100,
+      "branch": 76.92,
+      "functions": 100,
+      "uncoveredLineCount": 0,
+      "estimatedTotalLines": null,
+      "uncoveredLines": ""
+    },
+    {
+      "path": "src/connect/read.ts",
+      "line": 100,
+      "branch": 77.78,
+      "functions": 100,
+      "uncoveredLineCount": 0,
+      "estimatedTotalLines": null,
+      "uncoveredLines": ""
+    },
+    {
+      "path": "src/connect/status.ts",
+      "line": 100,
+      "branch": 78.57,
+      "functions": 100,
+      "uncoveredLineCount": 0,
+      "estimatedTotalLines": null,
+      "uncoveredLines": ""
+    },
+    {
+      "path": "src/core/lock.ts",
+      "line": 100,
+      "branch": 84.38,
+      "functions": 100,
+      "uncoveredLineCount": 0,
+      "estimatedTotalLines": null,
+      "uncoveredLines": ""
+    },
+    {
+      "path": "src/gate/verify.ts",
+      "line": 100,
+      "branch": 81.15,
+      "functions": 93.94,
+      "uncoveredLineCount": 0,
+      "estimatedTotalLines": null,
+      "uncoveredLines": ""
+    },
+    {
+      "path": "src/memory/cursor.ts",
+      "line": 100,
+      "branch": 83.33,
+      "functions": 100,
+      "uncoveredLineCount": 0,
+      "estimatedTotalLines": null,
+      "uncoveredLines": ""
+    },
+    {
+      "path": "src/memory/probe-merge.ts",
+      "line": 100,
+      "branch": 87.31,
+      "functions": 97.56,
+      "uncoveredLineCount": 0,
+      "estimatedTotalLines": null,
+      "uncoveredLines": ""
+    },
+    {
+      "path": "src/structure/extractors/t2.ts",
+      "line": 100,
+      "branch": 89.74,
+      "functions": 94.44,
+      "uncoveredLineCount": 0,
+      "estimatedTotalLines": null,
+      "uncoveredLines": ""
+    }
+  ],
+  "skipInventory": {
+    "conditionalSkipMarkers": 13,
+    "firedSkips": 1,
+    "markers": [
+      {
+        "file": "test/integration/ledger-store.test.ts:118",
+        "condition": "git 不可用则 t.skip"
+      },
+      {
+        "file": "test/redteam/client-adapters-boundary.test.ts:620",
+        "condition": "无法创建符号链接则 skip"
+      },
+      {
+        "file": "test/redteam/project-scan-boundary.test.ts:308",
+        "condition": "无法创建符号链接则 skip"
+      },
+      {
+        "file": "test/redteam/project-scan-boundary.test.ts:359",
+        "condition": "无法创建符号链接则 skip"
+      },
+      {
+        "file": "test/redteam/project-scan-boundary.test.ts:482",
+        "condition": "非 win32 则 skip 独占锁探针"
+      },
+      {
+        "file": "test/redteam/project-scan-boundary.test.ts:498",
+        "condition": "无法持有独占锁则 skip"
+      },
+      {
+        "file": "test/redteam/takeover-boundary.test.ts:290",
+        "condition": "无法创建符号链接则 skip"
+      },
+      {
+        "file": "test/unit/fingerprint.test.ts:58",
+        "condition": "symlink 不可用则 context.skip"
+      },
+      {
+        "file": "test/unit/fingerprint.test.ts:87",
+        "condition": "symlink 不可用则 context.skip"
+      },
+      {
+        "file": "test/unit/fingerprint.test.ts:143",
+        "condition": "文件系统不强制读权限则 context.skip（本轮实际触发）"
+      },
+      {
+        "file": "test/unit/project-scan.test.ts:234",
+        "condition": "symlink 不可用则 context.skip"
+      },
+      {
+        "file": "test/unit/surface-release.test.ts:107",
+        "condition": "symlink 不可用则 t.skip"
+      }
+    ],
+    "fixtureOnlySkipStrings": [
+      "test/redteam/ledger-full.test.ts:197",
+      "test/redteam/verify-hardening.test.ts:20-21"
+    ],
+    "conclusion": "13 个条件 skip 标记中本轮仅 1 个真实触发；无静默 skip、无 todo 实测、无 only。禁止新增 skip/todo/only 凑覆盖。"
+  },
+  "unreachableAndEnvironmentBoundaries": {
+    "acceptedDefensive": [
+      {
+        "location": "src/memory/replica-transport.ts:839",
+        "reason": "#validate default 分支：调用方仅传四种 type；需保留调用点证据，不得为美化数据删除。"
+      },
+      {
+        "location": "src/memory/replica-worker.ts:541-542",
+        "reason": "handleLine default：parseWorkerRequest 已限定 type；同上。"
+      }
+    ],
+    "environment": [
+      "Windows 不强制读权限（唯一实测 skip 的成因）。",
+      " symlink 需提升权限；canSymlink 探测失败时显式条件跳过。",
+      "独占锁探针仅 Windows；非 win32 显式跳过。",
+      "TLS 使用自签证书；CI 无证书工具时应显式跳过并打印。",
+      "TCP/TLS 仅 127.0.0.1/::1 与端口 0；单次真实等待 <=200ms，Windows 进程回收 <=500ms 有界。",
+      "物理跨机、OS 真分区、生产 HA 切换、跨机时钟回拨、可用性 SLA 不在验证范围。"
+    ],
+    "rules": [
+      "不得新增 --test-coverage-exclude 或任何 exclude。",
+      "不得在 src 添加 istanbul/等效 ignore 注释。",
+      "不得把分支移出 include 文件或改统计口径美化数据。",
+      "不得新增 skip/todo/only；既有条件 skip 必须保持打印可见。",
+      "覆盖率必须来自被执行测试；空跑、堆正常路径不算覆盖。",
+      "稳定性/泄漏与覆盖率分开验收：进程 PID、连接计数、端口可重绑、定时器计数另行断言。"
+    ]
+  },
+  "correctionsOfM17": {
+    "F1": "M17 基线把 replica-transport.ts:670 #requireLive 错误模板多余字面量 } 记为缺陷；逐行 eval 复核为误报，输出无多余 }。本轮维持“非真实缺陷”，不得再计入缺陷数。",
+    "tcpNine": "M17 第 3.2 节“剩余 9 处 TCP 行号数据缺失”已被本轮实测取代：src/memory/tcp-transport.ts 当前未覆盖 44 行、12 个区间（487-490,587-594,599-600,785-787,889,1135-1137,1254-1257,1260-1263,1270-1275,1278-1281,1318-1319,1340-1342）；其中 785-787 与 889 属安全分支（未握手 dispatch / fail-closed 授权），必须由 T-152 覆盖。原“9 处”仅可作为历史描述，不得再写为逐条行号结论。"
+  },
+  "ownershipSplit": {
+    "T151": {
+      "newFiles": [
+        "test/unit/tcp-frame-codec-complete.test.ts",
+        "test/unit/probe-merge-complete.test.ts",
+        "test/unit/leader-state-complete.test.ts",
+        "test/unit/logical-clock-complete.test.ts"
+      ],
+      "mayExtend": [
+        "test/unit/logical-clock.test.ts"
+      ],
+      "mustNotTouch": [
+        "src/**",
+        "test/redteam/**",
+        "test/integration/**",
+        "docs/**"
+      ]
+    },
+    "T152": {
+      "newFiles": [
+        "test/redteam/final-security-branches.test.ts",
+        "test/integration/final-consistency-branches.test.ts"
+      ],
+      "mayExtend": [
+        "test/unit/cluster-consistency.test.ts",
+        "test/unit/ha-protocol.test.ts",
+        "test/unit/multi-writer.test.ts",
+        "test/unit/distributed-probe.test.ts",
+        "test/redteam/distributed-probe-boundary.test.ts",
+        "test/redteam/ha-split-brain-boundary.test.ts",
+        "test/redteam/tcp-transport-boundary.test.ts"
+      ],
+      "mustNotTouch": [
+        "src/**",
+        "test/unit/tcp-frame-codec*.test.ts",
+        "test/unit/probe-merge*.test.ts",
+        "test/unit/leader-state*.test.ts",
+        "test/unit/logical-clock*.test.ts",
+        "docs/**"
+      ]
+    },
+    "sharedRule": "两者均只新增/扩展各自测试文件；如需改 src（缺陷修复）必须由主控串行指派，禁止并行编辑同一文件。helper 新增放在各自目录前缀下，避免 test/helpers 写冲突。"
+  },
+  "roundsContract": {
+    "requirement": "T-155 在同一冻结源码快照上连续运行三轮全量质量矩阵（test/typecheck/coverage/build/check-docs + 关键协议回归），三轮全部通过且结果一致。",
+    "snapshot": "每轮开始前记录源码树哈希；三轮之间不得有 src/test/docs 变更；若发现缺陷必须修复并重新开始三轮（重置快照）。",
+    "acceptancePerRound": {
+      "repo": ">=97/88/97",
+      "fourModules": "100/100/100",
+      "securityCritical": "枚举分支 100%",
+      "noSkip": "无未说明 skip",
+      "leaks": "无进程/socket/定时器泄漏"
+    },
+    "varianceHandling": "本轮已实测 13 个文件行/分支百分比在两次运行间抖动（逐文件指标最大 3.77pp，不等于全仓波动）；三轮必须每轮独立达标，不得取平均或最差值兜底。",
+    "dynamicIndexLocation": ".pm/（三轮报告索引写在 .pm，不进入源码指纹）。",
+    "finalCurrentSource": "交付时必须附当前源码的成功矩阵与 verify/gate 通过证据。"
+  },
+  "t156FrontLoad": {
+    "fingerprintScope": "docs/README/CHANGELOG/AGENTS/.ano 进入 pm-mcp 源码指纹；.pm/ 与 PROJECT.md 不进入（控主口径）。",
+    "instruction": "T-156 文档定稿（README/CHANGELOG/docs/limitations.md 等）应前置到 T-155 三轮同源码之前完成草稿并冻结；依赖链不变，T-156 对账任务不阻止主控提前定稿。",
+    "acceptanceJsonContract": "docs/evidence/final-quality-acceptance.json 若更新，只写契约与指向 .pm 结果路径的引用，不得自引用报告哈希；动态三轮报告索引写 .pm，避免三轮后改 docs 导致源码指纹过期。",
+    "excludes": "不得新增任何 exclude。"
+  },
+  "mechanicalGateContract": {
+    "owner": "T-153（主控或子代理）",
+    "t150ChangedScripts": false,
+    "note": "本契约由 T-150 冻结；T-150 不改脚本。核心运行逻辑不强制改动，只允许新增独立核对脚本或附加 flag/报告导出。",
+    "coverageThresholdUpgrade": {
+      "current": {
+        "lines": 90,
+        "branches": 80,
+        "functions": null,
+        "include": "src/**/*.ts",
+        "exclude": []
+      },
+      "target": {
+        "lines": 97,
+        "branches": 88,
+        "functions": 97,
+        "include": "src/**/*.ts",
+        "exclude": []
+      },
+      "command": "node --test --experimental-test-coverage --test-coverage-lines=97 --test-coverage-branches=88 --test-coverage-functions=97 --test-coverage-include=src/**/*.ts \"test/**/*.test.ts\"",
+      "acceptance": "升级后命令在冻结源码快照上自身 exit 0，且与机械核对原始计数一致。",
+      "excludeRule": "不得新增任何 exclude 或 ignore 注释。"
+    },
+    "fourModulesRawCountRule": {
+      "modules": [
+        "src/memory/tcp-frame-codec.ts",
+        "src/memory/probe-merge.ts",
+        "src/memory/leader-state.ts",
+        "src/memory/logical-clock.ts"
+      ],
+      "passCondition": "uncoveredLines==0 && uncoveredBranches==0 && uncoveredFunctions==0 && covered==total && total>0",
+      "evidencePerModule": "(total, covered, uncovered, sourceHash) 四元组",
+      "forbidden": "不得用 spec/TAP 文本表的 100.00% 作为达标证据（两位小数可掩盖极小缺口）。",
+      "currentTextBaselineNotATargetClaim": {
+        "tcp-frame-codec.ts": "100/97.44/100",
+        "probe-merge.ts": "100/87.31/97.56",
+        "leader-state.ts": "100/96.23/100",
+        "logical-clock.ts": "96.22/91.80/90.91"
+      }
+    },
+    "securityListEvidenceRule": {
+      "appliesTo": "final-quality-scope.md 第 2 节 8 个域枚举分支",
+      "requiredFieldsPerBranch": [
+        "branchDenominator",
+        "executedCount(=denominator)",
+        "evidence{testFile,testName}"
+      ],
+      "insufficientEvidence": "仅覆盖率计数而无测试→分支映射视为证据不足，不得判已覆盖。",
+      "mechanicalCheck": "导出分支级计数（位置+count），与安全清单证据映射表 join；任一 executedCount < branchDenominator 或缺少 evidence 即失败。",
+      "denominatorSource": "与四模块一致，使用原始计数；随三轮报告归档于 .pm/"
+    }
+  }
+}

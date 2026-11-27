@@ -1,0 +1,1 @@
+{"v":1,"type":"message","id":"alpha-hidden-m1","role":"tool","tool":"synthetic-secret-reader","ts":"2026-11-01T07:00:01.000Z","text":"token=SYNTHETIC_NOT_A_REAL_SECRET","files":["src/auth/session.ts"],"symbols":["src/auth/session.ts::refreshToken"]}

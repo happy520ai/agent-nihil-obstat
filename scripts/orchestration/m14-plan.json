@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "milestone": "M14",
+  "description": "Structure intelligence: file-query evidence, batch blast radius, CJS/IIFE coverage, risk-driven tests/Gate, incremental caching and real ecommerce validation.",
+  "tasks": {
+    "T-111": { "depends_on": [] },
+    "T-113": { "depends_on": ["T-111"] },
+    "T-112": { "depends_on": ["T-113"] },
+    "T-114": { "depends_on": ["T-111"] },
+    "T-115": { "depends_on": ["T-114"] },
+    "T-116": { "depends_on": ["T-114", "T-115"] },
+    "T-117": { "depends_on": ["T-113", "T-116"] },
+    "T-118": { "depends_on": ["T-112", "T-117"] },
+    "T-119": { "depends_on": ["T-113", "T-116"] },
+    "T-120": { "depends_on": ["T-112", "T-113", "T-114", "T-115", "T-116", "T-117", "T-118", "T-119"] },
+    "T-121": { "depends_on": ["T-112", "T-113", "T-114", "T-115", "T-116", "T-117", "T-118", "T-119"] },
+    "T-122": { "depends_on": ["T-120", "T-121"], "gate": "phase-structure-intelligence", "mutex_group": "m14-final-integration" }
+  }
+}
