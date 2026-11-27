@@ -21,7 +21,7 @@
   ],
   "type": "module",
   "engines": {
-    "node": ">=22.18"
+    "node": ">=24"
   },
   "bin": {
     "ano": "./dist/surface/cli.js"
