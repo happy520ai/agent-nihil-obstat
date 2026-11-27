@@ -1,5 +1,7 @@
 # Agent Nihil Obstat（ANO）
 
+[![ci](https://github.com/happy520ai/agent-nihil-obstat/actions/workflows/ci.yml/badge.svg)](https://github.com/happy520ai/agent-nihil-obstat/actions/workflows/ci.yml)
+
 **让证据裁决 Agent 的工作，而不是让 Agent 自己宣布成功。**
 
 ANO 是一个面向 AI 编程智能体的本地任务与发布裁决工具。它结合追加式账本、源码指纹、代码结构图和外部测试证据，判断“任务完成”或“可以发布”的声明是否有当前证据支持。
