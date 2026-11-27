@@ -172,7 +172,7 @@ interface ClientAdapter {
   {
     "schema": "ano.client-authorization/1",
     "authorizationId": "<sha256(canonicalJson({root, clientId, scope, grantedBy, role, statement, grantedAt}))>",
-    "root": "F:/Agent Nihil Obstat",
+    "root": "<repo>",
     "clientId": "claude-code",
     "scope": ["detect", "inspect", "config", "install", "restore"],
     "grantedBy": "具名人工",

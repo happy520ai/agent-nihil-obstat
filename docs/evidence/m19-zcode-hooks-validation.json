@@ -12,7 +12,7 @@
     "isolatedProject": "os.tmpdir()/ano-t168-work/project — 真实 Git 仓库，含 package.json 与 src/*.ts",
     "isolatedHead": "f375fbe (初始提交)",
     "isolatedHome": "os.tmpdir()/ano-t168-work/isolated-home — HOME/USERPROFILE 仅指向此处；真实用户配置与 ANO 仓库配置从未写入",
-    "cliUnderTest": "F:/Agent Nihil Obstat/dist/surface/cli.js（当前 dist，绝对 node 路径）",
+    "cliUnderTest": "<repo>/dist/surface/cli.js（当前 dist，绝对 node 路径）",
     "installer": "真实 CLI: ano clients install zcode --with-hooks --confirm（beforeHash/afterHash/backupId 见安装回执）",
     "graphRevision": "f954b7217fd64edfbfea6889c8a710ac2e125f662dc8fcfd836fcdb764179b0d",
     "graphRevisionBeforeExplore": "4d9f1839539e0a84b97949e319330ea0d9003f66275cfb9977fa640c22d8bb66",

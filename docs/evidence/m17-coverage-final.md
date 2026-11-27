@@ -1,6 +1,6 @@
 # M17 协议覆盖率恢复：最终覆盖表与剩余未覆盖清单（T-149 / CV-07）
 
-- 生成时间：2026-11-25；环境：Windows 10.0.19041 x64、Node v24.14.0、Git Bash；仓库：`F:\Agent Nihil Obstat`。
+- 生成时间：2026-11-25；环境：Windows 10.0.19041 x64、Node v24.14.0、Git Bash；仓库：`<repo>`。
 - 数字来源：主控全量 `npm run coverage`（`--test-coverage-include=src/**/*.ts`）与 `npm test` 实测；各任务验收报告 `.pm/quality-runs/quality-20261125-*.json`；基线 `docs/evidence/m17-coverage-baseline.{md,json}`；稳定性 `docs/evidence/m17-stability-runs.md`。
 - 本文件只做汇总与清单，**不重跑、不改写任何实测数字**；未单独给出的单文件数字一律标 `[数据缺失]`，不推断。
 - 关联文档：[README M17 小节](../../README.md)、[交付状态](delivery-status.md)。

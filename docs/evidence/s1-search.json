@@ -3,7 +3,7 @@
   "spike": "S1",
   "segment": "mechanism",
   "generatedAt": "2026-11-18T13:05:47.985Z",
-  "command": "node \"F:\\Agent Nihil Obstat\\scripts\\spikes\\s1-search.mjs\" --out \"F:/Agent Nihil Obstat/docs/evidence/s1-search.json\"",
+  "command": "node \"<repo>\\scripts\\spikes\\s1-search.mjs\" --out \"<repo>/docs/evidence/s1-search.json\"",
   "inputs": "synthetic-strings-only",
   "privacy": {
     "realSessionSampling": false,
@@ -23,11 +23,11 @@
     "sqlite": "3.51.2",
     "icuSmall": false,
     "execPath": "C:\\Program Files\\nodejs\\node.exe",
-    "cwd": "F:\\Agent Nihil Obstat",
-    "scriptPath": "F:\\Agent Nihil Obstat\\scripts\\spikes\\s1-search.mjs",
+    "cwd": "<repo>",
+    "scriptPath": "<repo>\\scripts\\spikes\\s1-search.mjs",
     "argv": [
       "C:\\Program Files\\nodejs\\node.exe",
-      "F:\\Agent Nihil Obstat\\scripts\\spikes\\s1-search.mjs"
+      "<repo>\\scripts\\spikes\\s1-search.mjs"
     ]
   },
   "runtimeWarnings": [

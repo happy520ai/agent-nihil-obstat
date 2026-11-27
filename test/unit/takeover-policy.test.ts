@@ -25,7 +25,7 @@ import {
   type TakeoverState,
 } from '../../src/connect/takeover-policy.ts';
 
-const ROOT = 'F:/Agent Nihil Obstat';
+const ROOT = '<repo>';
 const OTHER_ROOT = 'F:/Some Other Project';
 const GRANTED_AT = '2026-11-22T00:00:00.000Z';
 const HASH_A = 'a'.repeat(64);

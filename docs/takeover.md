@@ -61,7 +61,7 @@ ano takeover revoke --root <abs> --confirm
   "schema": "ano.takeover-transaction/1",
   "txId": "<sha256>",
   "authorizationId": "<sha256>",
-  "root": "F:/Agent Nihil Obstat",
+  "root": "<repo>",
   "phase": "prepared|migrated|reconciled|verified|installed|active|aborted",
   "sourceDigest": "<接管开始时旧源摘要>",
   "backupId": "<backup id>",

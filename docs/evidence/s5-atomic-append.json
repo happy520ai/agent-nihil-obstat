@@ -8,7 +8,7 @@
     "platform": "win32",
     "arch": "x64",
     "os": "Windows_NT 10.0.19041",
-    "cwd": "F:\\Agent Nihil Obstat"
+    "cwd": "<repo>"
   },
   "problem": "batch.begin 与 batch.end 之间每个字节边界崩溃后，恢复是否完全无半批；自己的写者能截断，别人的残尾只忽略且字节哈希不变；fsync/Windows 文件锁的实际能力。",
   "method": "独立 Node writer 写入目标批次前 N 字节并 fsync 后挂起，主 runner SIGKILL/taskkill 强杀；N 遍历 0..L，覆盖空文件与已有 seed 批次；随后另起同 segment 的独立 writer 进程截断残尾，再重放，并对他人残尾副本只读重放+哈希对比；另测文件/目录 fsync 与 wx 文件锁争用。",

@@ -2,8 +2,15 @@ node_modules/
 dist/
 coverage/
 .ano/
+.pm/
+.zcode/plans/
+.zcode/workflow-drafts/
+.zcode/workflow-runs/
+.zcode/hooks/
 *.log
 *.tmp
+.tmp-*
+*.tgz
 scripts/node_modules/
 scripts/fixtures/generated/
 docs/evidence/*-actual.tmp

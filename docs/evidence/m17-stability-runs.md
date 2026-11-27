@@ -1,6 +1,6 @@
 # M17 红队、重复运行与资源泄漏稳定性验收（T-148 / CV-06）
 
-- 日期：2026-11-25；环境：Windows 10 x64、Node v24.14.0、Git Bash；仓库：`F:\Agent Nihil Obstat`。
+- 日期：2026-11-25；环境：Windows 10 x64、Node v24.14.0、Git Bash；仓库：`<repo>`。
 - 范围：仅本地回环 TCP / 进程内协议层红队。跨机部署、OS 真分区、物理集群与 SLA 未验证（沿用 M16/M17 既有边界声明）。
 - 交付：新增 `test/redteam/m17-stability.test.ts`（12 用例）+ 本证据文档；`src/` 仅两处真实缺陷最小修复。
 

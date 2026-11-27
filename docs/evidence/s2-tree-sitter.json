@@ -17,7 +17,7 @@
     "cpuCount": 20,
     "totalMemMB": 32604,
     "exposeGc": true,
-    "cwd": "F:\\Agent Nihil Obstat",
+    "cwd": "<repo>",
     "note": "Only Node 24.14.0 on Windows was measured. Results do NOT represent Node 22, Linux, or macOS."
   },
   "dependencies": {
@@ -27,7 +27,7 @@
     "wasm": {
       "ts": {
         "name": "typescript",
-        "wasmPath": "F:\\Agent Nihil Obstat\\scripts\\node_modules\\tree-sitter-wasms\\out\\tree-sitter-typescript.wasm",
+        "wasmPath": "<repo>\\scripts\\node_modules\\tree-sitter-wasms\\out\\tree-sitter-typescript.wasm",
         "wasmBytes": 2342690,
         "abiVersion": 14,
         "nodeTypeCount": 385,
@@ -35,7 +35,7 @@
       },
       "tsx": {
         "name": "tsx",
-        "wasmPath": "F:\\Agent Nihil Obstat\\scripts\\node_modules\\tree-sitter-wasms\\out\\tree-sitter-tsx.wasm",
+        "wasmPath": "<repo>\\scripts\\node_modules\\tree-sitter-wasms\\out\\tree-sitter-tsx.wasm",
         "wasmBytes": 2411272,
         "abiVersion": 14,
         "nodeTypeCount": 405,
@@ -43,7 +43,7 @@
       },
       "js": {
         "name": "javascript",
-        "wasmPath": "F:\\Agent Nihil Obstat\\scripts\\node_modules\\tree-sitter-wasms\\out\\tree-sitter-javascript.wasm",
+        "wasmPath": "<repo>\\scripts\\node_modules\\tree-sitter-wasms\\out\\tree-sitter-javascript.wasm",
         "wasmBytes": 647334,
         "abiVersion": 14,
         "nodeTypeCount": 271,
@@ -52,7 +52,7 @@
     }
   },
   "fixtures": {
-    "dir": "F:\\Agent Nihil Obstat\\scripts\\fixtures\\generated\\s2",
+    "dir": "<repo>\\scripts\\fixtures\\generated\\s2",
     "totalFiles": 5220,
     "totalBytes": 50059905,
     "tiers": {

@@ -17,7 +17,7 @@
         "generatedAt": "2026-11-19T11:04:13.822Z",
         "verdict": "passed",
         "source": {
-          "root": "F:\\Agent Nihil Obstat",
+          "root": "<repo>",
           "packageName": "agent-nihil-obstat",
           "packageVersion": "0.1.0-alpha.0",
           "nodeRuntime": "v24.14.0",
@@ -70,7 +70,7 @@
             "pid": 42048,
             "command": "C:/Program Files/nodejs/node.exe",
             "args": [
-              "F:/Agent Nihil Obstat/dist/surface/mcp.js"
+              "<repo>/dist/surface/mcp.js"
             ],
             "status": "passed",
             "durationMs": 335.78279999999995,
@@ -178,7 +178,7 @@
         "generatedAt": "2026-11-19T11:04:23.385Z",
         "verdict": "passed",
         "source": {
-          "root": "F:\\Agent Nihil Obstat",
+          "root": "<repo>",
           "packageName": "agent-nihil-obstat",
           "packageVersion": "0.1.0-alpha.0",
           "nodeRuntime": "v24.14.0",
@@ -231,7 +231,7 @@
             "pid": 30776,
             "command": "C:/Program Files/nodejs/node.exe",
             "args": [
-              "F:/Agent Nihil Obstat/dist/surface/mcp.js"
+              "<repo>/dist/surface/mcp.js"
             ],
             "status": "passed",
             "durationMs": 313.6185000000005,

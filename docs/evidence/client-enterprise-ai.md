@@ -5,7 +5,7 @@
 - 交付：`src/clients/amazon-q.ts`、`src/clients/codegeex.ts`、`src/clients/tongyi-lingma.ts`、`src/clients/comate.ts`、`test/unit/client-enterprise-ai.test.ts`、本报告
 - 性质：公开文档只读核实 + 本机存在性只读探测 + 合成 fixture / tmpdir 注入验证。未读取真实客户端配置内容，未修改用户级配置，未执行配置内容，未新增第八个 MCP 工具。
 - 上游契约：`docs/adr/ADR-008-full-client-catalog.md` §2/§3/§4/§5/§6/§10、`docs/client-catalog.md` §1/§3、`src/clients/types.ts`、`src/clients/registry.ts`、`src/clients/doctor.ts`、`src/clients/config.ts`（T-081）。
-- 核实时点：2026-11-23；本机 win32 10.0.19041 x64，Node v24.14.0，工作目录 `F:\Agent Nihil Obstat`。
+- 核实时点：2026-11-23；本机 win32 10.0.19041 x64，Node v24.14.0，工作目录 `<repo>`。
 
 ## 1. 结论
 
@@ -40,7 +40,7 @@
 
 ## 3. 本机真实探测结果（存在性，留证）
 
-执行环境：win32 10.0.19041，Node v24.14.0，工作目录 `F:\Agent Nihil Obstat`。仅做可执行名/目录存在性核对，未读取任何配置内容。
+执行环境：win32 10.0.19041，Node v24.14.0，工作目录 `<repo>`。仅做可执行名/目录存在性核对，未读取任何配置内容。
 
 | 探测 | 结果 |
 |---|---|

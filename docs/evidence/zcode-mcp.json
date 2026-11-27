@@ -1,7 +1,7 @@
 {
   "schema": "ano.zcode-integration.v1",
   "generatedAt": "2026-11-27T12:36:33.746Z",
-  "configPath": "F:\\Agent Nihil Obstat\\.zcode\\config.json",
+  "configPath": "<repo>\\.zcode\\config.json",
   "configSha256": "a377fcf65dd2922cf018dfcde50392aa2b8dc029189701bef145d1977bf50601",
   "workspaceAnoDeclared": false,
   "registrationScope": "user",
@@ -23,7 +23,7 @@
     "audit"
   ],
   "briefPhase": "P7",
-  "root": "F:\\Agent Nihil Obstat",
+  "root": "<repo>",
   "scope": "user",
   "verified": "configured-stdio-command",
   "clientRestartRequired": true

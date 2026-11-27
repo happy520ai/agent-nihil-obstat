@@ -85,7 +85,7 @@
 ## 6. 复现步骤
 
 ```bash
-cd "F:/Agent Nihil Obstat"
+cd "<repo>"
 node --test test/integration/takeover-host.test.ts
 node --test test/integration/takeover.test.ts test/integration/takeover-drift.test.ts
 npx tsc -p tsconfig.json --noEmit

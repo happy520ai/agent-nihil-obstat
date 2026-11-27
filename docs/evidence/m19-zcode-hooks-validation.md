@@ -10,7 +10,7 @@
 | 隔离 HOME | `os.tmpdir()/ano-t168-work/isolated-home`；每次 ZCode CLI 调用均以 `HOME`/`USERPROFILE` 指向此处 |
 | 用户真实配置 | `<home>/.zcode/cli/config.json` 与 ANO 仓库配置**从未写入**（仅读取本仓库实现与既有证据） |
 | 钩子来源 | 真实 CLI `ano clients install zcode --with-hooks --confirm --home <isolated-home>`；安装回执 `beforeHash=2b3d1324…`、`afterHash=73daab18…`、`backupId=cfg-mwx3emq4-a8b6f11a` |
-| 钩子命令 | 绝对 node 路径 `C:\Program Files\nodejs\node.exe` + 绝对 `F:\Agent Nihil Obstat\dist\surface\cli.js` + `hook <event> --client zcode --root <isolated project>`，args 数组、无 stdin/shell 拼接（仅 4 事件：`SessionStart`/`UserPromptSubmit`/`PreToolUse`/`Stop`，type=process） |
+| 钩子命令 | 绝对 node 路径 `C:\Program Files\nodejs\node.exe` + 绝对 `<repo>\dist\surface\cli.js` + `hook <event> --client zcode --root <isolated project>`，args 数组、无 stdin/shell 拼接（仅 4 事件：`SessionStart`/`UserPromptSubmit`/`PreToolUse`/`Stop`，type=process） |
 | 脱敏 | 沿用 `src/clients/redact.ts`：只记非秘密元数据；prompt/响应/工具内容、transcript 路径、env 值、凭证不记录；宿主权限提示正文记为 `[host-permission-message]`，仅保留 ANO 来源的 `ruleId`/`decision`/`reason` |
 
 ## 2. 真实会话链路与判定

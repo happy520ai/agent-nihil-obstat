@@ -109,7 +109,7 @@
 ## 8. 复现步骤
 
 ```bash
-cd "F:/Agent Nihil Obstat"
+cd "<repo>"
 node --test test/integration/client-takeover.test.ts
 node --test test/unit/client-doctor.test.ts test/unit/client-config.test.ts
 npx tsc -p tsconfig.json --noEmit

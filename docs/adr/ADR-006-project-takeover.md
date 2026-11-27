@@ -47,7 +47,7 @@ M10 的目标（`.pm/roadmap.json`）是：在用户明确指定的项目内，�
 {
   "schema": "ano.takeover-authorization/1",
   "authorizationId": "<sha256(canonicalJson({root, projectId, projectKey, scope, grantedBy, role, statement, grantedAt}))>",
-  "root": "F:/Agent Nihil Obstat",
+  "root": "<repo>",
   "projectId": "…",
   "projectKey": "…",
   "scope": ["tasks", "memory", "acceptance", "dag"],

@@ -169,4 +169,4 @@
 - **配置解析有意受限**：只解释 `profile`、`hooks.mode`、`hooks.exempt`、`hooks.prompt_hint` 与 M23 的 `python.interpreter`、`python.roots`，未知键/段给出警告而不执行任意 TOML 内容；配置不是授权，不能替代 takeover、安装或发布的人工确认。
 - **setup 默认零写**：非 TTY 只输出计划，即使带 `--yes-dry-run` 也不写。真实写入要求 TTY 逐步确认；任一步拒绝即停止，已完成的接管/钩子步骤需用对应 disable/recover/restore 回退，历史不删除。
 - **真实个人闭环未由单测替代**：隔离夹具与三会话连续性证明机制，不构成 `<example-project>` 的 setup、cutover、误拦率或三次真实工作会话验收；这些仍以 M22 具名人工证据为准。
-- **M22 按具名人工判定闭环（2026-11-27，project owner）**：接管 enforced、两项切换任务有有效 Gate 证据、两个候选真实工作会话已核实；三次会话的量化指标与误拦标注未采集、停止判据 insufficient-data。该闭环是项目所有者的主观决定，不是指标达标声明；复核须按 `docs/evidence/m22-real-project-loop.md` 补齐，不得回填。
+- **M22 按具名人工判定闭环（2026-11-27，project owner）**：接管 enforced、两项切换任务有有效 Gate 证据、两个候选真实工作会话已核实；三次会话的量化指标与误拦标注未采集、停止判据 insufficient-data。该闭环是项目所有者的主观决定，不是指标达标声明；复核须按内部 M22 证据流程补齐（该证据未公开），不得回填。

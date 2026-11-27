@@ -7,7 +7,7 @@
     "node": "v24.14.0",
     "platform": "win32 x64",
     "os": "Windows_NT 10.0.19041",
-    "cwd": "F:\\Agent Nihil Obstat"
+    "cwd": "<repo>"
   },
   "problem": "模块解析三条路线在含相对路径、tsconfig paths、package exports、workspaces 的合成 monorepo 上的成功率与成本；宿主 TypeScript 动态加载按 G10 禁止，不实现。",
   "method": "脚本自写合成 fixture；路线①用 Node 内置能力自写解析器；路线②用 scripts/node_modules/typescript 的 ts.resolveModuleName 读取同一 tsconfig；路线③仅记录拒绝与 unknown 降级；测量导入/RSS/解析耗时与 TypeScript 安装体积。",
@@ -19,7 +19,7 @@
     "成本数据标注小规模、不外推"
   ],
   "fixture": {
-    "root": "F:\\Agent Nihil Obstat\\scripts\\fixtures\\generated\\s7",
+    "root": "<repo>\\scripts\\fixtures\\generated\\s7",
     "installMethod": "junction",
     "fileCount": 10,
     "bytes": 1398,
@@ -91,31 +91,31 @@
           {
             "spec": "./local.js",
             "status": "resolved",
-            "path": "F:\\Agent Nihil Obstat\\scripts\\fixtures\\generated\\s7\\packages\\app\\src\\local.ts",
+            "path": "<repo>\\scripts\\fixtures\\generated\\s7\\packages\\app\\src\\local.ts",
             "method": "relative"
           },
           {
             "spec": "@lib/util",
             "status": "resolved",
-            "path": "F:\\Agent Nihil Obstat\\scripts\\fixtures\\generated\\s7\\packages\\lib\\src\\util.ts",
+            "path": "<repo>\\scripts\\fixtures\\generated\\s7\\packages\\lib\\src\\util.ts",
             "method": "paths"
           },
           {
             "spec": "@fixture/lib",
             "status": "resolved",
-            "path": "F:\\Agent Nihil Obstat\\scripts\\fixtures\\generated\\s7\\packages\\lib\\src\\index.ts",
+            "path": "<repo>\\scripts\\fixtures\\generated\\s7\\packages\\lib\\src\\index.ts",
             "method": "workspace-exports"
           },
           {
             "spec": "@fixture/lib/feature",
             "status": "resolved",
-            "path": "F:\\Agent Nihil Obstat\\scripts\\fixtures\\generated\\s7\\packages\\lib\\src\\feature.ts",
+            "path": "<repo>\\scripts\\fixtures\\generated\\s7\\packages\\lib\\src\\feature.ts",
             "method": "workspace-exports"
           },
           {
             "spec": "../../lib/src/util.js",
             "status": "resolved",
-            "path": "F:\\Agent Nihil Obstat\\scripts\\fixtures\\generated\\s7\\packages\\lib\\src\\util.ts",
+            "path": "<repo>\\scripts\\fixtures\\generated\\s7\\packages\\lib\\src\\util.ts",
             "method": "relative"
           },
           {
@@ -135,8 +135,8 @@
     "route2": {
       "name": "项目自带 TypeScript ts.resolveModuleName",
       "metrics": {
-        "typescriptPath": "F:\\Agent Nihil Obstat\\scripts\\node_modules\\typescript\\lib\\typescript.js",
-        "typescriptPackageDir": "F:\\Agent Nihil Obstat\\scripts\\node_modules\\typescript",
+        "typescriptPath": "<repo>\\scripts\\node_modules\\typescript\\lib\\typescript.js",
+        "typescriptPackageDir": "<repo>\\scripts\\node_modules\\typescript",
         "version": "5.9.3",
         "installBytes": 23625066,
         "installMiB": 22.531,
@@ -153,7 +153,7 @@
           {
             "spec": "./local.js",
             "status": "resolved",
-            "path": "F:/Agent Nihil Obstat/scripts/fixtures/generated/s7/packages/app/src/local.ts",
+            "path": "<repo>/scripts/fixtures/generated/s7/packages/app/src/local.ts",
             "method": "typescript",
             "isExternalLibraryImport": false,
             "extension": ".ts",
@@ -162,7 +162,7 @@
           {
             "spec": "@lib/util",
             "status": "resolved",
-            "path": "F:/Agent Nihil Obstat/scripts/fixtures/generated/s7/packages/lib/src/util.ts",
+            "path": "<repo>/scripts/fixtures/generated/s7/packages/lib/src/util.ts",
             "method": "typescript",
             "isExternalLibraryImport": false,
             "extension": ".ts",
@@ -171,7 +171,7 @@
           {
             "spec": "@fixture/lib",
             "status": "resolved",
-            "path": "F:/Agent Nihil Obstat/scripts/fixtures/generated/s7/packages/lib/src/index.ts",
+            "path": "<repo>/scripts/fixtures/generated/s7/packages/lib/src/index.ts",
             "method": "node_modules",
             "isExternalLibraryImport": true,
             "extension": ".ts",
@@ -180,7 +180,7 @@
           {
             "spec": "@fixture/lib/feature",
             "status": "resolved",
-            "path": "F:/Agent Nihil Obstat/scripts/fixtures/generated/s7/packages/lib/src/feature.ts",
+            "path": "<repo>/scripts/fixtures/generated/s7/packages/lib/src/feature.ts",
             "method": "node_modules",
             "isExternalLibraryImport": true,
             "extension": ".ts",
@@ -189,7 +189,7 @@
           {
             "spec": "../../lib/src/util.js",
             "status": "resolved",
-            "path": "F:/Agent Nihil Obstat/scripts/fixtures/generated/s7/packages/lib/src/util.ts",
+            "path": "<repo>/scripts/fixtures/generated/s7/packages/lib/src/util.ts",
             "method": "typescript",
             "isExternalLibraryImport": false,
             "extension": ".ts",

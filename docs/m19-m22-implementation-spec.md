@@ -268,7 +268,7 @@ export function failClosedDecision(mode: HookMode, code: HookDegradedCode, detai
 ## 附录 B：交给执行 agent 的开工指令（M18 关闭、ADR 接受之后使用）
 
 ```text
-你在 F:\Agent Nihil Obstat 工作。先调用 ANO brief。
+你在 <repo> 工作。先调用 ANO brief。
 本轮目标是 M19（ADR-013 + docs/m19-m22-implementation-spec.md）。
 严格遵守 AGENTS.md 与 ADR-013 §2 的硬边界。
 从 T-162（S8 spike）开始：只在 os.tmpdir() 下的隔离 Git 项目实测 ZCode 钩子，

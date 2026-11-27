@@ -66,7 +66,7 @@ node --version       # 需 ≥ 22.18；本机证据为 v24.14.0
 - **Windows**：
   - `C:/Program Files/nodejs/node.exe` 或 `C:\\Program Files\\nodejs\\node.exe` 均可；JSON 中的反斜杠必须写成 `\\`，单个 `\` 会产生非法转义（例如 `\A`）。
   - 盘符路径 `F:/...` 是绝对路径；Git Bash 下的 `/f/...` 不是客户端可用的 Windows 路径。
-  - 含空格目录（如 `F:/Agent Nihil Obstat`）放在 JSON 数组/字符串中即可，不要手动加引号。
+  - 含空格目录（如 `<repo>`）放在 JSON 数组/字符串中即可，不要手动加引号。
   - 可用 `where node` 确认 node 绝对路径。
 - **POSIX**：如 `command: "/usr/local/bin/node"`、`args: ["/srv/ano/dist/surface/mcp.js"]`，并确保 node 可执行。
 - **UNC**：`\\server\share\...` 在 JSON 中写成 `\\\\server\\share\\...`。

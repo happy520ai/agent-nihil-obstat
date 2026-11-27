@@ -34,7 +34,7 @@
 - 可见 `mcp__ano__*` 工具名（7）：`brief`、`explore`、`recall`、`track`、`note`、`verify`、`audit`。
 - 实时调用 `mcp__ano__brief`（无参数）成功，返回 `phase=P7`、`tools=[brief,explore,recall,track,note,verify,audit]`、`tasks=[ANO-M5-001]`、`connected.connected=false`。
 - 主机日志 `<home>/.zcode/cli/log/zcode-2026-11-22.jsonl`：
-  - `mcp.server.connected`：`mcpServerName=ano`、`transport=stdio`、`workspaceKey=F:\Agent Nihil Obstat`、`sessionId=sess_40435b7d-91ff-48d4-93c2-db9ec08ecf6a`（2026-11-22T04:22:14.809Z）。
+  - `mcp.server.connected`：`mcpServerName=ano`、`transport=stdio`、`workspaceKey=<repo>`、`sessionId=sess_40435b7d-91ff-48d4-93c2-db9ec08ecf6a`（2026-11-22T04:22:14.809Z）。
   - `tool.call.started` / `tool.call.completed`：`toolName=mcp__ano__brief`（2026-11-22T05:12:22.341Z / 05:12:34.138Z，子代理会话 `sess_subagent_agent_fd9184ff-ecd2-49ed-9285-ed91a0c66a95`，`parentSessionId=sess_40435b7d-...`）。
 - 作用域推断（基于合并规则，非直接探针）：`pm-mcp` 与 `zcode-internal` 仅注册于 `cli/config.json`，而本会话可见其工具，故 `cli/config.json` 为当前生效用户配置；同名 `ano` 按「user 覆盖 workspace」规则来自用户级注册。
 
@@ -44,7 +44,7 @@
 |---|---|---|---|
 | `<home>/.zcode/cli/config.json` | 用户级 | `mcp.servers.ano` → `<home>/.zcode/ano-mcp.mjs`（无 `cwd` / `ANO_ROOT`） | 另含 `pm-mcp`、`zcode-internal`；无 `hooks` 键 |
 | `<home>/.zcode/v2/config.json` | 遗留（未被配置指南列为生效位置） | `mcpServers.ano` → 同一 wrapper；另有 `aos-memory`（SSE） | 今日主机日志中 `aos` 出现 0 次，判定未加载 |
-| `F:/Agent Nihil Obstat/.zcode/config.json` | 工作区 | `mcp.servers.ano` → `dist/surface/mcp.js`，`cwd=ANO_ROOT=F:/Agent Nihil Obstat` | 单项目固定 root |
+| `<repo>/.zcode/config.json` | 工作区 | `mcp.servers.ano` → `dist/surface/mcp.js`，`cwd=ANO_ROOT=<repo>` | 单项目固定 root |
 
 - 合并规则（zcode-configuration-guide）：CLI → 环境 → 用户 → 工作区 → 系统默认；user 覆盖 workspace 同名 server；各作用域 MCP 默认受信并在会话开始自动连接。
 - UI 机制（仅描述，未点击验证）：**Settings → MCP** 查看/修复服务器；**Settings → Plugin Management** 查看插件 hook；`PermissionRequest` 为交互式人工批准（会话内 `AskUserQuestion` 工具）。
@@ -53,7 +53,7 @@
 ## 5. 第二项目层
 
 - 用户级注册（`cli/config.json` 的 `mcp.servers.ano`，无 `cwd`/`ANO_ROOT`）→ 跨项目能力成立，不固定全局 root。
-- 主机日志：今日 `ano` 在 5 个工作区连接：`F:\Agent Nihil Obstat`、`F:\云服务器`、`F:\星驰任务`、`<example-project>`、`F:\token管理工厂`（11 次 `mcp.server.connected`）。
+- 主机日志：今日 `ano` 在 5 个工作区连接：`<repo>`、`F:\云服务器`、`F:\星驰任务`、`<example-project>`、`F:\token管理工厂`（11 次 `mcp.server.connected`）。
 - 但日志中 `mcp__ano__*` 工具调用仅见 ANO 工作区的 `brief`（2 条，含本次调查调用）。**跨项目「消费」（在另一项目真实调用工具并读写该项目 `.ano/` 账本）未现场验证。**
 - 仓库既有证据：`docs/zcode-integration.md`、`docs/delivery-status.md`、`README.md`、`.pm/changelog.md` T-028（真实 stdio initialize / tools=list 恰 7 工具、跨项目独立账本测试）、`test/integration/zcode-config.test.ts`（临时工作区配置启动真实 MCP，`brief` 断言读临时项目而非本仓库）。
 - 后续所需步骤（需授权）：在非 ANO 项目（如 `F:\星驰任务`）用真实 ZCode 会话调用 `mcp__ano__brief` / `explore`，核对该项目的独立 `.ano/` 账本与 `phase`，并记录工具名与返回。

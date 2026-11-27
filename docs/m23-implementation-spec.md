@@ -1,7 +1,7 @@
 # M23 实施规格：Python 语言包（pytest 证据 + L0/L1 结构）
 
 日期：2026-11-27
-状态：**已接受**，随 ADR-014 由project owner于 2026-11-27 具名审阅；开工边界以 ADR-014 为准。
+状态：**已接受**，随 ADR-014 由 project owner 于 2026-11-27 具名审阅；开工边界以 ADR-014 为准。
 语义契约：`docs/adr/ADR-014-python-language-pack.md`（冲突时以 ADR 为准）
 机器可读登记清单：`m23-registration.json`（与本文件同批提交，建议放 `docs/m23-registration.json`）
 前置条件：ADR-014 由具名人工审阅为"已接受"。**不需要**等 M22 关闭：M22 剩下的只是真实项目上的人工步骤，与 M23 没有文件冲突。
@@ -99,7 +99,7 @@ PY-08 依赖 PY-05，只是因为两者都要读 `src/core/config.ts` 的新键�
 ## 6. 交给执行 agent 的开工指令
 
 ```text
-你在 F:\Agent Nihil Obstat 工作。先调用 ANO brief。
+你在 <repo> 工作。先调用 ANO brief。
 
 第一步只做登记（PY-01）：
 1. 把会话交付的 ADR-014-python-language-pack.md 放到 docs/adr/，m23-implementation-spec.md

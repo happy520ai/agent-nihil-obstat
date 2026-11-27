@@ -21,9 +21,9 @@ jobs:
       - run: npm ci --ignore-scripts
       - run: npm --prefix scripts ci --ignore-scripts
       - run: npm run typecheck
+      - run: npm run build
       - run: npm test
       - run: npm run coverage
-      - run: npm run build
       - run: node scripts/check-schema.ts
       - run: npm run check-docs
       - run: npm pack --dry-run

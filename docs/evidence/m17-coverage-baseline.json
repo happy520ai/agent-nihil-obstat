@@ -3,7 +3,7 @@
   "task": "T-143 / CV-01",
   "title": "M17 逐文件未覆盖分支基线与补测契约",
   "generatedAt": "2026-11-25",
-  "repo": "F:/Agent Nihil Obstat",
+  "repo": "<repo>",
   "runtime": {
     "node": "v24.14.0",
     "platform": "win32 10.0.19041 x64",

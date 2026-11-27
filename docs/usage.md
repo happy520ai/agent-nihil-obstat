@@ -156,9 +156,9 @@ ano takeover revoke --root "/absolute/path/to/project" --confirm
       "ano": {
         "type": "stdio",
         "command": "C:/Program Files/nodejs/node.exe",
-        "args": ["F:/Agent Nihil Obstat/dist/surface/mcp.js"],
-        "cwd": "F:/Agent Nihil Obstat",
-        "env": { "ANO_ROOT": "F:/Agent Nihil Obstat" },
+        "args": ["<repo>/dist/surface/mcp.js"],
+        "cwd": "<repo>",
+        "env": { "ANO_ROOT": "<repo>" },
         "enabled": true,
         "timeoutMs": 60000
       }
