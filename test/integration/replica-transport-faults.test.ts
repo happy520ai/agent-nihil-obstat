@@ -472,10 +472,18 @@ test('a request that outlives its budget fails with REPLICA_QUERY_TIMEOUT and cl
     await stopQuietly(transport, handle);
   });
   const started = Date.now();
-  await assert.rejects(
-    () => transport.query(handle, { schema_version: 'anchorprobe.request.v1' } as never, { nodeTimeoutMs: 20 }),
-    (error: unknown) => error instanceof ReplicaTransportError && error.code === 'REPLICA_QUERY_TIMEOUT',
-  );
+  // The transport's request timer is intentionally unref'ed. Real children keep
+  // the loop alive, but this fake-child harness has no live handle, so keep the
+  // test process alive until the asserted rejection settles (Node 22.18).
+  const keepAlive = setTimeout(() => {}, 1_000);
+  try {
+    await assert.rejects(
+      () => transport.query(handle, { schema_version: 'anchorprobe.request.v1' } as never, { nodeTimeoutMs: 20 }),
+      (error: unknown) => error instanceof ReplicaTransportError && error.code === 'REPLICA_QUERY_TIMEOUT',
+    );
+  } finally {
+    clearTimeout(keepAlive);
+  }
   assert.ok(Date.now() - started < 1_000, 'timeout must fire near its 20ms budget');
   assert.equal(transport.stderrOf(handle), '');
 });
