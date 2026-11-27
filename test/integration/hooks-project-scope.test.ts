@@ -9,7 +9,22 @@ import { runCli } from '../../src/surface/cli.ts';
 
 function fixture(t: TestContext): { root: string; other: string; home: string } {
   const home = mkdtempSync(join(tmpdir(), 'ano-hook-scope-'));
-  t.after(() => rmSync(home, { recursive: true, force: true, maxRetries: 10, retryDelay: 100 }));
+  // CI Windows runners intermittently return EPERM while a spawned hook process
+  // still holds a handle inside the temp tree; a short bounded retry keeps the
+  // cleanup faithful without masking real failures (rmSync already rethrows).
+  t.after(async () => {
+    let lastError: unknown;
+    for (let attempt = 0; attempt < 5; attempt += 1) {
+      try {
+        rmSync(home, { recursive: true, force: true, maxRetries: 10, retryDelay: 100 });
+        return;
+      } catch (error) {
+        lastError = error;
+        await new Promise((resolve) => setTimeout(resolve, 200));
+      }
+    }
+    throw lastError;
+  });
   const root = join(home, 'project-a');
   const other = join(home, 'project-b');
   for (const path of [root, other]) {
