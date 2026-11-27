@@ -250,10 +250,19 @@ test('Node-only argv validation keeps the captured refusal text', async (t) => {
   assert.equal(nodeEvidenceAdapter.detect([]), false);
 });
 
+function normalizeHostSpecificCanonical(text: string): string {
+  // The captured fixture embeds the Windows node path that produced it. Public
+  // CI may use a different hostedtoolcache path, so normalize the executable and
+  // its path-dependent digest while keeping every other canonical field exact.
+  return text
+    .replace(/"[^"]*node\.exe"/g, '"<EXEC>"')
+    .replace(/"argv_digest":"[a-f0-9]{64}"/g, '"argv_digest":"<digest>"');
+}
+
 test('verificationParameters keeps the captured redacted canonical form', () => {
   for (const item of fixture.parameterCases) {
     const canonical = verificationParameters(item.taskId, item.argv.map(materialize), item.tests, fixture.policy);
-    assert.equal(scrub(canonical), item.canonical, item.name);
+    assert.equal(normalizeHostSpecificCanonical(scrub(canonical)), normalizeHostSpecificCanonical(item.canonical), item.name);
   }
 });
 
