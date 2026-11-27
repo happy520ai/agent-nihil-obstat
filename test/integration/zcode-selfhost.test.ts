@@ -20,7 +20,11 @@ test('node matrix plans a missing Node 22 leg instead of passing it', () => {
   assert.equal(supplied.find((target) => target.id === 'node-22')?.path, 'C:/node22/node.exe');
 });
 
-test('real tarball self-host launches workspace MCP config and exercises track/brief/explore/note/recall', { timeout: 300_000 }, async () => {
+const selfHostSkip = process.env.CI === 'true' && process.env.ANO_SELFHOST !== '1'
+  ? 'tarball self-host requires a temporary registry install; run with ANO_SELFHOST=1 for release smoke'
+  : false;
+
+test('real tarball self-host launches workspace MCP config and exercises track/brief/explore/note/recall', { timeout: 300_000, skip: selfHostSkip }, async () => {
   const report = await runSelfHost();
   assert.equal(report.schema, 'ano.selfhost.v1');
   assert.equal(report.source.root, resolve(repoRoot));
