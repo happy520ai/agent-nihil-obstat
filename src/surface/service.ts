@@ -5,6 +5,7 @@ import { fileURLToPath } from 'node:url';
 import { DatabaseSync } from 'node:sqlite';
 import { lstat, readdir, readFile } from 'node:fs/promises';
 import { Ledger } from '../ledger/ledger.ts';
+import { FileLockTimeoutError } from '../core/lock.ts';
 import { replayLedger } from '../ledger/replay.ts';
 import { exploredState, initViews, readLatestStructureQueryRevision, readStructureQueries } from '../ledger/views.ts';
 import { GraphStore } from '../structure/store.ts';
@@ -269,7 +270,11 @@ function ledgerFactKeys(ledger: Ledger): string[] {
   return [...keys].sort();
 }
 
-export async function brief(root: string, input: BriefSurfaceInput = {}): Promise<Record<string, unknown>> {
+export async function brief(
+  root: string,
+  input: BriefSurfaceInput = {},
+  internal: { readonly lockTimeoutMs?: number } = {},
+): Promise<Record<string, unknown>> {
   let projectRoot: string;
   try {
     projectRoot = await existingProjectRoot(root);
@@ -282,9 +287,30 @@ export async function brief(root: string, input: BriefSurfaceInput = {}): Promis
     return connectedOnlyBrief(status, root);
   }
   const scan = await resolveGraphScan(projectRoot, input.scan);
-  const ledger = await Ledger.open(projectRoot);
-  const graph = await GraphStore.open(projectRoot, scan !== undefined ? { scan } : {});
+  let ledger: Ledger;
+  try { ledger = await Ledger.open(projectRoot, internal); }
+  catch (error) {
+    // A locked derived view means recovery is unknown, never an empty task list.
+    // Do not read unlocked views, fall back to old PM tasks, or freeze a manifest.
+    if (!(error instanceof FileLockTimeoutError) || resolve(error.path) !== join(projectRoot, '.ano', 'cache', '.views.lock')) throw error;
+    return {
+      phase: 'P7', tools: toolCatalog.map(tool => tool.name), tasks: null,
+      task_recovery: { available: false, reason: error.code },
+      degraded: {
+        code: error.code, message: error.message,
+        lock: { path: error.path, timeoutMs: error.timeoutMs, waitedMs: error.waitedMs, owner: error.owner },
+      },
+      touched: null, memory: null, last_sessions: null,
+      graph: { status: 'degraded', available: false, reason: error.code },
+      connected: null,
+      limitations: ['Native tasks and breakpoints are unavailable while the views lock is held; do not infer that there are no unfinished tasks. Retry brief after the owner releases the lock.'],
+      ...(takeoverSurfaceField(projectRoot) ?? {}),
+      ...(input.include_memory_context === true ? { memory_context: { available: false, reason: error.code } } : {}),
+    };
+  }
+  let graph: GraphStore | undefined;
   try {
+    graph = await GraphStore.open(projectRoot, scan !== undefined ? { scan } : {});
     const touched = await gitTouchedFiles(projectRoot);
     // ADR-009 §8.3: brief reuses a valid graph cache instead of rebuilding the
     // whole tree; a stale/invalid cache is rebuilt once under the shared budget.
@@ -381,15 +407,15 @@ export async function brief(root: string, input: BriefSurfaceInput = {}): Promis
         limitations: ['Frozen context is derived cache material, not an archive; it expires and never carries Gate evidence.'],
       },
     };
-  } finally { ledger.close(); graph.close(); }
+  } finally { ledger.close(); graph?.close(); }
 }
 
 /** Bounded session-start projection; unlike brief it never creates a probe manifest. */
 export async function briefCompact(
   root: string,
-  options: { readonly budgetChars?: number } = {},
+  options: { readonly budgetChars?: number; readonly lockTimeoutMs?: number } = {},
 ): Promise<Record<string, unknown>> {
-  return compactBrief(await brief(root), options.budgetChars ?? 6000);
+  return compactBrief(await brief(root, {}, options.lockTimeoutMs === undefined ? {} : { lockTimeoutMs: options.lockTimeoutMs }), options.budgetChars ?? 6000);
 }
 
 async function readConnectionStatus(root: string): Promise<ConnectionStatus | { error: string }> {

@@ -1,4 +1,4 @@
-export const BRIEF_COMPACT_MIN_BUDGET = 24;
+export const BRIEF_COMPACT_MIN_BUDGET = 74;
 
 type BriefRecord = Record<string, unknown>;
 type Section = { readonly name: string; readonly value: BriefRecord };
@@ -58,6 +58,19 @@ function mergeSections(sections: readonly Section[], truncated: readonly string[
 export function compactBrief(full: BriefRecord, budgetChars = 6000): BriefRecord {
   if (!Number.isSafeInteger(budgetChars) || budgetChars < BRIEF_COMPACT_MIN_BUDGET) {
     throw new RangeError(`budgetChars must be an integer >= ${BRIEF_COMPACT_MIN_BUDGET}`);
+  }
+  const recovery = full['task_recovery'];
+  if (recovery !== null && typeof recovery === 'object' && (recovery as BriefRecord)['available'] === false) {
+    // Never let truncation turn unavailable native state into empty tasks or
+    // empty unmet checks. The recovery marker outranks every other section.
+    const result: BriefRecord = { tasks: null, task_recovery: recovery };
+    if (codePoints(encoded(result)) > budgetChars) throw new RangeError('budgetChars cannot fit the task recovery marker');
+    for (const [key, value] of Object.entries(full)) {
+      if (key === 'tasks' || key === 'task_recovery') continue;
+      const candidate = { ...result, [key]: value };
+      if (codePoints(encoded(candidate)) <= budgetChars) result[key] = value;
+    }
+    return result;
   }
   const sections: readonly Section[] = [
     { name: 'focus_tasks_and_breakpoints', value: focusSection(full) },

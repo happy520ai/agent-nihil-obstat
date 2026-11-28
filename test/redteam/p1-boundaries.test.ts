@@ -62,10 +62,13 @@ test('lock does not steal live ownership and operation EEXIST is not retried', a
   assert.throws(() => withFileLockSync(path, () => { calls += 1; const error = new Error('operation') as NodeJS.ErrnoException; error.code = 'EEXIST'; throw error; }), /operation/);
   assert.equal(calls, 1);
   let completed = false;
-  const first = withFileLock(path, async () => { await new Promise((resolve) => setTimeout(resolve, 45)); completed = true; }, { staleAfterMs: 1 });
-  await new Promise((resolve) => setTimeout(resolve, 12));
-  await assert.rejects(withFileLock(path, async () => undefined, { timeoutMs: 30, staleAfterMs: 1 }), /Timed out/);
-  await first;
+  let release!: () => void;
+  const released = new Promise<void>(resolve => { release = resolve; });
+  const first = withFileLock(path, async () => { await released; completed = true; }, { staleAfterMs: 1 });
+  try {
+    await assert.rejects(withFileLock(path, async () => undefined, { timeoutMs: 30, staleAfterMs: 1 }), /Timed out/);
+    assert.equal(completed, false);
+  } finally { release(); await first; }
   assert.equal(completed, true);
 });
 
