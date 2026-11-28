@@ -5,13 +5,16 @@
 ## 构建与验证
 
 ```sh
-npm ci
-npm --prefix scripts ci        # Spike 测试工具链（缺失时 npm test 会显式 SKIP 并打印）
+npm ci --ignore-scripts
+npm --prefix scripts ci --ignore-scripts  # Spike 测试工具链（缺失时 npm test 会显式 SKIP 并打印）
+npm run build                   # 集成测试需要 dist/，必须先构建
 npm run typecheck
-npm test                       # 根套件 + spike 套件 + 文档一致性
-npm run coverage               # 门槛：行 ≥90%、分支 ≥80%
-npm run build
-node scripts/verify-all.ts     # 全链路：schema/覆盖率/真实 ZCode MCP/打包冒烟
+npm test                        # 根套件 + spike 套件 + 文档一致性
+npm run coverage                # 门槛：行 ≥97%、分支 ≥88%、函数 ≥97%
+node scripts/check-schema.ts
+npm run check-docs
+npm pack --dry-run
+node scripts/verify-all.ts       # 全链路：schema/覆盖率/真实 ZCode MCP/打包冒烟
 ```
 
 启动真实 stdio MCP：

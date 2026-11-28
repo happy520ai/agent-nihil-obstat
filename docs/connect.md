@@ -10,7 +10,7 @@ Connect 是来源只读的接入层，不要求先放弃原项目管理工具。
 node dist/surface/cli.js connect ui --root "/absolute/path/to/project"
 ```
 
-打开命令输出的本机授权地址，检查识别到的项目和预检结果，再点击开始使用。地址含进程级访问凭据，不要转发。目标项目不需要 `package.json` 或 Git；ANO 运行时仍需要 Node.js 22.18 及以上。
+打开命令输出的本机授权地址，检查识别到的项目和预检结果，再点击开始使用。地址含进程级访问凭据，不要转发。目标项目不需要 `package.json` 或 Git；ANO 运行时仍需要 Node.js 24 及以上。
 
 非交互入口：
 

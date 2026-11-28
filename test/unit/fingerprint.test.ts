@@ -164,14 +164,30 @@ test('busy and permission failures map to explicit degraded statuses', async (co
   const marker = join(root, 'holder-ready');
   await writeFile(lockedPath, 'export const locked = 1;\n');
   const holder = spawn('powershell', [
+    '-NoLogo',
     '-NoProfile',
+    '-NonInteractive',
     '-Command',
-    `$fs=[System.IO.File]::Open("${lockedPath}","Open","ReadWrite","None"); [System.IO.File]::WriteAllText("${marker}","1"); Start-Sleep -Seconds 20; $fs.Close()`,
-  ], { stdio: 'ignore' });
+    '$ErrorActionPreference="Stop"; $fs=[System.IO.File]::Open($env:ANO_LOCKED_PATH,"Open","ReadWrite","None"); try { [System.IO.File]::WriteAllText($env:ANO_LOCK_MARKER,"1"); [Console]::In.ReadLine() | Out-Null } finally { $fs.Dispose() }',
+  ], {
+    env: { ...process.env, ANO_LOCKED_PATH: lockedPath, ANO_LOCK_MARKER: marker },
+    stdio: ['pipe', 'ignore', 'pipe'],
+  });
+  let startupError: Error | undefined;
+  let stderr = '';
+  holder.on('error', (error) => { startupError = error; });
+  holder.stderr.on('data', (chunk: Buffer) => { stderr += chunk.toString(); });
+  const closed = new Promise<void>((resolve) => { holder.once('close', () => resolve()); });
   try {
-    const deadline = Date.now() + 10_000;
+    // Cold PowerShell startup can exceed 10s on a loaded CI runner. The parent
+    // keeps stdin open so the lock cannot expire while the scan is running.
+    const deadline = Date.now() + 30_000;
     while (!existsSync(marker)) {
-      if (Date.now() > deadline) assert.fail('exclusive holder did not start');
+      assert.ifError(startupError);
+      if (holder.exitCode !== null || holder.signalCode !== null) {
+        assert.fail(`exclusive holder exited before readiness: ${holder.exitCode ?? holder.signalCode}; ${stderr}`);
+      }
+      if (Date.now() > deadline) assert.fail(`exclusive holder did not start within 30s: ${stderr}`);
       await delay(20);
     }
     // Prove the condition is real before asserting on the scan result.
@@ -185,7 +201,7 @@ test('busy and permission failures map to explicit degraded statuses', async (co
     assert.ok(!result.files.some((file) => file.path === 'src/locked.ts'));
   } finally {
     holder.kill('SIGKILL');
-    await delay(300);
+    await closed;
     await rm(root, { recursive: true, force: true });
   }
   void context;

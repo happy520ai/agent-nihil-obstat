@@ -253,6 +253,36 @@ test('CLI verify context validates a draft without executing it', async () => {
   }
 });
 
+test('CLI brief accepts --json without changing the default JSON contract', async () => {
+  const root = await project();
+  try {
+    const tracked = await runCli(['track', 'create', '--id', 'T-JSON', '--file', 'test/a.test.ts', '--root', root]);
+    assert.equal(tracked.code, 0, tracked.output);
+
+    const original = await runCli(['brief', '--root', root]);
+    assert.equal(original.code, 0, original.output);
+    const originalPayload = JSON.parse(original.output) as { phase: string; tasks: Array<{ id: string }> };
+
+    const result = spawnSync(process.execPath, [cliPath, 'brief', '--json', '--root', root], { encoding: 'utf8' });
+    assert.equal(result.status, 0, result.stderr || result.stdout);
+    const payload = JSON.parse(result.stdout) as typeof originalPayload;
+    assert.equal(payload.phase, originalPayload.phase);
+    assert.deepEqual(payload.tasks, originalPayload.tasks);
+    assert.ok(payload.tasks.some((task) => task.id === 'T-JSON'));
+    assert.deepEqual(Object.keys(payload).sort(), Object.keys(originalPayload).sort());
+
+    const unknown = await runCli(['brief', '--json', '--nope', '--root', root]);
+    assert.equal(unknown.code, 2);
+    assert.match(unknown.output, /brief does not accept --nope/u);
+
+    const help = await runCli(['--help', '--root', root]);
+    assert.equal(help.code, 0, help.output);
+    assert.match(help.output, /ano brief \[--json\]/u);
+  } finally {
+    await rm(root, { recursive: true, force: true });
+  }
+});
+
 test('CLI brief --memory-context freezes a context and verify context never mutates task state', async () => {
   const root = await project();
   try {
@@ -266,6 +296,12 @@ test('CLI brief --memory-context freezes a context and verify context never muta
     const memoryContext = JSON.parse(briefed.output) as { memory_context: { context_id: string; project_scope: string } };
     assert.match(memoryContext.memory_context.context_id, /^ctx-[0-9a-f]{32}$/u);
     assert.equal(memoryContext.memory_context.project_scope, 'local');
+
+    const jsonBriefed = await runCli(['brief', '--json', '--memory-context', '--context-budget', '20', '--root', root]);
+    assert.equal(jsonBriefed.code, 0, jsonBriefed.output);
+    const jsonContext = JSON.parse(jsonBriefed.output) as typeof memoryContext;
+    assert.equal(jsonContext.memory_context.context_id, memoryContext.memory_context.context_id);
+    assert.equal(jsonContext.memory_context.project_scope, memoryContext.memory_context.project_scope);
 
     const manifestPath = join(root, '.ano', 'memory', 'probes', `${memoryContext.memory_context.context_id}.json`);
     const manifest = JSON.parse(await readFile(manifestPath, 'utf8')) as { response: { active_evidence: Array<{ ref: string }> } };
@@ -315,7 +351,7 @@ test('CLI brief --memory-context freezes a context and verify context never muta
       assert.equal(ledgerFinal.getTask('T-CTX')?.status, 'in_progress');
     } finally { ledgerFinal.close(); }
 
-    const badBudget = await runCli(['brief', '--context-budget', '20', '--root', root]);
+    const badBudget = await runCli(['brief', '--json', '--context-budget', '20', '--root', root]);
     assert.equal(badBudget.code, 2);
     assert.match(badBudget.output, /--memory-context/);
   } finally {

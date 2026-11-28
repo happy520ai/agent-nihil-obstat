@@ -62,20 +62,25 @@ ano ui                         # 本机只读 UI
 ```sh
 git clone https://github.com/happy520ai/agent-nihil-obstat.git
 cd agent-nihil-obstat
-npm ci
+npm ci --ignore-scripts
 npm run build
 node dist/surface/cli.js --help
 ```
 
-开发验证命令（集成测试会调用 `dist/`，首次请先构建）：
+开发验证命令（先构建再测试；`npm test` 中的 spike 测试还需要独立 `scripts` 工具链，否则会显式跳过）：
 
 ```sh
+npm --prefix scripts ci --ignore-scripts
 npm run build
 npm run typecheck
 npm test
 npm run coverage
+node scripts/check-schema.ts
 npm run check-docs
+npm pack --dry-run
 ```
+
+完整贡献流程与依赖审计见 [CONTRIBUTING.md](CONTRIBUTING.md)，安全问题请先阅读 [SECURITY.md](SECURITY.md)。
 
 ### 先查看接入计划，不写入目标项目
 
@@ -127,7 +132,7 @@ ANO 的设计原则是默认收敛权限，而不是替用户扩大授权：
 - 静态覆盖和影响范围是启发式结果，不证明业务语义正确，也不能替代真实测试。
 - 分布式探针和多主高可用属于可选实验模块；现有验证不等同于跨机部署、真实网络分区或生产 SLA。
 - 除已明确验证的客户端外，不宣称真实兼容；配置目录存在或命令可生成不代表宿主已经验证。
-- 自动化 CI 当前只覆盖 Windows + Node 24，并跳过需要临时 registry 安装的 tarball self-host smoke（发布前手动设 `ANO_SELFHOST=1` 运行）；Node 22.18、Linux、macOS 的完整测试兼容性尚未验证。
+- 自动化 CI 当前只覆盖 Windows + Node 24，并显式设 `ANO_SELFHOST=0` 跳过需要临时 registry 安装的 tarball self-host smoke；发布前须手动启用并单独验证（PowerShell：`$env:ANO_SELFHOST='1'; npm test`）。Node 22 不在当前支持范围内；Linux、macOS 的完整测试兼容性尚未验证。
 - 证据身份不是密码学签名，账本与 Gate 也不能防御所有同用户恶意进程。
 - Windows 掉电级持久性尚未得到承诺。
 - `attest`、`sync`、`push` 等能力未作为 Agent 可执行工作流接通。
