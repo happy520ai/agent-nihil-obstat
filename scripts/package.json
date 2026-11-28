@@ -11,7 +11,7 @@
   },
   "devDependencies": {
     "tree-sitter-wasms": "^0.1.13",
-    "typescript": "^5.9.3",
+    "typescript": "^7.0.2",
     "web-tree-sitter": "^0.27.2"
   }
 }
