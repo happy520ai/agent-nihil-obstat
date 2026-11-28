@@ -243,7 +243,7 @@ test('MCP validates tier end-to-end: invalid/release/context rejected, T0 accept
       name: 'verify',
       arguments: { root, idem_key: 'tier:mcp:t0', scope: 'task', task_id: 'T-MCP-T0', argv: TEST_ARGS, test_files: [TEST_FILE], tier: 'T0' },
     }) as { isError?: boolean; content: { text: string }[] };
-    assert.equal(accepted.isError, undefined, accepted.content[0]?.text);
+    assert.equal(accepted.isError, undefined, accepted.content[0]?.text ?? 'verify returned an unexpected error');
     const t0Verdict = (JSON.parse(accepted.content[0]!.text) as { verdict: VerdictView }).verdict;
     assert.equal(t0Verdict.status, 'done', JSON.stringify(t0Verdict.reasons));
     assert.equal(t0Verdict.level, 'T0');
@@ -253,7 +253,7 @@ test('MCP validates tier end-to-end: invalid/release/context rejected, T0 accept
       name: 'verify',
       arguments: { root, idem_key: 'tier:mcp:strict', scope: 'task', task_id: 'T-MCP-STRICT', argv: TEST_ARGS, test_files: [TEST_FILE] },
     }) as { isError?: boolean; content: { text: string }[] };
-    assert.equal(strict.isError, undefined, strict.content[0]?.text);
+    assert.equal(strict.isError, undefined, strict.content[0]?.text ?? 'verify returned an unexpected error');
     const strictVerdict = (JSON.parse(strict.content[0]!.text) as { verdict: VerdictView }).verdict;
     assert.equal(strictVerdict.status, 'blocked', JSON.stringify(strictVerdict.reasons));
     assert.deepEqual(strictVerdict.policy, { minimum: 'T1', unknown: 'strict' });

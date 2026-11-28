@@ -59,7 +59,7 @@
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.24.3",
-    "web-tree-sitter": "^0.27.2",
+    "web-tree-sitter": "^0.25.10",
     "zod": "^4.1.12",
     "tree-sitter-wasms": "^0.1.13"
   },

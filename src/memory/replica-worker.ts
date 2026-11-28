@@ -550,7 +550,7 @@ function encode(response: ReplicaWorkerResponse): string {
  * after wiring listeners; call `terminate()` to leave deterministically.
  */
 export function runReplicaWorker(options: ReplicaWorkerRunOptions = {}): ReplicaWorkerRunner {
-  const input = options.input ?? process.stdin;
+  const input: NodeJS.ReadableStream = options.input ?? process.stdin;
   const output = options.output ?? process.stdout;
   const errorOutput = options.errorOutput ?? process.stderr;
   const heartbeatMs = options.heartbeatMs ?? REPLICA_WORKER_DEFAULT_HEARTBEAT_MS;
