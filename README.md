@@ -32,6 +32,23 @@ AI Agent 可以很好地描述自己做了什么，但自然语言总结不能�
 - **本地审计**：提供漂移、安全、许可证、依赖与治理检查。
 - **MCP / CLI 接口**：通过七个意图工具提供 `brief`、`explore`、`recall`、`track`、`note`、`verify` 和 `audit`。
 
+## 可探索的高级能力（隐藏命令）
+
+ANO 的 MCP 接口固定为 **7 个工具**，没有隐藏的第 8 个 MCP 工具。这里说的“隐藏工具”是 **personal 模式默认折叠的高级 CLI 命令**：它们不会消失，只是不展开在默认帮助里。
+
+```sh
+ano help --all                 # 查看全部命令
+ano doctor clients --all       # 查看完整客户端矩阵
+ano audit deps                 # 依赖审计
+ano baseline list              # 验收基线
+ano migrate plan               # 迁移预演，只读
+ano takeover status            # 接管状态
+ano rebuild graph              # 重建结构图
+ano ui                         # 本机只读 UI
+```
+
+高级命令覆盖迁移、接管、验收基线、审计、DAG、客户端接入和本地 UI 等；可先用 `plan`、`status`、`--dry-run` 自行探索。**探索不等于授权**：`setup`、`takeover apply/recover/disable/revoke`、`clients install/restore`、`baseline approve`、`migrate apply` 等写入动作仍需显式确认或具名人工授权。
+
 ## 快速开始
 
 ### 环境要求
