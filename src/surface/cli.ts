@@ -62,7 +62,7 @@ const help = `Agent Nihil Obstat (ANO) — P7 local alpha (P1 vertical slice pre
 Usage:
   ano --help | --version
   ano setup --root <path> --client <zcode|claude-code> [--yes-dry-run]
-  ano brief [--memory-context] [--context-budget <n>] [--root <path>]
+  ano brief [--json] [--memory-context] [--context-budget <n>] [--root <path>]
   ano explore <symbol> [--root <path>]
   ano track create --id <task-id> [--title <text>] [--file <path>]...
   ano track <update|cancel|reopen> --id <task-id> [--status <todo|in_progress|cancelled>]
@@ -780,7 +780,7 @@ export async function runCli(argv: string[], context: CliContext = {}): Promise<
     // CLI parity with the MCP brief branch: `--memory-context` freezes a
     // derived probe manifest so `verify context` has a real context id to
     // consume. The manifest is cache material; it never writes the ledger.
-    const allowed = ['--root', '--memory-context', '--context-budget'];
+    const allowed = ['--root', '--json', '--memory-context', '--context-budget'];
     const unknown = unknownFlag(ownArgs, allowed);
     if (unknown) return { code: 2, output: `brief does not accept ${unknown}\n` };
     const includeMemoryContext = hasFlag(ownArgs, '--memory-context');
