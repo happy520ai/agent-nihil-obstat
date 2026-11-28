@@ -22,8 +22,8 @@ const testConcurrency = process.env.ANO_TEST_CONCURRENCY ?? '4';
 await run(['--test', `--test-concurrency=${testConcurrency}`, '--experimental-test-coverage', 'test/**/*.test.ts'], 'core tests');
 
 // Spike mechanism tests need the isolated scripts/node_modules toolchain.
-// CI installs only root dependencies, so they are skipped explicitly (not silently
-// passed) when that toolchain is absent; the skip is printed and therefore visible.
+// Install the isolated scripts toolchain locally and in CI. Tests are skipped
+// explicitly (not silently passed) when that toolchain is absent; the skip is visible.
 const spikeDir = join(root, 'scripts', 'spikes');
 const spikeToolchain = join(root, 'scripts', 'node_modules', 'web-tree-sitter');
 const spikeTests = (await readdir(spikeDir)).filter((file) => file.endsWith('.test.mjs')).map((file) => `scripts/spikes/${file}`);
