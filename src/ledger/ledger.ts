@@ -7,7 +7,7 @@ import { Hlc } from '../core/hlc.ts';
 import type { SourceFingerprint } from '../core/fingerprint.ts';
 import { fingerprintProject, resolveProjectSourceScan } from '../core/source-scan.ts';
 import type { ResolvedProjectScan } from '../core/project-scan.ts';
-import { withFileLock, withFileLockSync, type LockOptions } from '../core/lock.ts';
+import { withFileLock, type LockOptions } from '../core/lock.ts';
 import { assertProjectPath } from '../core/paths.ts';
 import { ulid } from '../core/ulid.ts';
 import { hashEvent, lastHash, ledgerEventSchema, type LedgerEvent } from './event.ts';
@@ -453,7 +453,7 @@ export class Ledger {
     for (let attempt = 0; ; attempt += 1) {
       let started = false;
       try {
-        withFileLockSync(ledger.#viewsLock, () => { started = true; ledger.#initialize(); }, ledger.#lockOptions);
+        await withFileLock(ledger.#viewsLock, async () => { started = true; ledger.#initialize(); }, ledger.#lockOptions);
         return ledger;
       } catch (error) {
         if (started || attempt >= LOCK_RETRY_ATTEMPTS || !transientLockError(error)) throw error;
@@ -469,7 +469,7 @@ export class Ledger {
       try {
         return await withFileLock(
           this.#lockPath,
-          async () => withFileLockSync(this.#viewsLock, () => { started = true; return operation(); }, this.#lockOptions),
+          async () => withFileLock(this.#viewsLock, async () => { started = true; return operation(); }, this.#lockOptions),
           this.#lockOptions,
         );
       } catch (error) {
