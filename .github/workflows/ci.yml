@@ -22,7 +22,7 @@ jobs:
     env:
       ANO_SELFHOST: '0'
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
         with:
           persist-credentials: false
       - uses: actions/setup-node@v5
